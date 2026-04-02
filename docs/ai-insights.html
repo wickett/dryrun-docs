@@ -143,22 +143,41 @@
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>Code Insights lets you ask natural language questions about your codebase's security posture and get precise, contextual answers. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <a href="../docs/multi-agent-architecture.html">Codebase Insight Agent</a> retrieves the answer.</p>
+<p>The Insights page provides a conversational interface for exploring your security data. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <strong>DryRun AI Assistant</strong> retrieves the answer. Insights is currently available as a <strong>Beta</strong> feature.</p>
 
-<p>Code Insights is powered by the Code Insights MCP (Model Context Protocol), which enables programmatic access to your security data through natural language queries.</p>
+<p>At the top of the page, a date selector lets you scope your queries to a specific analysis window (e.g., "Mar 20, 2026"). Below it, the subtitle reads "Analysis of recent PRs and code changes," grounding the conversation in your actual repository activity.</p>
 
-<h2 id="example-queries">Example Queries</h2>
+<h2 id="dryrun-ai-assistant">DryRun AI Assistant</h2>
 
-<p>Here are real examples of what teams ask through Code Insights:</p>
+<p>The main interface is a chat window powered by the <strong>DryRun AI Assistant</strong>. When you open Insights, the assistant greets you with:</p>
+
+<blockquote>"Hello! I'm here to help you explore your security insights. You can ask me questions about the analysis results, specific patterns detected, or guidance on addressing findings. What would you like to know?"</blockquote>
+
+<p>Type a question in natural language and the assistant responds with contextual answers drawn from your PR reviews, DeepScans, policy enforcement records, and Risk Register data. Responses can include tables, charts, links to specific PRs, and code references.</p>
+
+<h2 id="suggested-prompts">Suggested Prompts</h2>
+
+<p>Below the chat window, the Insights page offers quick-start prompts you can click to begin a conversation:</p>
 
 <ul>
-  <li><strong>Attack surface discovery</strong> - "Did we add any new Go HTTP endpoints this week or last?"</li>
-  <li><strong>Security impact assessment</strong> - "Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
-  <li><strong>Risk trends</strong> - "Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
-  <li><strong>Compliance triggers</strong> - "List any PRs related to Lambda URLs in the last month."</li>
-  <li><strong>Audit reporting</strong> - "Show me a graph of risky alerts by repo for last week."</li>
-  <li><strong>Infrastructure changes</strong> - "What IAM policy changes were introduced across all repos this quarter?"</li>
+  <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
+  <li><strong>"What are the top risks in my repositories?"</strong> - Prioritized view of your highest-severity findings</li>
+  <li><strong>"Show me recent policy violations"</strong> - List of Natural Language Code Policy violations from recent PRs</li>
+  <li><strong>More</strong> - Expand to see additional suggested prompts</li>
 </ul>
+
+<p>You can also type free-form questions for more specific queries, such as:</p>
+
+<ul>
+  <li>"Did we add any new Go HTTP endpoints this week or last?"</li>
+  <li>"Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
+  <li>"Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
+  <li>"What IAM policy changes were introduced across all repos this quarter?"</li>
+</ul>
+
+<h2 id="customize-insights">Customize Insights</h2>
+
+<p>At the bottom of the Insights page, the <strong>Customize Insights</strong> section lets you tailor the analysis to your organization's priorities. Expand this section to configure which types of insights are generated and how the assistant prioritizes its responses.</p>
 
 <h2 id="use-cases">Use Cases</h2>
 
@@ -176,7 +195,7 @@
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>Code Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/multi-agent-architecture.html">primary agents</a>. The agent has access to:</p>
+<p>Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/multi-agent-architecture.html">primary agents</a>. The agent has access to:</p>
 
 <ul>
   <li>All PR review findings and history</li>
@@ -186,11 +205,11 @@
   <li>Risk Register data</li>
 </ul>
 
-<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer - including charts, tables, links to specific PRs, and code references as appropriate.</p>
+<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer. The Code Insights MCP (Model Context Protocol) enables the same queries programmatically, so AI coding agents can also access this data. See <a href="../docs/mcp-integration.html">MCP Integration</a> for details.</p>
 
 <h2 id="connection-to-dashboard">Connection to Security Dashboard</h2>
 
-<p>Code Insights complements the <a href="../docs/security-dashboard.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Code Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Code Insights for investigation and reporting.</p>
+<p>Insights complements the <a href="../docs/security-dashboard.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Insights for investigation and reporting.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/notifications.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Notifications</span></a>
@@ -202,7 +221,9 @@
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
 <li class="toc-h2"><a href="#overview">Overview</a></li>
-<li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
+<li class="toc-h2"><a href="#dryrun-ai-assistant">DryRun AI Assistant</a></li>
+<li class="toc-h2"><a href="#suggested-prompts">Suggested Prompts</a></li>
+<li class="toc-h2"><a href="#customize-insights">Customize Insights</a></li>
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 <li class="toc-h3"><a href="#audit-reporting">Audit-Ready Reporting</a></li>
 <li class="toc-h3"><a href="#risk-trend-analysis">Risk Trend Analysis</a></li>

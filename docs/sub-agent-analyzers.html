@@ -204,6 +204,18 @@
 
 <p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a>.</p>
 
+<h2 id="configuring-analyzers">Configuring Analyzers</h2>
+
+<p>Each Security Analyzer can be individually configured per repository through the <a href="../docs/configurations.html">Configurations</a> page. In the <strong>Code Security Agents</strong> section of a configuration, every analyzer has three controls:</p>
+
+<ul>
+  <li><strong>Blocking</strong> - When enabled, a finding from this analyzer creates a GitHub status check that must pass before the PR can be merged. The check appears under the analyzer's name (e.g., "Secrets Analyzer").</li>
+  <li><strong>Silent Mode</strong> - When enabled, the analyzer still runs and records findings in the Risk Register, but does not post them in the PR comment. Useful for evaluating an analyzer before turning it on for developers.</li>
+  <li><strong>Risk Level</strong> - Sets the default severity label for findings from this analyzer. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>. This controls how findings appear in the PR comment and Risk Register.</li>
+</ul>
+
+<p>These settings let teams gradually roll out analyzers - for example, starting in Silent Mode to evaluate signal quality before enabling Blocking for enforcement.</p>
+
 <h2 id="related-pages">Related Pages</h2>
 
 <ul>
@@ -211,6 +223,7 @@
   <li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a> - full scope of detected vulnerability classes</li>
   <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a> - how findings appear in pull requests</li>
   <li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a> - why analyzers produce low noise</li>
+  <li><a href="../docs/configurations.html">Configure Repositories</a> - per-repository agent and policy configuration</li>
 </ul>
         </div>
 <nav class="prev-next">
@@ -231,6 +244,7 @@
 <li class="toc-h2"><a href="#secrets-analyzer">Secrets Analyzer</a></li>
 <li class="toc-h2"><a href="#general-security-analyzer">General Security Analyzer (GSA)</a></li>
 <li class="toc-h2"><a href="#core-code-policies">Core Code Policies</a></li>
+<li class="toc-h2"><a href="#configuring-analyzers">Configuring Analyzers</a></li>
 <li class="toc-h2"><a href="#related-pages">Related Pages</a></li>
 </ul>
 </aside>

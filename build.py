@@ -630,119 +630,6 @@ PAGES['vulnerability-coverage'] = {
 ''',
 }
 
-PAGES['sub-agent-analyzers'] = {
-    'title': 'Security Analyzers',
-    'description': 'The specialized sub-agents that run on every pull request - XSS, SQLi, IDOR, SSRF, Mass Assignment, Secrets, and General Security.',
-    'section': 'Scanning',
-    'content': '''
-<p>DryRun Security uses a multi-agent system where specialized <strong>Security Analyzers</strong> focus on specific vulnerability classes. Each analyzer is a dedicated sub-agent with deep expertise in its area - tracing the right data flows, understanding framework-specific patterns, and applying the appropriate security reasoning for each vulnerability type. All analyzers leverage <strong>Contextual Security Analysis (CSA)</strong> to minimize false positives and surface findings that represent genuine risk.</p>
-
-<h2 id="xss-analyzer">XSS Analyzer</h2>
-
-<p>The <strong>XSS Analyzer</strong> detects cross-site scripting vulnerabilities by tracing user-controlled input through server-side rendering and JavaScript execution paths. It understands the difference between reflected, stored, and DOM-based XSS, and accounts for framework-specific escaping mechanisms.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>Unescaped user input rendered in HTML responses</li>
-  <li>Dangerous use of <code>innerHTML</code>, <code>document.write()</code>, and <code>eval()</code></li>
-  <li>Framework-specific risks: unsafe use of <code>dangerouslySetInnerHTML</code> in React, unescaped expressions in Vue/Angular templates</li>
-  <li>Stored XSS via database content rendered without sanitization</li>
-  <li>JavaScript injection through URL parameters and query strings</li>
-</ul>
-
-<h2 id="sqli-analyzer">SQLi Analyzer</h2>
-
-<p>The <strong>SQL Injection Analyzer</strong> traces data flow from user-controlled sources to database query execution, detecting unsafe query construction across languages and ORMs.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>String concatenation in raw SQL queries</li>
-  <li>ORM misuse that bypasses parameterization (e.g., raw query methods with user input)</li>
-  <li>Stored procedure vulnerabilities where input is interpolated into dynamic SQL</li>
-  <li>NoSQL injection in MongoDB, DynamoDB, and similar databases</li>
-  <li>Second-order SQL injection where stored values are later used in queries</li>
-</ul>
-
-<h2 id="idor-analyzer">IDOR Analyzer</h2>
-
-<p>The <strong>IDOR Analyzer</strong> surfaces broken object-level authorization by tracing how resource identifiers flow from incoming requests to data access operations. It checks whether authorization is verified before each access - not just at the route level, but at the point of data retrieval.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>API endpoints that accept a resource ID parameter without verifying ownership</li>
-  <li>Missing authorization checks before database lookups by ID</li>
-  <li>Inconsistent authorization - routes where some actions are protected but related actions are not</li>
-  <li>Horizontal privilege escalation paths where one user can access another user's resources</li>
-</ul>
-
-<h2 id="mass-assignment-analyzer">Mass Assignment Analyzer</h2>
-
-<p>The <strong>Mass Assignment Analyzer</strong> detects unsafe binding patterns where user-controlled request input is mapped directly to model fields without an allowlist or explicit field selection, allowing users to overwrite fields they should not control.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>Rails <code>params.permit!</code> and unfiltered <code>update(params)</code> calls</li>
-  <li>Django <code>ModelForm</code> usage without explicit field restrictions</li>
-  <li>Spring <code>@ModelAttribute</code> binding without <code>@InitBinder</code> protection</li>
-  <li>Express.js and similar frameworks where request body is spread directly onto model objects</li>
-  <li>Admin flag, role, and balance fields that can be overwritten through unprotected binding</li>
-</ul>
-
-<h2 id="ssrf-analyzer">SSRF Analyzer</h2>
-
-<p>The <strong>SSRF Analyzer</strong> inspects outbound HTTP calls where the target URL is derived from user-controlled input. It checks for the presence of allowlist validation, URL schema restrictions, and controls that prevent access to internal network addresses.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>HTTP client calls where the URL is constructed from request parameters or body fields</li>
-  <li>Missing validation of URL schema (allowing <code>file://</code>, <code>gopher://</code>, etc.)</li>
-  <li>Absence of internal IP address filtering (169.254.x.x, 10.x.x.x, etc.)</li>
-  <li>Webhook and callback URL handlers without domain allowlists</li>
-  <li>Cloud metadata endpoint exposure (169.254.169.254 access via SSRF)</li>
-</ul>
-
-<h2 id="secrets-analyzer">Secrets Analyzer</h2>
-
-<p>The <strong>Secrets Analyzer</strong> detects hardcoded credentials, API keys, tokens, and private keys committed to source code. Unlike simple regex matching, the Secrets Analyzer uses context to distinguish between real credentials and test fixtures, placeholder values, or example strings in documentation.</p>
-
-<p>Key detection areas:</p>
-<ul>
-  <li>API keys and tokens matching patterns for AWS, GitHub, Stripe, Twilio, and dozens of other services</li>
-  <li>Private keys (RSA, ECDSA, SSH) hardcoded in source files</li>
-  <li>Database connection strings with embedded credentials</li>
-  <li>OAuth client secrets and webhook signing secrets</li>
-  <li>Passwords and secrets in configuration files, environment variable defaults, and test fixtures</li>
-</ul>
-
-<p>See <a href="../docs/secrets-detection.html">Secrets Detection</a> for full documentation of the Secrets Analyzer.</p>
-
-<h2 id="general-security-analyzer">General Security Analyzer (GSA)</h2>
-
-<p>The <strong>General Security Analyzer (GSA)</strong> covers the security concerns that fall outside the scope of the specialized analyzers. It acts as a broad-spectrum analyzer that catches a wide range of issues including authentication and authorization gaps, cryptographic risks, debug artifacts, and application misconfigurations.</p>
-
-<p>GSA detection areas:</p>
-<ul>
-  <li><strong>Authentication and authorization gaps</strong> - Missing authentication middleware, inconsistently applied authorization, session management weaknesses</li>
-  <li><strong>Risky cryptography</strong> - Weak algorithms (MD5, DES, RC4 for security purposes), hardcoded encryption keys, insecure random number generation</li>
-  <li><strong>Debug artifacts</strong> - Debug endpoints left enabled, verbose error responses exposing stack traces, logging of sensitive data</li>
-  <li><strong>Unsafe deserialization</strong> - Deserializing untrusted data without type constraints or integrity checks</li>
-  <li><strong>Leaky errors</strong> - Exception handlers that return internal error details to end users</li>
-  <li><strong>Missing rate limits</strong> - Authentication endpoints, password reset flows, and sensitive data retrieval without throttling</li>
-  <li><strong>Misconfigurations</strong> - CORS policies too permissive, missing security headers, debug mode in production</li>
-  <li><strong>Logic flaws</strong> - Business logic issues that represent security risk but do not fit a specific vulnerability class</li>
-</ul>
-
-<h2 id="analyzer-coordination">How Analyzers Coordinate</h2>
-
-<p>Analyzers run in parallel on each pull request, with the Code Review Agent orchestrating their execution and synthesizing results. When a single piece of code raises concerns for multiple analyzers - for example, a database-backed API endpoint with missing authorization and unparameterized queries - the findings are correlated and presented together in the PR summary.</p>
-
-<p>Each analyzer calls on the underlying CSA engine for data flow analysis, so findings benefit from cross-file and cross-service context even when the vulnerability spans multiple components. The multi-agent architecture ensures that specialized expertise is applied to each vulnerability class while the orchestrating agent maintains a coherent view of the full change.</p>
-
-<p>See <a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a> for a detailed explanation of how agents collaborate, and <a href="../docs/false-positive-reduction.html">False Positive Reduction</a> for how contextual analysis keeps noise low.</p>
-''',
-}
-
-
 # -- AI & Intelligence --
 
 PAGES['ai-native-architecture'] = {
@@ -1389,41 +1276,69 @@ PAGES['risk-register'] = {
     'description': 'One view to see, search, and act on all security risk across your organization.',
     'section': 'Platform',
     'content': '''
-<p>Risk Register centralizes findings from PR scans and DeepScans. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
+<p>Risk Register centralizes findings from PR scans and DeepScans into a single view. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
 
-<h2 id="risk-register-features">Risk Register Features</h2>
+<h2 id="severity-overview">Severity Overview</h2>
+
+<p>At the top of the Risk Register, four severity cards display the current count of findings by level:</p>
 
 <ul>
-  <li>See all findings from all PRs and DeepScans together.</li>
-  <li>Understand where risk is concentrated by repo, type, and severity.</li>
-  <li>Prioritize work by Critical/High first, then drill into specifics.</li>
-  <li>Dismiss findings with reasons and context so the same false positives do not keep coming back.</li>
-  <li>Use filters to move from org-level insight to actionable lists in seconds:
-    <ul>
-      <li>Date ranges</li>
-      <li>Risk level (Critical, High, Medium, Low)</li>
-      <li>Agent (DeepScan, PR)</li>
-      <li>Status (Merged, Open, Closed)</li>
-    </ul>
-  </li>
+  <li><strong>Critical</strong> - Findings that represent immediate, exploitable risk</li>
+  <li><strong>High</strong> - Significant vulnerabilities that should be prioritized</li>
+  <li><strong>Medium</strong> - Moderate-risk issues to address during normal development</li>
+  <li><strong>Low</strong> - Informational findings or minor concerns</li>
 </ul>
+
+<p>These cards provide an at-a-glance view of your organization's current risk distribution, making it easy to see where attention is needed most.</p>
+
+<h2 id="search-and-filter">Search and Filter</h2>
+
+<p>Below the severity cards, the Risk Register provides several ways to narrow your view:</p>
+
+<ul>
+  <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
+  <li><strong>30D date filter</strong> - Quickly scope findings to the last 30 days, or adjust the date range to match your review period</li>
+  <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type, status, and more</li>
+  <li><strong>Dismiss</strong> - Select one or more findings and dismiss them in bulk with a reason and optional context</li>
+</ul>
+
+<h2 id="findings-table">Findings Table</h2>
+
+<p>The main findings table shows all findings with the following columns:</p>
+
+<table>
+  <thead>
+    <tr><th>Column</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Risk</strong></td><td>Severity label (Critical, High, Medium, Low) with color coding. Sortable.</td></tr>
+    <tr><td><strong>Type</strong></td><td>The vulnerability or finding description (e.g., "Authorization Bypass in Next.js", "Token Validation Check", "client-side-trust")</td></tr>
+    <tr><td><strong>File</strong></td><td>The file path where the finding was detected (e.g., <code>package-lock.json</code>, <code>app/api/generate-vi...</code>, <code>firestore.rules</code>)</td></tr>
+    <tr><td><strong>Repo</strong></td><td>The repository name where the finding originated</td></tr>
+    <tr><td><strong>Detected</strong></td><td>Timestamp showing when the finding was first detected (e.g., 03/18/26 16:51:18)</td></tr>
+    <tr><td><strong>Agent</strong></td><td>Which agent produced the finding - SCA, Code Policy, DeepScan, or a specific Security Analyzer</td></tr>
+    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, dismissed, or resolved</td></tr>
+  </tbody>
+</table>
+
+<p>Each row has a checkbox for bulk selection, and findings are paginated (e.g., "Showing 1-20 of 203 entries") with page navigation at the bottom.</p>
 
 <h2 id="finding-dismissal">Finding Dismissal</h2>
 
 <p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. See <a href="../finding-dismissal.html">Finding Dismissal</a> for the full workflow.</p>
 
-<p>In the Risk Register, click <strong>Dismiss</strong> on a finding to select a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
+<p>Select one or more findings using the checkboxes, then click <strong>Dismiss</strong> to choose a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
 
 <h2 id="faqs">FAQs</h2>
 
 <p><strong>How are severities determined?</strong><br>
-DryRun Security normalizes outputs to Critical/High/Medium/Low. For PR scans, this aligns closely with Fail, Risky, Info, and other labels. DeepScan uses its own severity model and outputs are normalized similarly.</p>
+DryRun Security normalizes outputs to Critical, High, Medium, and Low. For PR scans, these align with Fail, Risky, and Info labels from the analyzers. DeepScan uses its own severity model and outputs are normalized similarly.</p>
 
 <p><strong>Which columns can I sort?</strong><br>
-Risk is sortable. Type, File, Repo, Detected Date, Agent, and PR Status are sortable as well.</p>
+Risk is the primary sortable column. Type, File, Repo, Detected, Agent, and Status columns are also sortable.</p>
 
-<p><strong>What filters are available?</strong><br>
-Filter by Date range, Risk level, Agent (DeepScan, PR), and Status (Merged, Open, Closed).</p>
+<p><strong>What agents appear in the Agent column?</strong><br>
+You will see SCA (Software Composition Analysis), Code Policy (Natural Language Code Policies), DeepScan, and individual <a href="../docs/sub-agent-analyzers.html">Security Analyzers</a> listed as the source of each finding.</p>
 ''',
 }
 
@@ -1467,7 +1382,39 @@ PAGES['security-dashboard'] = {
 
 <h2 id="ai-assistance">AI Assistance</h2>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<p>The Insights page (marked <strong>Beta</strong> in the sidebar) includes a conversational AI assistant that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">Code Insights</a> for full documentation.</p>
+
+<h2 id="navigation">Platform Navigation</h2>
+
+<p>The DryRun Security dashboard organizes its features in a sidebar with three sections:</p>
+
+<ul>
+  <li><strong>Main</strong>
+    <ul>
+      <li><a href="./risk-register.html">Risk Register</a> - Centralized finding management</li>
+      <li>Repositories - Connected repository list and status</li>
+      <li>Pull Requests - PR scan history and results</li>
+      <li><a href="../docs/deepscan.html">DeepScan</a> - Full-repository security analysis</li>
+      <li><a href="../docs/natural-language-code-policies.html">Code Policies</a> - Natural Language Code Policy management</li>
+      <li><a href="./ai-insights.html">Insights</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
+    </ul>
+  </li>
+  <li><strong>Settings</strong>
+    <ul>
+      <li><a href="./configurations.html">Configurations</a> - Per-repository agent and policy settings</li>
+      <li><a href="../docs/notifications.html">Integrations</a> - Slack and webhook notification setup</li>
+      <li><a href="../docs/api-guide.html">Access Keys</a> - API key management</li>
+    </ul>
+  </li>
+  <li><strong>Help</strong>
+    <ul>
+      <li>Docs - Link to this documentation site</li>
+      <li>Ask Questions - Contact DryRun Security support</li>
+    </ul>
+  </li>
+</ul>
+
+<p>A <strong>Dark Mode</strong> toggle at the bottom of the sidebar lets you switch between light and dark themes.</p>
 ''',
 }
 
@@ -1476,33 +1423,81 @@ PAGES['configurations'] = {
     'description': 'Customize DryRun Security behavior per repository - enable agents, attach policies, configure blocking, and set up notifications.',
     'section': 'Platform',
     'content': '''
-<p>In this section we demonstrate how to customize the behavior of DryRun Security by creating a Configuration in the Dashboard.</p>
+<p>Configurations let you customize how DryRun Security behaves for each repository or group of repositories. You can control which agents run, which policies are enforced, whether findings block PRs, and how notifications are delivered.</p>
 
 <h2 id="creating-a-configuration">Creating a Configuration</h2>
 
 <ol>
   <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
-  <li>Navigate to <strong>Settings &gt; Configuration</strong>.
+  <li>Navigate to <strong>Settings &gt; Configurations</strong> in the sidebar.
     <br><strong>Note:</strong> The <code>default</code> configuration is editable and applies to all repositories not included in another configuration.</li>
   <li>Click <strong>Add new Configuration +</strong>.</li>
-  <li>Set up the new configuration:
-    <ul>
-      <li>Enter a name for the configuration.</li>
-      <li>Use the <strong>Select Repositories</strong> selector to choose which repositories will use this configuration.
-        <br><strong>Note:</strong> Repositories can only have a single configuration. Repositories already in another configuration will be greyed out.</li>
-      <li>Enable or disable the DryRun Security Pull Request Comment.</li>
-      <li>Enable or disable Notifications. If enabled, choose the integrations to apply.</li>
-      <li>Add Code Policies by clicking <strong>Add Policy +</strong>. The Policy Enforcement Agent can run up to 7 code policies per repository.</li>
-      <li>Configure Code Policy settings: enable <strong>Blocking</strong>, set <strong>Silent Mode</strong>, and choose the <strong>Risk Level</strong> returned when the policy has findings (Info, Risky, or Fail).</li>
-      <li>Configure Code Security Agents: enable or disable individual agents, set <strong>Blocking</strong>, and configure <strong>Silent Mode</strong>.</li>
-    </ul>
-  </li>
-  <li>Click <strong>Save</strong>.</li>
+  <li>Enter a <strong>Configuration Name</strong> at the top of the page.</li>
 </ol>
 
-<h2 id="configure-blocking">Configure Blocking for Code Policies</h2>
+<h2 id="general-settings">General Settings</h2>
 
-<p>Both Natural Language Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong>, follow these steps:</p>
+<p>The top section of a configuration provides these controls:</p>
+
+<ul>
+  <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
+  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
+  <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Useful for visibility and audit trails.</li>
+  <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
+  <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/notifications.html">Notifications</a> for setup details).</li>
+</ul>
+
+<h2 id="policy-enforcement">Policy Enforcement Agent</h2>
+
+<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Natural Language Code Policies to this configuration:</p>
+
+<ul>
+  <li><strong>Add Policy</strong> - Attach an existing policy from your organization's <a href="../docs/policy-library.html">Policy Library</a></li>
+  <li><strong>Create Policy</strong> - Write a new Natural Language Code Policy directly from this screen</li>
+</ul>
+
+<p>Each attached policy is shown as a row with its own controls:</p>
+
+<ul>
+  <li><strong>Blocking</strong> - Toggle to make this policy a required status check. When enabled, a policy violation prevents the PR from being merged.</li>
+  <li><strong>Silent Mode</strong> - Toggle to run the policy without posting findings in the PR comment. Useful for testing new policies before enforcing them.</li>
+  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>.</li>
+</ul>
+
+<p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>
+
+<h2 id="code-security-agents">Code Security Agents</h2>
+
+<p>The bottom section of the configuration page lists all available <a href="../docs/sub-agent-analyzers.html">Security Analyzers</a>. Each analyzer has its own row with three controls:</p>
+
+<table>
+  <thead>
+    <tr><th>Analyzer</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cross-Site Scripting Analyzer</strong></td><td>Detects XSS vulnerabilities across rendering contexts</td></tr>
+    <tr><td><strong>General Security Analyzer</strong></td><td>Broad-spectrum analyzer covering auth gaps, crypto, debug artifacts, and more</td></tr>
+    <tr><td><strong>IDOR Analyzer</strong></td><td>Surfaces broken object-level authorization</td></tr>
+    <tr><td><strong>Mass Assignment</strong></td><td>Detects unsafe model binding patterns</td></tr>
+    <tr><td><strong>Secrets Analyzer</strong></td><td>Catches committed credentials, API keys, and tokens</td></tr>
+    <tr><td><strong>Server-Side Request Forgery Analyzer</strong></td><td>Identifies SSRF via user-controlled outbound requests</td></tr>
+    <tr><td><strong>SQL Injection Analyzer</strong></td><td>Traces data flow to detect unsafe query composition</td></tr>
+  </tbody>
+</table>
+
+<p>Each analyzer row provides:</p>
+
+<ul>
+  <li><strong>Blocking</strong> - Toggle to make this analyzer a required status check</li>
+  <li><strong>Silent Mode</strong> - Toggle to run the analyzer without posting findings in the PR comment</li>
+  <li><strong>Risk Level</strong> - Dropdown to set the severity label for findings from this analyzer (<strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>)</li>
+</ul>
+
+<p>Click <strong>Save</strong> at the bottom to apply changes, or <strong>Cancel</strong> to discard.</p>
+
+<h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
+
+<p>Both Natural Language Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
 
 <h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
 
@@ -1581,22 +1576,41 @@ PAGES['ai-insights'] = {
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>Code Insights lets you ask natural language questions about your codebase's security posture and get precise, contextual answers. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <a href="../docs/multi-agent-architecture.html">Codebase Insight Agent</a> retrieves the answer.</p>
+<p>The Insights page provides a conversational interface for exploring your security data. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <strong>DryRun AI Assistant</strong> retrieves the answer. Insights is currently available as a <strong>Beta</strong> feature.</p>
 
-<p>Code Insights is powered by the Code Insights MCP (Model Context Protocol), which enables programmatic access to your security data through natural language queries.</p>
+<p>At the top of the page, a date selector lets you scope your queries to a specific analysis window (e.g., "Mar 20, 2026"). Below it, the subtitle reads "Analysis of recent PRs and code changes," grounding the conversation in your actual repository activity.</p>
 
-<h2 id="example-queries">Example Queries</h2>
+<h2 id="dryrun-ai-assistant">DryRun AI Assistant</h2>
 
-<p>Here are real examples of what teams ask through Code Insights:</p>
+<p>The main interface is a chat window powered by the <strong>DryRun AI Assistant</strong>. When you open Insights, the assistant greets you with:</p>
+
+<blockquote>"Hello! I'm here to help you explore your security insights. You can ask me questions about the analysis results, specific patterns detected, or guidance on addressing findings. What would you like to know?"</blockquote>
+
+<p>Type a question in natural language and the assistant responds with contextual answers drawn from your PR reviews, DeepScans, policy enforcement records, and Risk Register data. Responses can include tables, charts, links to specific PRs, and code references.</p>
+
+<h2 id="suggested-prompts">Suggested Prompts</h2>
+
+<p>Below the chat window, the Insights page offers quick-start prompts you can click to begin a conversation:</p>
 
 <ul>
-  <li><strong>Attack surface discovery</strong> - "Did we add any new Go HTTP endpoints this week or last?"</li>
-  <li><strong>Security impact assessment</strong> - "Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
-  <li><strong>Risk trends</strong> - "Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
-  <li><strong>Compliance triggers</strong> - "List any PRs related to Lambda URLs in the last month."</li>
-  <li><strong>Audit reporting</strong> - "Show me a graph of risky alerts by repo for last week."</li>
-  <li><strong>Infrastructure changes</strong> - "What IAM policy changes were introduced across all repos this quarter?"</li>
+  <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
+  <li><strong>"What are the top risks in my repositories?"</strong> - Prioritized view of your highest-severity findings</li>
+  <li><strong>"Show me recent policy violations"</strong> - List of Natural Language Code Policy violations from recent PRs</li>
+  <li><strong>More</strong> - Expand to see additional suggested prompts</li>
 </ul>
+
+<p>You can also type free-form questions for more specific queries, such as:</p>
+
+<ul>
+  <li>"Did we add any new Go HTTP endpoints this week or last?"</li>
+  <li>"Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
+  <li>"Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
+  <li>"What IAM policy changes were introduced across all repos this quarter?"</li>
+</ul>
+
+<h2 id="customize-insights">Customize Insights</h2>
+
+<p>At the bottom of the Insights page, the <strong>Customize Insights</strong> section lets you tailor the analysis to your organization's priorities. Expand this section to configure which types of insights are generated and how the assistant prioritizes its responses.</p>
 
 <h2 id="use-cases">Use Cases</h2>
 
@@ -1614,7 +1628,7 @@ PAGES['ai-insights'] = {
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>Code Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/multi-agent-architecture.html">primary agents</a>. The agent has access to:</p>
+<p>Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/multi-agent-architecture.html">primary agents</a>. The agent has access to:</p>
 
 <ul>
   <li>All PR review findings and history</li>
@@ -1624,11 +1638,11 @@ PAGES['ai-insights'] = {
   <li>Risk Register data</li>
 </ul>
 
-<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer - including charts, tables, links to specific PRs, and code references as appropriate.</p>
+<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer. The Code Insights MCP (Model Context Protocol) enables the same queries programmatically, so AI coding agents can also access this data. See <a href="../docs/mcp-integration.html">MCP Integration</a> for details.</p>
 
 <h2 id="connection-to-dashboard">Connection to Security Dashboard</h2>
 
-<p>Code Insights complements the <a href="../docs/security-dashboard.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Code Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Code Insights for investigation and reporting.</p>
+<p>Insights complements the <a href="../docs/security-dashboard.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Insights for investigation and reporting.</p>
 ''',
 }
 
@@ -2054,7 +2068,16 @@ PAGES['api-guide'] = {
 
 <h3 id="getting-an-api-key">Getting an API Key</h3>
 
-<p>Create and manage access keys at: <a href="https://app.dryrun.security/settings/access-keys" target="_blank" rel="noopener noreferrer">https://app.dryrun.security/settings/access-keys</a></p>
+<p>Navigate to <strong>Settings &gt; Access Keys</strong> in the sidebar at <a href="https://app.dryrun.security/settings/access-keys" target="_blank" rel="noopener noreferrer">app.dryrun.security</a>. The Access Keys page provides two sections:</p>
+
+<ul>
+  <li><strong>API Keys</strong> - Create and manage API keys for your applications. Click <strong>+ Generate New API Key</strong> to create a new key.</li>
+  <li><strong>Your API Keys</strong> - View and manage your existing API keys. You can revoke any key at any time.</li>
+</ul>
+
+<div class="callout callout-warning">
+  <strong>Keep your API keys secure.</strong> Treat API keys like passwords. Never share them in public repositories, client-side code, or unsecured locations. If a key is compromised, revoke it immediately from the Access Keys page.
+</div>
 
 <p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
 
@@ -2338,6 +2361,18 @@ PAGES['sub-agent-analyzers'] = {
 
 <p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a>.</p>
 
+<h2 id="configuring-analyzers">Configuring Analyzers</h2>
+
+<p>Each Security Analyzer can be individually configured per repository through the <a href="../docs/configurations.html">Configurations</a> page. In the <strong>Code Security Agents</strong> section of a configuration, every analyzer has three controls:</p>
+
+<ul>
+  <li><strong>Blocking</strong> - When enabled, a finding from this analyzer creates a GitHub status check that must pass before the PR can be merged. The check appears under the analyzer's name (e.g., "Secrets Analyzer").</li>
+  <li><strong>Silent Mode</strong> - When enabled, the analyzer still runs and records findings in the Risk Register, but does not post them in the PR comment. Useful for evaluating an analyzer before turning it on for developers.</li>
+  <li><strong>Risk Level</strong> - Sets the default severity label for findings from this analyzer. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>. This controls how findings appear in the PR comment and Risk Register.</li>
+</ul>
+
+<p>These settings let teams gradually roll out analyzers - for example, starting in Silent Mode to evaluate signal quality before enabling Blocking for enforcement.</p>
+
 <h2 id="related-pages">Related Pages</h2>
 
 <ul>
@@ -2345,6 +2380,7 @@ PAGES['sub-agent-analyzers'] = {
   <li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a> - full scope of detected vulnerability classes</li>
   <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a> - how findings appear in pull requests</li>
   <li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a> - why analyzers produce low noise</li>
+  <li><a href="../docs/configurations.html">Configure Repositories</a> - per-repository agent and policy configuration</li>
 </ul>
 ''',
 }

@@ -141,41 +141,69 @@
         <h1 class="page-heading">Risk Register</h1>
         <p class="page-description">One view to see, search, and act on all security risk across your organization.</p>
         <div class="doc-content">
-<p>Risk Register centralizes findings from PR scans and DeepScans. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
+<p>Risk Register centralizes findings from PR scans and DeepScans into a single view. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
 
-<h2 id="risk-register-features">Risk Register Features</h2>
+<h2 id="severity-overview">Severity Overview</h2>
+
+<p>At the top of the Risk Register, four severity cards display the current count of findings by level:</p>
 
 <ul>
-  <li>See all findings from all PRs and DeepScans together.</li>
-  <li>Understand where risk is concentrated by repo, type, and severity.</li>
-  <li>Prioritize work by Critical/High first, then drill into specifics.</li>
-  <li>Dismiss findings with reasons and context so the same false positives do not keep coming back.</li>
-  <li>Use filters to move from org-level insight to actionable lists in seconds:
-    <ul>
-      <li>Date ranges</li>
-      <li>Risk level (Critical, High, Medium, Low)</li>
-      <li>Agent (DeepScan, PR)</li>
-      <li>Status (Merged, Open, Closed)</li>
-    </ul>
-  </li>
+  <li><strong>Critical</strong> - Findings that represent immediate, exploitable risk</li>
+  <li><strong>High</strong> - Significant vulnerabilities that should be prioritized</li>
+  <li><strong>Medium</strong> - Moderate-risk issues to address during normal development</li>
+  <li><strong>Low</strong> - Informational findings or minor concerns</li>
 </ul>
+
+<p>These cards provide an at-a-glance view of your organization's current risk distribution, making it easy to see where attention is needed most.</p>
+
+<h2 id="search-and-filter">Search and Filter</h2>
+
+<p>Below the severity cards, the Risk Register provides several ways to narrow your view:</p>
+
+<ul>
+  <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
+  <li><strong>30D date filter</strong> - Quickly scope findings to the last 30 days, or adjust the date range to match your review period</li>
+  <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type, status, and more</li>
+  <li><strong>Dismiss</strong> - Select one or more findings and dismiss them in bulk with a reason and optional context</li>
+</ul>
+
+<h2 id="findings-table">Findings Table</h2>
+
+<p>The main findings table shows all findings with the following columns:</p>
+
+<table>
+  <thead>
+    <tr><th>Column</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Risk</strong></td><td>Severity label (Critical, High, Medium, Low) with color coding. Sortable.</td></tr>
+    <tr><td><strong>Type</strong></td><td>The vulnerability or finding description (e.g., "Authorization Bypass in Next.js", "Token Validation Check", "client-side-trust")</td></tr>
+    <tr><td><strong>File</strong></td><td>The file path where the finding was detected (e.g., <code>package-lock.json</code>, <code>app/api/generate-vi...</code>, <code>firestore.rules</code>)</td></tr>
+    <tr><td><strong>Repo</strong></td><td>The repository name where the finding originated</td></tr>
+    <tr><td><strong>Detected</strong></td><td>Timestamp showing when the finding was first detected (e.g., 03/18/26 16:51:18)</td></tr>
+    <tr><td><strong>Agent</strong></td><td>Which agent produced the finding - SCA, Code Policy, DeepScan, or a specific Security Analyzer</td></tr>
+    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, dismissed, or resolved</td></tr>
+  </tbody>
+</table>
+
+<p>Each row has a checkbox for bulk selection, and findings are paginated (e.g., "Showing 1-20 of 203 entries") with page navigation at the bottom.</p>
 
 <h2 id="finding-dismissal">Finding Dismissal</h2>
 
 <p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. See <a href="../finding-dismissal.html">Finding Dismissal</a> for the full workflow.</p>
 
-<p>In the Risk Register, click <strong>Dismiss</strong> on a finding to select a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
+<p>Select one or more findings using the checkboxes, then click <strong>Dismiss</strong> to choose a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
 
 <h2 id="faqs">FAQs</h2>
 
 <p><strong>How are severities determined?</strong><br>
-DryRun Security normalizes outputs to Critical/High/Medium/Low. For PR scans, this aligns closely with Fail, Risky, Info, and other labels. DeepScan uses its own severity model and outputs are normalized similarly.</p>
+DryRun Security normalizes outputs to Critical, High, Medium, and Low. For PR scans, these align with Fail, Risky, and Info labels from the analyzers. DeepScan uses its own severity model and outputs are normalized similarly.</p>
 
 <p><strong>Which columns can I sort?</strong><br>
-Risk is sortable. Type, File, Repo, Detected Date, Agent, and PR Status are sortable as well.</p>
+Risk is the primary sortable column. Type, File, Repo, Detected, Agent, and Status columns are also sortable.</p>
 
-<p><strong>What filters are available?</strong><br>
-Filter by Date range, Risk level, Agent (DeepScan, PR), and Status (Merged, Open, Closed).</p>
+<p><strong>What agents appear in the Agent column?</strong><br>
+You will see SCA (Software Composition Analysis), Code Policy (Natural Language Code Policies), DeepScan, and individual <a href="../docs/sub-agent-analyzers.html">Security Analyzers</a> listed as the source of each finding.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/finding-dismissal.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Finding Dismissal</span></a>
@@ -186,7 +214,9 @@ Filter by Date range, Risk level, Agent (DeepScan, PR), and Status (Merged, Open
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#risk-register-features">Risk Register Features</a></li>
+<li class="toc-h2"><a href="#severity-overview">Severity Overview</a></li>
+<li class="toc-h2"><a href="#search-and-filter">Search and Filter</a></li>
+<li class="toc-h2"><a href="#findings-table">Findings Table</a></li>
 <li class="toc-h2"><a href="#finding-dismissal">Finding Dismissal</a></li>
 <li class="toc-h2"><a href="#faqs">FAQs</a></li>
 </ul>
