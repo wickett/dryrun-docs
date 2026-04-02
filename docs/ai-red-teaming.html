@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>AI Red Teaming - DryRun Security Docs</title>
+  <meta name="description" content="Threat modeling and red teaming capabilities for AI-assisted development workflows.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -122,7 +122,7 @@
 <li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
 <li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
 <li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
+<li><a href="../docs/ai-red-teaming.html" class="active">AI Red Teaming</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -137,61 +137,76 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI Agent Security</div>
+        <h1 class="page-heading">AI Red Teaming</h1>
+        <p class="page-description">Threat modeling and red teaming capabilities for AI-assisted development workflows.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="threat-landscape">The AI Development Threat Landscape</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>AI-assisted development introduces new categories of security risk that traditional tools are not designed to detect. When AI agents write code, review code, or interact with development infrastructure, they create attack surfaces that adversaries can exploit through prompt injection, supply chain manipulation, and behavioral subversion.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<h2 id="attack-vectors">AI-Specific Attack Vectors</h2>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
-
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<p>DryRun Security's AI Agent Security capabilities address several categories of threats:</p>
 
 <ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
+  <li><strong>Prompt injection via code</strong> - malicious instructions embedded in code comments, documentation, or dependency files that manipulate AI coding assistants into generating insecure code</li>
+  <li><strong>Malicious agent skills</strong> - AI agents with tool access (file system, network, shell) that can be manipulated into performing unintended actions. See <a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a> for details</li>
+  <li><strong>Training data poisoning</strong> - AI models generating code patterns derived from intentionally vulnerable training examples</li>
+  <li><strong>Supply chain attacks via AI</strong> - adversaries using AI-generated PRs to introduce subtle backdoors that pass human review</li>
 </ul>
 
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
+<h2 id="behavioral-analysis">Behavioral Analysis</h2>
 
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>DryRun Security applies <a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a> to detect anomalous patterns in AI-generated contributions. This includes:</p>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li>Unusual commit patterns - timing, frequency, or volume that deviates from established baselines</li>
+  <li>Code style anomalies - changes that do not match the repository's established patterns</li>
+  <li>Scope creep - AI-generated changes that modify files or systems outside the stated scope of a task</li>
+  <li>Privilege escalation attempts - changes to authorization, permissions, or access control that were not part of the original request</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<h2 id="continuous-monitoring">Continuous Monitoring</h2>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<p>Rather than point-in-time assessments, DryRun Security provides continuous monitoring of AI-assisted development activity. Every PR - whether authored by a human, an AI assistant, or an autonomous agent - receives the same depth of security analysis. This means adversarial patterns are detected at the moment they appear, not during a periodic review.</p>
 
-<h2 id="ai-assistance">AI Assistance</h2>
+<h2 id="threat-modeling-support">Threat Modeling Support</h2>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<p>DryRun Security's <a href="../docs/ai-insights.html">Code Insights</a> capabilities support threat modeling exercises by answering questions like:</p>
+
+<ul>
+  <li>"Which repositories have the most AI-generated code changes this month?"</li>
+  <li>"What new API endpoints were introduced by AI-generated PRs?"</li>
+  <li>"Show findings correlated with AI-generated commits across all repos"</li>
+</ul>
+
+<p>This data helps security teams prioritize review efforts and identify repositories where AI-generated code may need additional scrutiny.</p>
+
+<h2 id="related-pages">Related Pages</h2>
+
+<ul>
+  <li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a> - detecting adversarial AI agent behavior</li>
+  <li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a> - anomaly detection in commit patterns</li>
+  <li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a> - observability into AI-generated changes</li>
+  <li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a> - security analysis for AI-written code</li>
+</ul>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/ai-tool-integrations.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">AI Coding Tool Integrations</span></a>
+<a href="../docs/api-guide.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">API Usage Guide</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#threat-landscape">The AI Development Threat Landscape</a></li>
+<li class="toc-h2"><a href="#attack-vectors">AI-Specific Attack Vectors</a></li>
+<li class="toc-h2"><a href="#behavioral-analysis">Behavioral Analysis</a></li>
+<li class="toc-h2"><a href="#continuous-monitoring">Continuous Monitoring</a></li>
+<li class="toc-h2"><a href="#threat-modeling-support">Threat Modeling Support</a></li>
+<li class="toc-h2"><a href="#related-pages">Related Pages</a></li>
 </ul>
 </aside>
   </div>

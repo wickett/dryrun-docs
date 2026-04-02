@@ -10,14 +10,20 @@
   <url><loc>https://docs.dryrun.security/docs/sca.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/iac-scanning.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/coverage-matrix.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/vulnerability-coverage.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/sub-agent-analyzers.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/ai-native-architecture.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/contextual-security-analysis.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/false-positive-reduction.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/business-logic-detection.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/git-behavioral-analysis.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/code-security-knowledge-graph.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/multi-agent-architecture.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/model-verification.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/natural-language-code-policies.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/nlcp-starter-pack.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/nlcp-best-practices.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/policy-library.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/auto-fix.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/fix-verification.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/finding-dismissal.html</loc><priority>0.8</priority></url>
@@ -28,13 +34,17 @@
   <url><loc>https://docs.dryrun.security/docs/ai-insights.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/risk-trending.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/sbom-generation.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/compliance-audit.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/ide-integration.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/mcp-integration.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/agents-md.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/cicd-integration.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/scm-support.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/securing-ai-code.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/malicious-agent-detection.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/ai-coding-visibility.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/ai-tool-integrations.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/ai-red-teaming.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/api-guide.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/language-support.html</loc><priority>0.8</priority></url>
 </urlset>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Insights - DryRun Security Docs</title>
-  <meta name="description" content="Ask natural language questions about your security data - findings, PRs, vulnerabilities, and trends - powered by AI.">
+  <title>Code Insights - DryRun Security Docs</title>
+  <meta name="description" content="Natural language queries about your codebase risk, trends, and exposure - powered by the Codebase Insight Agent.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,6 +63,8 @@
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
 <li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
+<li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
+<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -70,12 +72,16 @@
 <ul class="sidebar-links">
 <li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
 <li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
+<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
 <li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
 <li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
 <li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
+<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
+<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
 <li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
 <li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
 <li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
+<li><a href="../docs/policy-library.html">Policy Library</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -93,9 +99,10 @@
 <li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
-<li><a href="../docs/ai-insights.html" class="active">AI Insights</a></li>
+<li><a href="../docs/ai-insights.html" class="active">Code Insights</a></li>
 <li><a href="../docs/risk-trending.html">Risk Trending</a></li>
 <li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
+<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -105,6 +112,7 @@
 <li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
 <li><a href="../docs/agents-md.html">AGENTS.md</a></li>
 <li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
+<li><a href="../docs/scm-support.html">SCM Support</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -113,6 +121,8 @@
 <li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
 <li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
 <li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
+<li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
+<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,66 +138,59 @@
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">AI Insights</h1>
-        <p class="page-description">Ask natural language questions about your security data - findings, PRs, vulnerabilities, and trends - powered by AI.</p>
+        <h1 class="page-heading">Code Insights</h1>
+        <p class="page-description">Natural language queries about your codebase risk, trends, and exposure - powered by the Codebase Insight Agent.</p>
         <div class="doc-content">
-<p>AI Assistance is an admin-only chat experience inside the Insights page in the DryRun Security dashboard. It lets you ask natural language questions about your repos, pull requests, vulnerabilities, and analyzer findings, then pulls answers from your organization's Insights data using built-in tools.</p>
+<h2 id="overview">Overview</h2>
 
-<h2 id="what-its-for">What It's For</h2>
+<p>Code Insights lets you ask natural language questions about your codebase's security posture and get precise, contextual answers. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <a href="../docs/multi-agent-architecture.html">Codebase Insight Agent</a> retrieves the answer.</p>
 
-<p>Use AI Assistance when you want fast, plain English answers to questions like:</p>
-<ul>
-  <li>"What changed this week?"</li>
-  <li>"Which PR introduced the risky dependency?"</li>
-  <li>"What are the top risks across my repos right now?"</li>
-</ul>
+<p>Code Insights is powered by the Code Insights MCP (Model Context Protocol), which enables programmatic access to your security data through natural language queries.</p>
 
-<h2 id="key-points">Key Points</h2>
+<h2 id="example-queries">Example Queries</h2>
+
+<p>Here are real examples of what teams ask through Code Insights:</p>
 
 <ul>
-  <li><strong>Admin only access:</strong> Only admin users can use AI Assistance.</li>
-  <li><strong>Built for AppSec and developers:</strong> Ask about risks, PRs, vulnerabilities, integrations, and code changes.</li>
-  <li><strong>30-day window per query:</strong> Each tool call supports up to a 30-day time range. Use repeated calls for longer spans.</li>
-  <li><strong>Parallel lookups:</strong> Some workflows can call multiple tools at once.</li>
+  <li><strong>Attack surface discovery</strong> - "Did we add any new Go HTTP endpoints this week or last?"</li>
+  <li><strong>Security impact assessment</strong> - "Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
+  <li><strong>Risk trends</strong> - "Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
+  <li><strong>Compliance triggers</strong> - "List any PRs related to Lambda URLs in the last month."</li>
+  <li><strong>Audit reporting</strong> - "Show me a graph of risky alerts by repo for last week."</li>
+  <li><strong>Infrastructure changes</strong> - "What IAM policy changes were introduced across all repos this quarter?"</li>
 </ul>
 
-<h2 id="ways-to-use">Ways to Use AI Assistance</h2>
+<h2 id="use-cases">Use Cases</h2>
 
-<h3 id="search-insights">Search Across Insights</h3>
-<p>Answer questions across wide-ranging security insights - vulnerabilities, integrations, key risks, or code patterns. Best for broad searches when you're exploring what is happening or what changed.</p>
-<p><em>Example: "Tell me the top risks in this week's deployments." "Any new payment processing code added recently?"</em></p>
+<h3 id="audit-reporting">Audit-Ready Reporting</h3>
+<p>Generate compliance evidence and audit reports by querying your security data directly. Instead of exporting CSV files and building spreadsheets, ask for the exact view auditors need. See <a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a> for more on audit workflows.</p>
 
-<h3 id="summarize-insights">Summarize Insights for a Time Range</h3>
-<p>Pull together a summary of critical security insights for a given time range and organization. Best for big-picture views before you drill into specifics.</p>
-<p><em>Example: "What were the biggest findings in my repositories last week?" "Overview of vulnerabilities identified this month across all projects."</em></p>
+<h3 id="risk-trend-analysis">Risk Trend Analysis</h3>
+<p>Track how your security posture changes over time. Ask about trends by repository, team, vulnerability type, or time period. Identify whether remediation is keeping pace with new findings.</p>
 
-<h3 id="pr-deep-dive">Pull Request Deep Dive</h3>
-<p>Dive into the details of a specific pull request. Best for investigating what happened in a PR, why it was flagged, and what to fix.</p>
-<p><em>Example: "What security issues were raised in PR #135?" "Was PR #104 flagged for any credential exposures?"</em></p>
+<h3 id="attack-surface-discovery">Attack Surface Discovery</h3>
+<p>Understand what new attack surface your team is creating. Query for new endpoints, new dependencies, new infrastructure, or any code pattern that expands your exposure.</p>
 
-<h3 id="analyzer-stats">Analyzer Stats and Trends</h3>
-<p>Fetch stats from analyzers detecting security threats like SQL injection, insecure dependencies, IDOR, and more.</p>
-<p><em>Example: "How many vulnerabilities were detected by the SQL Injection Analyzer last week?" "Show stats for threats in repository 'dryrun-api' for December."</em></p>
+<h3 id="remediation-automation">Automated Discovery and Remediation</h3>
+<p>Through the MCP integration, AI coding agents can query Code Insights to discover findings, understand context, and generate fixes - creating a closed loop from detection to remediation. See <a href="../docs/mcp-integration.html">MCP Integration</a> for setup details.</p>
 
-<h3 id="file-level-data">File Level Security Data and History</h3>
-<p>Inspect security-relevant data and history for an individual file.</p>
-<p><em>Example: "Give me security data for src/login.js." "What's the history of vulnerabilities linked to src/config.yml?"</em></p>
+<h2 id="how-it-works">How It Works</h2>
 
-<h2 id="common-workflows">Common Workflows</h2>
+<p>Code Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/multi-agent-architecture.html">primary agents</a>. The agent has access to:</p>
 
-<h3 id="weekly-risk-review">Weekly Risk Review</h3>
-<ol>
-  <li>Run a summary for the last 7 days.</li>
-  <li>Use a broad search to expand on the top risks.</li>
-  <li>Drill into suspicious PRs with a pull request deep dive.</li>
-</ol>
+<ul>
+  <li>All PR review findings and history</li>
+  <li>DeepScan results</li>
+  <li>Policy enforcement records</li>
+  <li>Repository metadata and configuration</li>
+  <li>Risk Register data</li>
+</ul>
 
-<h3 id="trend-reporting">Trend Reporting</h3>
-<ol>
-  <li>Pull analyzer stats for the last 30 days.</li>
-  <li>Repeat for prior windows (e.g., previous month).</li>
-  <li>Compare trends and summarize changes.</li>
-</ol>
+<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer - including charts, tables, links to specific PRs, and code references as appropriate.</p>
+
+<h2 id="connection-to-dashboard">Connection to Security Dashboard</h2>
+
+<p>Code Insights complements the <a href="../docs/security-dashboard.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Code Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Code Insights for investigation and reporting.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/notifications.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Notifications</span></a>
@@ -198,17 +201,15 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#what-its-for">What It&#x27;s For</a></li>
-<li class="toc-h2"><a href="#key-points">Key Points</a></li>
-<li class="toc-h2"><a href="#ways-to-use">Ways to Use AI Assistance</a></li>
-<li class="toc-h3"><a href="#search-insights">Search Across Insights</a></li>
-<li class="toc-h3"><a href="#summarize-insights">Summarize Insights for a Time Range</a></li>
-<li class="toc-h3"><a href="#pr-deep-dive">Pull Request Deep Dive</a></li>
-<li class="toc-h3"><a href="#analyzer-stats">Analyzer Stats and Trends</a></li>
-<li class="toc-h3"><a href="#file-level-data">File Level Security Data and History</a></li>
-<li class="toc-h2"><a href="#common-workflows">Common Workflows</a></li>
-<li class="toc-h3"><a href="#weekly-risk-review">Weekly Risk Review</a></li>
-<li class="toc-h3"><a href="#trend-reporting">Trend Reporting</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
+<li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
+<li class="toc-h3"><a href="#audit-reporting">Audit-Ready Reporting</a></li>
+<li class="toc-h3"><a href="#risk-trend-analysis">Risk Trend Analysis</a></li>
+<li class="toc-h3"><a href="#attack-surface-discovery">Attack Surface Discovery</a></li>
+<li class="toc-h3"><a href="#remediation-automation">Automated Discovery and Remediation</a></li>
+<li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
+<li class="toc-h2"><a href="#connection-to-dashboard">Connection to Security Dashboard</a></li>
 </ul>
 </aside>
   </div>
@@ -222,8 +223,9 @@
           <div class="footer-badges">
             <span class="footer-badge"><span class="footer-badge-dot"></span>SOC2 Type II Certified</span>
             <span class="footer-badge"><span class="footer-badge-dot"></span>Black Hat USA 2024 Finalist</span>
-            <span class="footer-badge"><span class="footer-badge-dot"></span>G2 High Performer &mdash; SAST Spring 2026</span>
+            <span class="footer-badge"><span class="footer-badge-dot"></span>G2 High Performer - SAST Spring 2026</span>
           </div>
+          <a href="https://www.g2.com/products/dryrun-security/reviews" target="_blank" rel="noopener noreferrer" class="footer-g2-link">Read our reviews on G2</a>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">Links</p>

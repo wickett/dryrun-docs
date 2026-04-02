@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>SCM Support - DryRun Security Docs</title>
+  <meta name="description" content="Supported source code management platforms - GitHub and GitLab integration details.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -112,7 +112,7 @@
 <li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
 <li><a href="../docs/agents-md.html">AGENTS.md</a></li>
 <li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
-<li><a href="../docs/scm-support.html">SCM Support</a></li>
+<li><a href="../docs/scm-support.html" class="active">SCM Support</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -137,61 +137,100 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Developer Tools</div>
+        <h1 class="page-heading">SCM Support</h1>
+        <p class="page-description">Supported source code management platforms - GitHub and GitLab integration details.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="supported-platforms">Supported Platforms</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>DryRun Security integrates directly with the source code management (SCM) platforms your team already uses:</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Platform</th><th>Integration Method</th><th>Setup Guide</th></tr></thead>
+<tbody>
+<tr><td>GitHub (Cloud)</td><td>GitHub App</td><td><a href="../docs/quick-start.html">Install for GitHub</a></td></tr>
+<tr><td>GitLab (Cloud)</td><td>GitLab Integration</td><td><a href="../docs/quick-start-gitlab.html">Install for GitLab</a></td></tr>
+</tbody>
+</table>
+</div>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<h2 id="github-integration">GitHub Integration</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
-
-<ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
-</ul>
-
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
-
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>DryRun Security connects to GitHub through a GitHub App installation. The App requests only the permissions necessary for security analysis:</p>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li><strong>Repository contents</strong> (read) - to retrieve code for analysis</li>
+  <li><strong>Pull requests</strong> (read/write) - to receive PR events and post review comments</li>
+  <li><strong>Checks</strong> (read/write) - to post pass/fail check results on PRs</li>
+  <li><strong>Metadata</strong> (read) - repository metadata for organization and configuration</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<h3 id="github-events">Supported Events</h3>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<p>DryRun Security responds to the following GitHub events:</p>
 
-<h2 id="ai-assistance">AI Assistance</h2>
+<ul>
+  <li><strong>Pull request opened</strong> - triggers a full security review of the PR</li>
+  <li><strong>Pull request synchronized</strong> (new commits pushed) - re-runs analysis on updated code</li>
+  <li><strong>Pull request reopened</strong> - re-runs analysis</li>
+</ul>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<h3 id="github-installation-scope">Installation Scope</h3>
+
+<p>You can install the DryRun Security GitHub App for:</p>
+
+<ul>
+  <li><strong>All repositories</strong> in an organization - every repo gets security analysis automatically</li>
+  <li><strong>Selected repositories</strong> - choose specific repos to analyze</li>
+</ul>
+
+<p>New repositories added to the organization will automatically receive coverage if you selected "All repositories" during installation.</p>
+
+<h2 id="gitlab-integration">GitLab Integration</h2>
+
+<p>DryRun Security connects to GitLab through an integration that monitors merge request events. The setup process is documented in the <a href="../docs/quick-start-gitlab.html">GitLab installation guide</a>.</p>
+
+<h3 id="gitlab-events">Supported Events</h3>
+
+<ul>
+  <li><strong>Merge request opened</strong> - triggers security review</li>
+  <li><strong>Merge request updated</strong> (new commits) - re-runs analysis</li>
+</ul>
+
+<h2 id="how-reviews-appear">How Reviews Appear</h2>
+
+<p>On both platforms, DryRun Security posts findings directly in the PR/MR interface:</p>
+
+<ul>
+  <li><strong>PR comment</strong> with a summary of findings, policy results, and an executive-level overview</li>
+  <li><strong>Check/status</strong> that passes or fails based on finding severity and configuration</li>
+  <li><strong>Inline annotations</strong> on specific lines of code where findings were detected</li>
+</ul>
+
+<p>Developers see security feedback in the same interface they use for code review, with no separate dashboard or tool required to take action.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>After installation, configure repository-level settings through the DryRun Security platform. See <a href="../docs/configurations.html">Configure Repositories</a> for options including analyzer selection, severity thresholds, and notification routing.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/cicd-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">CI/CD Integration</span></a>
+<a href="../docs/securing-ai-code.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Securing AI-Generated Code</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#supported-platforms">Supported Platforms</a></li>
+<li class="toc-h2"><a href="#github-integration">GitHub Integration</a></li>
+<li class="toc-h3"><a href="#github-events">Supported Events</a></li>
+<li class="toc-h3"><a href="#github-installation-scope">Installation Scope</a></li>
+<li class="toc-h2"><a href="#gitlab-integration">GitLab Integration</a></li>
+<li class="toc-h3"><a href="#gitlab-events">Supported Events</a></li>
+<li class="toc-h2"><a href="#how-reviews-appear">How Reviews Appear</a></li>
+<li class="toc-h2"><a href="#configuration">Configuration</a></li>
 </ul>
 </aside>
   </div>

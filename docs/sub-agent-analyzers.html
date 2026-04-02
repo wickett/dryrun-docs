@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>Security Analyzers - DryRun Security Docs</title>
+  <meta name="description" content="The specialized sub-agents that run on every pull request - XSS, SQLi, IDOR, SSRF, Mass Assignment, Secrets, and General Security.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
 <li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 <li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
-<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
+<li><a href="../docs/sub-agent-analyzers.html" class="active">Security Analyzers</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -137,61 +137,101 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
+        <h1 class="page-heading">Security Analyzers</h1>
+        <p class="page-description">The specialized sub-agents that run on every pull request - XSS, SQLi, IDOR, SSRF, Mass Assignment, Secrets, and General Security.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="how-analyzers-work">How Analyzers Work</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>DryRun Security's <a href="../docs/multi-agent-architecture.html">multi-agent architecture</a> deploys specialized sub-agents on every pull request. Each analyzer focuses on a specific class of vulnerability and uses <a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a> to evaluate code in full context rather than matching patterns.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<p>Analyzers run in parallel during a PR review. The <strong>Code Review Agent</strong> coordinates the sub-agents, collects their findings, validates exploitability, and presents a consolidated report in the PR comment. Each analyzer can also call just-in-time research sub-agents to look up framework-specific behavior, CVE details, or license information as needed.</p>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<h2 id="sql-injection-analyzer">SQL Injection (SQLi) Analyzer</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<p>Detects unsafe query composition across languages by tracing data flow from user input sources to query execution sinks. The analyzer distinguishes between genuinely unsafe dynamic queries and parameterized queries, ORM abstractions, and other safe patterns that happen to involve user-derived values.</p>
+
+<p>Covers SQL injection in raw queries, stored procedures, ORM misuse, and query builder patterns across all <a href="../docs/language-support.html">supported languages</a>.</p>
+
+<h2 id="xss-analyzer">Cross-Site Scripting (XSS) Analyzer</h2>
+
+<p>Finds unescaped user input rendered in HTML output. Goes beyond simple <code>innerHTML</code> detection to cover framework-specific pitfalls - template engine auto-escaping bypass, React <code>dangerouslySetInnerHTML</code>, Vue <code>v-html</code> directives, and server-side rendering contexts where escaping rules differ.</p>
+
+<p>The analyzer evaluates whether the rendering context (HTML body, attribute, script, URL) matches the escaping applied, catching cases where input is escaped for one context but used in another.</p>
+
+<h2 id="idor-analyzer">Insecure Direct Object Reference (IDOR) Analyzer</h2>
+
+<p>Surfaces broken object-level authorization by tracing data paths from request parameters to data access. The analyzer looks for cases where a user-supplied identifier (ID, slug, filename) is used to retrieve or modify a resource without verifying that the requesting user has access to that resource.</p>
+
+<p>This goes well beyond checking whether an endpoint exists - the analyzer reasons about authorization middleware, access control decorators, and ownership checks in the data access layer.</p>
+
+<h2 id="mass-assignment-analyzer">Mass Assignment Analyzer</h2>
+
+<p>Flags unsafe binding patterns that allow user input to overwrite sensitive model fields or escalate privileges. Common in web frameworks that automatically map request parameters to model attributes (Rails <code>params.permit</code>, Django model forms, Express body parsing).</p>
+
+<p>The analyzer identifies when user-controlled input reaches a model update without an explicit allowlist of permitted fields, and evaluates whether any of the unprotected fields are security-sensitive (roles, permissions, account status, pricing).</p>
+
+<h2 id="ssrf-analyzer">Server-Side Request Forgery (SSRF) Analyzer</h2>
+
+<p>Inspects outbound HTTP calls, DNS lookups, and other network operations for user-controlled target URLs or hostnames. The analyzer checks for missing URL validation, allowlist enforcement, and internal network access restrictions.</p>
+
+<p>Covers direct SSRF (user input in URL), blind SSRF (request made but response not returned to user), and partial SSRF (user controls part of the URL path or query parameters).</p>
+
+<h2 id="secrets-analyzer">Secrets Analyzer</h2>
+
+<p>Stops committed API keys, tokens, database passwords, private keys, and other credentials at PR time. Unlike simple regex scanners, the Secrets Analyzer evaluates context - distinguishing between real credentials and test fixtures, example configurations, public documentation keys, and placeholder values.</p>
+
+<p>When a confirmed secret is found, the finding includes the file path and line number with a plain-language explanation of the risk, without reproducing the credential value in the report. See <a href="../docs/secrets-detection.html">Secrets Detection</a> for the full details.</p>
+
+<h2 id="general-security-analyzer">General Security Analyzer (GSA)</h2>
+
+<p>The GSA is the broadest analyzer, covering security issues that do not fall neatly into a single vulnerability class:</p>
 
 <ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
+  <li><strong>Authentication and authorization gaps</strong> - missing auth middleware, inconsistent access controls, broken session management</li>
+  <li><strong>Risky cryptography</strong> - weak algorithms, hardcoded IVs, improper key management</li>
+  <li><strong>Debug artifacts</strong> - debug endpoints, verbose error messages, development-mode settings left in production code</li>
+  <li><strong>Unsafe deserialization</strong> - untrusted data passed to deserialization functions without validation</li>
+  <li><strong>Leaky error handling</strong> - stack traces, internal paths, or database details exposed in error responses</li>
+  <li><strong>Missing rate limiting</strong> - authentication endpoints, API routes, and form submissions without throttling</li>
+  <li><strong>Security misconfigurations</strong> - permissive CORS, missing security headers, unsafe defaults</li>
+  <li><strong>General logic flaws</strong> - race conditions, time-of-check/time-of-use issues, and other semantic vulnerabilities</li>
 </ul>
 
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
+<h2 id="core-code-policies">Core Code Policies</h2>
 
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>In addition to the specialized analyzers, DryRun runs a set of Core Code Policies on every PR. These cover the OWASP Top 10 and other well-established vulnerability patterns using the same contextual analysis approach. Core Code Policies are always active and require no configuration.</p>
+
+<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a>.</p>
+
+<h2 id="related-pages">Related Pages</h2>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a> - how agents coordinate</li>
+  <li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a> - full scope of detected vulnerability classes</li>
+  <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a> - how findings appear in pull requests</li>
+  <li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a> - why analyzers produce low noise</li>
 </ul>
-
-<h2 id="risk-trending">Risk Trending</h2>
-
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
-
-<h2 id="ai-assistance">AI Assistance</h2>
-
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/vulnerability-coverage.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Vulnerability Coverage</span></a>
+<a href="../docs/ai-native-architecture.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">AI-Native Architecture</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#how-analyzers-work">How Analyzers Work</a></li>
+<li class="toc-h2"><a href="#sql-injection-analyzer">SQL Injection (SQLi) Analyzer</a></li>
+<li class="toc-h2"><a href="#xss-analyzer">Cross-Site Scripting (XSS) Analyzer</a></li>
+<li class="toc-h2"><a href="#idor-analyzer">Insecure Direct Object Reference (IDOR) Analyzer</a></li>
+<li class="toc-h2"><a href="#mass-assignment-analyzer">Mass Assignment Analyzer</a></li>
+<li class="toc-h2"><a href="#ssrf-analyzer">Server-Side Request Forgery (SSRF) Analyzer</a></li>
+<li class="toc-h2"><a href="#secrets-analyzer">Secrets Analyzer</a></li>
+<li class="toc-h2"><a href="#general-security-analyzer">General Security Analyzer (GSA)</a></li>
+<li class="toc-h2"><a href="#core-code-policies">Core Code Policies</a></li>
+<li class="toc-h2"><a href="#related-pages">Related Pages</a></li>
 </ul>
 </aside>
   </div>

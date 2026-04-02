@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>False Positive Reduction - DryRun Security Docs</title>
+  <meta name="description" content="How DryRun Security achieves 90% lower noise than traditional SAST through Contextual Security Analysis.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +72,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
 <li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
-<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
+<li><a href="../docs/false-positive-reduction.html" class="active">False Positive Reduction</a></li>
 <li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
 <li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
 <li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -137,61 +137,77 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
+        <h1 class="page-heading">False Positive Reduction</h1>
+        <p class="page-description">How DryRun Security achieves 90% lower noise than traditional SAST through Contextual Security Analysis.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="the-false-positive-problem">The False Positive Problem</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>False positives are the defining problem of traditional static analysis. When a tool flags code that is not actually vulnerable, developers lose time investigating, lose trust in the tool, and eventually start ignoring findings entirely. Studies consistently show that legacy SAST tools produce false positive rates of 40-60% or higher, meaning more than half of all alerts are noise.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<p>The consequence is predictable: development teams either disable the tool, suppress entire categories of findings, or assign a dedicated person to triage alerts - none of which improve security.</p>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<h2 id="why-pattern-matching-fails">Why Pattern Matching Produces Noise</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
-
-<ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
-</ul>
-
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
-
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>Pattern-matching tools flag code based on syntactic similarity to known vulnerability patterns. A function call that looks like a SQL query with string concatenation gets flagged, regardless of whether:</p>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li>The input is actually user-controlled</li>
+  <li>The input has already been sanitized upstream</li>
+  <li>The code is behind an authorization check that limits access</li>
+  <li>The string being concatenated is a constant, not a variable</li>
+  <li>The framework being used has built-in protections</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<p>Every one of these cases produces a false positive in a pattern-matching tool. The tool sees the pattern but cannot evaluate whether the pattern represents real risk in context.</p>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<h2 id="contextual-analysis-approach">The Contextual Analysis Approach</h2>
 
-<h2 id="ai-assistance">AI Assistance</h2>
+<p>DryRun Security's <a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a> engine evaluates each potential finding against the surrounding code context before reporting it. This means the engine considers:</p>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<ul>
+  <li><strong>Data flow</strong> - tracing where input originates and whether it passes through sanitization before reaching a sensitive sink</li>
+  <li><strong>Authorization context</strong> - whether the code path is protected by authentication and authorization middleware</li>
+  <li><strong>Framework behavior</strong> - understanding that Django's ORM parameterizes queries by default, that React escapes JSX output, that Spring Security's CSRF protection is enabled by default</li>
+  <li><strong>Developer intent</strong> - recognizing test fixtures, example configurations, and development-only code paths</li>
+  <li><strong>Exploitability</strong> - assessing whether a theoretical vulnerability is actually reachable and exploitable in the deployed application</li>
+</ul>
+
+<p>The result is findings that represent genuine risk, not syntactic matches.</p>
+
+<h2 id="90-lower-noise">90% Lower Noise in Practice</h2>
+
+<p>DryRun Security's contextual approach produces approximately 90% fewer false positives compared to traditional pattern-matching SAST tools. This is not achieved through suppression or threshold tuning - it is the natural result of analyzing code in context rather than in isolation.</p>
+
+<p>In practical terms, a traditional tool that generates 100 findings on a codebase might have 50-60 false positives that require manual review. DryRun Security analyzing the same codebase would produce fewer total findings, with the overwhelming majority representing actionable, real vulnerabilities.</p>
+
+<h2 id="not-suppression">Reduction, Not Suppression</h2>
+
+<p>It is important to distinguish between false positive <strong>reduction</strong> and false positive <strong>suppression</strong>. Many tools achieve lower noise by letting users suppress finding categories, raise severity thresholds, or ignore entire file paths. This hides findings but does not prevent them from being generated.</p>
+
+<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/sub-agent-analyzers.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-dismissal.html">Finding Dismissal</a>), but they are the exception rather than the primary noise management strategy.</p>
+
+<h2 id="developer-trust">Impact on Developer Trust</h2>
+
+<p>When developers trust that findings represent real issues, they act on them. Low false positive rates create a positive feedback loop: developers investigate findings promptly, fix real vulnerabilities, and continue to engage with the tool rather than working around it.</p>
+
+<p>This is why DryRun Security's approach to false positive reduction is not just a technical feature - it is the foundation of a security workflow that developers actually adopt.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/contextual-security-analysis.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Contextual Security Analysis</span></a>
+<a href="../docs/business-logic-detection.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Business Logic Detection</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#the-false-positive-problem">The False Positive Problem</a></li>
+<li class="toc-h2"><a href="#why-pattern-matching-fails">Why Pattern Matching Produces Noise</a></li>
+<li class="toc-h2"><a href="#contextual-analysis-approach">The Contextual Analysis Approach</a></li>
+<li class="toc-h2"><a href="#90-lower-noise">90% Lower Noise in Practice</a></li>
+<li class="toc-h2"><a href="#not-suppression">Reduction, Not Suppression</a></li>
+<li class="toc-h2"><a href="#developer-trust">Impact on Developer Trust</a></li>
 </ul>
 </aside>
   </div>

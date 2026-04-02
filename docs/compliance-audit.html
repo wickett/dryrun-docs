@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>Compliance and Audit Readiness - DryRun Security Docs</title>
+  <meta name="description" content="How DryRun Security supports compliance workflows, audit evidence generation, and regulatory requirements.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,13 +96,13 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
 <li><a href="../docs/risk-trending.html">Risk Trending</a></li>
 <li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
-<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
+<li><a href="../docs/compliance-audit.html" class="active">Compliance and Audit Readiness</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -138,60 +138,87 @@
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <h1 class="page-heading">Compliance and Audit Readiness</h1>
+        <p class="page-description">How DryRun Security supports compliance workflows, audit evidence generation, and regulatory requirements.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="overview">Overview</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>DryRun Security provides the evidence trail that compliance and audit workflows require. Every PR review, finding, remediation, and policy enforcement action is tracked and accessible through the platform's reporting capabilities.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<h2 id="soc2-certification">SOC2 Type II Certification</h2>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<p>DryRun Security is SOC2 Type II certified. This means the platform itself has been independently audited for security, availability, and confidentiality controls. Your data is handled according to the same standards your organization is working to meet.</p>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<h2 id="audit-evidence">Audit Evidence Generation</h2>
 
-<ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
-</ul>
-
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
-
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>The platform automatically generates evidence that auditors and regulators commonly request:</p>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li><strong>Findings history</strong> - complete record of every vulnerability found, when it was found, and when it was resolved</li>
+  <li><strong>Remediation timelines</strong> - time-to-fix metrics for each finding, broken down by severity and category</li>
+  <li><strong>Policy enforcement records</strong> - which <a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a> were evaluated, what they found, and how findings were resolved</li>
+  <li><strong>Scan coverage</strong> - which repositories were scanned, how frequently, and what percentage of PRs received security review</li>
+  <li><strong>DeepScan reports</strong> - point-in-time full-repository security assessments for baseline evidence</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<h2 id="dashboard-reporting">Dashboard and Reporting</h2>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<p>The <a href="../docs/security-dashboard.html">Security Dashboard</a> provides real-time metrics that map to common compliance requirements:</p>
 
-<h2 id="ai-assistance">AI Assistance</h2>
+<ul>
+  <li>Vulnerability trends over time (are things getting better or worse?)</li>
+  <li>Open findings by severity and category</li>
+  <li>Mean time to remediation</li>
+  <li>Policy compliance rates across repositories</li>
+  <li>Coverage gaps (repositories not yet connected)</li>
+</ul>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<p>Use <a href="../docs/ai-insights.html">Code Insights</a> to generate custom audit-ready reports by asking natural language questions like "show me a chart of risky alerts by repo for last quarter."</p>
+
+<h2 id="risk-register">Risk Register as Audit Trail</h2>
+
+<p>The <a href="../docs/risk-register.html">Risk Register</a> serves as the central audit trail for all findings. Every finding includes:</p>
+
+<ul>
+  <li>The specific code change that introduced the vulnerability</li>
+  <li>Which analyzer detected it and why</li>
+  <li>The remediation status and any associated PR that fixed it</li>
+  <li>Dismissal records with notes explaining why a finding was marked as acceptable risk</li>
+</ul>
+
+<p>This level of traceability satisfies auditors who need to understand not just what vulnerabilities exist, but how the organization identified and responded to them.</p>
+
+<h2 id="sbom-generation">SBOM and AI-BOM</h2>
+
+<p>DryRun Security generates <a href="../docs/sbom-generation.html">Software Bills of Materials (SBOM)</a> that document the third-party components in your codebase. SBOMs are increasingly required by regulation (Executive Order 14028, EU Cyber Resilience Act) and by enterprise customers who need supply chain transparency.</p>
+
+<h2 id="deepscan-compliance">DeepScan for Compliance Assessments</h2>
+
+<p>Run a <a href="../docs/deepscan.html">DeepScan</a> to generate a point-in-time security assessment of an entire repository. This is useful for:</p>
+
+<ul>
+  <li>Initial onboarding - establishing a security baseline when connecting a repository</li>
+  <li>Pre-audit preparation - generating comprehensive findings reports ahead of an audit</li>
+  <li>Regulatory submissions - providing evidence of security review for compliance certifications</li>
+  <li>Periodic assessments - quarterly or annual full-repository reviews beyond continuous PR scanning</li>
+</ul>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/sbom-generation.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">SBOM Generation</span></a>
+<a href="../docs/ide-integration.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">IDE Integration</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#soc2-certification">SOC2 Type II Certification</a></li>
+<li class="toc-h2"><a href="#audit-evidence">Audit Evidence Generation</a></li>
+<li class="toc-h2"><a href="#dashboard-reporting">Dashboard and Reporting</a></li>
+<li class="toc-h2"><a href="#risk-register">Risk Register as Audit Trail</a></li>
+<li class="toc-h2"><a href="#sbom-generation">SBOM and AI-BOM</a></li>
+<li class="toc-h2"><a href="#deepscan-compliance">DeepScan for Compliance Assessments</a></li>
 </ul>
 </aside>
   </div>

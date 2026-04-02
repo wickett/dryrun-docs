@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>Model-Independent Verification - DryRun Security Docs</title>
+  <meta name="description" content="How DryRun Security validates findings independently of any single language model to ensure accuracy.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,7 @@
 <li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
 <li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
 <li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
-<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
+<li><a href="../docs/model-verification.html" class="active">Model-Independent Verification</a></li>
 <li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
 <li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
 <li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -137,61 +137,54 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
+        <h1 class="page-heading">Model-Independent Verification</h1>
+        <p class="page-description">How DryRun Security validates findings independently of any single language model to ensure accuracy.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="the-challenge">The Challenge</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>AI-powered security tools face a fundamental trust problem: large language models can produce inconsistent results, hallucinate findings, or miss vulnerabilities depending on how they reason about a particular piece of code. For security tooling to be reliable in production, findings must be verified independently of any single model's output.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<h2 id="multi-agent-verification">Multi-Agent Verification</h2>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<p>DryRun Security's <a href="../docs/multi-agent-architecture.html">multi-agent architecture</a> provides a natural verification layer. When multiple specialized agents analyze the same code from different perspectives - one focused on injection, another on authorization, another on data flow - their findings serve as cross-checks on each other.</p>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<p>If one agent flags a SQL injection but the data flow analysis agent confirms that the input is parameterized, the finding is downgraded or removed. If an IDOR finding is flagged but authorization middleware is detected in the request pipeline, the finding includes that context. This cross-validation happens automatically as part of the agent coordination process.</p>
 
-<ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
-</ul>
+<h2 id="deterministic-checks">Deterministic Checks</h2>
 
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
-
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>Not every security check requires AI reasoning. DryRun Security supplements its AI-powered analysis with deterministic checks where appropriate:</p>
 
 <ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
+  <li><strong>Dependency vulnerability matching</strong> - CVE lookups against known vulnerability databases are exact matches, not probabilistic</li>
+  <li><strong>Secrets pattern validation</strong> - candidate credentials are validated against known formats (AWS key structure, JWT format, RSA key headers)</li>
+  <li><strong>Configuration checks</strong> - infrastructure as code misconfigurations can be verified against documented specifications</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<p>The combination of AI-powered contextual analysis and deterministic validation produces findings that are both contextually relevant and factually grounded.</p>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<h2 id="consistency">Consistency Across Runs</h2>
 
-<h2 id="ai-assistance">AI Assistance</h2>
+<p>A key requirement for enterprise adoption is that the same code produces the same findings when analyzed multiple times. DryRun Security's agent architecture is designed for consistency - the same PR analyzed twice should produce the same set of findings. The multi-agent cross-validation process helps ensure this by filtering out non-deterministic edge cases.</p>
 
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<h2 id="enterprise-trust">Why This Matters for Enterprise</h2>
+
+<p>Organizations adopting AI-powered security tooling need confidence that findings are reliable enough to block merges, drive remediation work, and satisfy audit requirements. Model-independent verification provides that confidence by ensuring no single point of AI reasoning failure can produce a false finding that reaches a developer or an audit report.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/multi-agent-architecture.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Multi-Agent Architecture</span></a>
+<a href="../docs/natural-language-code-policies.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Natural Language Code Policies</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#the-challenge">The Challenge</a></li>
+<li class="toc-h2"><a href="#multi-agent-verification">Multi-Agent Verification</a></li>
+<li class="toc-h2"><a href="#deterministic-checks">Deterministic Checks</a></li>
+<li class="toc-h2"><a href="#consistency">Consistency Across Runs</a></li>
+<li class="toc-h2"><a href="#enterprise-trust">Why This Matters for Enterprise</a></li>
 </ul>
 </aside>
   </div>

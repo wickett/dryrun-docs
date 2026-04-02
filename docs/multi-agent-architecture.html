@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Security Dashboard - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <title>Multi-Agent Architecture - DryRun Security Docs</title>
+  <meta name="description" content="How DryRun Security&#x27;s agentic system coordinates specialized agents for comprehensive code security analysis.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,7 @@
 <li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
 <li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
 <li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
-<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
+<li><a href="../docs/multi-agent-architecture.html" class="active">Multi-Agent Architecture</a></li>
 <li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
 <li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
 <li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
@@ -96,7 +96,7 @@
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html" class="active">Security Dashboard</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
 <li><a href="../docs/configurations.html">Configure Repositories</a></li>
 <li><a href="../docs/notifications.html">Notifications</a></li>
 <li><a href="../docs/ai-insights.html">Code Insights</a></li>
@@ -137,61 +137,89 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Security Dashboard</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
+        <h1 class="page-heading">Multi-Agent Architecture</h1>
+        <p class="page-description">How DryRun Security&#x27;s agentic system coordinates specialized agents for comprehensive code security analysis.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="why-multi-agent">Why Multi-Agent</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>DryRun Security uses a multi-agent architecture rather than a single monolithic model. Each agent specializes in a specific aspect of security analysis, and agents collaborate to produce comprehensive findings. This design mirrors how a senior security team works - one person focuses on authentication, another on injection, another on infrastructure - and the team's combined expertise exceeds what any individual could achieve.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<p>The alternative - running all security analysis through a single model or pipeline - limits depth. A monolithic system must balance breadth against the context window and reasoning capacity available for any single vulnerability class. Multi-agent design removes this constraint.</p>
 
-<h2 id="analytics-overview">Analytics Overview</h2>
+<h2 id="primary-agents">Primary Agents</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<h3 id="code-review-agent">Code Review Agent</h3>
+
+<p>The Code Review Agent is the primary agent that runs on every pull request. It coordinates the overall review process: retrieving the PR diff and surrounding context, dispatching specialized sub-agents, collecting and validating findings, and posting the consolidated result as a PR comment and check.</p>
+
+<p>The Code Review Agent also runs DryRun's <strong>Core Code Policies</strong> - a set of built-in checks covering the OWASP Top 10 and common vulnerability patterns. These are always active and require no configuration.</p>
+
+<h3 id="custom-policy-agent">Custom Policy Agent</h3>
+
+<p>The Custom Policy Agent enforces your organization's <a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
+
+<p>The Custom Policy Agent can call specialized sub-agents for SCA lookups, codebase analysis, and just-in-time research to fully evaluate whether a policy is satisfied.</p>
+
+<h3 id="deepscan-agent">DeepScan Agent</h3>
+
+<p>The <a href="../docs/deepscan.html">DeepScan Agent</a> performs full-repository security analysis on demand. While the Code Review Agent operates on PR diffs, the DeepScan Agent analyzes the entire repository tree at a given commit. This enables it to find vulnerabilities that span many files, were introduced gradually across multiple commits, or existed before DryRun Security was installed.</p>
+
+<h3 id="codebase-insight-agent">Codebase Insight Agent</h3>
+
+<p>The Codebase Insight Agent powers <a href="../docs/ai-insights.html">Code Insights</a> - natural language queries about your codebase's security posture. Instead of navigating dashboards and exports, you ask questions like "what new API endpoints were added this week?" or "show me a chart of risky alerts by repo" and get precise, contextual answers.</p>
+
+<h2 id="specialized-sub-agents">Specialized Sub-Agents</h2>
+
+<p>Primary agents dispatch specialized sub-agents to handle specific vulnerability classes. Each sub-agent focuses on one area and uses <a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a> for high-signal, low-noise findings:</p>
 
 <ul>
-  <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
+  <li><strong>SQLi Analyzer</strong> - SQL injection across languages, tracing sources to sinks</li>
+  <li><strong>XSS Analyzer</strong> - cross-site scripting including framework-specific templating pitfalls</li>
+  <li><strong>IDOR Analyzer</strong> - broken object-level authorization via data path tracing</li>
+  <li><strong>Mass Assignment Analyzer</strong> - unsafe model binding from user input</li>
+  <li><strong>SSRF Analyzer</strong> - server-side request forgery via user-controlled URLs</li>
+  <li><strong>Secrets Analyzer</strong> - credentials in code, distinguished from test fixtures</li>
+  <li><strong>General Security Analyzer</strong> - auth gaps, risky crypto, debug artifacts, deserialization, and more</li>
 </ul>
 
-<h2 id="repository-level-insights">Repository-Level Insights</h2>
+<p>See <a href="../docs/sub-agent-analyzers.html">Security Analyzers</a> for detailed documentation on each sub-agent.</p>
 
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<h2 id="agent-coordination">How Agents Coordinate</h2>
 
-<ul>
-  <li>Open findings by severity and type</li>
-  <li>Recent PR scan history with results</li>
-  <li>DeepScan history and current finding baseline</li>
-  <li>Risk trend for the repository over time</li>
-  <li>Configuration settings currently applied</li>
-</ul>
+<p>When a PR is opened or updated, the flow works as follows:</p>
 
-<h2 id="risk-trending">Risk Trending</h2>
+<ol>
+  <li>The <strong>Code Review Agent</strong> receives the PR event and retrieves the diff plus relevant surrounding files for context</li>
+  <li>The agent dispatches <strong>specialized sub-agents</strong> in parallel, each analyzing the changes for their specific vulnerability class</li>
+  <li>Sub-agents may call <strong>just-in-time research</strong> to look up framework behavior, CVE details, or license information</li>
+  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Natural Language Code Policies against the changes</li>
+  <li>Findings from all agents are collected, validated for exploitability, and deduplicated</li>
+  <li>The consolidated result is posted as a PR comment with findings, code references, and remediation guidance</li>
+</ol>
 
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./risk-trending.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
+<h2 id="model-independence">Model-Independent Verification</h2>
 
-<h2 id="ai-assistance">AI Assistance</h2>
-
-<p>The Insights page includes an AI Assistance feature that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./ai-insights.html">AI Insights</a> for full documentation.</p>
+<p>Agents cross-check each other's findings to reduce the risk of any single model hallucinating or producing inconsistent results. This multi-agent verification is a key reason DryRun Security achieves high consistency and reliability in production environments. See <a href="../docs/model-verification.html">Model-Independent Verification</a> for more detail.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/risk-register.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Risk Register</span></a>
-<a href="../docs/configurations.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Configure Repositories</span></a>
+<a href="../docs/code-security-knowledge-graph.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Code Security Knowledge Graph</span></a>
+<a href="../docs/model-verification.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Model-Independent Verification</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
-<li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
-<li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
+<li class="toc-h2"><a href="#why-multi-agent">Why Multi-Agent</a></li>
+<li class="toc-h2"><a href="#primary-agents">Primary Agents</a></li>
+<li class="toc-h3"><a href="#code-review-agent">Code Review Agent</a></li>
+<li class="toc-h3"><a href="#custom-policy-agent">Custom Policy Agent</a></li>
+<li class="toc-h3"><a href="#deepscan-agent">DeepScan Agent</a></li>
+<li class="toc-h3"><a href="#codebase-insight-agent">Codebase Insight Agent</a></li>
+<li class="toc-h2"><a href="#specialized-sub-agents">Specialized Sub-Agents</a></li>
+<li class="toc-h2"><a href="#agent-coordination">How Agents Coordinate</a></li>
+<li class="toc-h2"><a href="#model-independence">Model-Independent Verification</a></li>
 </ul>
 </aside>
   </div>
