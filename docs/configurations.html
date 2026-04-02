@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configure Repositories — DryRun Security Docs</title>
+  <meta name="description" content="Customize DryRun Security behavior per repository — enable agents, attach policies, configure blocking, and set up notifications.">
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="https://www.dryrun.security" target="_blank" rel="noopener noreferrer" class="logo-link">
+          <img src="../assets/logo.svg" alt="DryRun Security" class="logo">
+        </a>
+        <div class="header-divider"></div>
+        <nav class="header-nav">
+          <a href="https://www.dryrun.security/product/sast" target="_blank" rel="noopener noreferrer">Product</a>
+          <a href="https://www.dryrun.security/blog" target="_blank" rel="noopener noreferrer">Blog</a>
+          <a href="../index.html">Docs</a>
+          <a href="https://www.dryrun.security/faqs" target="_blank" rel="noopener noreferrer">FAQ</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 5h14M3 10h14M3 15h14"/>
+          </svg>
+        </button>
+        <a href="https://www.dryrun.security/get-started" target="_blank" rel="noopener noreferrer" class="btn-get-started">Get Started</a>
+        <a href="https://www.dryrun.security/get-a-demo" target="_blank" rel="noopener noreferrer" class="btn-demo">Get a Demo</a>
+      </div>
+    </div>
+  </header>
+  <div class="docs-layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<a href="../index.html" class="sidebar-logo-link">
+<img src="../assets/logo.svg" alt="DryRun Security" class="sidebar-logo">
+</a>
+</div>
+<div class="sidebar-nav">
+<div class="sidebar-section">
+<p class="sidebar-section-title">Getting Started</p>
+<ul class="sidebar-links">
+<li><a href="../docs/quick-start.html">Install DryRun Security</a></li>
+<li><a href="../docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Scanning</p>
+<ul class="sidebar-links">
+<li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
+<li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
+<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
+<li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
+<li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">AI &amp; Intelligence</p>
+<ul class="sidebar-links">
+<li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
+<li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
+<li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
+<li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
+<li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
+<li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
+<li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
+<li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Remediation</p>
+<ul class="sidebar-links">
+<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/fix-verification.html">Fix Verification</a></li>
+<li><a href="../docs/finding-dismissal.html">Finding Dismissal</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Platform</p>
+<ul class="sidebar-links">
+<li><a href="../docs/risk-register.html">Risk Register</a></li>
+<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
+<li><a href="../docs/configurations.html" class="active">Configure Repositories</a></li>
+<li><a href="../docs/notifications.html">Notifications</a></li>
+<li><a href="../docs/ai-insights.html">AI Insights</a></li>
+<li><a href="../docs/risk-trending.html">Risk Trending</a></li>
+<li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Developer Tools</p>
+<ul class="sidebar-links">
+<li><a href="../docs/ide-integration.html">IDE Integration</a></li>
+<li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
+<li><a href="../docs/agents-md.html">AGENTS.md</a></li>
+<li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">AI Agent Security</p>
+<ul class="sidebar-links">
+<li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
+<li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
+<li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">API Reference</p>
+<ul class="sidebar-links">
+<li><a href="../docs/api-guide.html">API Usage Guide</a></li>
+<li><a href="../docs/language-support.html">Language Support</a></li>
+</ul>
+</div>
+</div>
+</nav>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
+    <main class="content-area">
+      <div class="content-inner">
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
+        <h1 class="page-heading">Configure Repositories</h1>
+        <p class="page-description">Customize DryRun Security behavior per repository — enable agents, attach policies, configure blocking, and set up notifications.</p>
+        <div class="doc-content">
+<p>In this section we demonstrate how to customize the behavior of DryRun Security by creating a Configuration in the Dashboard.</p>
+
+<h2 id="creating-a-configuration">Creating a Configuration</h2>
+
+<ol>
+  <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
+  <li>Navigate to <strong>Settings &gt; Configuration</strong>.
+    <br><strong>Note:</strong> The <code>default</code> configuration is editable and applies to all repositories not included in another configuration.</li>
+  <li>Click <strong>Add new Configuration +</strong>.</li>
+  <li>Set up the new configuration:
+    <ul>
+      <li>Enter a name for the configuration.</li>
+      <li>Use the <strong>Select Repositories</strong> selector to choose which repositories will use this configuration.
+        <br><strong>Note:</strong> Repositories can only have a single configuration. Repositories already in another configuration will be greyed out.</li>
+      <li>Enable or disable the DryRun Security Pull Request Comment.</li>
+      <li>Enable or disable Notifications. If enabled, choose the integrations to apply.</li>
+      <li>Add Code Policies by clicking <strong>Add Policy +</strong>. The Policy Enforcement Agent can run up to 7 code policies per repository.</li>
+      <li>Configure Code Policy settings: enable <strong>Blocking</strong>, set <strong>Silent Mode</strong>, and choose the <strong>Risk Level</strong> returned when the policy has findings (Info, Risky, or Fail).</li>
+      <li>Configure Code Security Agents: enable or disable individual agents, set <strong>Blocking</strong>, and configure <strong>Silent Mode</strong>.</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="configure-blocking">Configure Blocking for Code Policies</h2>
+
+<p>Both Natural Language Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong>, follow these steps:</p>
+
+<h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
+
+<ol>
+  <li>On GitHub, navigate to the main page of the repository.</li>
+  <li>Under your repository name, click <strong>Settings</strong>.</li>
+  <li>In the <strong>Code and automation</strong> section of the sidebar, click <strong>Branches</strong>.</li>
+  <li>Choose <strong>Add classic branch protection rule</strong>.</li>
+  <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
+  <li>Select <strong>Require status checks to pass before merging</strong>.</li>
+  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Natural Language Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>When a Natural Language Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+        </div>
+<nav class="prev-next">
+<a href="../docs/security-dashboard.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Security Dashboard</span></a>
+<a href="../docs/notifications.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Notifications</span></a>
+</nav>
+      </div>
+    </main>
+<aside class="toc-sidebar">
+<p class="toc-title">On this page</p>
+<ul class="toc-list">
+<li class="toc-h2"><a href="#creating-a-configuration">Creating a Configuration</a></li>
+<li class="toc-h2"><a href="#configure-blocking">Configure Blocking for Code Policies</a></li>
+<li class="toc-h3"><a href="#set-up-branch-protection">Set Up a Classic Branch Protection Rule</a></li>
+</ul>
+</aside>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-logo">
+          <a href="https://www.dryrun.security" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/logo.svg" alt="DryRun Security" class="footer-logo-img">
+          </a>
+          <div class="footer-badges">
+            <span class="footer-badge"><span class="footer-badge-dot"></span>SOC2 Type II Certified</span>
+            <span class="footer-badge"><span class="footer-badge-dot"></span>Black Hat USA 2024 Finalist</span>
+            <span class="footer-badge"><span class="footer-badge-dot"></span>G2 High Performer &mdash; SAST Spring 2026</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Links</p>
+          <ul class="footer-links">
+            <li><a href="https://www.dryrun.security/blog" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://www.dryrun.security/faqs" target="_blank" rel="noopener noreferrer">FAQ</a></li>
+            <li><a href="https://www.dryrun.security/brand-guidelines" target="_blank" rel="noopener noreferrer">Brand Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Product</p>
+          <ul class="footer-links">
+            <li><a href="https://www.dryrun.security/product/sast" target="_blank" rel="noopener noreferrer">SAST</a></li>
+            <li><a href="https://www.dryrun.security/product/pr-code-reviews" target="_blank" rel="noopener noreferrer">PR Code Reviews</a></li>
+            <li><a href="https://www.dryrun.security/product/sast-deepscan-full-repository-security-scan" target="_blank" rel="noopener noreferrer">Repository Reviews</a></li>
+            <li><a href="https://www.dryrun.security/product/custom-code-policies" target="_blank" rel="noopener noreferrer">Custom Code Policies</a></li>
+            <li><a href="https://www.dryrun.security/product/codebase-intelligence" target="_blank" rel="noopener noreferrer">Codebase Intelligence</a></li>
+            <li><a href="https://www.dryrun.security/product/application-security-secrets" target="_blank" rel="noopener noreferrer">Secrets</a></li>
+            <li><a href="https://www.dryrun.security/product/infrastructure-as-code-iac-security" target="_blank" rel="noopener noreferrer">Infrastructure as Code</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Social</p>
+          <ul class="footer-social-links">
+            <li>
+              <a href="https://www.linkedin.com/company/dryrun-security/" target="_blank" rel="noopener noreferrer">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/DryRunSec" target="_blank" rel="noopener noreferrer">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                X (Twitter)
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hello@dryrun.security">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                hello@dryrun.security
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">&copy; 2026 DryRun Security. All rights reserved.</p>
+        <nav class="footer-legal">
+          <a href="https://www.dryrun.security/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <span class="footer-legal-sep">|</span>
+          <a href="https://www.dryrun.security/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          <span class="footer-legal-sep">|</span>
+          <a href="https://www.dryrun.security/code-safety" target="_blank" rel="noopener noreferrer">Code Safety</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DryRun Security Documentation</title>
+  <meta name="description" content="DryRun Security documentation — learn how to install, configure, and use DryRun Security to protect your codebase.">
+  <link rel="icon" href="./assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="https://www.dryrun.security" target="_blank" rel="noopener noreferrer" class="logo-link">
+          <img src="./assets/logo.svg" alt="DryRun Security" class="logo">
+        </a>
+        <div class="header-divider"></div>
+        <nav class="header-nav">
+          <a href="https://www.dryrun.security/product/sast" target="_blank" rel="noopener noreferrer">Product</a>
+          <a href="https://www.dryrun.security/blog" target="_blank" rel="noopener noreferrer">Blog</a>
+          <a href="./index.html">Docs</a>
+          <a href="https://www.dryrun.security/faqs" target="_blank" rel="noopener noreferrer">FAQ</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 5h14M3 10h14M3 15h14"/>
+          </svg>
+        </button>
+        <a href="https://www.dryrun.security/get-started" target="_blank" rel="noopener noreferrer" class="btn-get-started">Get Started</a>
+        <a href="https://www.dryrun.security/get-a-demo" target="_blank" rel="noopener noreferrer" class="btn-demo">Get a Demo</a>
+      </div>
+    </div>
+  </header>
+  <section class="docs-hero">
+    <div class="docs-hero-inner">
+      <p class="docs-hero-eyebrow">Documentation</p>
+      <h1 class="docs-hero-title">DryRun Security Docs</h1>
+      <p class="docs-hero-subtitle">Everything you need to install, configure, and get the most out of DryRun Security — the AI-native application security platform.</p>
+      <div class="docs-hero-search">
+        <svg class="docs-search-icon" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+        <input type="text" id="docsSearch" placeholder="Search documentation..." autocomplete="off">
+      </div>
+    </div>
+  </section>
+  <section class="docs-quickstart">
+    <div class="docs-quickstart-inner">
+      <p class="docs-quickstart-label">Quick start</p>
+      <div class="docs-quickstart-links">
+        <a href="./docs/quick-start.html" class="docs-quickstart-link">
+          <span class="docs-quickstart-arrow">→</span>
+          Install for GitHub
+        </a>
+        <a href="./docs/quick-start-gitlab.html" class="docs-quickstart-link">
+          <span class="docs-quickstart-arrow">→</span>
+          Install for GitLab
+        </a>
+        <a href="./docs/sast-overview.html" class="docs-quickstart-link">
+          <span class="docs-quickstart-arrow">→</span>
+          How scanning works
+        </a>
+        <a href="./docs/natural-language-code-policies.html" class="docs-quickstart-link">
+          <span class="docs-quickstart-arrow">→</span>
+          Custom code policies
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="index-cards-section">
+    <div class="index-cards-inner">
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+        <h2 class="index-card-title">Getting Started</h2>
+        <p class="index-card-desc">Install DryRun Security on GitHub or GitLab and get your first scan running.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/quick-start.html">Install DryRun Security</a></li><li><a href="./docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <h2 class="index-card-title">Scanning</h2>
+        <p class="index-card-desc">How DryRun Security analyzes code — from PR reviews to full repository DeepScans.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/sast-overview.html">How DryRun Security SAST Works</a></li><li><a href="./docs/pr-code-reviews.html">PR Code Reviews</a></li><li><a href="./docs/deepscan.html">DeepScan — Full Repository Scan</a></li><li><a href="./docs/secrets-detection.html">Secrets Detection</a></li><li><a href="./docs/sca.html">Software Composition Analysis (SCA)</a></li><li><a href="./docs/iac-scanning.html">Infrastructure as Code Scanning</a></li><li><a href="./docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a4 4 0 014 4v1h2a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2V6a4 4 0 014-4z"/></svg></div>
+        <h2 class="index-card-title">AI &amp; Intelligence</h2>
+        <p class="index-card-desc">The architecture, methodology, and intelligence capabilities behind DryRun Security.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/ai-native-architecture.html">AI-Native Architecture</a></li><li><a href="./docs/contextual-security-analysis.html">Contextual Security Analysis</a></li><li><a href="./docs/business-logic-detection.html">Business Logic Detection</a></li><li><a href="./docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li><li><a href="./docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li><li><a href="./docs/natural-language-code-policies.html">Natural Language Code Policies</a></li><li><a href="./docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li><li><a href="./docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h2 class="index-card-title">Remediation</h2>
+        <p class="index-card-desc">Fix findings, verify remediations, and manage false positives with precision.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/auto-fix.html">Auto-Fix</a></li><li><a href="./docs/fix-verification.html">Fix Verification</a></li><li><a href="./docs/finding-dismissal.html">Finding Dismissal</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h2 class="index-card-title">Platform</h2>
+        <p class="index-card-desc">Dashboard, risk register, configurations, notifications, and platform analytics.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/risk-register.html">Risk Register</a></li><li><a href="./docs/security-dashboard.html">Security Dashboard</a></li><li><a href="./docs/configurations.html">Configure Repositories</a></li><li><a href="./docs/notifications.html">Notifications</a></li><li><a href="./docs/ai-insights.html">AI Insights</a></li><li><a href="./docs/risk-trending.html">Risk Trending</a></li><li><a href="./docs/sbom-generation.html">SBOM Generation</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14"/></svg></div>
+        <h2 class="index-card-title">Developer Tools</h2>
+        <p class="index-card-desc">IDE integrations, MCP, AGENTS.md, and CI/CD pipeline integration.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/ide-integration.html">IDE Integration</a></li><li><a href="./docs/mcp-integration.html">MCP Integration</a></li><li><a href="./docs/agents-md.html">AGENTS.md</a></li><li><a href="./docs/cicd-integration.html">CI/CD Integration</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4l2 2"/></svg></div>
+        <h2 class="index-card-title">AI Agent Security</h2>
+        <p class="index-card-desc">Security for AI-generated code, malicious agent detection, and AI coding visibility.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/securing-ai-code.html">Securing AI-Generated Code</a></li><li><a href="./docs/malicious-agent-detection.html">Malicious Agent Detection</a></li><li><a href="./docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
+        </ul>
+      </div>
+      <div class="index-card">
+        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><path d="M8 9h8M8 13h5"/></svg></div>
+        <h2 class="index-card-title">API Reference</h2>
+        <p class="index-card-desc">Programmatic access to DryRun Security data and supported languages.</p>
+        <ul class="index-card-links">
+          <li><a href="./docs/api-guide.html">API Usage Guide</a></li><li><a href="./docs/language-support.html">Language Support</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-logo">
+          <a href="https://www.dryrun.security" target="_blank" rel="noopener noreferrer">
+            <img src="./assets/logo.svg" alt="DryRun Security" class="footer-logo-img">
+          </a>
+          <div class="footer-badges">
+            <span class="footer-badge"><span class="footer-badge-dot"></span>SOC2 Type II Certified</span>
+            <span class="footer-badge"><span class="footer-badge-dot"></span>Black Hat USA 2024 Finalist</span>
+            <span class="footer-badge"><span class="footer-badge-dot"></span>G2 High Performer &mdash; SAST Spring 2026</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Links</p>
+          <ul class="footer-links">
+            <li><a href="https://www.dryrun.security/blog" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://www.dryrun.security/faqs" target="_blank" rel="noopener noreferrer">FAQ</a></li>
+            <li><a href="https://www.dryrun.security/brand-guidelines" target="_blank" rel="noopener noreferrer">Brand Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Product</p>
+          <ul class="footer-links">
+            <li><a href="https://www.dryrun.security/product/sast" target="_blank" rel="noopener noreferrer">SAST</a></li>
+            <li><a href="https://www.dryrun.security/product/pr-code-reviews" target="_blank" rel="noopener noreferrer">PR Code Reviews</a></li>
+            <li><a href="https://www.dryrun.security/product/sast-deepscan-full-repository-security-scan" target="_blank" rel="noopener noreferrer">Repository Reviews</a></li>
+            <li><a href="https://www.dryrun.security/product/custom-code-policies" target="_blank" rel="noopener noreferrer">Custom Code Policies</a></li>
+            <li><a href="https://www.dryrun.security/product/codebase-intelligence" target="_blank" rel="noopener noreferrer">Codebase Intelligence</a></li>
+            <li><a href="https://www.dryrun.security/product/application-security-secrets" target="_blank" rel="noopener noreferrer">Secrets</a></li>
+            <li><a href="https://www.dryrun.security/product/infrastructure-as-code-iac-security" target="_blank" rel="noopener noreferrer">Infrastructure as Code</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Social</p>
+          <ul class="footer-social-links">
+            <li>
+              <a href="https://www.linkedin.com/company/dryrun-security/" target="_blank" rel="noopener noreferrer">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/DryRunSec" target="_blank" rel="noopener noreferrer">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                X (Twitter)
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hello@dryrun.security">
+                <svg class="footer-social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                hello@dryrun.security
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">&copy; 2026 DryRun Security. All rights reserved.</p>
+        <nav class="footer-legal">
+          <a href="https://www.dryrun.security/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+          <span class="footer-legal-sep">|</span>
+          <a href="https://www.dryrun.security/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          <span class="footer-legal-sep">|</span>
+          <a href="https://www.dryrun.security/code-safety" target="_blank" rel="noopener noreferrer">Code Safety</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <script src="./app.js"></script>
+</body>
+</html>
