@@ -242,6 +242,75 @@ class TestAccessibility:
         )
 
 
+class TestResponsiveCSS:
+    """Regression guards for responsive layout issues."""
+
+    @staticmethod
+    def _parse_css():
+        return (ROOT / "style.css").read_text()
+
+    def test_card_icons_have_size_constraint(self):
+        """Card SVG icons must have explicit size rules to prevent blow-up."""
+        css = self._parse_css()
+        assert '.index-card-icon svg' in css, (
+            "CSS must constrain .index-card-icon svg dimensions"
+        )
+        # The SVG rule should set width and height
+        svg_rule = css[css.index('.index-card-icon svg'):]
+        svg_block = svg_rule[:svg_rule.index('}') + 1]
+        assert 'width:' in svg_block, "icon SVG rule must set width"
+        assert 'height:' in svg_block, "icon SVG rule must set height"
+
+    def test_card_icon_size_is_reasonable(self):
+        """Card icons should be 24-50px, not 300px+."""
+        css = self._parse_css()
+        svg_start = css.index('.index-card-icon svg')
+        svg_block = css[svg_start:css.index('}', svg_start) + 1]
+        width_match = re.search(r'width:\s*(\d+)px', svg_block)
+        assert width_match, "Could not find icon SVG width in px"
+        width = int(width_match.group(1))
+        assert 24 <= width <= 50, f"Icon width is {width}px, should be 24-50px"
+
+    def test_grid_uses_explicit_columns(self):
+        """Card grid must use explicit column counts, not unbounded auto-fill."""
+        css = self._parse_css()
+        # Find the .index-cards-inner block
+        idx = css.index('.index-cards-inner')
+        block = css[idx:css.index('}', idx) + 1]
+        # Should NOT use auto-fill (which caused oversized cards)
+        assert 'auto-fill' not in block, (
+            "Card grid should use explicit repeat() counts, not auto-fill"
+        )
+
+    def test_mobile_breakpoint_exists(self):
+        """CSS must define mobile responsive rules."""
+        css = self._parse_css()
+        assert '@media (max-width: 600px)' in css, (
+            "Missing mobile breakpoint at 600px"
+        )
+        assert '@media (max-width: 900px)' in css, (
+            "Missing tablet breakpoint at 900px"
+        )
+
+    def test_sidebar_toggle_hidden_by_default(self):
+        """Hamburger menu must be hidden at desktop widths."""
+        css = self._parse_css()
+        toggle_idx = css.index('.sidebar-toggle')
+        toggle_block = css[toggle_idx:css.index('}', toggle_idx) + 1]
+        assert 'display: none' in toggle_block or 'display:none' in toggle_block, (
+            "Sidebar toggle (hamburger) must be display:none by default"
+        )
+
+    def test_header_nav_visible_by_default(self):
+        """Desktop nav links must be visible by default."""
+        css = self._parse_css()
+        nav_idx = css.index('.header-nav')
+        nav_block = css[nav_idx:css.index('}', nav_idx) + 1]
+        assert 'display: flex' in nav_block or 'display:flex' in nav_block, (
+            "Header nav must be display:flex by default for desktop"
+        )
+
+
 class TestSidebarNavigation:
     """Verify sidebar navigation is consistent across pages."""
 
