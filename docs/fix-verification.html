@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fix Verification — DryRun Security Docs</title>
+  <title>Fix Verification - DryRun Security Docs</title>
   <meta name="description" content="After a fix is applied, DryRun Security re-tests to confirm the vulnerability is resolved and no regressions were introduced.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,7 +133,7 @@
         <div class="doc-content">
 <h2 id="closing-the-loop">Closing the Loop</h2>
 
-<p>Applying a security fix and declaring the vulnerability resolved are not the same thing. Fixes can be incomplete, introduce new vulnerabilities, or address the symptoms of a problem without fixing the root cause. Manual verification is time-consuming, and in fast-moving development environments it often doesn't happen at all — the fix gets pushed and the team moves on.</p>
+<p>Applying a security fix and declaring the vulnerability resolved are not the same thing. Fixes can be incomplete, introduce new vulnerabilities, or address the symptoms of a problem without fixing the root cause. Manual verification is time-consuming, and in fast-moving development environments it often doesn't happen at all - the fix gets pushed and the team moves on.</p>
 
 <p>DryRun Security's <strong>Fix Verification</strong> capability closes this loop automatically. When a developer applies a fix to a vulnerability finding and pushes an updated commit, DryRun Security re-runs analysis on the affected code to verify the outcome.</p>
 
@@ -141,9 +142,9 @@
 <p>Fix Verification performs a targeted re-analysis focused on three questions:</p>
 
 <ol>
-  <li><strong>Is the original vulnerability resolved?</strong> — The specific finding that prompted the fix is re-evaluated to confirm the vulnerability no longer exists in the updated code.</li>
-  <li><strong>Are there related vulnerabilities?</strong> — The fix's broader impact on the code path is analyzed to ensure the remediation didn't leave related issues unaddressed.</li>
-  <li><strong>Did the fix introduce new issues?</strong> — The changed code is scanned for any new vulnerabilities or security anti-patterns introduced by the fix itself.</li>
+  <li><strong>Is the original vulnerability resolved?</strong> - The specific finding that prompted the fix is re-evaluated to confirm the vulnerability no longer exists in the updated code.</li>
+  <li><strong>Are there related vulnerabilities?</strong> - The fix's broader impact on the code path is analyzed to ensure the remediation didn't leave related issues unaddressed.</li>
+  <li><strong>Did the fix introduce new issues?</strong> - The changed code is scanned for any new vulnerabilities or security anti-patterns introduced by the fix itself.</li>
 </ol>
 
 <h2 id="verification-results">Verification Results</h2>
@@ -154,7 +155,7 @@
 
 <p>Fix Verification turns security remediation into a closed-loop process. Developers know whether their fix actually worked. Security teams have confidence that closed findings are genuinely closed. And the organization builds a track record of verified remediations rather than a list of acknowledged findings with unknown resolution status.</p>
 
-<p>This is particularly valuable for compliance purposes, where demonstrating that identified vulnerabilities were genuinely remediated — not just acknowledged — is often required.</p>
+<p>This is particularly valuable for compliance purposes, where demonstrating that identified vulnerabilities were genuinely remediated - not just acknowledged - is often required.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/auto-fix.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Auto-Fix</span></a>

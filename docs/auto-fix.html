@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto-Fix — DryRun Security Docs</title>
+  <title>Auto-Fix - DryRun Security Docs</title>
   <meta name="description" content="DryRun Security generates AI-powered fix suggestions that match your codebase patterns, making remediation fast and consistent.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,13 +133,13 @@
         <div class="doc-content">
 <h2 id="from-finding-to-fix">From Finding to Fix</h2>
 
-<p>Identifying a vulnerability is only half the work. Developers still need to understand what the fix is, implement it correctly, and verify that the fix doesn't introduce new problems. For high-volume security tools, the remediation burden can be the biggest obstacle to actually improving security posture — teams become skilled at triaging findings rather than closing them.</p>
+<p>Identifying a vulnerability is only half the work. Developers still need to understand what the fix is, implement it correctly, and verify that the fix doesn't introduce new problems. For high-volume security tools, the remediation burden can be the biggest obstacle to actually improving security posture - teams become skilled at triaging findings rather than closing them.</p>
 
 <p>DryRun Security's <strong>Auto-Fix</strong> capability closes this gap by generating AI-powered remediation suggestions directly alongside each finding. When a vulnerability is identified, DryRun Security analyzes the affected code, understands the vulnerability's root cause, and generates a concrete fix that can be applied to resolve it.</p>
 
 <h2 id="contextual-fixes">Contextual Fixes That Match Your Code</h2>
 
-<p>Auto-Fix suggestions are generated in the context of your specific codebase — not from a generic template. The fix generation process considers:</p>
+<p>Auto-Fix suggestions are generated in the context of your specific codebase - not from a generic template. The fix generation process considers:</p>
 
 <ul>
   <li>The frameworks, libraries, and language idioms your code uses</li>
@@ -147,7 +148,7 @@
   <li>Security best practices for the specific vulnerability class</li>
 </ul>
 
-<p>The result is a fix suggestion that a developer can evaluate and apply with confidence — not a generic "sanitize this input" suggestion that still requires significant interpretation.</p>
+<p>The result is a fix suggestion that a developer can evaluate and apply with confidence - not a generic "sanitize this input" suggestion that still requires significant interpretation.</p>
 
 <h2 id="fix-presentation">How Fix Suggestions Are Presented</h2>
 

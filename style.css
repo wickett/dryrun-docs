@@ -1,4 +1,4 @@
-/* DryRun Security — Documentation Site */
+/* DryRun Security - Documentation Site */
 /* Brand: #1A1825 bg, #272537 surface, #C8FF09 accent, #38D92D green, #3B1EF9 blue */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -141,7 +141,7 @@ body {
 }
 .btn-demo:hover { background: #4AE63D; transform: translateY(-1px); }
 
-/* Mobile sidebar toggle — hidden on desktop */
+/* Mobile sidebar toggle - hidden on desktop */
 .sidebar-toggle {
   display: none;
   background: none;

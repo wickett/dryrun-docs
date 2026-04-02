@@ -1,5 +1,5 @@
 /**
- * DryRun Security Docs — app.js
+ * DryRun Security Docs - app.js
  * Handles: mobile sidebar toggle, TOC active state on scroll, smooth scroll,
  * docs search (index page), and minor UX polish.
  */

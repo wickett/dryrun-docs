@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Risk Trending — DryRun Security Docs</title>
+  <title>Risk Trending - DryRun Security Docs</title>
   <meta name="description" content="Track security posture over time, compare periods, and identify regression with DryRun Security risk trending.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,24 +133,24 @@
         <div class="doc-content">
 <h2 id="continuous-security-baseline">Continuous Security Baseline</h2>
 
-<p>Point-in-time security assessments give you a snapshot of your security posture on the day the assessment runs. But software is always changing — new code is deployed, old vulnerabilities are closed, new ones are introduced. Understanding whether your organization's security is improving or degrading over time requires continuous measurement, not periodic snapshots.</p>
+<p>Point-in-time security assessments give you a snapshot of your security posture on the day the assessment runs. But software is always changing - new code is deployed, old vulnerabilities are closed, new ones are introduced. Understanding whether your organization's security is improving or degrading over time requires continuous measurement, not periodic snapshots.</p>
 
-<p>DryRun Security automatically builds and maintains a continuous security baseline for every connected repository. As scans run — on each pull request and each DeepScan — findings are recorded and trend data is updated. This creates a running picture of security posture that you can interrogate at any level of granularity: the full organization, a specific team, a single repository, or a particular vulnerability class.</p>
+<p>DryRun Security automatically builds and maintains a continuous security baseline for every connected repository. As scans run - on each pull request and each DeepScan - findings are recorded and trend data is updated. This creates a running picture of security posture that you can interrogate at any level of granularity: the full organization, a specific team, a single repository, or a particular vulnerability class.</p>
 
 <h2 id="comparing-periods">Comparing Periods</h2>
 
 <p>Risk trending allows you to select any two time periods and compare them directly. Common comparisons include:</p>
 
 <ul>
-  <li><strong>Week over week</strong> — Are you introducing new findings faster than you're closing old ones? Is the mix of severities changing?</li>
-  <li><strong>Sprint over sprint</strong> — Are security remediation efforts keeping pace with development velocity?</li>
-  <li><strong>Quarter over quarter</strong> — Is the security program producing measurable improvement in overall risk posture?</li>
-  <li><strong>Before and after an initiative</strong> — Did the shift-left push, the security training, or the new policy configuration actually change outcomes?</li>
+  <li><strong>Week over week</strong> - Are you introducing new findings faster than you're closing old ones? Is the mix of severities changing?</li>
+  <li><strong>Sprint over sprint</strong> - Are security remediation efforts keeping pace with development velocity?</li>
+  <li><strong>Quarter over quarter</strong> - Is the security program producing measurable improvement in overall risk posture?</li>
+  <li><strong>Before and after an initiative</strong> - Did the shift-left push, the security training, or the new policy configuration actually change outcomes?</li>
 </ul>
 
 <h2 id="identifying-regression">Identifying Regression</h2>
 
-<p>Risk trending surfaces regression early. If a repository's finding rate spikes or a new vulnerability class begins appearing frequently, trend analysis will show the inflection point — making it easier to identify which changes or teams introduced the regression and prioritize remediation accordingly.</p>
+<p>Risk trending surfaces regression early. If a repository's finding rate spikes or a new vulnerability class begins appearing frequently, trend analysis will show the inflection point - making it easier to identify which changes or teams introduced the regression and prioritize remediation accordingly.</p>
 
 <h2 id="reporting">Reporting</h2>
 

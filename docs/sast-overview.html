@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How DryRun Security SAST Works — DryRun Security Docs</title>
-  <meta name="description" content="An overview of DryRun Security&#x27;s Contextual Security Analysis — an AI-native approach to static analysis that evaluates code in full context, not by pattern matching.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <title>How DryRun Security SAST Works - DryRun Security Docs</title>
+  <meta name="description" content="An overview of DryRun Security&#x27;s Contextual Security Analysis - an AI-native approach to static analysis that evaluates code in full context, not by pattern matching.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html" class="active">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,31 +129,31 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
         <h1 class="page-heading">How DryRun Security SAST Works</h1>
-        <p class="page-description">An overview of DryRun Security&#x27;s Contextual Security Analysis — an AI-native approach to static analysis that evaluates code in full context, not by pattern matching.</p>
+        <p class="page-description">An overview of DryRun Security&#x27;s Contextual Security Analysis - an AI-native approach to static analysis that evaluates code in full context, not by pattern matching.</p>
         <div class="doc-content">
 <h2 id="not-pattern-matching">This Is Not Pattern Matching</h2>
 
-<p>Traditional static application security testing (SAST) tools work by comparing your code against a database of known-bad patterns. If a function call or code fragment matches a signature, it gets flagged. This approach is fast to implement and easy to explain — but it misses the vast majority of real vulnerabilities while generating enormous volumes of noise on code that happens to look like a pattern but is actually safe.</p>
+<p>Traditional static application security testing (SAST) tools work by comparing your code against a database of known-bad patterns. If a function call or code fragment matches a signature, it gets flagged. This approach is fast to implement and easy to explain - but it misses the vast majority of real vulnerabilities while generating enormous volumes of noise on code that happens to look like a pattern but is actually safe.</p>
 
-<p>DryRun Security takes a fundamentally different approach. Our <strong>Contextual Security Analysis (CSA)</strong> evaluates code within its full context: the data flowing into a function, the authorization logic surrounding it, the framework being used, the developer's apparent intent, and the broader architecture of the application. A SQL query constructed from user input is only a problem if input sanitization is absent — and CSA can determine that, while a pattern matcher cannot.</p>
+<p>DryRun Security takes a fundamentally different approach. Our <strong>Contextual Security Analysis (CSA)</strong> evaluates code within its full context: the data flowing into a function, the authorization logic surrounding it, the framework being used, the developer's apparent intent, and the broader architecture of the application. A SQL query constructed from user input is only a problem if input sanitization is absent - and CSA can determine that, while a pattern matcher cannot.</p>
 
 <h2 id="how-csa-works">How Contextual Security Analysis Works</h2>
 
-<p>When a Pull Request is opened, DryRun Security's Code Review Agent retrieves the diff along with the relevant surrounding code context. It does not analyze the diff in isolation — it considers the complete code path, imported libraries, authentication middleware, and any applicable security policies configured for the repository.</p>
+<p>When a Pull Request is opened, DryRun Security's Code Review Agent retrieves the diff along with the relevant surrounding code context. It does not analyze the diff in isolation - it considers the complete code path, imported libraries, authentication middleware, and any applicable security policies configured for the repository.</p>
 
-<p>The analysis is performed by a multi-agent system where each specialized agent focuses on a specific class of vulnerability or security concern. The SQL Injection Analyzer, for example, traces the full data flow from input to query execution. The Secrets Analyzer looks for credential patterns in context — distinguishing between a real API key and a test fixture. Each agent reports findings with precise file locations and a plain-language explanation of the risk.</p>
+<p>The analysis is performed by a multi-agent system where each specialized agent focuses on a specific class of vulnerability or security concern. The SQL Injection Analyzer, for example, traces the full data flow from input to query execution. The Secrets Analyzer looks for credential patterns in context - distinguishing between a real API key and a test fixture. Each agent reports findings with precise file locations and a plain-language explanation of the risk.</p>
 
 <h2 id="ai-native-architecture">AI-Native Architecture</h2>
 
-<p>DryRun Security is built AI-first. Every layer of the platform — from ingestion to analysis to reporting — is designed around large language model capabilities rather than bolted on top of a legacy rules engine. This means findings reflect the same kind of reasoning a senior security engineer would apply: considering intent, context, and consequence rather than matching syntax.</p>
+<p>DryRun Security is built AI-first. Every layer of the platform - from ingestion to analysis to reporting - is designed around large language model capabilities rather than bolted on top of a legacy rules engine. This means findings reflect the same kind of reasoning a senior security engineer would apply: considering intent, context, and consequence rather than matching syntax.</p>
 
 <p>Importantly, DryRun uses <strong>model-independent verification</strong>. Findings are validated across multiple AI models before being surfaced, reducing hallucinations and ensuring that every result has been cross-checked. This multi-model approach means DryRun Security is not dependent on the behavior of any single model provider, and findings remain consistent even as underlying models evolve.</p>
 
 <h2 id="what-this-means-for-developers">What This Means for Developers</h2>
 
-<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time dismissing irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context — the affected code path, the reason the vulnerability exists, and suggested remediation — they are immediately actionable without requiring a security expert to interpret them.</p>
+<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time dismissing irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
 
-<p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews — security analysis happens in real time as code is being written.</p>
+<p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews - security analysis happens in real time as code is being written.</p>
 
 <h2 id="coverage">Coverage</h2>
 

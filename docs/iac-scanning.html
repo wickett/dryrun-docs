@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infrastructure as Code Scanning — DryRun Security Docs</title>
+  <title>Infrastructure as Code Scanning - DryRun Security Docs</title>
   <meta name="description" content="DryRun Security scans IaC configurations for security misconfigurations, subdomain takeover risks, and infrastructure vulnerabilities.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html" class="active">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -141,12 +142,12 @@
 <p>DryRun Security's IaC scanning supports the most widely used infrastructure definition formats:</p>
 
 <ul>
-  <li><strong>Terraform</strong> — <code>.tf</code> files for any provider (AWS, GCP, Azure, and others)</li>
-  <li><strong>AWS CloudFormation</strong> — JSON and YAML templates</li>
-  <li><strong>Kubernetes</strong> — Deployment, Service, Ingress, RBAC, and other resource manifests</li>
-  <li><strong>Helm</strong> — Chart templates and values files</li>
-  <li><strong>Docker and Docker Compose</strong> — Dockerfile and compose configuration</li>
-  <li><strong>GitHub Actions</strong> — Workflow YAML files</li>
+  <li><strong>Terraform</strong> - <code>.tf</code> files for any provider (AWS, GCP, Azure, and others)</li>
+  <li><strong>AWS CloudFormation</strong> - JSON and YAML templates</li>
+  <li><strong>Kubernetes</strong> - Deployment, Service, Ingress, RBAC, and other resource manifests</li>
+  <li><strong>Helm</strong> - Chart templates and values files</li>
+  <li><strong>Docker and Docker Compose</strong> - Dockerfile and compose configuration</li>
+  <li><strong>GitHub Actions</strong> - Workflow YAML files</li>
 </ul>
 
 <h2 id="what-iac-scanning-catches">What IaC Scanning Catches</h2>
@@ -154,22 +155,22 @@
 <p>DryRun Security's IaC analysis goes beyond generic misconfiguration detection. Common findings include:</p>
 
 <ul>
-  <li><strong>Subdomain takeover</strong> — Dangling DNS records or CDN configurations that could be claimed by an attacker to serve malicious content under your domain</li>
-  <li><strong>Excessive IAM permissions</strong> — Roles and policies granting broader access than the service requires, violating least privilege</li>
-  <li><strong>Public storage buckets</strong> — S3 buckets, GCS buckets, or blob storage containers with unrestricted public access</li>
-  <li><strong>Insecure network configurations</strong> — Security groups or firewall rules that expose services to the public internet unnecessarily</li>
-  <li><strong>Unencrypted data stores</strong> — Database instances, file systems, or volumes without encryption at rest</li>
-  <li><strong>Missing logging and monitoring</strong> — Resources lacking audit trails or access logging</li>
-  <li><strong>Container misconfigurations</strong> — Containers running as root, privilege escalation enabled, or with overly broad capabilities</li>
+  <li><strong>Subdomain takeover</strong> - Dangling DNS records or CDN configurations that could be claimed by an attacker to serve malicious content under your domain</li>
+  <li><strong>Excessive IAM permissions</strong> - Roles and policies granting broader access than the service requires, violating least privilege</li>
+  <li><strong>Public storage buckets</strong> - S3 buckets, GCS buckets, or blob storage containers with unrestricted public access</li>
+  <li><strong>Insecure network configurations</strong> - Security groups or firewall rules that expose services to the public internet unnecessarily</li>
+  <li><strong>Unencrypted data stores</strong> - Database instances, file systems, or volumes without encryption at rest</li>
+  <li><strong>Missing logging and monitoring</strong> - Resources lacking audit trails or access logging</li>
+  <li><strong>Container misconfigurations</strong> - Containers running as root, privilege escalation enabled, or with overly broad capabilities</li>
 </ul>
 
 <h2 id="contextual-iac-analysis">Contextual IaC Analysis</h2>
 
-<p>Like all DryRun Security analysis, IaC scanning is contextual. A finding is evaluated against the full intent of the infrastructure change — an intentionally public static asset bucket is treated differently from an accidentally public database. When your team uses <a href="../agents-md.html">AGENTS.md</a> to document known-safe infrastructure patterns, DryRun Security's agents apply that context during analysis to reduce false positives.</p>
+<p>Like all DryRun Security analysis, IaC scanning is contextual. A finding is evaluated against the full intent of the infrastructure change - an intentionally public static asset bucket is treated differently from an accidentally public database. When your team uses <a href="../agents-md.html">AGENTS.md</a> to document known-safe infrastructure patterns, DryRun Security's agents apply that context during analysis to reduce false positives.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/sca.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Software Composition Analysis (SCA)</span></a>
-<a href="../docs/coverage-matrix.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Coverage Matrix — Vulnerability Categories</span></a>
+<a href="../docs/coverage-matrix.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Coverage Matrix - Vulnerability Categories</span></a>
 </nav>
       </div>
     </main>

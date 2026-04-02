@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CI/CD Integration — DryRun Security Docs</title>
-  <meta name="description" content="Integrate DryRun Security into CI/CD pipelines — use GitHub Branch Protection to block merges and enforce security gates.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <title>CI/CD Integration - DryRun Security Docs</title>
+  <meta name="description" content="Integrate DryRun Security into CI/CD pipelines - use GitHub Branch Protection to block merges and enforce security gates.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,11 +129,11 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Developer Tools</div>
         <h1 class="page-heading">CI/CD Integration</h1>
-        <p class="page-description">Integrate DryRun Security into CI/CD pipelines — use GitHub Branch Protection to block merges and enforce security gates.</p>
+        <p class="page-description">Integrate DryRun Security into CI/CD pipelines - use GitHub Branch Protection to block merges and enforce security gates.</p>
         <div class="doc-content">
 <h2 id="dryrun-in-your-pipeline">DryRun Security in Your Pipeline</h2>
 
-<p>DryRun Security integrates natively with GitHub and GitLab CI/CD workflows. Because DryRun Security is a GitHub App (and a GitLab integration), it participates directly in the pull request and pipeline status check system — no additional CI/CD configuration is required to get basic integration. Every PR scan automatically posts a status check result that your pipeline infrastructure can act on.</p>
+<p>DryRun Security integrates natively with GitHub and GitLab CI/CD workflows. Because DryRun Security is a GitHub App (and a GitLab integration), it participates directly in the pull request and pipeline status check system - no additional CI/CD configuration is required to get basic integration. Every PR scan automatically posts a status check result that your pipeline infrastructure can act on.</p>
 
 <h2 id="github-branch-protection">GitHub Branch Protection Rules</h2>
 
@@ -149,12 +150,12 @@
 
 <h2 id="status-checks">Status Checks</h2>
 
-<p>DryRun Security posts individual status checks for each enabled agent and code policy. This granularity lets you enforce specific security gates — for example, requiring the Secrets Analyzer to pass on all PRs to <code>main</code>, while treating other agent findings as advisory.</p>
+<p>DryRun Security posts individual status checks for each enabled agent and code policy. This granularity lets you enforce specific security gates - for example, requiring the Secrets Analyzer to pass on all PRs to <code>main</code>, while treating other agent findings as advisory.</p>
 
 <p>Available status checks include:</p>
 <ul>
-  <li><strong>Code Policies</strong> — A single aggregated check for all NLCP policy findings.</li>
-  <li><strong>Individual agent checks</strong> — One check per enabled Code Security Agent (e.g., <code>Secrets Analyzer</code>, <code>SQL Injection Analyzer</code>).</li>
+  <li><strong>Code Policies</strong> - A single aggregated check for all NLCP policy findings.</li>
+  <li><strong>Individual agent checks</strong> - One check per enabled Code Security Agent (e.g., <code>Secrets Analyzer</code>, <code>SQL Injection Analyzer</code>).</li>
 </ul>
 
 <h2 id="api-triggered-scans">API-Triggered Scans</h2>

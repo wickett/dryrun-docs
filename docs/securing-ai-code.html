@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Securing AI-Generated Code — DryRun Security Docs</title>
+  <title>Securing AI-Generated Code - DryRun Security Docs</title>
   <meta name="description" content="How DryRun Security handles the unique security challenges of AI-generated code from coding assistants.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,13 +133,13 @@
         <div class="doc-content">
 <h2 id="the-ai-code-security-challenge">The AI Code Security Challenge</h2>
 
-<p>AI coding assistants — GitHub Copilot, Cursor, Claude Code, and similar tools — have dramatically changed how software is written. Developers using these tools can produce working code faster than ever before. But AI-generated code introduces a new and underappreciated security challenge: AI models can produce code that is functionally correct and syntactically sound while containing security vulnerabilities that the developer who accepted the suggestion didn't introduce and may not recognize.</p>
+<p>AI coding assistants - GitHub Copilot, Cursor, Claude Code, and similar tools - have dramatically changed how software is written. Developers using these tools can produce working code faster than ever before. But AI-generated code introduces a new and underappreciated security challenge: AI models can produce code that is functionally correct and syntactically sound while containing security vulnerabilities that the developer who accepted the suggestion didn't introduce and may not recognize.</p>
 
-<p>Traditional code review processes assume the developer is responsible for the code they write. AI-generated code muddies this: the developer accepted a suggestion but didn't reason through every security implication of the code that was generated. The responsibility is shared — and the security tooling needs to account for this new dynamic.</p>
+<p>Traditional code review processes assume the developer is responsible for the code they write. AI-generated code muddies this: the developer accepted a suggestion but didn't reason through every security implication of the code that was generated. The responsibility is shared - and the security tooling needs to account for this new dynamic.</p>
 
 <h2 id="how-dryrun-handles-ai-generated-code">How DryRun Security Handles AI-Generated Code</h2>
 
-<p>DryRun Security applies additional analytical scrutiny to code that exhibits characteristics of AI generation. This isn't about penalizing AI-assisted development — it's about recognizing that AI-generated code patterns, particularly around security-sensitive operations, warrant extra care in review.</p>
+<p>DryRun Security applies additional analytical scrutiny to code that exhibits characteristics of AI generation. This isn't about penalizing AI-assisted development - it's about recognizing that AI-generated code patterns, particularly around security-sensitive operations, warrant extra care in review.</p>
 
 <p>AI coding assistants sometimes:</p>
 <ul>
@@ -152,7 +153,7 @@
 
 <h2 id="ai-coding-visibility">Organizational Visibility</h2>
 
-<p>Beyond per-PR security analysis, DryRun Security provides visibility into AI coding activity across your organization — tracking where AI-generated code is being introduced and what security implications it carries. See <a href="./ai-coding-visibility.html">AI Coding Visibility</a> for details.</p>
+<p>Beyond per-PR security analysis, DryRun Security provides visibility into AI coding activity across your organization - tracking where AI-generated code is being introduced and what security implications it carries. See <a href="./ai-coding-visibility.html">AI Coding Visibility</a> for details.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/cicd-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">CI/CD Integration</span></a>

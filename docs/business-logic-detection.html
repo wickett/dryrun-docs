@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Logic Detection — DryRun Security Docs</title>
+  <title>Business Logic Detection - DryRun Security Docs</title>
   <meta name="description" content="How DryRun Security detects business logic flaws that pattern-matching tools fundamentally cannot find.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,31 +133,31 @@
         <div class="doc-content">
 <h2 id="what-are-business-logic-flaws">What Are Business Logic Flaws?</h2>
 
-<p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior — not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. They represent cases where the code does exactly what it was programmed to do, but what it was programmed to do creates a security risk.</p>
+<p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior - not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. They represent cases where the code does exactly what it was programmed to do, but what it was programmed to do creates a security risk.</p>
 
 <p>Classic examples include: a price-calculation function that allows negative quantities to generate negative totals and reverse payment flows; an authorization check that verifies the user owns a resource but doesn't verify the user is modifying <em>their own</em> instance of that resource; a multi-step transaction that can be interrupted midway to leave the system in an inconsistent state that benefits the attacker.</p>
 
-<p>No pattern matcher can find these. They don't involve known-vulnerable function calls or dangerous API usage. They require understanding what the code is supposed to do — and then evaluating whether it actually does it securely.</p>
+<p>No pattern matcher can find these. They don't involve known-vulnerable function calls or dangerous API usage. They require understanding what the code is supposed to do - and then evaluating whether it actually does it securely.</p>
 
 <h2 id="how-dryrun-detects-logic-flaws">How DryRun Security Detects Logic Flaws</h2>
 
-<p>DryRun Security's Code Review Agent and DeepScan Agent analyze code for business logic vulnerabilities by understanding application intent. When a PR modifies an e-commerce checkout flow, the agent evaluates the logic of the price calculation, discount application, and quantity validation as a unified behavior — not as individual function calls. It can identify cases where the logical chain has gaps that could be exploited.</p>
+<p>DryRun Security's Code Review Agent and DeepScan Agent analyze code for business logic vulnerabilities by understanding application intent. When a PR modifies an e-commerce checkout flow, the agent evaluates the logic of the price calculation, discount application, and quantity validation as a unified behavior - not as individual function calls. It can identify cases where the logical chain has gaps that could be exploited.</p>
 
 <p>This requires the kind of holistic code understanding that contextual AI analysis enables. The agent reads the code the way a security engineer would: with an understanding of what the feature is trying to accomplish, what inputs it receives, what outputs it produces, and what happens if those inputs are unexpected or adversarial.</p>
 
 <h2 id="examples-of-what-it-catches">Examples of What It Catches</h2>
 
 <ul>
-  <li><strong>IDOR (Insecure Direct Object Reference)</strong> — An API endpoint that looks up a resource by user-controlled ID without verifying the requesting user owns that resource.</li>
-  <li><strong>Race conditions in transactions</strong> — Logic that allows a resource to be consumed multiple times if requests arrive simultaneously, before a lock is applied.</li>
-  <li><strong>Authorization on the wrong layer</strong> — UI-level access controls that aren't enforced at the API layer, allowing direct API calls to bypass restrictions.</li>
-  <li><strong>State machine violations</strong> — Workflows that can be driven into invalid states by skipping or repeating steps in an unexpected order.</li>
-  <li><strong>Privilege abuse paths</strong> — Sequences of otherwise-legitimate operations that, when combined, achieve an outcome an attacker shouldn't be able to reach.</li>
+  <li><strong>IDOR (Insecure Direct Object Reference)</strong> - An API endpoint that looks up a resource by user-controlled ID without verifying the requesting user owns that resource.</li>
+  <li><strong>Race conditions in transactions</strong> - Logic that allows a resource to be consumed multiple times if requests arrive simultaneously, before a lock is applied.</li>
+  <li><strong>Authorization on the wrong layer</strong> - UI-level access controls that aren't enforced at the API layer, allowing direct API calls to bypass restrictions.</li>
+  <li><strong>State machine violations</strong> - Workflows that can be driven into invalid states by skipping or repeating steps in an unexpected order.</li>
+  <li><strong>Privilege abuse paths</strong> - Sequences of otherwise-legitimate operations that, when combined, achieve an outcome an attacker shouldn't be able to reach.</li>
 </ul>
 
 <h2 id="why-this-matters">Why This Matters</h2>
 
-<p>Business logic flaws are responsible for some of the most significant security breaches in modern applications — particularly in fintech, e-commerce, and any domain where the application itself mediates valuable transactions or sensitive data access. Because these vulnerabilities don't match any CVE or pattern signature, they persist in codebases for months or years until discovered through manual penetration testing or in production exploitation.</p>
+<p>Business logic flaws are responsible for some of the most significant security breaches in modern applications - particularly in fintech, e-commerce, and any domain where the application itself mediates valuable transactions or sensitive data access. Because these vulnerabilities don't match any CVE or pattern signature, they persist in codebases for months or years until discovered through manual penetration testing or in production exploitation.</p>
 
 <p>DryRun Security brings automated business logic analysis into the PR review workflow, giving development teams a systematic way to catch these vulnerabilities before they reach production.</p>
         </div>

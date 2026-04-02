@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contextual Security Analysis — DryRun Security Docs</title>
-  <meta name="description" content="A deep dive on DryRun Security&#x27;s CSA methodology — what &#x27;full context&#x27; means and why it changes what security analysis can find.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <title>Contextual Security Analysis - DryRun Security Docs</title>
+  <meta name="description" content="A deep dive on DryRun Security&#x27;s CSA methodology - what &#x27;full context&#x27; means and why it changes what security analysis can find.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,13 +129,13 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
         <h1 class="page-heading">Contextual Security Analysis</h1>
-        <p class="page-description">A deep dive on DryRun Security&#x27;s CSA methodology — what &#x27;full context&#x27; means and why it changes what security analysis can find.</p>
+        <p class="page-description">A deep dive on DryRun Security&#x27;s CSA methodology - what &#x27;full context&#x27; means and why it changes what security analysis can find.</p>
         <div class="doc-content">
 <h2 id="the-limits-of-pattern-matching">The Limits of Pattern Matching</h2>
 
 <p>Pattern-matching SAST tools work by detecting syntactic patterns associated with known vulnerability classes. If you call <code>execute_query</code> with a string that contains user input, you get flagged. If you use an outdated encryption algorithm, you get flagged. The pattern is present; the finding is generated.</p>
 
-<p>The fundamental problem is that security in real code is almost never a matter of syntactic patterns. Whether a SQL query is vulnerable depends on how the input was validated before it arrived. Whether a redirect is dangerous depends on whether the target URL can be influenced by an attacker. Whether an API endpoint is a risk depends on whether authorization is enforced — which might happen in middleware the pattern matcher never examined.</p>
+<p>The fundamental problem is that security in real code is almost never a matter of syntactic patterns. Whether a SQL query is vulnerable depends on how the input was validated before it arrived. Whether a redirect is dangerous depends on whether the target URL can be influenced by an attacker. Whether an API endpoint is a risk depends on whether authorization is enforced - which might happen in middleware the pattern matcher never examined.</p>
 
 <p>This is why traditional SAST produces so many false positives (flagging safe code) and so many false negatives (missing real vulnerabilities that don't match a pattern). It isn't a tuning problem. It's a fundamental limitation of the approach.</p>
 
@@ -156,9 +157,9 @@
 
 <h2 id="why-this-matters-operationally">Why This Matters Operationally</h2>
 
-<p>The practical outcome of contextual analysis is findings that are accurate and actionable. When DryRun Security reports a vulnerability, it's because analysis of the full context concluded that a real risk exists — not because a pattern matched. When DryRun Security doesn't flag something, it's because the context indicates the code is actually safe.</p>
+<p>The practical outcome of contextual analysis is findings that are accurate and actionable. When DryRun Security reports a vulnerability, it's because analysis of the full context concluded that a real risk exists - not because a pattern matched. When DryRun Security doesn't flag something, it's because the context indicates the code is actually safe.</p>
 
-<p>This changes the developer experience. Security review stops being a noise-filtering exercise and becomes a focused list of genuine issues. Trust in the tool increases because findings are consistently meaningful. And the developers who receive findings have the context they need to understand and fix the issue — because the finding itself was generated by understanding that same context.</p>
+<p>This changes the developer experience. Security review stops being a noise-filtering exercise and becomes a focused list of genuine issues. Trust in the tool increases because findings are consistently meaningful. And the developers who receive findings have the context they need to understand and fix the issue - because the finding itself was generated by understanding that same context.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/ai-native-architecture.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">AI-Native Architecture</span></a>

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API Usage Guide — DryRun Security Docs</title>
+  <title>API Usage Guide - DryRun Security Docs</title>
   <meta name="description" content="Programmatic access to DryRun Security findings, scans, configurations, and insights via the Simple API.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -132,7 +133,7 @@
         <div class="doc-content">
 <h2 id="dryrun-simple-api">DryRun Simple API</h2>
 
-<p>The DryRun Simple API provides programmatic access to your organization's security data — findings, scans, deepscans, configurations, repositories, and insights.</p>
+<p>The DryRun Simple API provides programmatic access to your organization's security data - findings, scans, deepscans, configurations, repositories, and insights.</p>
 
 <ul>
   <li><strong>Swagger UI:</strong> <a href="https://simple-api.dryrun.security/api-docs/index.html" target="_blank" rel="noopener noreferrer">https://simple-api.dryrun.security/api-docs/index.html</a></li>
@@ -148,7 +149,7 @@
 
 <p>Create and manage access keys at: <a href="https://app.dryrun.security/settings/access-keys" target="_blank" rel="noopener noreferrer">https://app.dryrun.security/settings/access-keys</a></p>
 
-<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place — it will not be shown again.</p>
+<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
 
 <h3 id="using-your-api-key">Using Your API Key</h3>
 
@@ -160,8 +161,8 @@
 
 <p>Most endpoints are scoped to an account. You'll need:</p>
 <ul>
-  <li><code>account_id</code> — provided by the DryRun Security platform (e.g., <code>12345678-1234-1234-1234-1234567890ab</code>)</li>
-  <li><code>repository_id</code> — a UUID for a repository</li>
+  <li><code>account_id</code> - provided by the DryRun Security platform (e.g., <code>12345678-1234-1234-1234-1234567890ab</code>)</li>
+  <li><code>repository_id</code> - a UUID for a repository</li>
 </ul>
 
 <p>Typical workflow:</p>
@@ -179,48 +180,48 @@
 
 <h3 id="accounts">Accounts</h3>
 
-<p><code>GET /v1/accounts</code> — List all accounts accessible by the API key.</p>
+<p><code>GET /v1/accounts</code> - List all accounts accessible by the API key.</p>
 
 <h3 id="repositories">Repositories</h3>
 
-<p><code>GET /v1/accounts/{account_id}/repositories</code> — List all repositories for an account.</p>
+<p><code>GET /v1/accounts/{account_id}/repositories</code> - List all repositories for an account.</p>
 
 <h3 id="scans">Scans</h3>
 
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans</code> — List PR scans for a repository (supports filtering by status, date, and pagination).</p>
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans</code> - List PR scans for a repository (supports filtering by status, date, and pagination).</p>
 
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code> — Get detailed PR scan results including findings.</p>
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code> - Get detailed PR scan results including findings.</p>
 
 <h3 id="findings">Findings</h3>
 
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/findings</code> — List all PR findings for a repository. Each finding includes a <code>dashboard_url</code> to view it in the DryRun Security dashboard.</p>
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/findings</code> - List all PR findings for a repository. Each finding includes a <code>dashboard_url</code> to view it in the DryRun Security dashboard.</p>
 
 <h3 id="deepscans">Deepscans</h3>
 
-<p><code>GET /v1/accounts/{account_id}/deepscans</code> — List all deepscans for an account.</p>
+<p><code>GET /v1/accounts/{account_id}/deepscans</code> - List all deepscans for an account.</p>
 
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans</code> — List deepscans for a repository.</p>
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans</code> - List deepscans for a repository.</p>
 
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results</code> — List findings for a specific deepscan.</p>
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results</code> - List findings for a specific deepscan.</p>
 
 <h3 id="configurations-api">Configurations</h3>
 
-<p><code>GET /v1/accounts/{account_id}/configurations</code> — List configurations for an account.</p>
-<p><code>POST /v1/accounts/{account_id}/configurations</code> — Create a new configuration.</p>
-<p><code>PUT /v1/accounts/{account_id}/configurations/{id}</code> — Update a configuration.</p>
-<p><code>DELETE /v1/accounts/{account_id}/configurations/{id}</code> — Delete a configuration.</p>
+<p><code>GET /v1/accounts/{account_id}/configurations</code> - List configurations for an account.</p>
+<p><code>POST /v1/accounts/{account_id}/configurations</code> - Create a new configuration.</p>
+<p><code>PUT /v1/accounts/{account_id}/configurations/{id}</code> - Update a configuration.</p>
+<p><code>DELETE /v1/accounts/{account_id}/configurations/{id}</code> - Delete a configuration.</p>
 
 <h3 id="analyzers-api">Analyzers</h3>
 
-<p><code>GET /v1/accounts/{account_id}/analyzers</code> — List available analyzers. Use the <code>slug</code> field as the key in configuration analyzer settings.</p>
+<p><code>GET /v1/accounts/{account_id}/analyzers</code> - List available analyzers. Use the <code>slug</code> field as the key in configuration analyzer settings.</p>
 
 <h3 id="custom-policies-api">Custom Policies</h3>
 
-<p><code>GET /v1/accounts/{account_id}/custom_policies</code> — List all Natural Language Code Policies for an account.</p>
+<p><code>GET /v1/accounts/{account_id}/custom_policies</code> - List all Natural Language Code Policies for an account.</p>
 
 <h3 id="insights-api">Insights</h3>
 
-<p><code>GET /v1/accounts/{account_id}/insights</code> — Retrieve the daily insights digest. Insights are generated daily and highlight important security changes. Supports a <code>date</code> query parameter (YYYY-MM-DD).</p>
+<p><code>GET /v1/accounts/{account_id}/insights</code> - Retrieve the daily insights digest. Insights are generated daily and highlight important security changes. Supports a <code>date</code> query parameter (YYYY-MM-DD).</p>
 
 <h2 id="conventions">Conventions</h2>
 

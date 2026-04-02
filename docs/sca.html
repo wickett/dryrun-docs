@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software Composition Analysis (SCA) — DryRun Security Docs</title>
-  <meta name="description" content="Dependency scanning and supply chain risk detection — find vulnerable third-party packages before they reach production.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <title>Software Composition Analysis (SCA) - DryRun Security Docs</title>
+  <meta name="description" content="Dependency scanning and supply chain risk detection - find vulnerable third-party packages before they reach production.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html" class="active">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,26 +129,26 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
         <h1 class="page-heading">Software Composition Analysis (SCA)</h1>
-        <p class="page-description">Dependency scanning and supply chain risk detection — find vulnerable third-party packages before they reach production.</p>
+        <p class="page-description">Dependency scanning and supply chain risk detection - find vulnerable third-party packages before they reach production.</p>
         <div class="doc-content">
 <h2 id="what-is-sca">What Is Software Composition Analysis?</h2>
 
-<p>Modern applications are built on a foundation of open-source libraries and third-party packages. The majority of code in any production service is not written by your team — it comes from the open-source ecosystem. Software Composition Analysis (SCA) is the practice of identifying what third-party components you depend on and whether any of them carry known security vulnerabilities.</p>
+<p>Modern applications are built on a foundation of open-source libraries and third-party packages. The majority of code in any production service is not written by your team - it comes from the open-source ecosystem. Software Composition Analysis (SCA) is the practice of identifying what third-party components you depend on and whether any of them carry known security vulnerabilities.</p>
 
-<p>DryRun Security's SCA capability analyzes your dependency manifests and lock files on every pull request, detecting when a new or updated dependency introduces a known vulnerability. Because this analysis runs at the PR level, you catch supply chain risk at the moment it enters the codebase — not in a weekly report after it's already in production.</p>
+<p>DryRun Security's SCA capability analyzes your dependency manifests and lock files on every pull request, detecting when a new or updated dependency introduces a known vulnerability. Because this analysis runs at the PR level, you catch supply chain risk at the moment it enters the codebase - not in a weekly report after it's already in production.</p>
 
 <h2 id="dependency-scanning">Dependency Scanning</h2>
 
 <p>DryRun Security scans package manifests and lock files across all major ecosystems, including:</p>
 
 <ul>
-  <li><strong>JavaScript / Node.js</strong> — <code>package.json</code>, <code>package-lock.json</code>, <code>yarn.lock</code></li>
-  <li><strong>Python</strong> — <code>requirements.txt</code>, <code>Pipfile</code>, <code>pyproject.toml</code>, <code>poetry.lock</code></li>
-  <li><strong>Ruby</strong> — <code>Gemfile</code>, <code>Gemfile.lock</code></li>
-  <li><strong>Java / Kotlin</strong> — <code>pom.xml</code>, Gradle build files</li>
-  <li><strong>Go</strong> — <code>go.mod</code>, <code>go.sum</code></li>
-  <li><strong>Rust</strong> — <code>Cargo.toml</code>, <code>Cargo.lock</code></li>
-  <li><strong>.NET</strong> — <code>*.csproj</code>, <code>packages.config</code></li>
+  <li><strong>JavaScript / Node.js</strong> - <code>package.json</code>, <code>package-lock.json</code>, <code>yarn.lock</code></li>
+  <li><strong>Python</strong> - <code>requirements.txt</code>, <code>Pipfile</code>, <code>pyproject.toml</code>, <code>poetry.lock</code></li>
+  <li><strong>Ruby</strong> - <code>Gemfile</code>, <code>Gemfile.lock</code></li>
+  <li><strong>Java / Kotlin</strong> - <code>pom.xml</code>, Gradle build files</li>
+  <li><strong>Go</strong> - <code>go.mod</code>, <code>go.sum</code></li>
+  <li><strong>Rust</strong> - <code>Cargo.toml</code>, <code>Cargo.lock</code></li>
+  <li><strong>.NET</strong> - <code>*.csproj</code>, <code>packages.config</code></li>
 </ul>
 
 <h2 id="supply-chain-risk">Supply Chain Risk Detection</h2>

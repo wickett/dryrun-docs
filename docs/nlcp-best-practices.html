@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NLCP Best Practices — DryRun Security Docs</title>
+  <title>NLCP Best Practices - DryRun Security Docs</title>
   <meta name="description" content="Examples of what to do and what to avoid when writing the Background for your Natural Language Code Policies.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -151,22 +152,22 @@
 
 <p><strong>Avoid this:</strong></p>
 <ul>
-  <li>"Check the whole codebase for this" — too vague, slow, and may introduce noise</li>
-  <li>"Anywhere this might happen" — ambiguous and not helpful for targeting</li>
+  <li>"Check the whole codebase for this" - too vague, slow, and may introduce noise</li>
+  <li>"Anywhere this might happen" - ambiguous and not helpful for targeting</li>
 </ul>
 
 <h2 id="target-specific-layers">2. Target Specific Layers or Components</h2>
 
 <p><strong>Do this:</strong></p>
 <ul>
-  <li>"Authorization is enforced at the controller layer — be sure to check it"</li>
+  <li>"Authorization is enforced at the controller layer - be sure to check it"</li>
   <li>"Verify any additions to the service layer that might bypass our middleware"</li>
 </ul>
 
 <p><strong>Avoid this:</strong></p>
 <ul>
-  <li>"Just make sure this is secure" — doesn't guide where your policy should look or what to expect</li>
-  <li>"Check backend stuff" — too generic</li>
+  <li>"Just make sure this is secure" - doesn't guide where your policy should look or what to expect</li>
+  <li>"Check backend stuff" - too generic</li>
 </ul>
 
 <h2 id="use-naming-cues">3. Use File or Function Naming Cues</h2>
@@ -182,7 +183,7 @@
 <p><strong>Do this:</strong></p>
 <ul>
   <li>"Only analyze changes introduced in this PR"</li>
-  <li>"Ignore unchanged files — only evaluate lines added or modified"</li>
+  <li>"Ignore unchanged files - only evaluate lines added or modified"</li>
 </ul>
 
 <h2 id="mention-full-file-analysis">5. Mention When Full-File or Tool-Based Analysis Is Needed</h2>
@@ -198,7 +199,7 @@
 <p><strong>Do this:</strong></p>
 <ul>
   <li>"Database access may happen via helper functions in <code>db/helpers.ts</code>"</li>
-  <li>"Authorization is often wrapped in <code>ensureAuthorizedUser()</code> — follow that chain"</li>
+  <li>"Authorization is often wrapped in <code>ensureAuthorizedUser()</code> - follow that chain"</li>
 </ul>
 
 <h2 id="define-secure">7. Define What "Secure" Means</h2>
@@ -211,8 +212,8 @@
 
 <p><strong>Avoid this:</strong></p>
 <ul>
-  <li>"Just make sure it is secure" — every organization defines "secure" differently</li>
-  <li>"CORS should be safe" — what does "safe" mean?</li>
+  <li>"Just make sure it is secure" - every organization defines "secure" differently</li>
+  <li>"CORS should be safe" - what does "safe" mean?</li>
 </ul>
 
 <h2 id="call-out-enforcement-mechanisms">8. Call Out Recognized Enforcement Mechanisms</h2>
@@ -232,8 +233,8 @@
 
 <p><strong>Avoid this:</strong></p>
 <ul>
-  <li>"Make sure secrets are not logged" — what is a "secret"? What logging system?</li>
-  <li>"Scan for unsafe logging" — what qualifies as unsafe?</li>
+  <li>"Make sure secrets are not logged" - what is a "secret"? What logging system?</li>
+  <li>"Scan for unsafe logging" - what qualifies as unsafe?</li>
 </ul>
         </div>
 <nav class="prev-next">

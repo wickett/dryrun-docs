@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Git Behavioral Analysis — DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security analyzes git commit patterns and developer behavior as a security signal — a capability unique to DryRun.">
-  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <title>Git Behavioral Analysis - DryRun Security Docs</title>
+  <meta name="description" content="DryRun Security analyzes git commit patterns and developer behavior as a security signal - a capability unique to DryRun.">
+  <link rel="icon" href="../assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -57,11 +58,11 @@
 <ul class="sidebar-links">
 <li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
 <li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan — Full Repository Scan</a></li>
+<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix — Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -128,34 +129,34 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
         <h1 class="page-heading">Git Behavioral Analysis</h1>
-        <p class="page-description">DryRun Security analyzes git commit patterns and developer behavior as a security signal — a capability unique to DryRun.</p>
+        <p class="page-description">DryRun Security analyzes git commit patterns and developer behavior as a security signal - a capability unique to DryRun.</p>
         <div class="doc-content">
 <h2 id="git-history-as-security-signal">Git History as a Security Signal</h2>
 
-<p>Every commit, every PR, every branch — the git history of a repository is a rich record of developer activity. Most security tools treat this as irrelevant background; they care only about the current state of the code. DryRun Security takes a different view: developer behavior patterns are a meaningful security signal, and understanding them enables a class of detection that code analysis alone cannot provide.</p>
+<p>Every commit, every PR, every branch - the git history of a repository is a rich record of developer activity. Most security tools treat this as irrelevant background; they care only about the current state of the code. DryRun Security takes a different view: developer behavior patterns are a meaningful security signal, and understanding them enables a class of detection that code analysis alone cannot provide.</p>
 
-<p>When code changes arrive in a pull request, DryRun Security doesn't just analyze the diff in isolation. It evaluates the change in the context of the developer's history, the repository's patterns, and the behavioral characteristics of the change itself. This enables detection of anomalies that indicate elevated risk — not because the code contains a known vulnerability, but because the circumstances surrounding the code change are unusual.</p>
+<p>When code changes arrive in a pull request, DryRun Security doesn't just analyze the diff in isolation. It evaluates the change in the context of the developer's history, the repository's patterns, and the behavioral characteristics of the change itself. This enables detection of anomalies that indicate elevated risk - not because the code contains a known vulnerability, but because the circumstances surrounding the code change are unusual.</p>
 
 <h2 id="what-behavioral-analysis-detects">What Behavioral Analysis Detects</h2>
 
 <p>Git behavioral analysis contributes to DryRun Security's risk assessment in several ways:</p>
 
 <h3 id="unusual-change-patterns">Unusual Change Patterns</h3>
-<p>A commit that modifies authentication logic, authorization enforcement, and audit logging simultaneously — and does so in a way inconsistent with the developer's historical coding style — warrants closer scrutiny than the same code changes arriving individually over time. Behavioral context raises the signal strength of findings.</p>
+<p>A commit that modifies authentication logic, authorization enforcement, and audit logging simultaneously - and does so in a way inconsistent with the developer's historical coding style - warrants closer scrutiny than the same code changes arriving individually over time. Behavioral context raises the signal strength of findings.</p>
 
 <h3 id="sensitive-path-modifications">Sensitive Path Modifications</h3>
 <p>Changes to security-critical files (authentication modules, cryptographic utilities, authorization middleware) are flagged with higher priority when they originate from contributors who don't typically modify those paths, or when they arrive outside of normal development patterns for the repository.</p>
 
 <h3 id="supply-chain-risk-indicators">Supply Chain Risk Indicators</h3>
-<p>In the context of AI-generated code and automated tooling, behavioral analysis helps identify when changes have characteristics inconsistent with the human developer's normal patterns — an important signal for detecting potential compromise or malicious code injection.</p>
+<p>In the context of AI-generated code and automated tooling, behavioral analysis helps identify when changes have characteristics inconsistent with the human developer's normal patterns - an important signal for detecting potential compromise or malicious code injection.</p>
 
 <h2 id="unique-capability">A Unique Capability</h2>
 
-<p>No other application security tool routinely incorporates git behavioral analysis as a security signal. Most tools are designed to analyze the current state of code, not the behavioral context of how that code arrived. DryRun Security's integration of behavioral signals with code analysis represents a genuinely different approach to software supply chain security — one that treats the development process itself as part of the threat model.</p>
+<p>No other application security tool routinely incorporates git behavioral analysis as a security signal. Most tools are designed to analyze the current state of code, not the behavioral context of how that code arrived. DryRun Security's integration of behavioral signals with code analysis represents a genuinely different approach to software supply chain security - one that treats the development process itself as part of the threat model.</p>
 
 <h2 id="privacy-and-developer-trust">Privacy and Developer Trust</h2>
 
-<p>Behavioral analysis is designed to augment security findings, not to monitor individual developers. The analysis is used to prioritize and contextualize security findings — never to generate reports about individual developer behavior or to create surveillance capabilities. The goal is better security outcomes, not productivity monitoring.</p>
+<p>Behavioral analysis is designed to augment security findings, not to monitor individual developers. The analysis is used to prioritize and contextualize security findings - never to generate reports about individual developer behavior or to create surveillance capabilities. The goal is better security outcomes, not productivity monitoring.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/business-logic-detection.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Business Logic Detection</span></a>

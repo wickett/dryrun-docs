@@ -114,7 +114,7 @@ class TestGeneratedFiles:
     def test_doc_pages_have_favicon(self):
         for html_file in DOCS_DIR.glob("*.html"):
             content = html_file.read_text()
-            assert 'favicon.png' in content, (
+            assert 'favicon.ico' in content, (
                 f"{html_file.name} missing favicon reference"
             )
 

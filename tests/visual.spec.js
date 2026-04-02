@@ -2,9 +2,9 @@
 const { test, expect } = require('@playwright/test');
 
 // ============================================================
-// Landing Page — Structure
+// Landing Page  -  Structure
 // ============================================================
-test.describe('Landing Page — Structure', () => {
+test.describe('Landing Page  -  Structure', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
@@ -64,9 +64,9 @@ test.describe('Landing Page — Structure', () => {
 });
 
 // ============================================================
-// Landing Page — Responsive Layout
+// Landing Page  -  Responsive Layout
 // ============================================================
-test.describe('Landing Page — Responsive Layout', () => {
+test.describe('Landing Page  -  Responsive Layout', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
@@ -95,7 +95,7 @@ test.describe('Landing Page — Responsive Layout', () => {
 
   test('desktop: cards render in multi-column grid', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    // On desktop (1440px), should have 3 or 4 columns — check that first row cards are side-by-side
+    // On desktop (1440px), should have 3 or 4 columns  -  check that first row cards are side-by-side
     const positions = await page.evaluate(() => {
       const cards = document.querySelectorAll('.index-card');
       return Array.from(cards).slice(0, 4).map(c => {
@@ -144,9 +144,9 @@ test.describe('Landing Page — Responsive Layout', () => {
 });
 
 // ============================================================
-// Documentation Pages — Structure
+// Documentation Pages  -  Structure
 // ============================================================
-test.describe('Documentation Pages — Structure', () => {
+test.describe('Documentation Pages  -  Structure', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/quick-start.html');
     await page.waitForLoadState('domcontentloaded');
@@ -184,9 +184,9 @@ test.describe('Documentation Pages — Structure', () => {
 });
 
 // ============================================================
-// Documentation Pages — Sidebar Navigation
+// Documentation Pages  -  Sidebar Navigation
 // ============================================================
-test.describe('Documentation Pages — Sidebar', () => {
+test.describe('Documentation Pages  -  Sidebar', () => {
   test('desktop: sidebar is visible with sections and links', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
     await page.goto('/docs/quick-start.html');
@@ -282,7 +282,7 @@ test.describe('Search', () => {
     const input = page.locator('#docsSearch');
     await input.fill('secrets');
     await page.waitForTimeout(300);
-    // Search should show results or filter — check the search results container exists
+    // Search should show results or filter  -  check the search results container exists
     // At minimum, verify the input accepted text
     const value = await input.inputValue();
     expect(value).toBe('secrets');
@@ -441,7 +441,7 @@ test.describe('Typography Regression Guards', () => {
 });
 
 // ============================================================
-// Content Coverage — Spot Checks
+// Content Coverage  -  Spot Checks
 // ============================================================
 test.describe('Content Coverage', () => {
   test('coverage matrix page has a table', async ({ page }) => {
