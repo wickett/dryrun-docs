@@ -470,6 +470,37 @@ body {
 
 .doc-content blockquote p { margin-bottom: 0; }
 
+/* Documentation screenshots */
+.docs-screenshot {
+  margin: 20px 0 28px;
+  padding: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.docs-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+/* Responsive video embed */
+.video-embed {
+  margin: 20px 0 28px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
 /* Callout boxes */
 .callout {
   padding: 16px 20px;
