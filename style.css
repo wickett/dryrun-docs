@@ -119,7 +119,7 @@ body {
   width: auto;
 }
 
-/* Logo text: white in dark mode, dark in light mode */
+/* Logo text paths: white in dark mode, dark in light mode */
 .logo-text { fill: #ffffff; }
 html[data-theme="light"] .logo-text { fill: #1A1825; }
 
