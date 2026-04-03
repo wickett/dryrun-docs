@@ -145,6 +145,10 @@
 
 <p>When a vulnerable dependency is detected, DryRun Security posts a finding in the PR that includes the affected package, the specific CVE or vulnerability identifier, the severity, the affected version range, and a recommended remediation (typically a version upgrade). Findings appear in both the PR comment and the GitHub Checks area, and are tracked in the <a href="../risk-register.html">Risk Register</a> for centralized triage.</p>
 
+<h2 id="deepscan-sca">SCA in DeepScan</h2>
+
+<p>DryRun Security now surfaces SCA findings during <a href="../docs/deepscan.html">DeepScan</a> repository analysis, not just during PR reviews. When a DeepScan runs, it identifies vulnerable dependencies across the entire codebase and ingests them as findings. These findings can be filtered by the SCA agent type in the <a href="../docs/risk-register.html">Risk Register</a>, making it easy to isolate dependency-related risk from code-level findings.</p>
+
 <h2 id="sbom-integration">SBOM Integration</h2>
 
 <p>DryRun Security's dependency analysis feeds into SBOM (Software Bill of Materials) generation, enabling you to produce a complete inventory of your software dependencies for compliance and audit purposes. See <a href="../compliance-grc.html">SBOM Generation</a> for details.</p>
@@ -162,6 +166,7 @@
 <li class="toc-h2"><a href="#dependency-scanning">Dependency Scanning</a></li>
 <li class="toc-h2"><a href="#supply-chain-risk">Supply Chain Risk Detection</a></li>
 <li class="toc-h2"><a href="#vulnerable-dependency-findings">Vulnerable Dependency Findings</a></li>
+<li class="toc-h2"><a href="#deepscan-sca">SCA in DeepScan</a></li>
 <li class="toc-h2"><a href="#sbom-integration">SBOM Integration</a></li>
 </ul>
 </aside>

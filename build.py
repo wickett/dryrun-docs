@@ -315,6 +315,8 @@ PAGES['quick-start'] = {
 
 <h2 id="gitlab-installation">GitLab Installation</h2>
 
+<p><strong>Install All for Groups:</strong> When installing DryRun Security on GitLab, the <strong>Install All</strong> option for groups now respects project hierarchy. This means you can install across an entire group and its subgroups while maintaining the correct project structure and permissions.</p>
+
 <p>DryRun Security for GitLab.com enables fast, contextual code reviews that help your team spot unknown risks before they start. This guide walks you through connecting your GitLab environment to DryRun Security by creating a Personal Access Token and completing the installation in the dashboard.</p>
 
 <h2 id="create-a-personal-access-token">Create a Personal Access Token</h2>
@@ -530,6 +532,14 @@ PAGES['deepscan'] = {
 
 <p>DeepScan results appear alongside PR findings in the <a href="../risk-register.html">Risk Register</a>. You can filter by agent type to view DeepScan-specific findings separately from PR findings. All the same triage, fingerprinting, and suppression capabilities apply - findings triaged as false positives from a DeepScan will be suppressed in future scans as well, and triage context feeds back into the system to improve future accuracy.</p>
 
+<h2 id="sca-findings">SCA Findings in DeepScan</h2>
+
+<p>DeepScan now surfaces <a href="../docs/sca.html">Software Composition Analysis (SCA)</a> findings alongside its code-level analysis. When a DeepScan runs, it identifies vulnerable dependencies and surfaces them as findings that can be filtered and triaged in the <a href="../docs/risk-register.html">Risk Register</a>. An SBOM endpoint is also available for programmatic access to dependency inventories. See <a href="../docs/dryrun-api.html">DryRun API</a> for endpoint details.</p>
+
+<h2 id="stability-and-performance">Stability and Performance</h2>
+
+<p>Recent improvements include better handling of malformed files and additional recovery workflows for long-running scans. These changes reduce scan failures and slowdowns on large repositories, making DeepScan more reliable for enterprise-scale codebases.</p>
+
 <h2 id="triggering-a-deepscan">Triggering a DeepScan</h2>
 
 <p>DeepScan can be triggered manually from the DryRun Security dashboard for any connected repository. It can also be triggered programmatically via the <a href="../dryrun-api.html">DryRun Simple API</a>, enabling integration into CI/CD pipelines or scheduled workflows.</p>
@@ -595,6 +605,20 @@ PAGES['pr-scanning'] = {
 <h2 id="risk-level">Risk Level</h2>
 
 <p>DryRun Security calculates and assigns a risk level to each change: <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This risk level can be used to trigger notifications or block the merging of a Pull Request via GitHub Branch Protection Rules.</p>
+
+<h2 id="vulnerability-severity">Vulnerability Severity Workflow</h2>
+
+<p>DryRun Security evaluates each finding based on both <strong>impact</strong> and <strong>exploitability</strong>, assigning a severity rating of <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This model goes beyond simple pattern matching to assess how likely a finding is to be exploitable in your specific codebase context.</p>
+
+<p>A configuration toggle is available to block PRs based on this severity model. See <a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a> for setup.</p>
+
+<h2 id="false-positive-reduction">False Positive Reduction</h2>
+
+<p>DryRun Security continuously improves its false positive detection rate and matching across your organization. When findings are triaged as false positives, the system fingerprints those patterns and applies suppression across all repositories in your org. Recent improvements have expanded the matching logic to reduce repeat false positives more effectively.</p>
+
+<h2 id="context-handling">Context Handling</h2>
+
+<p>Package handling context has been expanded to inject better context where and when it matters during analysis. This means DryRun Security&rsquo;s agents have richer understanding of dependency relationships, framework conventions, and package-level security patterns when evaluating code changes.</p>
 
 <h2 id="github-checks">GitHub Checks</h2>
 
@@ -663,6 +687,10 @@ PAGES['secrets-scanning'] = {
   <li>Webhook secrets and signing keys</li>
   <li>Generic high-entropy strings that exhibit the statistical properties of cryptographic secrets</li>
 </ul>
+
+<h2 id="deepscan-secrets">DeepScan Secrets Workflow</h2>
+
+<p>Secrets detected during DeepScan are now reviewed through a dedicated, more robust workflow that provides clearer visibility into sensitive exposures. Rather than processing secrets findings through the general analysis pipeline, DeepScan routes them through a specialized handler that improves classification accuracy and surfaces them with richer context in the <a href="../docs/risk-register.html">Risk Register</a>.</p>
 
 <h2 id="contextual-accuracy">Contextual Accuracy</h2>
 
@@ -756,6 +784,10 @@ PAGES['sca'] = {
 <h2 id="vulnerable-dependency-findings">Vulnerable Dependency Findings</h2>
 
 <p>When a vulnerable dependency is detected, DryRun Security posts a finding in the PR that includes the affected package, the specific CVE or vulnerability identifier, the severity, the affected version range, and a recommended remediation (typically a version upgrade). Findings appear in both the PR comment and the GitHub Checks area, and are tracked in the <a href="../risk-register.html">Risk Register</a> for centralized triage.</p>
+
+<h2 id="deepscan-sca">SCA in DeepScan</h2>
+
+<p>DryRun Security now surfaces SCA findings during <a href="../docs/deepscan.html">DeepScan</a> repository analysis, not just during PR reviews. When a DeepScan runs, it identifies vulnerable dependencies across the entire codebase and ingests them as findings. These findings can be filtered by the SCA agent type in the <a href="../docs/risk-register.html">Risk Register</a>, making it easy to isolate dependency-related risk from code-level findings.</p>
 
 <h2 id="sbom-integration">SBOM Integration</h2>
 
@@ -880,15 +912,13 @@ PAGES['code-insights'] = {
 
 <h2 id="dryrun-ai-assistant">DryRun AI Assistant</h2>
 
-<p>The main interface is a chat window powered by the <strong>DryRun AI Assistant</strong>. When you open Insights, the assistant greets you with:</p>
-
-<blockquote>"Hello! I'm here to help you explore your security insights. You can ask me questions about the analysis results, specific patterns detected, or guidance on addressing findings. What would you like to know?"</blockquote>
+<p>The main interface features an <strong>inline AI Assistant chat</strong> with streaming responses. When you open Insights, the assistant is ready to answer questions about your security data in real time.</p>
 
 <p>Type a question in natural language and the assistant responds with contextual answers drawn from your PR reviews, DeepScans, policy enforcement records, and Risk Register data. Responses can include tables, charts, links to specific PRs, and code references.</p>
 
 <h2 id="suggested-prompts">Suggested Prompts</h2>
 
-<p>Below the chat window, the Insights page offers quick-start prompts you can click to begin a conversation:</p>
+<p>Below the chat window, a <strong>More</strong> dropdown provides quick question suggestions to help you get started:</p>
 
 <ul>
   <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
@@ -908,7 +938,7 @@ PAGES['code-insights'] = {
 
 <h2 id="customize-insights">Customize Insights</h2>
 
-<p>At the bottom of the Insights page, the <strong>Customize Insights</strong> section lets you tailor the analysis to your organization's priorities. Expand this section to configure which types of insights are generated and how the assistant prioritizes its responses.</p>
+<p>The <strong>Category Manager</strong> provides tabbed controls for customizing <strong>Categories</strong> and <strong>Quick Questions</strong>. Categories let you define the types of insights generated, while Quick Questions configure the suggested prompts available in the More dropdown. Redesigned Insights cards with expandable sections provide a cleaner, more organized view of your security data.</p>
 
 <h2 id="use-cases">Use Cases</h2>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/insights/02-insights-results.png" alt="AI Insights results showing security analysis" loading="lazy"></figure>
@@ -918,6 +948,9 @@ PAGES['code-insights'] = {
 
 <h3 id="risk-trend-analysis">Risk Trend Analysis</h3>
 <p>Track how your security posture changes over time. Ask about trends by repository, team, vulnerability type, or time period. Identify whether remediation is keeping pace with new findings.</p>
+
+<h3 id="investigate-pr">Investigate PR</h3>
+<p>The <strong>Investigate PR</strong> action triggers <a href="../docs/pr-variant-analysis.html">variant analysis</a> directly from the Insights page to enhance vulnerability investigation. When you identify a finding of interest, you can deep-dive into the specific PR to understand the full security context, related patterns, and potential blast radius.</p>
 
 <h3 id="attack-surface-discovery">Attack Surface Discovery</h3>
 <p>Understand what new attack surface your team is creating. Query for new endpoints, new dependencies, new infrastructure, or any code pattern that expands your exposure.</p>
@@ -1185,6 +1218,10 @@ PAGES['pr-variant-analysis'] = {
 
 
 <h2 id="security-analyzers">Security Analyzers</h2>
+
+<h2 id="investigate-from-insights">Investigate from Insights</h2>
+
+<p>Variant analysis can be triggered directly from the <a href="../docs/code-insights.html">Insights</a> page using the <strong>Investigate PR</strong> action. This allows you to seamlessly move from a high-level security question to a deep investigation of a specific pull request, with the full context of the variant analysis applied.</p>
 
 <h2 id="how-analyzers-work">How Analyzers Work</h2>
 
@@ -1650,9 +1687,11 @@ PAGES['pr-scanning-configuration'] = {
 <ul>
   <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
   <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
-  <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Useful for visibility and audit trails.</li>
   <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
   <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
+  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
+  <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Toggle off for the familiar behavior where DryRun posts a comment only when scans produce findings. Toggle on to have DryRun post a comment on every PR scanned, useful for visibility and audit trails.</li>
+  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the risk level has not changed. When enabled, repeated notifications for the same risk level are suppressed, reducing noise.</li>
 </ul>
 
 <h2 id="policy-enforcement">Policy Enforcement Agent</h2>
@@ -2184,9 +2223,9 @@ PAGES['risk-register'] = {
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/02-risk-filter.png" alt="Risk Register filtering and search options" loading="lazy"></figure>
 
 <ul>
-  <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
+  <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, PR titles, PR numbers, and other fields</li>
   <li><strong>30D date filter</strong> - Quickly scope findings to the last 30 days, or adjust the date range to match your review period</li>
-  <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type, status, and more</li>
+  <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type (including Code Policy), status, and more</li>
   <li><strong>Triage</strong> - Select one or more findings and triage them in bulk with a reason and optional context</li>
 </ul>
 
@@ -2218,6 +2257,14 @@ PAGES['risk-register'] = {
 
 <p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/04-triage-pr.png" alt="Finding triage from the PR workflow" loading="lazy"></figure>
+
+<h2 id="dismissed-findings">Dismissed Findings</h2>
+
+<p>You can view and manage dismissed findings in the Risk Register using the <strong>Dismissed</strong> filter option. This shows all previously dismissed findings with full context: the dismissal category, reason, who dismissed it, when, and any notes provided at the time of dismissal.</p>
+
+<p>Each dismissed finding has a <strong>Restore</strong> button to bring it back to your active queue if circumstances change or the dismissal needs to be revisited.</p>
+
+<p>The dismissal flow now includes two additional values: <strong>Resolved</strong> and <strong>Won&rsquo;t Fix / Nitpick</strong>, giving teams more precise categorization when triaging findings.</p>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -2584,6 +2631,12 @@ PAGES['permissions'] = {
   <li>The token owner must have at least <strong>Maintainer</strong> access to the target group or project.</li>
 </ul>
 
+<h2 id="configuration-access">Configuration Access</h2>
+
+<p>Developer edit rights have been removed for configurations. Only <strong>Admins</strong> (Organization Owners and Repository Admins mapped to Manager or above) can modify configurations in the DryRun Security dashboard. Developers retain view access to findings and can provide feedback on their PRs, but cannot change scanning configurations, policies, or blocking settings.</p>
+
+<p>If you have a developer who is not a GitHub or GitLab admin but needs to modify configurations, contact DryRun Security support at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a> to request an override.</p>
+
 <h2 id="managing-access">Managing Access</h2>
 
 <p>To manage who has access to DryRun Security:</p>
@@ -2690,7 +2743,7 @@ PAGES['mcp'] = {
 
 <h2 id="authorization">Authorization</h2>
 
-<p>The Insights MCP uses API token authentication. Generate a token from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard and pass it as a Bearer token in the <code>Authorization</code> header. See <a href="./dryrun-api.html">API Usage Guide</a> for details on key management.</p>
+<p>The recommended method for connecting to the Insights MCP is using an <strong><a href="../docs/api-access-keys.html">API Access Key</a></strong>. Generate an API Access Key from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard and pass it as a Bearer token in the <code>Authorization</code> header. This is the best practice method for all MCP connections. See <a href="./dryrun-api.html">API Usage Guide</a> for details on key management.</p>
 
 <p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
 
@@ -3027,6 +3080,8 @@ PAGES['api-access-keys'] = {
 <h2 id="using-keys">Using API Keys</h2>
 
 <p>Include your API key in the <code>Authorization</code> header of each request:</p>
+
+<p><strong>MCP Connection (recommended):</strong> API Access Keys are the recommended best practice for connecting to the <a href="../docs/mcp.html">DryRun Security Insights MCP</a>. Use the key as a Bearer token in the Authorization header when configuring your MCP client.</p>
 
 <pre><code>curl -H "Authorization: Bearer YOUR_API_KEY" \
   https://api.dryrun.security/v1/findings</code></pre>
