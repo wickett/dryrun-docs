@@ -25,34 +25,28 @@ test.describe('Landing Page  -  Structure', () => {
     await expect(page.locator('.btn-demo')).toBeVisible();
   });
 
-  test('hero section displays title, subtitle, and search', async ({ page }) => {
-    await expect(page.locator('.docs-hero')).toBeVisible();
-    await expect(page.locator('.docs-hero-title')).toBeVisible();
-    await expect(page.locator('.docs-hero-subtitle')).toBeVisible();
-    await expect(page.locator('.docs-hero-search input')).toBeVisible();
+  test('page heading and description are visible', async ({ page }) => {
+    await expect(page.locator('.page-heading')).toBeVisible();
+    await expect(page.locator('.page-description')).toBeVisible();
   });
 
-  test('quick start links are present', async ({ page }) => {
-    const links = page.locator('.docs-quickstart-link');
-    expect(await links.count()).toBeGreaterThanOrEqual(3);
+  test('sidebar nav is present with sections', async ({ page, isMobile }) => {
+    if (isMobile) return;
+    await expect(page.locator('.sidebar')).toBeVisible();
+    const sections = page.locator('.sidebar-section-title');
+    expect(await sections.count()).toBeGreaterThanOrEqual(5);
   });
 
-  test('all 5 section cards are rendered', async ({ page }) => {
-    const cards = page.locator('.index-card');
-    expect(await cards.count()).toBe(5);
+  test('sidebar search input is present', async ({ page, isMobile }) => {
+    if (isMobile) return;
+    await expect(page.locator('.sidebar-search input')).toBeVisible();
   });
 
-  test('each section card has icon, title, description, and links', async ({ page }) => {
-    const cards = page.locator('.index-card');
-    const count = await cards.count();
-    for (let i = 0; i < count; i++) {
-      const card = cards.nth(i);
-      await expect(card.locator('.index-card-icon')).toBeVisible();
-      await expect(card.locator('.index-card-title')).toBeVisible();
-      await expect(card.locator('.index-card-desc')).toBeVisible();
-      const links = card.locator('.index-card-links a');
-      expect(await links.count()).toBeGreaterThanOrEqual(1);
-    }
+  test('doc content area has substantial text', async ({ page }) => {
+    const content = page.locator('.doc-content');
+    await expect(content).toBeVisible();
+    const text = await content.textContent();
+    expect(text.length).toBeGreaterThan(200);
   });
 
   test('footer renders with logo and link sections', async ({ page }) => {
@@ -79,34 +73,19 @@ test.describe('Landing Page  -  Responsive Layout', () => {
     expect(hasOverflow).toBe(false);
   });
 
-  test('card icons are not oversized (max 50px)', async ({ page }) => {
-    const iconSizes = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('.index-card-icon svg')).map(svg => {
-        const rect = svg.getBoundingClientRect();
-        return { width: rect.width, height: rect.height };
-      });
-    });
-    expect(iconSizes.length).toBeGreaterThan(0);
-    for (const size of iconSizes) {
-      expect(size.width).toBeLessThanOrEqual(50);
-      expect(size.height).toBeLessThanOrEqual(50);
-    }
-  });
-
-  test('desktop: cards render in multi-column grid', async ({ page, isMobile }) => {
+  test('desktop: sidebar and content render side by side', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    // On desktop (1440px), should have 3 or 4 columns  -  check that first row cards are side-by-side
-    const positions = await page.evaluate(() => {
-      const cards = document.querySelectorAll('.index-card');
-      return Array.from(cards).slice(0, 4).map(c => {
-        const rect = c.getBoundingClientRect();
-        return { top: Math.round(rect.top), left: Math.round(rect.left), width: Math.round(rect.width) };
-      });
+    const layout = await page.evaluate(() => {
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content-area');
+      if (!sidebar || !content) return null;
+      const sr = sidebar.getBoundingClientRect();
+      const cr = content.getBoundingClientRect();
+      return { sidebarRight: Math.round(sr.right), contentLeft: Math.round(cr.left) };
     });
-    // At least 3 cards should share the same top position (same row)
-    const firstRowTop = positions[0].top;
-    const sameRow = positions.filter(p => Math.abs(p.top - firstRowTop) < 5);
-    expect(sameRow.length).toBeGreaterThanOrEqual(3);
+    expect(layout).not.toBeNull();
+    // Content should start to the right of or near the sidebar
+    expect(layout.contentLeft).toBeGreaterThanOrEqual(layout.sidebarRight - 5);
   });
 
   test('desktop: nav links visible, hamburger hidden', async ({ page, isMobile }) => {
@@ -121,18 +100,17 @@ test.describe('Landing Page  -  Responsive Layout', () => {
     await expect(page.locator('.header-nav')).not.toBeVisible();
   });
 
-  test('mobile: cards stack in single column', async ({ page, isMobile }) => {
+  test('mobile: content takes full width', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    const positions = await page.evaluate(() => {
-      const cards = document.querySelectorAll('.index-card');
-      return Array.from(cards).slice(0, 3).map(c => {
-        const rect = c.getBoundingClientRect();
-        return { top: Math.round(rect.top), left: Math.round(rect.left) };
-      });
+    const layout = await page.evaluate(() => {
+      const content = document.querySelector('.content-area');
+      if (!content) return null;
+      const rect = content.getBoundingClientRect();
+      return { width: Math.round(rect.width), viewportWidth: window.innerWidth };
     });
-    // Each card should have a different top (stacked vertically)
-    expect(positions[0].top).not.toBe(positions[1].top);
-    expect(positions[1].top).not.toBe(positions[2].top);
+    expect(layout).not.toBeNull();
+    // Content area should be close to full viewport width on mobile
+    expect(layout.width).toBeGreaterThanOrEqual(layout.viewportWidth - 40);
   });
 
   test('mobile: header is compact', async ({ page, isMobile }) => {
@@ -321,12 +299,17 @@ test.describe('Search', () => {
 // Cross-page Navigation Flow
 // ============================================================
 test.describe('Navigation Flow', () => {
-  test('landing page card link navigates to doc page', async ({ page }) => {
+  test('landing page sidebar link navigates to doc page', async ({ page, isMobile }) => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
-    // Click first link in first card
-    const firstLink = page.locator('.index-card-links a').first();
-    const linkText = await firstLink.textContent();
+    // On mobile, open sidebar first
+    if (isMobile) {
+      const toggle = page.locator('.sidebar-toggle');
+      await toggle.click();
+      await page.locator('.sidebar.open').waitFor({ state: 'visible' });
+    }
+    // Click first doc link in sidebar nav
+    const firstLink = page.locator('.sidebar-nav .sidebar-links a').first();
     await firstLink.click();
     await page.waitForLoadState('domcontentloaded');
     // Should be on a doc page with header and content
@@ -362,7 +345,7 @@ test.describe('Navigation Flow', () => {
     if (await docsLink.isVisible()) {
       await docsLink.click();
       await page.waitForLoadState('domcontentloaded');
-      await expect(page.locator('.docs-hero')).toBeVisible();
+      await expect(page.locator('.page-heading')).toContainText('Documentation');
     }
   });
 });
@@ -419,33 +402,16 @@ test.describe('Accessibility', () => {
 // Typography & Sizing Regression Guards
 // ============================================================
 test.describe('Typography Regression Guards', () => {
-  test('hero title is not oversized', async ({ page }) => {
+  test('page heading is not oversized', async ({ page }) => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
     const fontSize = await page.evaluate(() => {
-      const el = document.querySelector('.docs-hero-title');
+      const el = document.querySelector('.page-heading');
       return parseFloat(getComputedStyle(el).fontSize);
     });
-    // Should be between 24px and 36px, not 48px+
-    expect(fontSize).toBeGreaterThanOrEqual(24);
-    expect(fontSize).toBeLessThanOrEqual(36);
-  });
-
-  test('card icon SVGs have constrained dimensions', async ({ page }) => {
-    await page.goto('/index.html');
-    await page.waitForLoadState('domcontentloaded');
-    const dims = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('.index-card-icon svg')).map(svg => ({
-        w: svg.getBoundingClientRect().width,
-        h: svg.getBoundingClientRect().height,
-      }));
-    });
-    for (const d of dims) {
-      expect(d.w).toBeGreaterThanOrEqual(20);
-      expect(d.w).toBeLessThanOrEqual(50);
-      expect(d.h).toBeGreaterThanOrEqual(20);
-      expect(d.h).toBeLessThanOrEqual(50);
-    }
+    // Should be between 22px and 40px
+    expect(fontSize).toBeGreaterThanOrEqual(22);
+    expect(fontSize).toBeLessThanOrEqual(40);
   });
 
   test('page heading font size is reasonable', async ({ page }) => {
@@ -587,15 +553,15 @@ test.describe('UI Acceptance', () => {
     expect(hasOverflow).toBe(false);
   });
 
-  test('all landing page section cards are clickable', async ({ page }) => {
+  test('all landing page sidebar sections have links', async ({ page }) => {
     await page.goto('/');
     await page.waitForLoadState('domcontentloaded');
-    const cards = page.locator('.index-card');
-    const count = await cards.count();
+    const sections = page.locator('.sidebar-nav .sidebar-section');
+    const count = await sections.count();
     expect(count).toBeGreaterThanOrEqual(5);
-    // Each card should have at least one link
+    // Each section should have at least one link
     for (let i = 0; i < count; i++) {
-      const links = cards.nth(i).locator('a');
+      const links = sections.nth(i).locator('.sidebar-links a');
       const linkCount = await links.count();
       expect(linkCount).toBeGreaterThan(0);
     }

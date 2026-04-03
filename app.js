@@ -162,16 +162,19 @@
   });
 
   // -------------------------------------------------------------------------
-  // Full-text docs search (index.html only) + keyboard shortcut
+  // Full-text docs search (sidebar, all pages) + keyboard shortcut
   // -------------------------------------------------------------------------
   const docsSearch = document.getElementById('docsSearch');
   if (docsSearch) {
     const resultsContainer = document.getElementById('searchResults');
-    const cards = document.querySelectorAll('.index-card');
     const searchIndex = window.__SEARCH_INDEX__ || [];
     const MAX_RESULTS = 12;
     const SNIPPET_RADIUS = 60;
     let activeIdx = -1;
+
+    // Determine link prefix: root (index.html) uses ./docs/, doc pages use ./
+    const isRoot = !window.location.pathname.match(/\/docs\//);
+    const linkPrefix = isRoot ? './docs/' : './';
 
     // Build a snippet around the first match of query in text
     function buildSnippet(text, query) {
@@ -183,7 +186,6 @@
       var snippet = '';
       if (start > 0) snippet += '\u2026';
       var raw = text.slice(start, end);
-      // Highlight the matched term
       var matchStart = pos - start;
       snippet += raw.slice(0, matchStart)
         + '<mark>' + raw.slice(matchStart, matchStart + query.length) + '</mark>'
@@ -199,18 +201,8 @@
       if (!query) {
         resultsContainer.innerHTML = '';
         resultsContainer.hidden = true;
-        // Show all cards again
-        cards.forEach(function (c) {
-          c.style.display = '';
-          c.querySelectorAll('.index-card-links li').forEach(function (li) {
-            li.style.display = '';
-          });
-        });
         return;
       }
-
-      // Hide cards while showing search results
-      cards.forEach(function (c) { c.style.display = 'none'; });
 
       var results = [];
       for (var i = 0; i < searchIndex.length; i++) {
@@ -239,7 +231,6 @@
         }
       }
 
-      // Sort: title matches first, then description, then body
       results.sort(function (a, b) { return b.score - a.score; });
       results = results.slice(0, MAX_RESULTS);
 
@@ -252,7 +243,7 @@
       var html = '';
       for (var j = 0; j < results.length; j++) {
         var r = results[j];
-        html += '<a class="search-result-item" href="./docs/' + r.entry.s + '.html"'
+        html += '<a class="search-result-item" href="' + linkPrefix + r.entry.s + '.html"'
           + ' data-idx="' + j + '">'
           + '<span class="search-result-title">' + escHtml(r.entry.t) + '</span>'
           + '<span class="search-result-section">' + escHtml(r.entry.n) + '</span>'
@@ -307,20 +298,13 @@
       }
     });
 
-    // Close results when clicking outside
+    // Close results when clicking outside the sidebar search area
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.docs-hero-search')) {
+      if (!e.target.closest('.sidebar-search')) {
         if (resultsContainer) {
           resultsContainer.innerHTML = '';
           resultsContainer.hidden = true;
         }
-        // Restore cards
-        cards.forEach(function (c) {
-          c.style.display = '';
-          c.querySelectorAll('.index-card-links li').forEach(function (li) {
-            li.style.display = '';
-          });
-        });
       }
     });
 

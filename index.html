@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DryRun Security Documentation</title>
-  <meta name="description" content="DryRun Security documentation - learn how to install, configure, and use DryRun Security to protect your codebase.">
+  <meta name="description" content="Welcome to DryRun Security documentation. Learn how DryRun Security uses AI-native analysis to find vulnerabilities in your code.">
   <link rel="icon" href="./assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="./assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,86 +47,267 @@
       </div>
     </div>
   </header>
-  <section class="docs-hero">
-    <div class="docs-hero-inner">
-      <p class="docs-hero-eyebrow">Documentation</p>
-      <h1 class="docs-hero-title">DryRun Security Docs</h1>
-      <p class="docs-hero-subtitle">Everything you need to install, configure, and get the most out of DryRun Security - the AI-native application security platform.</p>
-      <div class="docs-hero-search">
-        <svg class="docs-search-icon" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
-        <input type="text" id="docsSearch" placeholder="Search documentation..." autocomplete="off">
-        <span class="docs-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>
-        <div id="searchResults" class="search-results" hidden></div>
+  <div class="docs-layout">
+<nav class="sidebar" id="sidebar">
+<div class="sidebar-header">
+<a href="./index.html" class="sidebar-home-link">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5L8 2l5.5 4.5V13a1 1 0 01-1 1h-3V10H6.5v4h-3a1 1 0 01-1-1V6.5z"/></svg>
+<span>Documentation</span>
+</a>
+</div>
+<div class="sidebar-search">
+<div class="sidebar-search-wrap">
+<svg class="sidebar-search-icon" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+<input type="text" id="docsSearch" placeholder="Search docs..." autocomplete="off">
+<span class="sidebar-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>
+</div>
+<div id="searchResults" class="search-results" hidden></div>
+</div>
+<div class="sidebar-nav">
+<div class="sidebar-section">
+<p class="sidebar-section-title">Getting Started</p>
+<ul class="sidebar-links">
+<li><a href="./docs/documentation.html" class="active">Documentation</a></li>
+<li><a href="./docs/quick-start.html">Quick Start</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Scanning</p>
+<ul class="sidebar-links">
+<li><a href="./docs/deepscan.html">Repository Scanning with DeepScan</a></li>
+<li><a href="./docs/pr-scanning.html">PR Scanning</a></li>
+<li><a href="./docs/secrets-scanning.html">Secrets Scanning</a></li>
+<li><a href="./docs/iac-scanning.html">IaC Scanning</a></li>
+<li><a href="./docs/sca.html">SCA</a></li>
+<li><a href="./docs/auto-fix.html">Auto Fix</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Code Security Intelligence</p>
+<ul class="sidebar-links">
+<li><a href="./docs/feature-ships.html">Feature Ships</a></li>
+<li><a href="./docs/architecture-risks.html">Architecture Risks</a></li>
+<li><a href="./docs/developer-trends.html">Developer Trends</a></li>
+<li><a href="./docs/incident-response.html">Incident Response Investigation</a></li>
+<li><a href="./docs/shadow-ai.html">Shadow AI</a></li>
+<li><a href="./docs/security-review-requests.html">New Feature or Repository Security Review</a></li>
+<li><a href="./docs/security-reviews.html">Security Reviews</a></li>
+<li><a href="./docs/pr-variant-analysis.html">PR Variant Analysis</a></li>
+<li><a href="./docs/vulnerability-trends.html">Vulnerability Trends</a></li>
+<li><a href="./docs/application-summary.html">Application Summary</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Platform</p>
+<ul class="sidebar-links">
+<li><a href="./docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li>
+<li><a href="./docs/custom-code-policies.html">Custom Code Policies</a></li>
+<li><a href="./docs/repository-context.html">Repository Context</a></li>
+<li><a href="./docs/risk-register.html">Risk Register</a></li>
+<li><a href="./docs/finding-tuning.html">Finding Tuning with Feedback</a></li>
+<li><a href="./docs/pr-blocking.html">PR Blocking</a></li>
+<li><a href="./docs/compliance-grc.html">Compliance &amp; GRC</a></li>
+<li><a href="./docs/permissions.html">Permissions</a></li>
+<li><a href="./docs/mcp.html">MCP</a></li>
+<li><a href="./docs/dryrun-api.html">DryRun API</a></li>
+</ul>
+</div>
+<div class="sidebar-section">
+<p class="sidebar-section-title">Integrations</p>
+<ul class="sidebar-links">
+<li><a href="./docs/slack-integration.html">Slack Integration</a></li>
+<li><a href="./docs/webhook-integration.html">Generic Webhook Integration</a></li>
+<li><a href="./docs/api-access-keys.html">API Access Keys</a></li>
+<li><a href="./docs/ai-coding-integration.html">AI Coding Integration</a></li>
+</ul>
+</div>
+</div>
+</nav>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
+    <main class="content-area">
+      <div class="content-inner">
+        <h1 class="page-heading">Documentation</h1>
+        <p class="page-description">Welcome to DryRun Security documentation. Learn how DryRun Security uses AI-native analysis to find vulnerabilities in your code.</p>
+        <div class="doc-content">
+<h2 id="welcome">Welcome to DryRun Security</h2>
+
+<p>DryRun Security is an AI-native application security platform that analyzes your code for vulnerabilities in real time. Every pull request is automatically reviewed by a suite of specialized security analyzers that understand context, detect business logic flaws, and provide actionable remediation guidance.</p>
+
+<p>This documentation covers everything you need to get started, configure scanning, interpret results, and integrate DryRun Security into your development workflow.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<ul>
+  <li><a href="./docs/quick-start.html">Quick Start</a> &mdash; Install DryRun Security on GitHub or GitLab and start scanning in minutes.</li>
+</ul>
+
+<h2 id="scanning">Scanning</h2>
+
+<p>DryRun Security provides multiple scanning modes to cover your entire codebase:</p>
+
+<ul>
+  <li><a href="./docs/deepscan.html">Repository Scanning with DeepScan</a> &mdash; Full repository analysis for comprehensive vulnerability detection.</li>
+  <li><a href="./docs/pr-scanning.html">PR Scanning</a> &mdash; Automatic security review on every pull request.</li>
+  <li><a href="./docs/secrets-scanning.html">Secrets Scanning</a> &mdash; Detect leaked credentials, API keys, and tokens.</li>
+  <li><a href="./docs/iac-scanning.html">IaC Scanning</a> &mdash; Security analysis for infrastructure-as-code configurations.</li>
+  <li><a href="./docs/sca.html">SCA</a> &mdash; Software composition analysis for open-source dependency vulnerabilities.</li>
+  <li><a href="./docs/auto-fix.html">Auto Fix</a> &mdash; Automated remediation guidance and fix verification.</li>
+</ul>
+
+<h2 id="code-security-intelligence">Code Security Intelligence</h2>
+
+<p>Go beyond simple pattern matching with DryRun Security's AI-powered intelligence:</p>
+
+<ul>
+  <li><a href="./docs/feature-ships.html">Feature Ships</a> &mdash; Track features shipped across your codebase.</li>
+  <li><a href="./docs/architecture-risks.html">Architecture Risks</a> &mdash; Identify structural security risks across your system.</li>
+  <li><a href="./docs/developer-trends.html">Developer Trends</a> &mdash; Analyze developer behavior and security trend patterns.</li>
+  <li><a href="./docs/incident-response.html">Incident Response Investigation</a> &mdash; Investigate security incidents with queryable code intelligence.</li>
+  <li><a href="./docs/shadow-ai.html">Shadow AI</a> &mdash; Detect and govern unauthorized AI tool usage.</li>
+  <li><a href="./docs/security-review-requests.html">New Feature or Repository Security Review</a> &mdash; Request security reviews informed by historical intelligence.</li>
+  <li><a href="./docs/security-reviews.html">Security Reviews</a> &mdash; Contextual security analysis and business logic detection.</li>
+  <li><a href="./docs/pr-variant-analysis.html">PR Variant Analysis</a> &mdash; Behavioral analysis and multi-agent architecture for PR review.</li>
+  <li><a href="./docs/vulnerability-trends.html">Vulnerability Trends</a> &mdash; Track vulnerability coverage and risk trends over time.</li>
+  <li><a href="./docs/application-summary.html">Application Summary</a> &mdash; Dashboard overview of your application security posture.</li>
+</ul>
+
+<h2 id="platform">Platform</h2>
+
+<ul>
+  <li><a href="./docs/pr-scanning-configuration.html">PR Scanning Configuration</a> &mdash; Configure which analyzers and policies run on each repository.</li>
+  <li><a href="./docs/custom-code-policies.html">Custom Code Policies</a> &mdash; Create custom security rules in plain English.</li>
+  <li><a href="./docs/repository-context.html">Repository Context</a> &mdash; Provide repository context to improve analysis accuracy.</li>
+  <li><a href="./docs/risk-register.html">Risk Register</a> &mdash; Track and manage security risks.</li>
+  <li><a href="./docs/finding-tuning.html">Finding Tuning with Feedback</a> &mdash; Tune findings and reduce false positives.</li>
+  <li><a href="./docs/pr-blocking.html">PR Blocking</a> &mdash; Block PRs based on security findings.</li>
+  <li><a href="./docs/compliance-grc.html">Compliance &amp; GRC</a> &mdash; Compliance reporting and audit readiness.</li>
+  <li><a href="./docs/permissions.html">Permissions</a> &mdash; Manage roles and access controls.</li>
+  <li><a href="./docs/mcp.html">MCP</a> &mdash; Model Context Protocol integration.</li>
+  <li><a href="./docs/dryrun-api.html">DryRun API</a> &mdash; Programmatic access to DryRun Security.</li>
+</ul>
+
+<h2 id="integrations">Integrations</h2>
+
+<ul>
+  <li><a href="./docs/slack-integration.html">Slack Integration</a> &mdash; Receive security alerts in Slack.</li>
+  <li><a href="./docs/webhook-integration.html">Generic Webhook Integration</a> &mdash; Send DryRun events to any webhook endpoint.</li>
+  <li><a href="./docs/api-access-keys.html">API Access Keys</a> &mdash; Manage API keys for programmatic access.</li>
+  <li><a href="./docs/ai-coding-integration.html">AI Coding Integration</a> &mdash; Integrate DryRun Security with AI coding tools and agents.</li>
+</ul>
+
+
+<h2 id="not-pattern-matching">This Is Not Pattern Matching</h2>
+
+<p>Traditional static application security testing (SAST) tools work by comparing your code against a database of known-bad patterns. If a function call or code fragment matches a signature, it gets flagged. This approach is fast to implement and easy to explain - but it misses the vast majority of real vulnerabilities while generating enormous volumes of noise on code that happens to look like a pattern but is actually safe.</p>
+
+<p>DryRun Security takes a fundamentally different approach. Our <strong>Contextual Security Analysis (CSA)</strong> evaluates code within its full context: the data flowing into a function, the authorization logic surrounding it, the framework being used, the developer's apparent intent, and the broader architecture of the application. A SQL query constructed from user input is only a problem if input sanitization is absent - and CSA can determine that, while a pattern matcher cannot.</p>
+
+<h2 id="how-csa-works">How Contextual Security Analysis Works</h2>
+
+<p>When a Pull Request is opened, DryRun Security's Code Review Agent retrieves the diff along with the relevant surrounding code context. It does not analyze the diff in isolation - it considers the complete code path, imported libraries, authentication middleware, and any applicable security policies configured for the repository.</p>
+
+<p>The analysis is performed by a multi-agent system where each specialized agent focuses on a specific class of vulnerability or security concern. The SQL Injection Analyzer, for example, traces the full data flow from input to query execution. The Secrets Analyzer looks for credential patterns in context - distinguishing between a real API key and a test fixture. Each agent reports findings with precise file locations and a plain-language explanation of the risk.</p>
+
+<h2 id="ai-native-architecture">AI-Native Architecture</h2>
+
+<p>DryRun Security is built AI-first. Every layer of the platform - from ingestion to analysis to reporting - is designed around large language model capabilities rather than bolted on top of a legacy rules engine. This means findings reflect the same kind of reasoning a senior security engineer would apply: considering intent, context, and consequence rather than matching syntax.</p>
+
+<p>Importantly, DryRun uses <strong>model-independent verification</strong>. Findings are validated across multiple AI models before being surfaced, reducing hallucinations and ensuring that every result has been cross-checked. This multi-model approach means DryRun Security is not dependent on the behavior of any single model provider, and findings remain consistent even as underlying models evolve.</p>
+
+<h2 id="what-this-means-for-developers">What This Means for Developers</h2>
+
+<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time triaging irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
+
+<p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews - security analysis happens in real time as code is being written.</p>
+
+<h2 id="coverage">Coverage</h2>
+
+<p>DryRun Security's agents cover over 47 vulnerability categories, from SQL injection and cross-site scripting to business logic flaws, IDOR, and AI-specific risks like prompt injection. See the <a href="./docs/vulnerability-trends.html">Coverage Matrix</a> for the full list with CWE mappings.</p>
+
+
+
+<h2 id="ai-powered-language-agnostic-analysis">AI-Powered, Language-Agnostic Analysis</h2>
+
+<p>Unlike traditional SAST tools that require language-specific parsers and rule sets for each supported language, DryRun Security's AI-native architecture enables analysis across all major programming languages. The same contextual analysis capabilities - data flow tracing, business logic evaluation, cross-file analysis - apply regardless of the language in which the code is written.</p>
+
+<p>This matters for polyglot codebases, where security tools that only cover a subset of languages create blind spots. DryRun Security provides consistent coverage across the full stack.</p>
+
+<h2 id="supported-languages">Supported Languages</h2>
+
+<p>DryRun Security supports analysis of the following languages:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Ecosystems / Frameworks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Python</td><td>Django, Flask, FastAPI, SQLAlchemy, and others</td></tr>
+    <tr><td>JavaScript / TypeScript</td><td>Node.js, Express, React, Next.js, Vue, Angular</td></tr>
+    <tr><td>Java</td><td>Spring Boot, Hibernate, Jakarta EE</td></tr>
+    <tr><td>Kotlin</td><td>Spring Boot, Android</td></tr>
+    <tr><td>Ruby</td><td>Ruby on Rails, Sinatra</td></tr>
+    <tr><td>Go</td><td>Standard library, Gin, Echo, GORM</td></tr>
+    <tr><td>PHP</td><td>Laravel, Symfony, WordPress</td></tr>
+    <tr><td>C#</td><td>.NET / ASP.NET Core, Entity Framework</td></tr>
+    <tr><td>Rust</td><td>Actix, Axum, Tokio</td></tr>
+    <tr><td>Swift</td><td>iOS / macOS applications</td></tr>
+    <tr><td>C / C++</td><td>Systems, embedded, and native code</td></tr>
+    <tr><td>Scala</td><td>Play Framework, Akka</td></tr>
+    <tr><td>Infrastructure</td><td>Terraform, CloudFormation, Kubernetes, Helm, Docker</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="dependency-ecosystems">Dependency Ecosystems</h2>
+
+<p>DryRun Security's Software Composition Analysis covers dependency manifests and lock files for all major package managers:</p>
+
+<ul>
+  <li><strong>npm / yarn / pnpm</strong> (JavaScript / TypeScript)</li>
+  <li><strong>pip / poetry / pipenv</strong> (Python)</li>
+  <li><strong>bundler</strong> (Ruby)</li>
+  <li><strong>maven / gradle</strong> (Java / Kotlin)</li>
+  <li><strong>go modules</strong> (Go)</li>
+  <li><strong>cargo</strong> (Rust)</li>
+  <li><strong>nuget</strong> (.NET)</li>
+  <li><strong>composer</strong> (PHP)</li>
+</ul>
+
+<h2 id="language-version-risk">Language Version Risk</h2>
+
+<p>In addition to analyzing code within a language, DryRun Security's coverage includes detecting <strong>Language Version Risk</strong> - the use of outdated or unsupported language runtime versions that carry known vulnerabilities. This applies across all supported languages and is particularly important for long-lived production codebases that may not have had their runtime dependencies updated recently.</p>
+        </div>
+<nav class="prev-next">
+<span></span>
+<a href="./docs/quick-start.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Quick Start</span></a>
+</nav>
       </div>
-    </div>
-  </section>
-  <section class="docs-quickstart">
-    <div class="docs-quickstart-inner">
-      <p class="docs-quickstart-label">Quick start</p>
-      <div class="docs-quickstart-links">
-        <a href="./docs/quick-start.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Install for GitHub
-        </a>
-        <a href="./docs/quick-start.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Install for GitLab
-        </a>
-        <a href="./docs/pr-scanning.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          How scanning works
-        </a>
-        <a href="./docs/custom-code-policies.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Custom code policies
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="index-cards-section">
-    <div class="index-cards-inner">
-      <div class="index-card">
-        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
-        <h2 class="index-card-title">Getting Started</h2>
-        <p class="index-card-desc">Install DryRun Security on GitHub or GitLab and get your first scan running.</p>
-        <ul class="index-card-links">
-          <li><a href="./docs/documentation.html">Documentation</a></li><li><a href="./docs/quick-start.html">Quick Start</a></li>
-        </ul>
-      </div>
-      <div class="index-card">
-        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-        <h2 class="index-card-title">Scanning</h2>
-        <p class="index-card-desc">How DryRun Security analyzes code - from PR reviews to full repository DeepScans.</p>
-        <ul class="index-card-links">
-          <li><a href="./docs/deepscan.html">Repository Scanning with DeepScan</a></li><li><a href="./docs/pr-scanning.html">PR Scanning</a></li><li><a href="./docs/secrets-scanning.html">Secrets Scanning</a></li><li><a href="./docs/iac-scanning.html">IaC Scanning</a></li><li><a href="./docs/sca.html">SCA</a></li><li><a href="./docs/auto-fix.html">Auto Fix</a></li>
-        </ul>
-      </div>
-      <div class="index-card">
-        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a4 4 0 014 4v1h2a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2V6a4 4 0 014-4z"/></svg></div>
-        <h2 class="index-card-title">Code Security Intelligence</h2>
-        <p class="index-card-desc">Query the intelligence index for feature ships, architecture risks, developer trends, incident response, and security reviews.</p>
-        <ul class="index-card-links">
-          <li><a href="./docs/feature-ships.html">Feature Ships</a></li><li><a href="./docs/architecture-risks.html">Architecture Risks</a></li><li><a href="./docs/developer-trends.html">Developer Trends</a></li><li><a href="./docs/incident-response.html">Incident Response Investigation</a></li><li><a href="./docs/shadow-ai.html">Shadow AI</a></li><li><a href="./docs/security-review-requests.html">New Feature or Repository Security Review</a></li><li><a href="./docs/security-reviews.html">Security Reviews</a></li><li><a href="./docs/pr-variant-analysis.html">PR Variant Analysis</a></li><li><a href="./docs/vulnerability-trends.html">Vulnerability Trends</a></li><li><a href="./docs/application-summary.html">Application Summary</a></li>
-        </ul>
-      </div>
-      <div class="index-card">
-        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h2 class="index-card-title">Platform</h2>
-        <p class="index-card-desc">Configuration, policies, risk management, compliance, permissions, and API access.</p>
-        <ul class="index-card-links">
-          <li><a href="./docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li><li><a href="./docs/custom-code-policies.html">Custom Code Policies</a></li><li><a href="./docs/repository-context.html">Repository Context</a></li><li><a href="./docs/risk-register.html">Risk Register</a></li><li><a href="./docs/finding-tuning.html">Finding Tuning with Feedback</a></li><li><a href="./docs/pr-blocking.html">PR Blocking</a></li><li><a href="./docs/compliance-grc.html">Compliance &amp; GRC</a></li><li><a href="./docs/permissions.html">Permissions</a></li><li><a href="./docs/mcp.html">MCP</a></li><li><a href="./docs/dryrun-api.html">DryRun API</a></li>
-        </ul>
-      </div>
-      <div class="index-card">
-        <div class="index-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14"/></svg></div>
-        <h2 class="index-card-title">Integrations</h2>
-        <p class="index-card-desc">Connect DryRun Security with Slack, webhooks, API keys, and AI coding tools.</p>
-        <ul class="index-card-links">
-          <li><a href="./docs/slack-integration.html">Slack Integration</a></li><li><a href="./docs/webhook-integration.html">Generic Webhook Integration</a></li><li><a href="./docs/api-access-keys.html">API Access Keys</a></li><li><a href="./docs/ai-coding-integration.html">AI Coding Integration</a></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </main>
+<aside class="toc-sidebar">
+<p class="toc-title">On this page</p>
+<ul class="toc-list">
+<li class="toc-h2"><a href="#welcome">Welcome to DryRun Security</a></li>
+<li class="toc-h2"><a href="#getting-started">Getting Started</a></li>
+<li class="toc-h2"><a href="#scanning">Scanning</a></li>
+<li class="toc-h2"><a href="#code-security-intelligence">Code Security Intelligence</a></li>
+<li class="toc-h2"><a href="#platform">Platform</a></li>
+<li class="toc-h2"><a href="#integrations">Integrations</a></li>
+<li class="toc-h2"><a href="#not-pattern-matching">This Is Not Pattern Matching</a></li>
+<li class="toc-h2"><a href="#how-csa-works">How Contextual Security Analysis Works</a></li>
+<li class="toc-h2"><a href="#ai-native-architecture">AI-Native Architecture</a></li>
+<li class="toc-h2"><a href="#what-this-means-for-developers">What This Means for Developers</a></li>
+<li class="toc-h2"><a href="#coverage">Coverage</a></li>
+<li class="toc-h2"><a href="#ai-powered-language-agnostic-analysis">AI-Powered, Language-Agnostic Analysis</a></li>
+<li class="toc-h2"><a href="#supported-languages">Supported Languages</a></li>
+<li class="toc-h2"><a href="#dependency-ecosystems">Dependency Ecosystems</a></li>
+<li class="toc-h2"><a href="#language-version-risk">Language Version Risk</a></li>
+</ul>
+</aside>
+  </div>
   <footer class="site-footer">
     <div class="footer-main">
       <div class="footer-grid">

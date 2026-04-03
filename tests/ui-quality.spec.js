@@ -255,7 +255,7 @@ test.describe('Interactive Elements', () => {
   test('search input has keyboard shortcut hint on desktop', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
     await page.goto('/index.html');
-    const kbd = page.locator('.docs-search-kbd');
+    const kbd = page.locator('.sidebar-search-kbd');
     await expect(kbd).toBeVisible();
   });
 
@@ -268,12 +268,6 @@ test.describe('Interactive Elements', () => {
     // Full-text search should show result items in dropdown
     const results = page.locator('#searchResults .search-result-item');
     expect(await results.count()).toBeGreaterThan(0);
-    // Cards should be hidden while results are shown
-    const visibleCards = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll('.index-card'))
-        .filter(c => getComputedStyle(c).display !== 'none').length;
-    });
-    expect(visibleCards).toBe(0);
   });
 
   test('Cmd+K focuses search input', async ({ page, isMobile }) => {
@@ -483,7 +477,7 @@ test.describe('Mobile-Specific UI', () => {
   test('mobile: keyboard shortcut hint hidden on small screens', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
     await page.goto('/index.html');
-    const kbd = page.locator('.docs-search-kbd');
+    const kbd = page.locator('.sidebar-search-kbd');
     await expect(kbd).not.toBeVisible();
   });
 });
