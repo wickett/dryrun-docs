@@ -2,7 +2,6 @@
 Unit tests for DryRun Security Documentation build system.
 Run with: python3 -m pytest tests/test_build.py -v
 """
-import os
 import re
 import importlib.util
 from pathlib import Path
