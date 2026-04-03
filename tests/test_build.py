@@ -15,6 +15,8 @@ spec.loader.exec_module(build)
 
 ROOT = Path(__file__).parent.parent
 DOCS_DIR = ROOT / "docs"
+CSS_PATH = ROOT / "style.css"
+INDEX_PATH = ROOT / "index.html"
 
 
 class TestDataIntegrity:
@@ -339,3 +341,90 @@ class TestSidebarNavigation:
         assert 'class="prev-next-link next-link"' not in last_content, (
             f"Last page '{all_slugs[-1]}' should not have a next link"
         )
+
+
+class TestUIQualityCSS:
+    """CSS guards for UI quality - prevent regressions in typography, contrast, spacing."""
+
+    def test_body_text_uses_readable_color_token(self):
+        """Body text (--text-body) should be distinct from --text-muted."""
+        css = CSS_PATH.read_text()
+        assert '--text-body:' in css, "CSS must define --text-body token for readable body text"
+        assert '--text-muted:' in css, "CSS must define --text-muted token"
+        # Extract hex values
+        import re
+        body_match = re.search(r'--text-body:\s*(#[0-9a-fA-F]+)', css)
+        muted_match = re.search(r'--text-muted:\s*(#[0-9a-fA-F]+)', css)
+        assert body_match and muted_match
+        assert body_match.group(1) != muted_match.group(1), (
+            "--text-body and --text-muted must be different colors"
+        )
+
+    def test_page_heading_size_is_authoritative(self):
+        """Page heading should be at least 2rem."""
+        css = CSS_PATH.read_text()
+        import re
+        match = re.search(r'\.page-heading\s*\{[^}]*font-size:\s*([\d.]+)rem', css)
+        assert match, ".page-heading must have a font-size in rem"
+        size = float(match.group(1))
+        assert size >= 2.0, f".page-heading font-size should be >= 2rem, got {size}rem"
+
+    def test_h2_size_hierarchy(self):
+        """h2 should be at least 1.4rem."""
+        css = CSS_PATH.read_text()
+        import re
+        match = re.search(r'\.doc-content h2\s*\{[^}]*font-size:\s*([\d.]+)rem', css)
+        assert match, ".doc-content h2 must have a font-size in rem"
+        size = float(match.group(1))
+        assert size >= 1.4, f"h2 font-size should be >= 1.4rem, got {size}rem"
+
+    def test_content_area_has_generous_padding(self):
+        """Content area should have at least 40px horizontal padding."""
+        css = CSS_PATH.read_text()
+        import re
+        match = re.search(r'\.content-area\s*\{[^}]*padding:\s*([^;]+)', css)
+        assert match, ".content-area must have padding defined"
+        # padding shorthand: top right bottom left or top horizontal bottom
+        padding_val = match.group(1).strip()
+        parts = padding_val.replace('px', '').split()
+        if len(parts) >= 2:
+            horizontal = float(parts[1])
+        else:
+            horizontal = float(parts[0])
+        assert horizontal >= 40, f"Content horizontal padding should be >= 40px, got {horizontal}px"
+
+    def test_copy_button_is_styled(self):
+        """Copy button should have proper CSS styling."""
+        css = CSS_PATH.read_text()
+        assert '.copy-btn' in css, "CSS must style .copy-btn"
+        assert 'position: absolute' in css or 'position:absolute' in css, (
+            "Copy button should be absolutely positioned"
+        )
+
+    def test_sidebar_link_padding_is_adequate(self):
+        """Sidebar links should have at least 6px vertical padding for tap targets."""
+        css = CSS_PATH.read_text()
+        import re
+        match = re.search(r'\.sidebar-links a\s*\{[^}]*padding:\s*([^;]+)', css)
+        assert match, ".sidebar-links a must have padding"
+        padding_val = match.group(1).strip()
+        parts = padding_val.replace('px', '').split()
+        top_padding = float(parts[0])
+        assert top_padding >= 6, f"Sidebar link vertical padding should be >= 6px, got {top_padding}px"
+
+    def test_table_has_border_styling(self):
+        """Tables should have border for visual definition."""
+        css = CSS_PATH.read_text()
+        import re
+        match = re.search(r'\.doc-content table\s*\{[^}]*border:', css)
+        assert match, ".doc-content table should have border styling"
+
+    def test_no_em_dashes_in_css(self):
+        """CSS should not contain em dashes."""
+        css = CSS_PATH.read_text()
+        assert '\u2014' not in css, "CSS should not contain em dashes"
+
+    def test_keyboard_shortcut_hint_exists(self):
+        """Index page should have keyboard shortcut hint on search."""
+        index = INDEX_PATH.read_text()
+        assert 'docs-search-kbd' in index, "Index should have keyboard shortcut hint on search"

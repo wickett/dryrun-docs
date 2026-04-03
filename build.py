@@ -3290,6 +3290,7 @@ def render_index_page() -> str:
       <div class="docs-hero-search">
         <svg class="docs-search-icon" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
         <input type="text" id="docsSearch" placeholder="Search documentation..." autocomplete="off">
+        <span class="docs-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>
       </div>
     </div>
   </section>
