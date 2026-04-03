@@ -299,10 +299,16 @@ test.describe('Search', () => {
 // Cross-page Navigation Flow
 // ============================================================
 test.describe('Navigation Flow', () => {
-  test('landing page sidebar link navigates to doc page', async ({ page }) => {
+  test('landing page sidebar link navigates to doc page', async ({ page, isMobile }) => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
-    // Click first doc link in sidebar nav (skip section headers)
+    // On mobile, open sidebar first
+    if (isMobile) {
+      const toggle = page.locator('.sidebar-toggle');
+      await toggle.click();
+      await page.locator('.sidebar.open').waitFor({ state: 'visible' });
+    }
+    // Click first doc link in sidebar nav
     const firstLink = page.locator('.sidebar-nav .sidebar-links a').first();
     await firstLink.click();
     await page.waitForLoadState('domcontentloaded');
