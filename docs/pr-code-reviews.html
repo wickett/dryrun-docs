@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -143,6 +143,37 @@
         <div class="doc-content">
 <p>In this section we describe how DryRun Security runs and where to see the results. To illustrate, we walk through an example of modifying code in a sample repository and reviewing the results.</p>
 
+
+<h2 id="see-it-in-action">See DryRun Security in Action</h2>
+
+<p>Here is a complete walkthrough of what DryRun Security produces when analyzing a pull request.</p>
+
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/01-update-file.png" alt="Example PR with code changes being analyzed by DryRun Security" loading="lazy"></figure>
+
+<h3 id="summary-comment">Summary Comment</h3>
+<p>DryRun Security posts a summary comment on the PR with an overview of all findings.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/02-summary-comment.png" alt="DryRun Security summary comment on a pull request" loading="lazy"></figure>
+
+<h3 id="policy-enforcement-results">Policy Enforcement</h3>
+<p>If Natural Language Code Policies are configured, the results appear in the summary.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/03-code-policy.png" alt="DryRun Security code policy enforcement results" loading="lazy"></figure>
+
+<h3 id="code-security-findings">Code Security Findings</h3>
+<p>The Code Security section shows detailed findings from the security analysis.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/04-code-analysis.png" alt="DryRun Security code analysis findings" loading="lazy"></figure>
+
+<h3 id="risk-level-assessment">Risk Level</h3>
+<p>Each PR is assigned a risk level based on the combined findings.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/05-riskiness.png" alt="DryRun Security risk level assessment" loading="lazy"></figure>
+
+<h3 id="github-checks-integration">GitHub Checks</h3>
+<p>DryRun Security integrates with GitHub Checks to provide pass/fail status on PRs.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/06-checks.png" alt="DryRun Security GitHub Checks integration" loading="lazy"></figure>
+
+<p>Detailed check results include the specific vulnerability identified and remediation guidance.</p>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/07-checks-sql.png" alt="DryRun Security check detail showing SQL injection finding" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/walkthrough/08-checks-finding.png" alt="DryRun Security check finding with remediation details" loading="lazy"></figure>
+
 <h2 id="open-a-pull-request">Open a Pull Request</h2>
 
 <p>When code is updated and a Pull Request is opened, DryRun Security's Policy Enforcement Agent will immediately run any user-configured Natural Language Code Policies against the code. DryRun Security's many Code Security Agents will also run against the code and report back with any findings.</p>
@@ -184,6 +215,12 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#see-it-in-action">See DryRun Security in Action</a></li>
+<li class="toc-h3"><a href="#summary-comment">Summary Comment</a></li>
+<li class="toc-h3"><a href="#policy-enforcement-results">Policy Enforcement</a></li>
+<li class="toc-h3"><a href="#code-security-findings">Code Security Findings</a></li>
+<li class="toc-h3"><a href="#risk-level-assessment">Risk Level</a></li>
+<li class="toc-h3"><a href="#github-checks-integration">GitHub Checks</a></li>
 <li class="toc-h2"><a href="#open-a-pull-request">Open a Pull Request</a></li>
 <li class="toc-h2"><a href="#dryrun-security-summary">DryRun Security Summary</a></li>
 <li class="toc-h2"><a href="#policy-enforcement">Policy Enforcement</a></li>

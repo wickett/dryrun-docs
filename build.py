@@ -87,7 +87,7 @@ SECTIONS = [
     {
         'name': 'Remediation',
         'slug': 'remediation',
-        'pages': ['auto-fix', 'fix-verification', 'finding-triage'],
+        'pages': ['remediation-guidance', 'fix-verification', 'finding-triage'],
     },
     {
         'name': 'Platform',
@@ -1279,43 +1279,70 @@ PAGES['nlcp-best-practices'] = {
 
 # -- Remediation --
 
-PAGES['auto-fix'] = {
-    'title': 'Auto-Fix',
-    'description': 'DryRun Security generates AI-powered fix suggestions that match your codebase patterns, making remediation fast and consistent.',
+PAGES['remediation-guidance'] = {
+    'title': 'Remediation Guidance',
+    'description': "DryRun Security provides detailed remediation guidance, code examples, and context so your coding agents can fix vulnerabilities with full understanding - not auto-fix, but empowerment.",
     'section': 'Remediation',
     'content': '''
-<h2 id="from-finding-to-fix">From Finding to Fix</h2>
 
-<p>Identifying a vulnerability is only half the work. Developers still need to understand what the fix is, implement it correctly, and verify that the fix doesn't introduce new problems. For high-volume security tools, the remediation burden can be the biggest obstacle to actually improving security posture - teams become skilled at triaging findings rather than closing them.</p>
+<h2 id="philosophy">Remediation, Not Auto-Fix</h2>
 
-<p>DryRun Security's <strong>Auto-Fix</strong> capability closes this gap by generating AI-powered remediation suggestions directly alongside each finding. When a vulnerability is identified, DryRun Security analyzes the affected code, understands the vulnerability's root cause, and generates a concrete fix that can be applied to resolve it.</p>
+<p class="lead">DryRun Security does not auto-fix your code. Instead, it provides rich remediation guidance designed to empower the coding and generation agents you already use - Cursor, Claude Code, GitHub Copilot, and others - to fix issues with full context and understanding.</p>
 
-<h2 id="contextual-fixes">Contextual Fixes That Match Your Code</h2>
+<p>This is a deliberate philosophical choice. Your coding agents have the deepest context about your codebase and the work being performed. They understand your architecture, your patterns, and your intent. DryRun Security's role is to identify the security problem, explain it clearly, and give your agents everything they need to resolve it correctly - not to layer in generated code from a scanner that lacks that context.</p>
 
-<p>Auto-Fix suggestions are generated in the context of your specific codebase - not from a generic template. The fix generation process considers:</p>
+<div class="callout callout-info">
+<p><strong>Why this matters:</strong> Auto-fix tools risk introducing new problems because they lack the full architectural context of your codebase. By providing guidance rather than generated patches, DryRun Security keeps code generation where it belongs - with the agents and developers who understand the code best.</p>
+</div>
+
+<h2 id="what-dryrun-provides">What DryRun Security Provides</h2>
+
+<p>When DryRun Security identifies a vulnerability, the finding includes detailed remediation guidance:</p>
+
+<ul>
+  <li><strong>Specific code examples</strong> - Concrete lines of code showing what the fix looks like, tailored to your codebase's frameworks and patterns</li>
+  <li><strong>Root cause explanation</strong> - A clear explanation of why the code is vulnerable, so your coding agent understands the underlying problem</li>
+  <li><strong>Remediation approach</strong> - Step-by-step guidance on how to address the vulnerability, including considerations for edge cases</li>
+  <li><strong>Security context</strong> - The vulnerability class, severity, and any relevant CWE references to help prioritize the fix</li>
+</ul>
+
+<h2 id="contextual-guidance">Guidance That Matches Your Code</h2>
+
+<p>Remediation guidance is generated in the context of your specific codebase - not from generic templates. The guidance considers:</p>
 
 <ul>
   <li>The frameworks, libraries, and language idioms your code uses</li>
-  <li>The existing patterns in your codebase for similar problems (if you validate input one way elsewhere, the fix follows the same pattern)</li>
+  <li>The existing patterns in your codebase for similar problems (if you validate input one way elsewhere, the guidance follows the same pattern)</li>
   <li>The surrounding code structure and dependencies that a fix must integrate with</li>
   <li>Security best practices for the specific vulnerability class</li>
 </ul>
 
-<p>The result is a fix suggestion that a developer can evaluate and apply with confidence - not a generic "sanitize this input" suggestion that still requires significant interpretation.</p>
+<p>The result is guidance that a developer or coding agent can act on with confidence - not a generic "sanitize this input" suggestion that still requires significant interpretation.</p>
 
-<h2 id="fix-presentation">How Fix Suggestions Are Presented</h2>
+<h2 id="designed-for-coding-agents">Designed for Coding Agents</h2>
 
-<p>Auto-Fix suggestions appear inline with findings in the PR comment and in the DryRun Security dashboard. Each suggestion includes:</p>
+<p>DryRun Security's remediation guidance is structured so that AI coding agents can consume it directly. When a finding with remediation guidance is surfaced in a PR comment, your coding agent can:</p>
+
+<ol>
+  <li>Read the vulnerability description and understand the security issue</li>
+  <li>Review the code examples and remediation approach</li>
+  <li>Apply the fix using its own understanding of your codebase context</li>
+  <li>Push the update, which DryRun Security will re-analyze to verify the fix (see <a href="./fix-verification.html">Fix Verification</a>)</li>
+</ol>
+
+<p>This workflow keeps the security scanner and the code generator in their respective strengths: DryRun Security excels at finding and explaining vulnerabilities, and your coding agent excels at writing code that fits your codebase.</p>
+
+<h2 id="where-guidance-appears">Where Guidance Appears</h2>
+
+<p>Remediation guidance is presented alongside findings in multiple places:</p>
 
 <ul>
-  <li>The specific code change recommended (shown as a diff)</li>
-  <li>An explanation of why this fix addresses the vulnerability</li>
-  <li>Any relevant considerations the developer should be aware of before applying</li>
+  <li><strong>PR comments</strong> - Inline with each finding in the DryRun Security summary comment</li>
+  <li><strong>GitHub Checks</strong> - In the detailed check output for each finding</li>
+  <li><strong>Risk Register</strong> - In the finding detail view in the DryRun Security dashboard</li>
+  <li><strong>AI Coding Integrations</strong> - Through the DryRun Remediation Skill for Claude Code and other MCP-compatible agents</li>
 </ul>
 
-<h2 id="verification">Verification After Fixing</h2>
-
-<p>After a fix is applied and the PR is updated, DryRun Security automatically re-analyzes the affected code to verify that the vulnerability has been resolved and that the fix hasn't introduced new issues. See <a href="./fix-verification.html">Fix Verification</a> for details on how this works.</p>
 ''',
 }
 

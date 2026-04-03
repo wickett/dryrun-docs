@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -142,6 +142,51 @@
         <p class="page-description">Customize DryRun Security behavior per repository - enable agents, attach policies, configure blocking, and set up notifications.</p>
         <div class="doc-content">
 <p>Configurations let you customize how DryRun Security behaves for each repository or group of repositories. You can control which agents run, which policies are enforced, whether findings block PRs, and how notifications are delivered.</p>
+
+
+<h2 id="configuration-walkthrough">Configuration Walkthrough</h2>
+
+<p>The Configurations page shows all your existing repository configurations.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/01-configurations.png" alt="Repository configurations list in DryRun Security dashboard" loading="lazy"></figure>
+
+<p>Click <strong>Add New Configuration</strong> to create a configuration for your repositories.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/02-add-new-config.png" alt="Add New Configuration dialog" loading="lazy"></figure>
+
+<h3 id="select-repositories">Select Repositories</h3>
+<p>Choose which repositories this configuration applies to.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/03-select-repos.png" alt="Selecting repositories for a configuration" loading="lazy"></figure>
+
+<h3 id="pr-comments-and-notifications">PR Comments and Notifications</h3>
+<p>Enable or disable PR issue comments for this configuration.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/04-issue-comment.png" alt="Issue comment toggle" loading="lazy"></figure>
+
+<p>Enable notifications to get alerts when security findings are detected.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
+
+<h3 id="attach-policies">Attach Code Policies</h3>
+<p>Add up to 7 Natural Language Code Policies to a configuration.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/07-configure-policies.png" alt="Configuring attached policies" loading="lazy"></figure>
+
+<h3 id="configure-security-agents">Code Security Agents</h3>
+<p>Configure which security agents are enabled and whether they block or run silently.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/08-configure-agents.png" alt="Configuring code security agents" loading="lazy"></figure>
+
+<p>Save the configuration when complete.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/09-config-save.png" alt="Saving a repository configuration" loading="lazy"></figure>
+
+<h3 id="branch-protection-rules">GitHub Branch Protection Rules</h3>
+<p>Use GitHub Branch Protection Rules to enforce DryRun Security checks before merging.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/10-github-settings.png" alt="GitHub repository Settings page" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/11-github-branches.png" alt="GitHub Branches settings" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/12-branch-protection.png" alt="GitHub Branch Protection rule" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/13-branch-name.png" alt="Branch name pattern for protection" loading="lazy"></figure>
+
+<p>Require DryRun Security status checks to pass before merging.</p>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/14-require-checks.png" alt="Requiring status checks for DryRun Security" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/15-checks-policies.png" alt="DryRun Security policy checks in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/16-checks-secrets.png" alt="DryRun Security secrets check in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/configurations/17-checks-details.png" alt="DryRun Security check details in branch protection" loading="lazy"></figure>
 
 <h2 id="creating-a-configuration">Creating a Configuration</h2>
 
@@ -241,6 +286,12 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#configuration-walkthrough">Configuration Walkthrough</a></li>
+<li class="toc-h3"><a href="#select-repositories">Select Repositories</a></li>
+<li class="toc-h3"><a href="#pr-comments-and-notifications">PR Comments and Notifications</a></li>
+<li class="toc-h3"><a href="#attach-policies">Attach Code Policies</a></li>
+<li class="toc-h3"><a href="#configure-security-agents">Code Security Agents</a></li>
+<li class="toc-h3"><a href="#branch-protection-rules">GitHub Branch Protection Rules</a></li>
 <li class="toc-h2"><a href="#creating-a-configuration">Creating a Configuration</a></li>
 <li class="toc-h2"><a href="#general-settings">General Settings</a></li>
 <li class="toc-h2"><a href="#policy-enforcement">Policy Enforcement Agent</a></li>

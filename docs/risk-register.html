@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -143,6 +143,8 @@
         <div class="doc-content">
 <p>Risk Register centralizes findings from PR scans and DeepScans into a single view. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
 
+<figure class="docs-screenshot"><img src="../assets/images/risk-register/01-risk-register.png" alt="DryRun Security Risk Register dashboard" loading="lazy"></figure>
+
 <h2 id="severity-overview">Severity Overview</h2>
 
 <p>At the top of the Risk Register, four severity cards display the current count of findings by level:</p>
@@ -159,6 +161,7 @@
 <h2 id="search-and-filter">Search and Filter</h2>
 
 <p>Below the severity cards, the Risk Register provides several ways to narrow your view:</p>
+<figure class="docs-screenshot"><img src="../assets/images/risk-register/02-risk-filter.png" alt="Risk Register filtering and search options" loading="lazy"></figure>
 
 <ul>
   <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
@@ -191,8 +194,10 @@
 <h2 id="finding-triage">Finding Triage</h2>
 
 <p>Risk Register supports Finding Triage so teams can categorize findings and feed decisions back into DryRun Security. Every triage decision - the reason, the context you provide - is a learning signal that improves future scan accuracy. See <a href="../finding-triage.html">Finding Triage</a> for the full workflow.</p>
+<figure class="docs-screenshot"><img src="../assets/images/risk-register/03-finding-triage.png" alt="Finding triage in the Risk Register" loading="lazy"></figure>
 
 <p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
+<figure class="docs-screenshot"><img src="../assets/images/risk-register/04-triage-pr.png" alt="Finding triage from the PR workflow" loading="lazy"></figure>
 
 <h2 id="faqs">FAQs</h2>
 

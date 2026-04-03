@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -145,6 +145,44 @@
 
 <p><strong>Prerequisite:</strong> You'll need to have already created a Webhook URL on the system you wish to integrate. Messages sent are JSON-formatted POST requests.</p>
 
+
+<h2 id="notifications-setup-walkthrough">Notification Setup Walkthrough</h2>
+
+<p>The Integrations page in the DryRun Security dashboard shows available notification channels.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/01-integrations.png" alt="Notification integrations page in DryRun Security" loading="lazy"></figure>
+
+<h3 id="slack-integration">Slack Integration</h3>
+<p>Connect DryRun Security to Slack for real-time security alerts.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/02-slack-setup.png" alt="Slack integration setup" loading="lazy"></figure>
+
+<h3 id="generic-webhook">Generic Webhook</h3>
+<p>Configure a generic webhook to send notifications to any HTTP endpoint.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/03-generic-webhook.png" alt="Generic webhook configuration" loading="lazy"></figure>
+
+<h3 id="integration-scope">Integration Scope</h3>
+<p>Global integrations notify on findings across all repositories in your organization.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/04-global-integration.png" alt="Global integration settings" loading="lazy"></figure>
+
+<p>Targeted integrations notify only for specific repositories.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/05-targeted-integration.png" alt="Targeted integration settings" loading="lazy"></figure>
+
+<h3 id="risk-triggers">Risk Level Triggers</h3>
+<p>Configure which risk levels trigger notifications.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/06-risk-trigger.png" alt="Risk level trigger configuration" loading="lazy"></figure>
+
+<p>Use the test button to validate your notification configuration.</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/07-test-notification.png" alt="Test notification button" loading="lazy"></figure>
+
+<h3 id="webhook-format">Webhook Format</h3>
+<p>Example JSON body sent by the generic webhook:</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/08-webhook-body.png" alt="Generic webhook JSON body example" loading="lazy"></figure>
+
+<p>Example of a Slack notification message:</p>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/09-slack-message.png" alt="Slack notification message example" loading="lazy"></figure>
+
+<figure class="docs-screenshot"><img src="../assets/images/notifications/10-notification-config.png" alt="Notification configuration overview" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="../assets/images/notifications/11-notification-list.png" alt="List of configured notifications" loading="lazy"></figure>
+
 <h2 id="configure-global-integration">Configure a Global Integration</h2>
 
 <p>A global integration works across all repositories in your organization with no additional configuration required.</p>
@@ -196,6 +234,12 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#notifications-setup-walkthrough">Notification Setup Walkthrough</a></li>
+<li class="toc-h3"><a href="#slack-integration">Slack Integration</a></li>
+<li class="toc-h3"><a href="#generic-webhook">Generic Webhook</a></li>
+<li class="toc-h3"><a href="#integration-scope">Integration Scope</a></li>
+<li class="toc-h3"><a href="#risk-triggers">Risk Level Triggers</a></li>
+<li class="toc-h3"><a href="#webhook-format">Webhook Format</a></li>
 <li class="toc-h2"><a href="#configure-global-integration">Configure a Global Integration</a></li>
 <li class="toc-h2"><a href="#configure-targeted-integration">Configure a Targeted Integration</a></li>
 <li class="toc-h2"><a href="#add-to-configuration">Add Notification to a Configuration</a></li>

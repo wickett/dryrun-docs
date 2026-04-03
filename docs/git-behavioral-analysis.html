@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Git Behavioral Analysis - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security analyzes git commit patterns and developer behavior as a security signal - a capability unique to DryRun.">
+  <meta name="description" content="DryRun Security constructs a Git Behavioral Graph from commit history - analyzing code churn, temporal coupling, knowledge decay, temporal anomalies, and intent mining to steer its AI agent toward the code that matters most.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -139,34 +139,101 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
         <h1 class="page-heading">Git Behavioral Analysis</h1>
-        <p class="page-description">DryRun Security analyzes git commit patterns and developer behavior as a security signal - a capability unique to DryRun.</p>
+        <p class="page-description">DryRun Security constructs a Git Behavioral Graph from commit history - analyzing code churn, temporal coupling, knowledge decay, temporal anomalies, and intent mining to steer its AI agent toward the code that matters most.</p>
         <div class="doc-content">
-<h2 id="git-history-as-security-signal">Git History as a Security Signal</h2>
+<p class="lead">DryRun Security constructs a <strong>Git Behavioral Graph</strong> before its AI agent reads a single line of code - analyzing commit history across five behavioral axes to steer the scanner toward the code that matters most.</p>
 
-<p>Every commit, every PR, every branch - the git history of a repository is a rich record of developer activity. Most security tools treat this as irrelevant background; they care only about the current state of the code. DryRun Security takes a different view: developer behavior patterns are a meaningful security signal, and understanding them enables a class of detection that code analysis alone cannot provide.</p>
+<div class="callout callout-info">
+<p>The techniques described here are grounded in Adam Tornhill's <em>Your Code as a Crime Scene</em> (2nd ed., Pragmatic Programmers, 2024). DryRun Security engineered these forensic principles into a pipeline that steers an AI agent with deterministic precision. <a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Read the full blog post</a> for additional context.</p>
+</div>
 
-<p>When code changes arrive in a pull request, DryRun Security doesn't just analyze the diff in isolation. It evaluates the change in the context of the developer's history, the repository's patterns, and the behavioral characteristics of the change itself. This enables detection of anomalies that indicate elevated risk - not because the code contains a known vulnerability, but because the circumstances surrounding the code change are unusual.</p>
+<h2 id="why-git-history-matters">Why Git History Matters for Security</h2>
 
-<h2 id="what-behavioral-analysis-detects">What Behavioral Analysis Detects</h2>
+<p>Traditional static analysis (SAST) using abstract syntax tree (AST) parsing and call graphs is well studied, but these scanners lack a fundamental dimension of context: the human element. Vulnerabilities are rarely just syntactical errors - they are the byproduct of diffuse ownership, shifting requirements, and knowledge decay.</p>
 
-<p>Git behavioral analysis contributes to DryRun Security's risk assessment in several ways:</p>
+<p>LLM context windows are finite, and agentic loops are computationally expensive. You cannot feed a giant monorepo into an LLM and ask it to find bugs. While DryRun Security already uses a hybrid LLM-driven context gathering and SAST-style multi-agent architecture to surface traditional vulnerabilities, hunting non-traditional structural flaws requires an additional layer. For deeper, complex logic issues, the agent needs a deterministic, high-signal heuristic to prioritize its attention.</p>
 
-<h3 id="unusual-change-patterns">Unusual Change Patterns</h3>
-<p>A commit that modifies authentication logic, authorization enforcement, and audit logging simultaneously - and does so in a way inconsistent with the developer's historical coding style - warrants closer scrutiny than the same code changes arriving individually over time. Behavioral context raises the signal strength of findings.</p>
+<p>The Git Behavioral Graph provides exactly this. Before our agent reads any code, it analyzes the repository's commit history across five distinct behavioral axes.</p>
 
-<h3 id="sensitive-path-modifications">Sensitive Path Modifications</h3>
-<p>Changes to security-critical files (authentication modules, cryptographic utilities, authorization middleware) are flagged with higher priority when they originate from contributors who don't typically modify those paths, or when they arrive outside of normal development patterns for the repository.</p>
+<h2 id="data-ingestion">The Data Ingestion Engine</h2>
 
-<h3 id="supply-chain-risk-indicators">Supply Chain Risk Indicators</h3>
-<p>In the context of AI-generated code and automated tooling, behavioral analysis helps identify when changes have characteristics inconsistent with the human developer's normal patterns - an important signal for detecting potential compromise or malicious code injection.</p>
+<p>Parsing git history across a decade-old monorepo is notoriously memory-intensive. Loading the entire commit tree into memory guarantees out-of-memory (OOM) crashes.</p>
 
-<h2 id="unique-capability">A Unique Capability</h2>
+<p>DryRun Security's harvester uses an <strong>asynchronous subprocess streaming architecture</strong>. It pipes <code>git log --numstat</code> with custom delimiters into a generator function, yielding, parsing, and evaluating a single commit block at a time - resolving complex git brace rename notations on the fly while maintaining a strictly bounded memory footprint.</p>
 
-<p>No other application security tool routinely incorporates git behavioral analysis as a security signal. Most tools are designed to analyze the current state of code, not the behavioral context of how that code arrived. DryRun Security's integration of behavioral signals with code analysis represents a genuinely different approach to software supply chain security - one that treats the development process itself as part of the threat model.</p>
+<h2 id="five-behavioral-axes">The Five Behavioral Axes</h2>
+
+<h3 id="code-churn">1. Code Churn: Quantifying Diffuse Ownership</h3>
+
+<p>Code churn is mathematically one of the strongest historical predictors of vulnerability density. The pipeline extracts total revisions, distinct contributor counts, and cumulative line additions and deletions. Two heuristic anomalies are particularly accurate:</p>
+
+<ul>
+<li><strong>The "Many-Hands" Anti-Pattern:</strong> When the number of distinct authors scales linearly with the commit count, ownership becomes completely diffuse. No single engineer holds a comprehensive mental model of the module's security boundaries.</li>
+<li><strong>Security Contract Renegotiation:</strong> When a file exhibits high churn velocity where cumulative deleted lines approximate cumulative added lines, it indicates continuous heavy rewriting - a classic signature of a module whose design is fundamentally unstable and lacks a clean architectural reset.</li>
+</ul>
+
+<p>AI coding agents (Codex, Claude, etc.) do not improve the situation here. They are not humans with long-term knowledge and storage. They have a point-in-time concept of the changing code with discrete directions and narrow focus, and the range of contributors can widen dramatically with increased shipping velocity.</p>
+
+<h3 id="temporal-coupling">2. Temporal Coupling: Mapping Invisible Dependencies</h3>
+
+<p>Attackers exploit the invisible gaps between microservices. To find these, DryRun Security uses <strong>temporal coupling</strong> - a forensic graph technique that identifies files that frequently change together in the same changeset, regardless of whether a formal AST import relationship exists.</p>
+
+<p>This is modeled as a bipartite graph of commits to files. The coupling degree is calculated as the ratio of shared revisions to the average individual revision count of the pair.</p>
+
+<p>To keep the scanner performant, strict pruning heuristics are applied:</p>
+
+<ul>
+<li><strong>Changeset Caps:</strong> Massive repo-wide refactors (e.g., license header sweeps) are filtered out by ignoring any commit touching more than 30 files.</li>
+<li><strong>Cold File Pruning:</strong> A file pair must have at least 5 individual revisions. This prevents a cold file from generating a spurious 100% coupling degree after a single co-commit.</li>
+<li><strong>Aggressive Garbage Collection:</strong> Every 5,000 commits, the engine pauses to prune pairs with only a single co-commit - because of the minimum revision threshold, these can mathematically never reach the 50% target threshold.</li>
+</ul>
+
+<h3 id="knowledge-decay">3. Knowledge Decay: Age and Ownership Concentration</h3>
+
+<p>Age and ownership determine whether anyone actively understands a critical module. Two metrics are combined:</p>
+
+<ul>
+<li><strong>Age in Months:</strong> Calculated by diffing the file's last modified timestamp against current UTC time. High-age files often rely on deprecated cryptographic wrappers or broken standards (MD5, HTTP Basic Auth) that were patched everywhere else but forgotten here.</li>
+<li><strong>Ownership Concentration:</strong> The fraction of a file's total surviving code attributed to its primary contributor. If a single developer owns over 90% of a heavily modified file, it acts as a knowledge silo - if they leave, the implicit security context evaporates.</li>
+</ul>
+
+<h3 id="temporal-anomalies">4. Temporal Anomalies: Circular Statistics for Threat Hunting</h3>
+
+<p>To identify compromised CI pipelines or insider threats, DryRun Security flags commits made at statistically unusual hours. Standard linear math fails on clocks - the linear mean of 23:00 and 01:00 is incorrectly calculated as 12:00, destroying the signal.</p>
+
+<p>Instead, commit timestamps are mapped onto a unit circle using <strong>circular statistics</strong>. The decimal hour is converted to an angle in radians, and the mean of the sine and cosine components across an author's history is computed to find their true circular mean, along with the circular standard deviation based on shortest angular distances.</p>
+
+<p>If a commit's angular distance from the author's circular mean exceeds 3.0 standard deviations, it triggers an anomaly. To filter noise, a baseline commit history per author is required, and anomalies during standard local business hours (9 AM - 5 PM) are ignored.</p>
+
+<h3 id="intent-mining">5. Intent Mining: The Developer Confessional</h3>
+
+<p>Developers narrate their architectural shortcuts in commit messages. Keywords like "bypass," "hardcode," or "remove before" function as explicit confessions of technical debt.</p>
+
+<p>Making this actionable for an AI agent is a data projection problem. Historically interesting hacks on files that no longer exist waste the LLM's finite context window. The pipeline strictly intersects regex matches with the output of <code>git ls-files</code>. If a commit confesses to a "quick fix" and the files modified in that specific commit still exist in the current working tree, the agent is directed to analyze those live paths for latent bypass surfaces.</p>
+
+<p>To prevent sensitive data leaks into the LLM context, all matched commit messages are routed through a dedicated <strong>secrets sanitizer</strong> before being passed to the planner.</p>
+
+<h2 id="agent-orchestration">How the Agent is Orchestrated</h2>
+
+<p>Classic code quality metrics like cyclomatic complexity, code churn, and temporal coupling are traditionally used to predict maintenance burden. From an AppSec perspective, <strong>maintenance burden is computationally indistinguishable from security risk</strong>. Where code quality degrades, structural entropy rises, and vulnerabilities breed.</p>
+
+<p>A seasoned human security auditor does not read a monorepo linearly from <code>main.py</code>. They check <code>git blame</code> on the cryptographic wrappers, look for the auth module everyone hot-patches but nobody owns, and zero in on the files littered with "TODO: fix bypass later" comments. The Git Behavioral Graph explicitly digitizes and scales that human intuition into a deterministic data structure.</p>
+
+<p>Large Language Models are inherently stochastic engines. If deployed naively against a massive codebase, they suffer from context fragmentation, attention decay, and hallucination. By pre-processing the repository into a behavioral artifact, DryRun Security fundamentally alters the agent's execution model: <strong>deterministic, mathematically rigorous algorithms tightly bound the search space</strong>, and only then is the LLM's stochastic reasoning unleashed to evaluate the semantics within that bounded space.</p>
+
+<p>The agent is no longer asked to blindly "find vulnerabilities" in a vacuum. It receives a prioritized, JSON-structured map of human risk - pointing its finite context window precisely at the highly-coupled, heavily-churned, late-night architectural hacks. This synthesis of deterministic graph analysis and agentic semantic reasoning is what allows DryRun Security to scale elite, human-level security auditing across enterprise codebases.</p>
 
 <h2 id="privacy-and-developer-trust">Privacy and Developer Trust</h2>
 
 <p>Behavioral analysis is designed to augment security findings, not to monitor individual developers. The analysis is used to prioritize and contextualize security findings - never to generate reports about individual developer behavior or to create surveillance capabilities. The goal is better security outcomes, not productivity monitoring.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+<li><a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Steering Agentic Security Scanners with Git Behavioral Graphs</a> - DryRun Security Blog</li>
+<li><a href="https://pragprog.com/titles/atcrime2" target="_blank" rel="noopener noreferrer">Your Code as a Crime Scene, Second Edition</a> - Adam Tornhill (Pragmatic Programmers, 2024)</li>
+<li><em>Software Design X-Rays</em> - Adam Tornhill (Pragmatic Programmers) - also worth reading for change coupling algorithms</li>
+</ul>
         </div>
 <nav class="prev-next">
 <a href="../docs/business-logic-detection.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Business Logic Detection</span></a>
@@ -177,13 +244,17 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#git-history-as-security-signal">Git History as a Security Signal</a></li>
-<li class="toc-h2"><a href="#what-behavioral-analysis-detects">What Behavioral Analysis Detects</a></li>
-<li class="toc-h3"><a href="#unusual-change-patterns">Unusual Change Patterns</a></li>
-<li class="toc-h3"><a href="#sensitive-path-modifications">Sensitive Path Modifications</a></li>
-<li class="toc-h3"><a href="#supply-chain-risk-indicators">Supply Chain Risk Indicators</a></li>
-<li class="toc-h2"><a href="#unique-capability">A Unique Capability</a></li>
+<li class="toc-h2"><a href="#why-git-history-matters">Why Git History Matters for Security</a></li>
+<li class="toc-h2"><a href="#data-ingestion">The Data Ingestion Engine</a></li>
+<li class="toc-h2"><a href="#five-behavioral-axes">The Five Behavioral Axes</a></li>
+<li class="toc-h3"><a href="#code-churn">1. Code Churn: Quantifying Diffuse Ownership</a></li>
+<li class="toc-h3"><a href="#temporal-coupling">2. Temporal Coupling: Mapping Invisible Dependencies</a></li>
+<li class="toc-h3"><a href="#knowledge-decay">3. Knowledge Decay: Age and Ownership Concentration</a></li>
+<li class="toc-h3"><a href="#temporal-anomalies">4. Temporal Anomalies: Circular Statistics for Threat Hunting</a></li>
+<li class="toc-h3"><a href="#intent-mining">5. Intent Mining: The Developer Confessional</a></li>
+<li class="toc-h2"><a href="#agent-orchestration">How the Agent is Orchestrated</a></li>
 <li class="toc-h2"><a href="#privacy-and-developer-trust">Privacy and Developer Trust</a></li>
+<li class="toc-h2"><a href="#further-reading">Further Reading</a></li>
 </ul>
 </aside>
   </div>
