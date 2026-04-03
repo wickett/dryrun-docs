@@ -108,8 +108,21 @@ body {
   gap: 16px;
 }
 
-.logo-link { display: flex; align-items: center; text-decoration: none; }
-.logo { height: 36px; width: auto; }
+/* Logo color - inherits into inline SVG fill="inherit" paths */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.logo {
+  height: 36px;
+  width: auto;
+  color: var(--text-primary);
+}
+.footer-logo-img {
+  color: var(--text-primary);
+}
 
 .header-divider {
   width: 1px;
