@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notifications - DryRun Security Docs</title>
-  <meta name="description" content="Set up Slack and webhook integrations to receive security alerts from DryRun Security when findings meet your configured risk threshold.">
+  <title>Slack Integration - DryRun Security Docs</title>
+  <meta name="description" content="Receive DryRun Security alerts and notifications in Slack.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,87 +59,53 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Getting Started</p>
 <ul class="sidebar-links">
-<li><a href="../docs/quick-start.html">Install DryRun Security</a></li>
-<li><a href="../docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+<li><a href="../docs/documentation.html">Documentation</a></li>
+<li><a href="../docs/quick-start.html">Quick Start</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Scanning</p>
 <ul class="sidebar-links">
-<li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
-<li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
-<li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
-<li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
-<li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
-<li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
-<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
+<li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
+<li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
+<li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
+<li><a href="../docs/sca.html">SCA</a></li>
+<li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">AI &amp; Intelligence</p>
+<p class="sidebar-section-title">Code Security Intelligence</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
-<li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
-<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
-<li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
-<li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
-<li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
-<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
-<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
-<li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
-<li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
-<li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
-<li><a href="../docs/policy-library.html">Policy Library</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">Remediation</p>
-<ul class="sidebar-links">
-<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
-<li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
+<li><a href="../docs/code-insights.html">Code Insights</a></li>
+<li><a href="../docs/security-reviews.html">Security Reviews</a></li>
+<li><a href="../docs/pr-variant-analysis.html">PR Variant Analysis</a></li>
+<li><a href="../docs/vulnerability-trends.html">Vulnerability Trends</a></li>
+<li><a href="../docs/application-summary.html">Application Summary</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
+<li><a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li>
+<li><a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+<li><a href="../docs/repository-context.html">Repository Context</a></li>
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
-<li><a href="../docs/configurations.html">Configure Repositories</a></li>
-<li><a href="../docs/notifications.html" class="active">Notifications</a></li>
-<li><a href="../docs/ai-insights.html">Code Insights</a></li>
-<li><a href="../docs/risk-trending.html">Risk Trending</a></li>
-<li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
-<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
+<li><a href="../docs/finding-tuning.html">Finding Tuning with Feedback</a></li>
+<li><a href="../docs/pr-blocking.html">PR Blocking</a></li>
+<li><a href="../docs/compliance-grc.html">Compliance &amp; GRC</a></li>
+<li><a href="../docs/permissions.html">Permissions</a></li>
+<li><a href="../docs/mcp.html">MCP</a></li>
+<li><a href="../docs/dryrun-api.html">DryRun API</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">Developer Tools</p>
+<p class="sidebar-section-title">Integrations</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
-<li><a href="../docs/agents-md.html">AGENTS.md</a></li>
-<li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
-<li><a href="../docs/scm-support.html">SCM Support</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">AI Agent Security</p>
-<ul class="sidebar-links">
-<li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
-<li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
-<li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
-<li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">API Reference</p>
-<ul class="sidebar-links">
-<li><a href="../docs/api-guide.html">API Usage Guide</a></li>
-<li><a href="../docs/language-support.html">Language Support</a></li>
+<li><a href="../docs/slack-integration.html" class="active">Slack Integration</a></li>
+<li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
+<li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
+<li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
 </div>
 </div>
@@ -147,9 +113,9 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
-        <h1 class="page-heading">Notifications</h1>
-        <p class="page-description">Set up Slack and webhook integrations to receive security alerts from DryRun Security when findings meet your configured risk threshold.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Integrations</div>
+        <h1 class="page-heading">Slack Integration</h1>
+        <p class="page-description">Receive DryRun Security alerts and notifications in Slack.</p>
         <div class="doc-content">
 <p>In this section we set up an integration webhook and use it to receive event notifications from DryRun Security. There is a dedicated Slack integration and a Generic webhook option. The configuration steps are identical for both.</p>
 
@@ -234,10 +200,23 @@
 </ol>
 
 <p>Changes in the repository that match the integration's risk level will now trigger a notification.</p>
+
+
+<h2 id="slack-setup">Setting Up Slack Notifications</h2>
+
+<p>DryRun Security can send real-time security finding notifications to your Slack workspace. This keeps your team informed about new vulnerabilities as they are discovered during PR scanning and DeepScan analysis.</p>
+
+<h3 id="slack-channels">Recommended Channel Setup</h3>
+
+<ul>
+  <li><strong>#security-alerts</strong> &mdash; High and critical findings for immediate attention.</li>
+  <li><strong>#security-digest</strong> &mdash; Daily or weekly summary of all findings.</li>
+  <li><strong>#dev-security</strong> &mdash; All findings for developer visibility.</li>
+</ul>
         </div>
 <nav class="prev-next">
-<a href="../docs/configurations.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Configure Repositories</span></a>
-<a href="../docs/ai-insights.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Code Insights</span></a>
+<a href="../docs/dryrun-api.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">DryRun API</span></a>
+<a href="../docs/webhook-integration.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Generic Webhook Integration</span></a>
 </nav>
       </div>
     </main>
@@ -253,6 +232,8 @@
 <li class="toc-h2"><a href="#configure-global-integration">Configure a Global Integration</a></li>
 <li class="toc-h2"><a href="#configure-targeted-integration">Configure a Targeted Integration</a></li>
 <li class="toc-h2"><a href="#add-to-configuration">Add Notification to a Configuration</a></li>
+<li class="toc-h2"><a href="#slack-setup">Setting Up Slack Notifications</a></li>
+<li class="toc-h3"><a href="#slack-channels">Recommended Channel Setup</a></li>
 </ul>
 </aside>
   </div>

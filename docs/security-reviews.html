@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Business Logic Detection - DryRun Security Docs</title>
-  <meta name="description" content="How DryRun Security detects business logic flaws that pattern-matching tools fundamentally cannot find.">
+  <title>Security Reviews - DryRun Security Docs</title>
+  <meta name="description" content="Contextual security analysis and business logic detection powered by AI.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,87 +59,53 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Getting Started</p>
 <ul class="sidebar-links">
-<li><a href="../docs/quick-start.html">Install DryRun Security</a></li>
-<li><a href="../docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+<li><a href="../docs/documentation.html">Documentation</a></li>
+<li><a href="../docs/quick-start.html">Quick Start</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Scanning</p>
 <ul class="sidebar-links">
-<li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
-<li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
-<li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
-<li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
-<li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
-<li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
-<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
+<li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
+<li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
+<li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
+<li><a href="../docs/sca.html">SCA</a></li>
+<li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">AI &amp; Intelligence</p>
+<p class="sidebar-section-title">Code Security Intelligence</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
-<li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
-<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
-<li><a href="../docs/business-logic-detection.html" class="active">Business Logic Detection</a></li>
-<li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
-<li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
-<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
-<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
-<li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
-<li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
-<li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
-<li><a href="../docs/policy-library.html">Policy Library</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">Remediation</p>
-<ul class="sidebar-links">
-<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
-<li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
+<li><a href="../docs/code-insights.html">Code Insights</a></li>
+<li><a href="../docs/security-reviews.html" class="active">Security Reviews</a></li>
+<li><a href="../docs/pr-variant-analysis.html">PR Variant Analysis</a></li>
+<li><a href="../docs/vulnerability-trends.html">Vulnerability Trends</a></li>
+<li><a href="../docs/application-summary.html">Application Summary</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
+<li><a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li>
+<li><a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+<li><a href="../docs/repository-context.html">Repository Context</a></li>
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
-<li><a href="../docs/configurations.html">Configure Repositories</a></li>
-<li><a href="../docs/notifications.html">Notifications</a></li>
-<li><a href="../docs/ai-insights.html">Code Insights</a></li>
-<li><a href="../docs/risk-trending.html">Risk Trending</a></li>
-<li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
-<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
+<li><a href="../docs/finding-tuning.html">Finding Tuning with Feedback</a></li>
+<li><a href="../docs/pr-blocking.html">PR Blocking</a></li>
+<li><a href="../docs/compliance-grc.html">Compliance &amp; GRC</a></li>
+<li><a href="../docs/permissions.html">Permissions</a></li>
+<li><a href="../docs/mcp.html">MCP</a></li>
+<li><a href="../docs/dryrun-api.html">DryRun API</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">Developer Tools</p>
+<p class="sidebar-section-title">Integrations</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
-<li><a href="../docs/agents-md.html">AGENTS.md</a></li>
-<li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
-<li><a href="../docs/scm-support.html">SCM Support</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">AI Agent Security</p>
-<ul class="sidebar-links">
-<li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
-<li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
-<li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
-<li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">API Reference</p>
-<ul class="sidebar-links">
-<li><a href="../docs/api-guide.html">API Usage Guide</a></li>
-<li><a href="../docs/language-support.html">Language Support</a></li>
+<li><a href="../docs/slack-integration.html">Slack Integration</a></li>
+<li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
+<li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
+<li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
 </div>
 </div>
@@ -147,10 +113,45 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
-        <h1 class="page-heading">Business Logic Detection</h1>
-        <p class="page-description">How DryRun Security detects business logic flaws that pattern-matching tools fundamentally cannot find.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
+        <h1 class="page-heading">Security Reviews</h1>
+        <p class="page-description">Contextual security analysis and business logic detection powered by AI.</p>
         <div class="doc-content">
+<h2 id="contextual-analysis">Contextual Security Analysis</h2>
+
+<h2 id="the-limits-of-pattern-matching">The Limits of Pattern Matching</h2>
+
+<p>Pattern-matching SAST tools work by detecting syntactic patterns associated with known vulnerability classes. If you call <code>execute_query</code> with a string that contains user input, you get flagged. If you use an outdated encryption algorithm, you get flagged. The pattern is present; the finding is generated.</p>
+
+<p>The fundamental problem is that security in real code is almost never a matter of syntactic patterns. Whether a SQL query is vulnerable depends on how the input was validated before it arrived. Whether a redirect is dangerous depends on whether the target URL can be influenced by an attacker. Whether an API endpoint is a risk depends on whether authorization is enforced - which might happen in middleware the pattern matcher never examined.</p>
+
+<p>This is why traditional SAST produces so many false positives (flagging safe code) and so many false negatives (missing real vulnerabilities that don't match a pattern). It isn't a tuning problem. It's a fundamental limitation of the approach.</p>
+
+<h2 id="what-full-context-means">What "Full Context" Means</h2>
+
+<p>DryRun Security's Contextual Security Analysis evaluates code through several dimensions of context simultaneously:</p>
+
+<h3 id="code-patterns-and-data-flow">Code Patterns and Data Flow</h3>
+<p>CSA traces the flow of data from its origin (user input, external API, database read) through transformations and into sensitive operations. A function that receives a validated, sanitized parameter is treated differently from one that receives a raw request field, even if the calling code looks identical to a pattern matcher.</p>
+
+<h3 id="runtime-behaviors">Runtime Behaviors</h3>
+<p>CSA considers the runtime context of code: which framework is in use, how middleware is configured, what the deployment topology implies about trust boundaries. Code that relies on a WAF for input validation is different from code with no upstream protection, even if the application code itself looks the same.</p>
+
+<h3 id="developer-intent">Developer Intent</h3>
+<p>CSA evaluates what a code change is trying to accomplish. A change that adds a new authenticated API endpoint has very different security implications from a change that modifies how authentication is enforced on existing endpoints. Understanding intent is crucial for accurate severity assessment and for identifying when a change's security impact is larger than its visible footprint.</p>
+
+<h3 id="cross-file-analysis">Cross-File Analysis</h3>
+<p>Real vulnerabilities frequently span multiple files. The data entry point is in a controller. The validation logic is in a utility module. The dangerous operation is in a service layer. CSA follows these chains across file boundaries, providing the comprehensive view that single-file analysis fundamentally cannot.</p>
+
+<h2 id="why-this-matters-operationally">Why This Matters Operationally</h2>
+
+<p>The practical outcome of contextual analysis is findings that are accurate and actionable. When DryRun Security reports a vulnerability, it's because analysis of the full context concluded that a real risk exists - not because a pattern matched. When DryRun Security doesn't flag something, it's because the context indicates the code is actually safe.</p>
+
+<p>This changes the developer experience. Security review stops being a noise-filtering exercise and becomes a focused list of genuine issues. Trust in the tool increases because findings are consistently meaningful. And the developers who receive findings have the context they need to understand and fix the issue - because the finding itself was generated by understanding that same context.</p>
+
+
+<h2 id="business-logic">Business Logic Detection</h2>
+
 <h2 id="what-are-business-logic-flaws">What Are Business Logic Flaws?</h2>
 
 <p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior - not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. They represent cases where the code does exactly what it was programmed to do, but what it was programmed to do creates a security risk.</p>
@@ -180,20 +181,68 @@
 <p>Business logic flaws are responsible for some of the most significant security breaches in modern applications - particularly in fintech, e-commerce, and any domain where the application itself mediates valuable transactions or sensitive data access. Because these vulnerabilities don't match any CVE or pattern signature, they persist in codebases for months or years until discovered through manual penetration testing or in production exploitation.</p>
 
 <p>DryRun Security brings automated business logic analysis into the PR review workflow, giving development teams a systematic way to catch these vulnerabilities before they reach production.</p>
+
+
+<h2 id="model-verification">Model-Independent Verification</h2>
+
+<h2 id="the-challenge">The Challenge</h2>
+
+<p>AI-powered security tools face a fundamental trust problem: large language models can produce inconsistent results, hallucinate findings, or miss vulnerabilities depending on how they reason about a particular piece of code. For security tooling to be reliable in production, findings must be verified independently of any single model's output.</p>
+
+<h2 id="multi-agent-verification">Multi-Agent Verification</h2>
+
+<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> provides a natural verification layer. When multiple specialized agents analyze the same code from different perspectives - one focused on injection, another on authorization, another on data flow - their findings serve as cross-checks on each other.</p>
+
+<p>If one agent flags a SQL injection but the data flow analysis agent confirms that the input is parameterized, the finding is downgraded or removed. If an IDOR finding is flagged but authorization middleware is detected in the request pipeline, the finding includes that context. This cross-validation happens automatically as part of the agent coordination process.</p>
+
+<h2 id="deterministic-checks">Deterministic Checks</h2>
+
+<p>Not every security check requires AI reasoning. DryRun Security supplements its AI-powered analysis with deterministic checks where appropriate:</p>
+
+<ul>
+  <li><strong>Dependency vulnerability matching</strong> - CVE lookups against known vulnerability databases are exact matches, not probabilistic</li>
+  <li><strong>Secrets pattern validation</strong> - candidate credentials are validated against known formats (AWS key structure, JWT format, RSA key headers)</li>
+  <li><strong>Configuration checks</strong> - infrastructure as code misconfigurations can be verified against documented specifications</li>
+</ul>
+
+<p>The combination of AI-powered contextual analysis and deterministic validation produces findings that are both contextually relevant and factually grounded.</p>
+
+<h2 id="consistency">Consistency Across Runs</h2>
+
+<p>A key requirement for enterprise adoption is that the same code produces the same findings when analyzed multiple times. DryRun Security's agent architecture is designed for consistency - the same PR analyzed twice should produce the same set of findings. The multi-agent cross-validation process helps ensure this by filtering out non-deterministic edge cases.</p>
+
+<h2 id="enterprise-trust">Why This Matters for Enterprise</h2>
+
+<p>Organizations adopting AI-powered security tooling need confidence that findings are reliable enough to block merges, drive remediation work, and satisfy audit requirements. Model-independent verification provides that confidence by ensuring no single point of AI reasoning failure can produce a false finding that reaches a developer or an audit report.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/false-positive-reduction.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">False Positive Reduction</span></a>
-<a href="../docs/git-behavioral-analysis.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Git Behavioral Analysis</span></a>
+<a href="../docs/code-insights.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Code Insights</span></a>
+<a href="../docs/pr-variant-analysis.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">PR Variant Analysis</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#contextual-analysis">Contextual Security Analysis</a></li>
+<li class="toc-h2"><a href="#the-limits-of-pattern-matching">The Limits of Pattern Matching</a></li>
+<li class="toc-h2"><a href="#what-full-context-means">What &quot;Full Context&quot; Means</a></li>
+<li class="toc-h3"><a href="#code-patterns-and-data-flow">Code Patterns and Data Flow</a></li>
+<li class="toc-h3"><a href="#runtime-behaviors">Runtime Behaviors</a></li>
+<li class="toc-h3"><a href="#developer-intent">Developer Intent</a></li>
+<li class="toc-h3"><a href="#cross-file-analysis">Cross-File Analysis</a></li>
+<li class="toc-h2"><a href="#why-this-matters-operationally">Why This Matters Operationally</a></li>
+<li class="toc-h2"><a href="#business-logic">Business Logic Detection</a></li>
 <li class="toc-h2"><a href="#what-are-business-logic-flaws">What Are Business Logic Flaws?</a></li>
 <li class="toc-h2"><a href="#how-dryrun-detects-logic-flaws">How DryRun Security Detects Logic Flaws</a></li>
 <li class="toc-h2"><a href="#examples-of-what-it-catches">Examples of What It Catches</a></li>
 <li class="toc-h2"><a href="#why-this-matters">Why This Matters</a></li>
+<li class="toc-h2"><a href="#model-verification">Model-Independent Verification</a></li>
+<li class="toc-h2"><a href="#the-challenge">The Challenge</a></li>
+<li class="toc-h2"><a href="#multi-agent-verification">Multi-Agent Verification</a></li>
+<li class="toc-h2"><a href="#deterministic-checks">Deterministic Checks</a></li>
+<li class="toc-h2"><a href="#consistency">Consistency Across Runs</a></li>
+<li class="toc-h2"><a href="#enterprise-trust">Why This Matters for Enterprise</a></li>
 </ul>
 </aside>
   </div>

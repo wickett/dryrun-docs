@@ -37,9 +37,9 @@ test.describe('Landing Page  -  Structure', () => {
     expect(await links.count()).toBeGreaterThanOrEqual(3);
   });
 
-  test('all 8 section cards are rendered', async ({ page }) => {
+  test('all 5 section cards are rendered', async ({ page }) => {
     const cards = page.locator('.index-card');
-    expect(await cards.count()).toBe(8);
+    expect(await cards.count()).toBe(5);
   });
 
   test('each section card has icon, title, description, and links', async ({ page }) => {
@@ -206,12 +206,12 @@ test.describe('Documentation Pages  -  Sidebar', () => {
     await expect(active).toBeVisible();
     expect(await active.count()).toBe(1);
     const text = await active.textContent();
-    expect(text).toContain('Install DryRun Security');
+    expect(text).toContain('Quick Start');
   });
 
   test('desktop: TOC sidebar is visible on wide screens', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/sast-overview.html');
+    await page.goto('/docs/pr-scanning.html');
     await page.waitForLoadState('domcontentloaded');
     const vw = await page.evaluate(() => window.innerWidth);
     if (vw > 1200) {
@@ -224,10 +224,10 @@ test.describe('Documentation Pages  -  Sidebar', () => {
     await page.goto('/docs/quick-start.html');
     await page.waitForLoadState('domcontentloaded');
     // Click on a different page link in the sidebar
-    const prLink = page.locator('.sidebar-links a', { hasText: 'PR Code Reviews' });
+    const prLink = page.locator('.sidebar-links a:text-is("PR Scanning")');
     await prLink.click();
     await page.waitForLoadState('domcontentloaded');
-    await expect(page.locator('.page-heading')).toContainText('PR Code Reviews');
+    await expect(page.locator('.page-heading')).toContainText('PR Scanning');
   });
 });
 
@@ -255,15 +255,15 @@ test.describe('Mobile Navigation', () => {
     await page.waitForLoadState('domcontentloaded');
     await page.locator('.sidebar-toggle').click();
     await page.waitForTimeout(400);
-    const secretsLink = page.locator('.sidebar-links a', { hasText: 'Secrets Detection' });
+    const secretsLink = page.locator('.sidebar-links a', { hasText: 'Secrets Scanning' });
     await secretsLink.click();
     await page.waitForLoadState('domcontentloaded');
-    await expect(page.locator('.page-heading')).toContainText('Secrets Detection');
+    await expect(page.locator('.page-heading')).toContainText('Secrets Scanning');
   });
 
   test('no horizontal overflow on mobile doc pages', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/quick-start.html');
+    await page.goto('/docs/pr-blocking.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() =>
       document.documentElement.scrollWidth > document.documentElement.clientWidth
@@ -309,7 +309,7 @@ test.describe('Navigation Flow', () => {
   test('prev/next links form a navigable chain', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
     // Start at first page
-    await page.goto('/docs/quick-start.html');
+    await page.goto('/docs/documentation.html');
     await page.waitForLoadState('domcontentloaded');
     // Should have next but no prev
     const prevLinks = page.locator('.prev-next-link.prev-link');
@@ -321,7 +321,7 @@ test.describe('Navigation Flow', () => {
     await nextLink.click();
     await page.waitForLoadState('domcontentloaded');
     const heading = await page.locator('.page-heading').textContent();
-    expect(heading).not.toContain('Quick Start');
+    expect(heading).not.toContain('Documentation');
     // Now should have a prev link
     const newPrev = page.locator('.prev-next-link.prev-link');
     await expect(newPrev).toBeVisible();
@@ -445,28 +445,28 @@ test.describe('Typography Regression Guards', () => {
 // ============================================================
 test.describe('Content Coverage', () => {
   test('coverage matrix page has a table', async ({ page }) => {
-    await page.goto('/docs/coverage-matrix.html');
+    await page.goto('/docs/vulnerability-trends.html');
     await page.waitForLoadState('domcontentloaded');
-    const table = page.locator('.doc-content table');
+    const table = page.locator('.doc-content table').first();
     await expect(table).toBeVisible();
   });
 
   test('NLCP page has content about policies', async ({ page }) => {
-    await page.goto('/docs/natural-language-code-policies.html');
+    await page.goto('/docs/custom-code-policies.html');
     await page.waitForLoadState('domcontentloaded');
     const text = await page.locator('.doc-content').textContent();
     expect(text.toLowerCase()).toContain('polic');
   });
 
   test('API guide page has content', async ({ page }) => {
-    await page.goto('/docs/api-guide.html');
+    await page.goto('/docs/dryrun-api.html');
     await page.waitForLoadState('domcontentloaded');
     const text = await page.locator('.doc-content').textContent();
     expect(text.length).toBeGreaterThan(100);
   });
 
   test('AI agent security page exists and loads', async ({ page }) => {
-    await page.goto('/docs/securing-ai-code.html');
+    await page.goto('/docs/ai-coding-integration.html');
     await page.waitForLoadState('domcontentloaded');
     await expect(page.locator('.page-heading')).toBeVisible();
   });
@@ -488,7 +488,7 @@ test.describe('UI Acceptance', () => {
 
   test('no horizontal overflow on mobile doc pages', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/quick-start.html');
+    await page.goto('/docs/pr-blocking.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() => {
       return document.body.scrollWidth > window.innerWidth;
@@ -498,7 +498,7 @@ test.describe('UI Acceptance', () => {
 
   test('no horizontal overflow on table pages on mobile', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/coverage-matrix.html');
+    await page.goto('/docs/vulnerability-trends.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() => {
       return document.body.scrollWidth > window.innerWidth;
@@ -525,7 +525,7 @@ test.describe('UI Acceptance', () => {
   test('sidebar stays visible when scrolling on desktop', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
     // Use a long page so there's enough content to scroll
-    await page.goto('/docs/coverage-matrix.html');
+    await page.goto('/docs/vulnerability-trends.html');
     await page.waitForLoadState('domcontentloaded');
     await page.evaluate(() => window.scrollBy(0, 800));
     await page.waitForTimeout(300);
@@ -541,7 +541,7 @@ test.describe('UI Acceptance', () => {
   });
 
   test('code blocks do not overflow their container', async ({ page }) => {
-    await page.goto('/docs/mcp-integration.html');
+    await page.goto('/docs/mcp.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() => {
       const codeBlocks = document.querySelectorAll('.doc-content pre');
@@ -564,7 +564,7 @@ test.describe('UI Acceptance', () => {
     await page.waitForLoadState('domcontentloaded');
     const cards = page.locator('.index-card');
     const count = await cards.count();
-    expect(count).toBeGreaterThanOrEqual(8);
+    expect(count).toBeGreaterThanOrEqual(5);
     // Each card should have at least one link
     for (let i = 0; i < count; i++) {
       const links = cards.nth(i).locator('a');

@@ -68,8 +68,8 @@ jobs:
           test -d docs
           PAGE_COUNT=$(ls docs/*.html | wc -l)
           echo "Generated $PAGE_COUNT pages"
-          if [ "$PAGE_COUNT" -lt 40 ]; then
-            echo "ERROR: Expected at least 40 pages, got $PAGE_COUNT"
+          if [ "$PAGE_COUNT" -lt 25 ]; then
+            echo "ERROR: Expected at least 25 pages, got $PAGE_COUNT"
             exit 1
           fi
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Git Behavioral Analysis - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security constructs a Git Behavioral Graph from commit history - analyzing code churn, temporal coupling, knowledge decay, temporal anomalies, and intent mining to steer its AI agent toward the code that matters most.">
+  <title>PR Variant Analysis - DryRun Security Docs</title>
+  <meta name="description" content="Behavioral analysis and multi-agent PR review architecture.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,87 +59,53 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Getting Started</p>
 <ul class="sidebar-links">
-<li><a href="../docs/quick-start.html">Install DryRun Security</a></li>
-<li><a href="../docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+<li><a href="../docs/documentation.html">Documentation</a></li>
+<li><a href="../docs/quick-start.html">Quick Start</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Scanning</p>
 <ul class="sidebar-links">
-<li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
-<li><a href="../docs/pr-code-reviews.html">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
-<li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
-<li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
-<li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
-<li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
-<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
+<li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
+<li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
+<li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
+<li><a href="../docs/sca.html">SCA</a></li>
+<li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">AI &amp; Intelligence</p>
+<p class="sidebar-section-title">Code Security Intelligence</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
-<li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
-<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
-<li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
-<li><a href="../docs/git-behavioral-analysis.html" class="active">Git Behavioral Analysis</a></li>
-<li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
-<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
-<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
-<li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
-<li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
-<li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
-<li><a href="../docs/policy-library.html">Policy Library</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">Remediation</p>
-<ul class="sidebar-links">
-<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
-<li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
+<li><a href="../docs/code-insights.html">Code Insights</a></li>
+<li><a href="../docs/security-reviews.html">Security Reviews</a></li>
+<li><a href="../docs/pr-variant-analysis.html" class="active">PR Variant Analysis</a></li>
+<li><a href="../docs/vulnerability-trends.html">Vulnerability Trends</a></li>
+<li><a href="../docs/application-summary.html">Application Summary</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
+<li><a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li>
+<li><a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+<li><a href="../docs/repository-context.html">Repository Context</a></li>
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
-<li><a href="../docs/configurations.html">Configure Repositories</a></li>
-<li><a href="../docs/notifications.html">Notifications</a></li>
-<li><a href="../docs/ai-insights.html">Code Insights</a></li>
-<li><a href="../docs/risk-trending.html">Risk Trending</a></li>
-<li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
-<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
+<li><a href="../docs/finding-tuning.html">Finding Tuning with Feedback</a></li>
+<li><a href="../docs/pr-blocking.html">PR Blocking</a></li>
+<li><a href="../docs/compliance-grc.html">Compliance &amp; GRC</a></li>
+<li><a href="../docs/permissions.html">Permissions</a></li>
+<li><a href="../docs/mcp.html">MCP</a></li>
+<li><a href="../docs/dryrun-api.html">DryRun API</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">Developer Tools</p>
+<p class="sidebar-section-title">Integrations</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
-<li><a href="../docs/agents-md.html">AGENTS.md</a></li>
-<li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
-<li><a href="../docs/scm-support.html">SCM Support</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">AI Agent Security</p>
-<ul class="sidebar-links">
-<li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
-<li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
-<li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
-<li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">API Reference</p>
-<ul class="sidebar-links">
-<li><a href="../docs/api-guide.html">API Usage Guide</a></li>
-<li><a href="../docs/language-support.html">Language Support</a></li>
+<li><a href="../docs/slack-integration.html">Slack Integration</a></li>
+<li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
+<li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
+<li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
 </div>
 </div>
@@ -147,10 +113,13 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>AI &amp; Intelligence</div>
-        <h1 class="page-heading">Git Behavioral Analysis</h1>
-        <p class="page-description">DryRun Security constructs a Git Behavioral Graph from commit history - analyzing code churn, temporal coupling, knowledge decay, temporal anomalies, and intent mining to steer its AI agent toward the code that matters most.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
+        <h1 class="page-heading">PR Variant Analysis</h1>
+        <p class="page-description">Behavioral analysis and multi-agent PR review architecture.</p>
         <div class="doc-content">
+<h2 id="behavioral-analysis">Git Behavioral Analysis</h2>
+
+
 <p class="lead">DryRun Security constructs a <strong>Git Behavioral Graph</strong> before its AI agent reads a single line of code - analyzing commit history across five behavioral axes to steer the scanner toward the code that matters most.</p>
 
 <div class="callout callout-info">
@@ -244,16 +213,170 @@
 <li><a href="https://pragprog.com/titles/atcrime2" target="_blank" rel="noopener noreferrer">Your Code as a Crime Scene, Second Edition</a> - Adam Tornhill (Pragmatic Programmers, 2024)</li>
 <li><em>Software Design X-Rays</em> - Adam Tornhill (Pragmatic Programmers) - also worth reading for change coupling algorithms</li>
 </ul>
+
+
+
+<h2 id="security-analyzers">Security Analyzers</h2>
+
+<h2 id="how-analyzers-work">How Analyzers Work</h2>
+
+<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> deploys specialized sub-agents on every pull request. Each analyzer focuses on a specific class of vulnerability and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> to evaluate code in full context rather than matching patterns.</p>
+
+<p>Analyzers run in parallel during a PR review. The <strong>Code Review Agent</strong> coordinates the sub-agents, collects their findings, validates exploitability, and presents a consolidated report in the PR comment. Each analyzer can also call just-in-time research sub-agents to look up framework-specific behavior, CVE details, or license information as needed.</p>
+
+<h2 id="sql-injection-analyzer">SQL Injection (SQLi) Analyzer</h2>
+
+<p>Detects unsafe query composition across languages by tracing data flow from user input sources to query execution sinks. The analyzer distinguishes between genuinely unsafe dynamic queries and parameterized queries, ORM abstractions, and other safe patterns that happen to involve user-derived values.</p>
+
+<p>Covers SQL injection in raw queries, stored procedures, ORM misuse, and query builder patterns across all <a href="../docs/documentation.html">supported languages</a>.</p>
+
+<h2 id="xss-analyzer">Cross-Site Scripting (XSS) Analyzer</h2>
+
+<p>Finds unescaped user input rendered in HTML output. Goes beyond simple <code>innerHTML</code> detection to cover framework-specific pitfalls - template engine auto-escaping bypass, React <code>dangerouslySetInnerHTML</code>, Vue <code>v-html</code> directives, and server-side rendering contexts where escaping rules differ.</p>
+
+<p>The analyzer evaluates whether the rendering context (HTML body, attribute, script, URL) matches the escaping applied, catching cases where input is escaped for one context but used in another.</p>
+
+<h2 id="idor-analyzer">Insecure Direct Object Reference (IDOR) Analyzer</h2>
+
+<p>Surfaces broken object-level authorization by tracing data paths from request parameters to data access. The analyzer looks for cases where a user-supplied identifier (ID, slug, filename) is used to retrieve or modify a resource without verifying that the requesting user has access to that resource.</p>
+
+<p>This goes well beyond checking whether an endpoint exists - the analyzer reasons about authorization middleware, access control decorators, and ownership checks in the data access layer.</p>
+
+<h2 id="mass-assignment-analyzer">Mass Assignment Analyzer</h2>
+
+<p>Flags unsafe binding patterns that allow user input to overwrite sensitive model fields or escalate privileges. Common in web frameworks that automatically map request parameters to model attributes (Rails <code>params.permit</code>, Django model forms, Express body parsing).</p>
+
+<p>The analyzer identifies when user-controlled input reaches a model update without an explicit allowlist of permitted fields, and evaluates whether any of the unprotected fields are security-sensitive (roles, permissions, account status, pricing).</p>
+
+<h2 id="ssrf-analyzer">Server-Side Request Forgery (SSRF) Analyzer</h2>
+
+<p>Inspects outbound HTTP calls, DNS lookups, and other network operations for user-controlled target URLs or hostnames. The analyzer checks for missing URL validation, allowlist enforcement, and internal network access restrictions.</p>
+
+<p>Covers direct SSRF (user input in URL), blind SSRF (request made but response not returned to user), and partial SSRF (user controls part of the URL path or query parameters).</p>
+
+<h2 id="secrets-analyzer">Secrets Analyzer</h2>
+
+<p>Stops committed API keys, tokens, database passwords, private keys, and other credentials at PR time. Unlike simple regex scanners, the Secrets Analyzer evaluates context - distinguishing between real credentials and test fixtures, example configurations, public documentation keys, and placeholder values.</p>
+
+<p>When a confirmed secret is found, the finding includes the file path and line number with a plain-language explanation of the risk, without reproducing the credential value in the report. See <a href="../docs/secrets-scanning.html">Secrets Detection</a> for the full details.</p>
+
+<h2 id="general-security-analyzer">General Security Analyzer (GSA)</h2>
+
+<p>The GSA is the broadest analyzer, covering security issues that do not fall neatly into a single vulnerability class:</p>
+
+<ul>
+  <li><strong>Authentication and authorization gaps</strong> - missing auth middleware, inconsistent access controls, broken session management</li>
+  <li><strong>Risky cryptography</strong> - weak algorithms, hardcoded IVs, improper key management</li>
+  <li><strong>Debug artifacts</strong> - debug endpoints, verbose error messages, development-mode settings left in production code</li>
+  <li><strong>Unsafe deserialization</strong> - untrusted data passed to deserialization functions without validation</li>
+  <li><strong>Leaky error handling</strong> - stack traces, internal paths, or database details exposed in error responses</li>
+  <li><strong>Missing rate limiting</strong> - authentication endpoints, API routes, and form submissions without throttling</li>
+  <li><strong>Security misconfigurations</strong> - permissive CORS, missing security headers, unsafe defaults</li>
+  <li><strong>General logic flaws</strong> - race conditions, time-of-check/time-of-use issues, and other semantic vulnerabilities</li>
+</ul>
+
+<h2 id="core-code-policies">Core Code Policies</h2>
+
+<p>In addition to the specialized analyzers, DryRun runs a set of Core Code Policies on every PR. These cover the OWASP Top 10 and other well-established vulnerability patterns using the same contextual analysis approach. Core Code Policies are always active and require no configuration.</p>
+
+<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a>.</p>
+
+<h2 id="configuring-analyzers">Configuring Analyzers</h2>
+
+<p>Each Security Analyzer can be individually configured per repository through the <a href="../docs/pr-scanning-configuration.html">Configurations</a> page. In the <strong>Code Security Agents</strong> section of a configuration, every analyzer has three controls:</p>
+
+<ul>
+  <li><strong>Blocking</strong> - When enabled, a finding from this analyzer creates a GitHub status check that must pass before the PR can be merged. The check appears under the analyzer's name (e.g., "Secrets Analyzer").</li>
+  <li><strong>Silent Mode</strong> - When enabled, the analyzer still runs and records findings in the Risk Register, but does not post them in the PR comment. Useful for evaluating an analyzer before turning it on for developers.</li>
+  <li><strong>Risk Level</strong> - Sets the default severity label for findings from this analyzer. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>. This controls how findings appear in the PR comment and Risk Register.</li>
+</ul>
+
+<p>These settings let teams gradually roll out analyzers - for example, starting in Silent Mode to evaluate signal quality before enabling Blocking for enforcement.</p>
+
+<h2 id="related-pages">Related Pages</h2>
+
+<ul>
+  <li><a href="../docs/pr-variant-analysis.html">Multi-Agent Architecture</a> - how agents coordinate</li>
+  <li><a href="../docs/vulnerability-trends.html">Vulnerability Coverage</a> - full scope of detected vulnerability classes</li>
+  <li><a href="../docs/pr-scanning.html">PR Code Reviews</a> - how findings appear in pull requests</li>
+  <li><a href="../docs/finding-tuning.html">False Positive Reduction</a> - why analyzers produce low noise</li>
+  <li><a href="../docs/pr-scanning-configuration.html">Configure Repositories</a> - per-repository agent and policy configuration</li>
+</ul>
+
+
+<h2 id="multi-agent-architecture">Multi-Agent Architecture</h2>
+
+<h2 id="why-multi-agent">Why Multi-Agent</h2>
+
+<p>DryRun Security uses a multi-agent architecture rather than a single monolithic model. Each agent specializes in a specific aspect of security analysis, and agents collaborate to produce comprehensive findings. This design mirrors how a senior security team works - one person focuses on authentication, another on injection, another on infrastructure - and the team's combined expertise exceeds what any individual could achieve.</p>
+
+<p>The alternative - running all security analysis through a single model or pipeline - limits depth. A monolithic system must balance breadth against the context window and reasoning capacity available for any single vulnerability class. Multi-agent design removes this constraint.</p>
+
+<h2 id="primary-agents">Primary Agents</h2>
+
+<h3 id="code-review-agent">Code Review Agent</h3>
+
+<p>The Code Review Agent is the primary agent that runs on every pull request. It coordinates the overall review process: retrieving the PR diff and surrounding context, dispatching specialized sub-agents, collecting and validating findings, and posting the consolidated result as a PR comment and check.</p>
+
+<p>The Code Review Agent also runs DryRun's <strong>Core Code Policies</strong> - a set of built-in checks covering the OWASP Top 10 and common vulnerability patterns. These are always active and require no configuration.</p>
+
+<h3 id="custom-policy-agent">Custom Policy Agent</h3>
+
+<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
+
+<p>The Custom Policy Agent can call specialized sub-agents for SCA lookups, codebase analysis, and just-in-time research to fully evaluate whether a policy is satisfied.</p>
+
+<h3 id="deepscan-agent">DeepScan Agent</h3>
+
+<p>The <a href="../docs/deepscan.html">DeepScan Agent</a> performs full-repository security analysis on demand. While the Code Review Agent operates on PR diffs, the DeepScan Agent analyzes the entire repository tree at a given commit. This enables it to find vulnerabilities that span many files, were introduced gradually across multiple commits, or existed before DryRun Security was installed.</p>
+
+<h3 id="codebase-insight-agent">Codebase Insight Agent</h3>
+
+<p>The Codebase Insight Agent powers <a href="../docs/code-insights.html">Code Insights</a> - natural language queries about your codebase's security posture. Instead of navigating dashboards and exports, you ask questions like "what new API endpoints were added this week?" or "show me a chart of risky alerts by repo" and get precise, contextual answers.</p>
+
+<h2 id="specialized-sub-agents">Specialized Sub-Agents</h2>
+
+<p>Primary agents dispatch specialized sub-agents to handle specific vulnerability classes. Each sub-agent focuses on one area and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> for high-signal, low-noise findings:</p>
+
+<ul>
+  <li><strong>SQLi Analyzer</strong> - SQL injection across languages, tracing sources to sinks</li>
+  <li><strong>XSS Analyzer</strong> - cross-site scripting including framework-specific templating pitfalls</li>
+  <li><strong>IDOR Analyzer</strong> - broken object-level authorization via data path tracing</li>
+  <li><strong>Mass Assignment Analyzer</strong> - unsafe model binding from user input</li>
+  <li><strong>SSRF Analyzer</strong> - server-side request forgery via user-controlled URLs</li>
+  <li><strong>Secrets Analyzer</strong> - credentials in code, distinguished from test fixtures</li>
+  <li><strong>General Security Analyzer</strong> - auth gaps, risky crypto, debug artifacts, deserialization, and more</li>
+</ul>
+
+<p>See <a href="../docs/pr-variant-analysis.html">Security Analyzers</a> for detailed documentation on each sub-agent.</p>
+
+<h2 id="agent-coordination">How Agents Coordinate</h2>
+
+<p>When a PR is opened or updated, the flow works as follows:</p>
+
+<ol>
+  <li>The <strong>Code Review Agent</strong> receives the PR event and retrieves the diff plus relevant surrounding files for context</li>
+  <li>The agent dispatches <strong>specialized sub-agents</strong> in parallel, each analyzing the changes for their specific vulnerability class</li>
+  <li>Sub-agents may call <strong>just-in-time research</strong> to look up framework behavior, CVE details, or license information</li>
+  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Natural Language Code Policies against the changes</li>
+  <li>Findings from all agents are collected, validated for exploitability, and deduplicated</li>
+  <li>The consolidated result is posted as a PR comment with findings, code references, and remediation guidance</li>
+</ol>
+
+<h2 id="model-independence">Model-Independent Verification</h2>
+
+<p>Agents cross-check each other's findings to reduce the risk of any single model hallucinating or producing inconsistent results. This multi-agent verification is a key reason DryRun Security achieves high consistency and reliability in production environments. See <a href="../docs/security-reviews.html">Model-Independent Verification</a> for more detail.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/business-logic-detection.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Business Logic Detection</span></a>
-<a href="../docs/code-security-knowledge-graph.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Code Security Knowledge Graph</span></a>
+<a href="../docs/security-reviews.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Security Reviews</span></a>
+<a href="../docs/vulnerability-trends.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Vulnerability Trends</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#behavioral-analysis">Git Behavioral Analysis</a></li>
 <li class="toc-h2"><a href="#why-git-history-matters">Why Git History Matters for Security</a></li>
 <li class="toc-h2"><a href="#data-ingestion">The Data Ingestion Engine</a></li>
 <li class="toc-h2"><a href="#five-behavioral-axes">The Five Behavioral Axes</a></li>
@@ -265,6 +388,28 @@
 <li class="toc-h2"><a href="#agent-orchestration">How the Agent is Orchestrated</a></li>
 <li class="toc-h2"><a href="#privacy-and-developer-trust">Privacy and Developer Trust</a></li>
 <li class="toc-h2"><a href="#further-reading">Further Reading</a></li>
+<li class="toc-h2"><a href="#security-analyzers">Security Analyzers</a></li>
+<li class="toc-h2"><a href="#how-analyzers-work">How Analyzers Work</a></li>
+<li class="toc-h2"><a href="#sql-injection-analyzer">SQL Injection (SQLi) Analyzer</a></li>
+<li class="toc-h2"><a href="#xss-analyzer">Cross-Site Scripting (XSS) Analyzer</a></li>
+<li class="toc-h2"><a href="#idor-analyzer">Insecure Direct Object Reference (IDOR) Analyzer</a></li>
+<li class="toc-h2"><a href="#mass-assignment-analyzer">Mass Assignment Analyzer</a></li>
+<li class="toc-h2"><a href="#ssrf-analyzer">Server-Side Request Forgery (SSRF) Analyzer</a></li>
+<li class="toc-h2"><a href="#secrets-analyzer">Secrets Analyzer</a></li>
+<li class="toc-h2"><a href="#general-security-analyzer">General Security Analyzer (GSA)</a></li>
+<li class="toc-h2"><a href="#core-code-policies">Core Code Policies</a></li>
+<li class="toc-h2"><a href="#configuring-analyzers">Configuring Analyzers</a></li>
+<li class="toc-h2"><a href="#related-pages">Related Pages</a></li>
+<li class="toc-h2"><a href="#multi-agent-architecture">Multi-Agent Architecture</a></li>
+<li class="toc-h2"><a href="#why-multi-agent">Why Multi-Agent</a></li>
+<li class="toc-h2"><a href="#primary-agents">Primary Agents</a></li>
+<li class="toc-h3"><a href="#code-review-agent">Code Review Agent</a></li>
+<li class="toc-h3"><a href="#custom-policy-agent">Custom Policy Agent</a></li>
+<li class="toc-h3"><a href="#deepscan-agent">DeepScan Agent</a></li>
+<li class="toc-h3"><a href="#codebase-insight-agent">Codebase Insight Agent</a></li>
+<li class="toc-h2"><a href="#specialized-sub-agents">Specialized Sub-Agents</a></li>
+<li class="toc-h2"><a href="#agent-coordination">How Agents Coordinate</a></li>
+<li class="toc-h2"><a href="#model-independence">Model-Independent Verification</a></li>
 </ul>
 </aside>
   </div>

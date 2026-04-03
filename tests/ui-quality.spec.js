@@ -6,7 +6,7 @@ const { test, expect } = require('@playwright/test');
 // ============================================================
 test.describe('Typography & Readability', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     await page.waitForLoadState('domcontentloaded');
   });
 
@@ -92,7 +92,7 @@ test.describe('Typography & Readability', () => {
 // ============================================================
 test.describe('Color & Theming', () => {
   test('background color is dark (not white/light)', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const bgColor = await page.evaluate(() => {
       const style = getComputedStyle(document.body);
       const match = style.backgroundColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
@@ -105,7 +105,7 @@ test.describe('Color & Theming', () => {
   });
 
   test('accent links are visually distinct from body text', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const colors = await page.evaluate(() => {
       const link = document.querySelector('.doc-content a');
       const para = document.querySelector('.doc-content p');
@@ -120,7 +120,7 @@ test.describe('Color & Theming', () => {
   });
 
   test('active sidebar link has accent color highlight', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const activeStyle = await page.evaluate(() => {
       const active = document.querySelector('.sidebar-links a.active');
       if (!active) return null;
@@ -143,7 +143,7 @@ test.describe('Color & Theming', () => {
 test.describe('Spacing & Layout', () => {
   test('content area has adequate padding on desktop', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const padding = await page.evaluate(() => {
       const area = document.querySelector('.content-area');
       if (!area) return { top: 0, right: 0, left: 0 };
@@ -161,7 +161,7 @@ test.describe('Spacing & Layout', () => {
   });
 
   test('h2 sections have visual separation (border-top or margin)', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const h2Styles = await page.evaluate(() => {
       const h2s = document.querySelectorAll('.doc-content h2');
       return Array.from(h2s).slice(1).map(h2 => {
@@ -182,7 +182,7 @@ test.describe('Spacing & Layout', () => {
 
   test('sidebar width is reasonable (200-300px)', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const width = await page.evaluate(() => {
       const sidebar = document.querySelector('.sidebar');
       if (!sidebar) return 0;
@@ -193,7 +193,7 @@ test.describe('Spacing & Layout', () => {
   });
 
   test('list items have adequate spacing between them', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const spacing = await page.evaluate(() => {
       const items = document.querySelectorAll('.doc-content li');
       if (items.length < 2) return 0;
@@ -209,7 +209,7 @@ test.describe('Spacing & Layout', () => {
 // ============================================================
 test.describe('Interactive Elements', () => {
   test('code blocks have copy buttons', async ({ page }) => {
-    await page.goto('/docs/mcp-integration.html');
+    await page.goto('/docs/mcp.html');
     await page.waitForLoadState('domcontentloaded');
     const codeBlocks = page.locator('.doc-content pre');
     const count = await codeBlocks.count();
@@ -224,7 +224,7 @@ test.describe('Interactive Elements', () => {
 
   test('copy button has hover-reveal CSS rule', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/mcp-integration.html');
+    await page.goto('/docs/mcp.html');
     const pre = page.locator('.doc-content pre').first();
     const copyBtn = pre.locator('.copy-btn');
 
@@ -262,7 +262,7 @@ test.describe('Interactive Elements', () => {
   test('search filters cards on input', async ({ page }) => {
     await page.goto('/index.html');
     const search = page.locator('#docsSearch');
-    await search.fill('remediation');
+    await search.fill('scanning');
     await page.waitForTimeout(200);
 
     const visibleCards = await page.evaluate(() => {
@@ -271,7 +271,7 @@ test.describe('Interactive Elements', () => {
     });
     // Should show fewer cards when filtering
     expect(visibleCards).toBeGreaterThan(0);
-    expect(visibleCards).toBeLessThan(8);
+    expect(visibleCards).toBeLessThan(5);
   });
 
   test('Cmd+K focuses search input', async ({ page, isMobile }) => {
@@ -286,7 +286,7 @@ test.describe('Interactive Elements', () => {
 
   test('sidebar overlay closes on click', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
 
     // Open sidebar
     await page.locator('.sidebar-toggle').click();
@@ -300,7 +300,7 @@ test.describe('Interactive Elements', () => {
 
   test('TOC highlights active section on scroll', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     await page.setViewportSize({ width: 1440, height: 900 });
 
     // Scroll to a specific section
@@ -318,7 +318,7 @@ test.describe('Interactive Elements', () => {
   });
 
   test('prev/next navigation links are present on doc pages', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const prevNext = page.locator('.prev-next');
     await prevNext.scrollIntoViewIfNeeded();
     await expect(prevNext).toBeVisible();
@@ -329,7 +329,7 @@ test.describe('Interactive Elements', () => {
 
   test('prev/next links have hover lift effect', async ({ page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const link = page.locator('.prev-next-link').first();
     await link.scrollIntoViewIfNeeded();
 
@@ -348,7 +348,7 @@ test.describe('Interactive Elements', () => {
 // ============================================================
 test.describe('Tables', () => {
   test('tables have border and rounded corners', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const tableStyle = await page.evaluate(() => {
       const table = document.querySelector('.doc-content table');
       if (!table) return null;
@@ -362,7 +362,7 @@ test.describe('Tables', () => {
   });
 
   test('table headers have distinct background', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const thBg = await page.evaluate(() => {
       const th = document.querySelector('.doc-content th');
       if (!th) return null;
@@ -374,7 +374,7 @@ test.describe('Tables', () => {
   });
 
   test('table cells have adequate padding', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const padding = await page.evaluate(() => {
       const td = document.querySelector('.doc-content td');
       if (!td) return 0;
@@ -390,7 +390,7 @@ test.describe('Tables', () => {
 // ============================================================
 test.describe('Header & Navigation', () => {
   test('header is sticky (position: sticky)', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const position = await page.evaluate(() => {
       const header = document.querySelector('.site-header');
       return header ? getComputedStyle(header).position : '';
@@ -399,7 +399,7 @@ test.describe('Header & Navigation', () => {
   });
 
   test('header has backdrop blur', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const blur = await page.evaluate(() => {
       const header = document.querySelector('.site-header');
       if (!header) return '';
@@ -410,7 +410,7 @@ test.describe('Header & Navigation', () => {
   });
 
   test('breadcrumb shows correct path on doc pages', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const breadcrumb = page.locator('.breadcrumb');
     await expect(breadcrumb).toBeVisible();
     const text = await breadcrumb.textContent();
@@ -424,7 +424,7 @@ test.describe('Header & Navigation', () => {
 test.describe('Mobile-Specific UI', () => {
   test('mobile: content has adequate padding (not cramped)', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const padding = await page.evaluate(() => {
       const area = document.querySelector('.content-area');
       if (!area) return { left: 0, right: 0 };
@@ -441,7 +441,7 @@ test.describe('Mobile-Specific UI', () => {
 
   test('mobile: no horizontal overflow on doc pages', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/mcp-integration.html');
+    await page.goto('/docs/mcp.html');
     const hasOverflow = await page.evaluate(() =>
       document.documentElement.scrollWidth > document.documentElement.clientWidth
     );
@@ -450,7 +450,7 @@ test.describe('Mobile-Specific UI', () => {
 
   test('mobile: code blocks scroll horizontally without breaking layout', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/mcp-integration.html');
+    await page.goto('/docs/mcp.html');
     const preOverflow = await page.evaluate(() => {
       const pre = document.querySelector('.doc-content pre');
       if (!pre) return '';
@@ -461,7 +461,7 @@ test.describe('Mobile-Specific UI', () => {
 
   test('mobile: sidebar toggle opens and closes sidebar', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
 
     const sidebar = page.locator('.sidebar');
     const toggle = page.locator('.sidebar-toggle');
@@ -491,7 +491,7 @@ test.describe('Mobile-Specific UI', () => {
 // ============================================================
 test.describe('Animations & Transitions', () => {
   test('content area has fade-in animation', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const animation = await page.evaluate(() => {
       const inner = document.querySelector('.content-inner');
       if (!inner) return '';
@@ -501,7 +501,7 @@ test.describe('Animations & Transitions', () => {
   });
 
   test('sidebar links have transition on hover', async ({ page }) => {
-    await page.goto('/docs/configurations.html');
+    await page.goto('/docs/pr-scanning-configuration.html');
     const transition = await page.evaluate(() => {
       const link = document.querySelector('.sidebar-links a');
       if (!link) return '';
