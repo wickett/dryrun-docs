@@ -207,7 +207,7 @@ body {
 
 .sidebar-section-title {
   padding: 14px 20px 6px;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -644,7 +644,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 4px;
   font-family: var(--font);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   line-height: 1.3;
 }

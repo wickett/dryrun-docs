@@ -4,7 +4,6 @@ Generates all HTML pages for the docs site.
 Usage: python3 build.py
 """
 import html
-import os
 import re
 from pathlib import Path
 
@@ -3006,7 +3005,7 @@ def render_sidebar(current_slug: str, asset_prefix: str) -> str:
     parts.append('</div>')
     parts.append('<div class="sidebar-nav">')
     for section in SECTIONS:
-        parts.append(f'<div class="sidebar-section">')
+        parts.append('<div class="sidebar-section">')
         parts.append(f'<p class="sidebar-section-title">{esc(section["name"])}</p>')
         parts.append('<ul class="sidebar-links">')
         for slug in section['pages']:
@@ -3259,8 +3258,6 @@ def render_index_page() -> str:
         section_name = section['name']
         icon = SECTION_ICONS.get(section_name, '')
         section_desc = SECTION_DESCRIPTIONS.get(section_name, '')
-        first_slug = section['pages'][0]
-        first_page = PAGES.get(first_slug, {})
 
         links_html = []
         for slug in section['pages']:

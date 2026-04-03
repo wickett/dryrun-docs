@@ -2,7 +2,6 @@
 Unit tests for DryRun Security Documentation build system.
 Run with: python3 -m pytest tests/test_build.py -v
 """
-import os
 import re
 import importlib.util
 from pathlib import Path
@@ -241,6 +240,25 @@ class TestAccessibility:
         content = (ROOT / "index.html").read_text()
         assert '<html lang=' in content.lower(), (
             "index.html missing lang attribute on <html> element"
+        )
+
+    def test_no_font_size_below_minimum(self):
+        """No font-size in desktop CSS should be below 0.72rem (11.5px at 16px base).
+        Mobile breakpoint is exempt."""
+        css = self._parse_css()
+        mobile_start = css.find('@media')
+        desktop_css = css[:mobile_start] if mobile_start != -1 else css
+        min_rem = 0.72
+        violations = []
+        for match in re.finditer(r'font-size:\s*([\d.]+)rem', desktop_css):
+            val = float(match.group(1))
+            if val < min_rem:
+                start = max(0, match.start() - 80)
+                context = desktop_css[start:match.start()].strip().split('\n')[-1]
+                violations.append(f"{val}rem (near: ...{context})")
+        assert not violations, (
+            f"Font sizes below {min_rem}rem found in desktop CSS:\n" +
+            "\n".join(f"  - {v}" for v in violations)
         )
 
 

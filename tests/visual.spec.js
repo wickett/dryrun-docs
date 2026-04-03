@@ -471,3 +471,105 @@ test.describe('Content Coverage', () => {
     await expect(page.locator('.page-heading')).toBeVisible();
   });
 });
+
+// ============================================================
+// UI Acceptance Tests (borrowed from capability matrix patterns)
+// ============================================================
+test.describe('UI Acceptance', () => {
+  test('no horizontal overflow on mobile', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'Mobile only');
+    await page.goto('/');
+    await page.waitForLoadState('domcontentloaded');
+    const hasOverflow = await page.evaluate(() => {
+      return document.body.scrollWidth > window.innerWidth;
+    });
+    expect(hasOverflow).toBe(false);
+  });
+
+  test('no horizontal overflow on mobile doc pages', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'Mobile only');
+    await page.goto('/docs/quick-start.html');
+    await page.waitForLoadState('domcontentloaded');
+    const hasOverflow = await page.evaluate(() => {
+      return document.body.scrollWidth > window.innerWidth;
+    });
+    expect(hasOverflow).toBe(false);
+  });
+
+  test('no horizontal overflow on table pages on mobile', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'Mobile only');
+    await page.goto('/docs/coverage-matrix.html');
+    await page.waitForLoadState('domcontentloaded');
+    const hasOverflow = await page.evaluate(() => {
+      return document.body.scrollWidth > window.innerWidth;
+    });
+    expect(hasOverflow).toBe(false);
+  });
+
+  test('header stays visible when scrolling on desktop', async ({ page, isMobile }) => {
+    test.skip(!!isMobile, 'Desktop only');
+    await page.goto('/docs/quick-start.html');
+    await page.waitForLoadState('domcontentloaded');
+    // Scroll down well past the header
+    await page.evaluate(() => window.scrollBy(0, 800));
+    await page.waitForTimeout(300);
+    const headerVisible = await page.evaluate(() => {
+      const header = document.querySelector('.site-header');
+      if (!header) return false;
+      const rect = header.getBoundingClientRect();
+      return rect.top >= 0 && rect.bottom <= window.innerHeight;
+    });
+    expect(headerVisible).toBe(true);
+  });
+
+  test('sidebar stays visible when scrolling on desktop', async ({ page, isMobile }) => {
+    test.skip(!!isMobile, 'Desktop only');
+    // Use a long page so there's enough content to scroll
+    await page.goto('/docs/coverage-matrix.html');
+    await page.waitForLoadState('domcontentloaded');
+    await page.evaluate(() => window.scrollBy(0, 800));
+    await page.waitForTimeout(300);
+    // Sidebar should be sticky - verify it's still in the viewport
+    const sidebarInViewport = await page.evaluate(() => {
+      const sidebar = document.querySelector('.sidebar');
+      if (!sidebar) return false;
+      const rect = sidebar.getBoundingClientRect();
+      // Sticky sidebar should have top near 56px (header height)
+      return rect.top >= 0 && rect.top < 100 && rect.height > 200;
+    });
+    expect(sidebarInViewport).toBe(true);
+  });
+
+  test('code blocks do not overflow their container', async ({ page }) => {
+    await page.goto('/docs/mcp-integration.html');
+    await page.waitForLoadState('domcontentloaded');
+    const hasOverflow = await page.evaluate(() => {
+      const codeBlocks = document.querySelectorAll('.doc-content pre');
+      for (const pre of codeBlocks) {
+        if (pre.scrollWidth > pre.clientWidth + 2) {
+          // Allow overflow only if overflow-x is auto/scroll (scrollable)
+          const style = getComputedStyle(pre);
+          if (style.overflowX !== 'auto' && style.overflowX !== 'scroll') {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+    expect(hasOverflow).toBe(false);
+  });
+
+  test('all landing page section cards are clickable', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForLoadState('domcontentloaded');
+    const cards = page.locator('.index-card');
+    const count = await cards.count();
+    expect(count).toBeGreaterThanOrEqual(8);
+    // Each card should have at least one link
+    for (let i = 0; i < count; i++) {
+      const links = cards.nth(i).locator('a');
+      const linkCount = await links.count();
+      expect(linkCount).toBeGreaterThan(0);
+    }
+  });
+});
