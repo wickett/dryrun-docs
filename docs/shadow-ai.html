@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shadow AI - DryRun Security Docs</title>
-  <meta name="description" content="Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security&#x27;s intelligence index.">
+  <meta name="description" content="Detect and investigate unauthorized AI tool usage by querying DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,15 +120,17 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
         <h1 class="page-heading">Shadow AI</h1>
-        <p class="page-description">Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security&#x27;s intelligence index.</p>
+        <p class="page-description">Detect and investigate unauthorized AI tool usage by querying DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during PR and repository scanning, enabling teams to detect, investigate, and govern AI usage across their codebase.</p>
+<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone detection dashboard. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about AI usage patterns using the structured findings and insights generated across your repositories.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed and made queryable. Teams can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
+<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed alongside all other findings. When you query for shadow AI patterns, the LLM has access to the full history of these observations and can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
 
 <p>This capability builds on DryRun Security&rsquo;s <a href="../docs/ai-coding-integration.html">AI Coding Integration</a> analysis, extending it into the intelligence index for historical querying and trend analysis.</p>
 
@@ -150,6 +152,17 @@
   <li><strong>Commit metadata</strong> &mdash; Signals from commit messages, authorship patterns, and contribution timing.</li>
   <li><strong>Tool fingerprints</strong> &mdash; Identifiable patterns associated with specific AI coding assistants.</li>
   <li><strong>Volume anomalies</strong> &mdash; Unusual spikes in code contribution volume that may indicate AI-assisted development.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Shadow AI queries integrate with DryRun Security&rsquo;s broader analysis. Each AI-related observation in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that flagged AI indicators</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
 </ul>
 
 <h2 id="use-cases">Use Cases</h2>
@@ -174,6 +187,7 @@
 <li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
 <li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
 <li class="toc-h2"><a href="#detection-signals">Detection Signals</a></li>
+<li class="toc-h2"><a href="#security-review-integration">Security Review Integration</a></li>
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>

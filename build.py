@@ -948,18 +948,20 @@ PAGES['feature-ships'] = {
 
 PAGES['architecture-risks'] = {
     'title': 'Architecture Risks',
-    'description': 'Identify and investigate architectural security risks using DryRun Security\'s intelligence index.',
+    'description': 'Identify and investigate architectural security risks by querying DryRun Security\'s intelligence index.',
     'section': 'Code Security Intelligence',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase. The Architecture Risks page explains how to query this index to identify structural security risks &mdash; the kind that emerge from how components interact, not just from individual code flaws.</p>
+<p>Architectural security risks &mdash; the kind that emerge from how components interact rather than from individual code flaws &mdash; are notoriously hard to detect with traditional tools. DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page or dashboard. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about architectural risks using the structured findings and insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a>.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
 <p>During every PR review and repository scan, DryRun Security&rsquo;s models observe architectural signals: new service boundaries, authentication pattern changes, data flow modifications, infrastructure-as-code updates, and dependency relationship shifts. These observations accumulate in the intelligence index, building a persistent map of your system&rsquo;s architecture and how it evolves over time.</p>
 
-<p>Teams can query this index to surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
+<p>When you query for architecture risks, the LLM has access to the full history of these observations and can surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -981,6 +983,17 @@ PAGES['architecture-risks'] = {
   <li><strong>Infrastructure changes</strong> &mdash; IaC modifications that alter network topology, permissions, or deployment configuration.</li>
 </ul>
 
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Architecture risk queries integrate with DryRun Security&rsquo;s broader analysis. Each risk pattern identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that introduced the change</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
@@ -993,18 +1006,20 @@ PAGES['architecture-risks'] = {
 
 PAGES['developer-trends'] = {
     'title': 'Developer Trends',
-    'description': 'Analyze developer behavior and contribution patterns through DryRun Security\'s intelligence index.',
+    'description': 'Analyze developer behavior and security trend patterns by querying DryRun Security\'s intelligence index.',
     'section': 'Code Security Intelligence',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of PR and repository scanning. The Developer Trends page explains how to query this index to understand team-level security trends, identify areas where additional training may help, and track how security practices evolve over time.</p>
+<p>Understanding how your team&rsquo;s security practices evolve over time requires more than point-in-time snapshots. DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone dashboard or report. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about development trends using the structured findings and insights generated across your repositories.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
 <p>As DryRun Security reviews pull requests, the models record patterns at the contributor level: which types of findings are most common, how quickly findings are addressed, what categories of code changes are being made, and how security posture trends over time. This data is aggregated and anonymizable, designed to improve team processes rather than single out individuals.</p>
 
-<p>Teams can query the intelligence index to understand development patterns and their security implications.</p>
+<p>When you query for developer trends, the LLM has access to this full history and can identify patterns, inflection points, and areas where additional attention may help.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -1026,6 +1041,17 @@ PAGES['developer-trends'] = {
   <li><strong>Policy compliance</strong> &mdash; How often <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are triggered and resolved.</li>
 </ul>
 
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Developer trend queries integrate with DryRun Security&rsquo;s broader analysis. Each trend identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that drive the trend</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
@@ -1038,18 +1064,18 @@ PAGES['developer-trends'] = {
 
 PAGES['incident-response'] = {
     'title': 'Incident Response Investigation',
-    'description': 'Use DryRun Security\'s intelligence index to investigate security incidents and trace code changes.',
+    'description': 'Investigate security incidents by querying DryRun Security\'s intelligence index for code change history and findings.',
     'section': 'Code Security Intelligence',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>When a security incident occurs, speed of investigation is critical. DryRun Security&rsquo;s intelligence index provides a queryable record of every code change, security finding, and policy evaluation across your repositories &mdash; enabling rapid, targeted investigation without manually searching through PR histories and logs.</p>
+<p>When a security incident occurs, speed of investigation is critical. DryRun Security&rsquo;s intelligence index provides a queryable record of every code change, security finding, and policy evaluation across your repositories &mdash; enabling rapid, targeted investigation through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone incident response tool. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM to trace code changes, findings, and triage decisions using the structured insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a>.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>Every PR review and repository scan feeds the intelligence index with structured data: what changed, what was found, which policies were evaluated, and what the security assessment was. During incident response, this index becomes an investigation tool. Instead of piecing together information from Git logs, CI systems, and security dashboards, responders can query the index directly.</p>
-
-<p>Queries can be made through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+<p>Every PR review and repository scan feeds the intelligence index with structured data: what changed, what was found, which policies were evaluated, and what the security assessment was. During incident response, this index becomes an investigation tool. Instead of piecing together information from Git logs, CI systems, and security dashboards, responders can query the LLM directly &mdash; and it has access to the full history of findings and insights across your organization.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -1071,6 +1097,17 @@ PAGES['incident-response'] = {
   <li><strong>Finding review</strong> &mdash; Surface any prior findings related to the affected code that may have been triaged or deferred.</li>
 </ul>
 
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Incident response queries integrate with DryRun Security&rsquo;s broader analysis. Each investigation query draws on:</p>
+
+<ul>
+  <li>Security findings from the PR reviews across your repositories</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
@@ -1083,16 +1120,18 @@ PAGES['incident-response'] = {
 
 PAGES['shadow-ai'] = {
     'title': 'Shadow AI',
-    'description': 'Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security\'s intelligence index.',
+    'description': 'Detect and investigate unauthorized AI tool usage by querying DryRun Security\'s intelligence index.',
     'section': 'Code Security Intelligence',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during PR and repository scanning, enabling teams to detect, investigate, and govern AI usage across their codebase.</p>
+<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone detection dashboard. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about AI usage patterns using the structured findings and insights generated across your repositories.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed and made queryable. Teams can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
+<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed alongside all other findings. When you query for shadow AI patterns, the LLM has access to the full history of these observations and can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
 
 <p>This capability builds on DryRun Security&rsquo;s <a href="../docs/ai-coding-integration.html">AI Coding Integration</a> analysis, extending it into the intelligence index for historical querying and trend analysis.</p>
 
@@ -1116,6 +1155,17 @@ PAGES['shadow-ai'] = {
   <li><strong>Volume anomalies</strong> &mdash; Unusual spikes in code contribution volume that may indicate AI-assisted development.</li>
 </ul>
 
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Shadow AI queries integrate with DryRun Security&rsquo;s broader analysis. Each AI-related observation in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that flagged AI indicators</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
@@ -1129,18 +1179,18 @@ PAGES['shadow-ai'] = {
 
 PAGES['security-review-requests'] = {
     'title': 'New Feature or Repository Security Review',
-    'description': 'Request security reviews for new features or repositories using DryRun Security\'s intelligence index.',
+    'description': 'Request security reviews for new features or repositories by querying DryRun Security\'s intelligence index.',
     'section': 'Code Security Intelligence',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>When a new feature is proposed or a new repository is onboarded, security teams need to quickly assess the risk landscape. DryRun Security&rsquo;s intelligence index provides the foundation for these reviews &mdash; enabling teams to query historical patterns, similar implementations, and known risks to inform their assessment.</p>
+<p>When a new feature is proposed or a new repository is onboarded, security teams need to quickly assess the risk landscape. DryRun Security&rsquo;s intelligence index provides the foundation for these reviews &mdash; enabling teams to query historical patterns, similar implementations, and known risks through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone review tool. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM to assess new features or repositories using the structured findings and insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a> across your organization.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>The intelligence index accumulated from PR and repository scanning contains a structured record of security patterns across your entire codebase. When reviewing a new feature or repository, teams can query this index to find relevant precedents: how similar features were implemented elsewhere, what security issues arose, and what patterns to watch for.</p>
-
-<p>Queries can be made through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+<p>The intelligence index accumulated from PR and repository scanning contains a structured record of security patterns across your entire codebase. When reviewing a new feature or repository, you query the LLM to find relevant precedents: how similar features were implemented elsewhere, what security issues arose, and what patterns to watch for. The LLM has access to all findings details and insights generated across your repositories.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -1162,6 +1212,17 @@ PAGES['security-review-requests'] = {
   <li><strong>Ongoing monitoring</strong> &mdash; After the review, the intelligence index continues to track the feature or repository as it evolves.</li>
 </ul>
 
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Security review queries integrate with DryRun Security&rsquo;s broader analysis. Each query draws on:</p>
+
+<ul>
+  <li>Security findings from the PR reviews across your repositories</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
@@ -1175,12 +1236,18 @@ PAGES['security-review-requests'] = {
 
 PAGES['security-reviews'] = {
     'title': 'Security Reviews',
-    'description': 'Contextual security analysis and business logic detection powered by AI.',
+    'description': 'Query DryRun Security\'s intelligence index for contextual security analysis, business logic detection, and model verification insights.',
     'section': 'Code Security Intelligence',
     'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security&rsquo;s intelligence index captures deep security analysis from every PR review and <a href="../docs/deepscan.html">DeepScan</a> &mdash; including contextual security analysis, business logic detection, and model-independent verification results. These insights are queryable as use cases through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page. It describes the analytical capabilities that power the intelligence index and how to query for their results. Every query to the LLM draws on the full depth of these analytical methods.</p>
+
 <h2 id="contextual-analysis">Contextual Security Analysis</h2>
 
-<h2 id="the-limits-of-pattern-matching">The Limits of Pattern Matching</h2>
+<h3 id="the-limits-of-pattern-matching">The Limits of Pattern Matching</h3>
 
 <p>Pattern-matching SAST tools work by detecting syntactic patterns associated with known vulnerability classes. If you call <code>execute_query</code> with a string that contains user input, you get flagged. If you use an outdated encryption algorithm, you get flagged. The pattern is present; the finding is generated.</p>
 
@@ -1188,103 +1255,82 @@ PAGES['security-reviews'] = {
 
 <p>This is why traditional SAST produces so many false positives (flagging safe code) and so many false negatives (missing real vulnerabilities that don't match a pattern). It isn't a tuning problem. It's a fundamental limitation of the approach.</p>
 
-<h2 id="what-full-context-means">What "Full Context" Means</h2>
+<h3 id="what-full-context-means">What "Full Context" Means</h3>
 
 <p>DryRun Security's Contextual Security Analysis evaluates code through several dimensions of context simultaneously:</p>
 
-<h3 id="code-patterns-and-data-flow">Code Patterns and Data Flow</h3>
-<p>CSA traces the flow of data from its origin (user input, external API, database read) through transformations and into sensitive operations. A function that receives a validated, sanitized parameter is treated differently from one that receives a raw request field, even if the calling code looks identical to a pattern matcher.</p>
+<ul>
+  <li><strong>Code patterns and data flow</strong> &mdash; Traces the flow of data from its origin through transformations and into sensitive operations. A function that receives a validated, sanitized parameter is treated differently from one that receives a raw request field.</li>
+  <li><strong>Runtime behaviors</strong> &mdash; Considers the runtime context: which framework is in use, how middleware is configured, what the deployment topology implies about trust boundaries.</li>
+  <li><strong>Developer intent</strong> &mdash; Evaluates what a code change is trying to accomplish. A change that adds a new authenticated API endpoint has very different security implications from a change that modifies how authentication is enforced.</li>
+  <li><strong>Cross-file analysis</strong> &mdash; Follows vulnerability chains across file boundaries, providing the comprehensive view that single-file analysis fundamentally cannot.</li>
+</ul>
 
-<h3 id="runtime-behaviors">Runtime Behaviors</h3>
-<p>CSA considers the runtime context of code: which framework is in use, how middleware is configured, what the deployment topology implies about trust boundaries. Code that relies on a WAF for input validation is different from code with no upstream protection, even if the application code itself looks the same.</p>
+<h3 id="example-queries-csa">Example Queries</h3>
 
-<h3 id="developer-intent">Developer Intent</h3>
-<p>CSA evaluates what a code change is trying to accomplish. A change that adds a new authenticated API endpoint has very different security implications from a change that modifies how authentication is enforced on existing endpoints. Understanding intent is crucial for accurate severity assessment and for identifying when a change's security impact is larger than its visible footprint.</p>
-
-<h3 id="cross-file-analysis">Cross-File Analysis</h3>
-<p>Real vulnerabilities frequently span multiple files. The data entry point is in a controller. The validation logic is in a utility module. The dangerous operation is in a service layer. CSA follows these chains across file boundaries, providing the comprehensive view that single-file analysis fundamentally cannot.</p>
-
-<h2 id="why-this-matters-operationally">Why This Matters Operationally</h2>
-
-<p>The practical outcome of contextual analysis is findings that are accurate and actionable. When DryRun Security reports a vulnerability, it's because analysis of the full context concluded that a real risk exists - not because a pattern matched. When DryRun Security doesn't flag something, it's because the context indicates the code is actually safe.</p>
-
-<p>This changes the developer experience. Security review stops being a noise-filtering exercise and becomes a focused list of genuine issues. Trust in the tool increases because findings are consistently meaningful. And the developers who receive findings have the context they need to understand and fix the issue - because the finding itself was generated by understanding that same context.</p>
-
+<ul>
+  <li><strong>&ldquo;Which PRs had findings that required cross-file analysis to detect?&rdquo;</strong> &mdash; Surfaces complex vulnerabilities that pattern matchers would miss.</li>
+  <li><strong>&ldquo;Show me findings where context changed the severity assessment&rdquo;</strong> &mdash; Highlights where contextual analysis made a material difference.</li>
+  <li><strong>&ldquo;What percentage of our findings this month were business logic flaws?&rdquo;</strong> &mdash; Measures coverage beyond pattern-matching categories.</li>
+</ul>
 
 <h2 id="business-logic">Business Logic Detection</h2>
 
-<h2 id="what-are-business-logic-flaws">What Are Business Logic Flaws?</h2>
+<h3 id="what-are-business-logic-flaws">What Are Business Logic Flaws?</h3>
 
-<p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior - not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. They represent cases where the code does exactly what it was programmed to do, but what it was programmed to do creates a security risk.</p>
+<p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior - not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. No pattern matcher can find these. They require understanding what the code is supposed to do - and then evaluating whether it actually does it securely.</p>
 
-<p>Classic examples include: a price-calculation function that allows negative quantities to generate negative totals and reverse payment flows; an authorization check that verifies the user owns a resource but doesn't verify the user is modifying <em>their own</em> instance of that resource; a multi-step transaction that can be interrupted midway to leave the system in an inconsistent state that benefits the attacker.</p>
-
-<p>No pattern matcher can find these. They don't involve known-vulnerable function calls or dangerous API usage. They require understanding what the code is supposed to do - and then evaluating whether it actually does it securely.</p>
-
-<h2 id="how-dryrun-detects-logic-flaws">How DryRun Security Detects Logic Flaws</h2>
-
-<p>DryRun Security's Code Review Agent and DeepScan Agent analyze code for business logic vulnerabilities by understanding application intent. When a PR modifies an e-commerce checkout flow, the agent evaluates the logic of the price calculation, discount application, and quantity validation as a unified behavior - not as individual function calls. It can identify cases where the logical chain has gaps that could be exploited.</p>
-
-<p>This requires the kind of holistic code understanding that contextual AI analysis enables. The agent reads the code the way a security engineer would: with an understanding of what the feature is trying to accomplish, what inputs it receives, what outputs it produces, and what happens if those inputs are unexpected or adversarial.</p>
-
-<h2 id="examples-of-what-it-catches">Examples of What It Catches</h2>
+<h3 id="examples-of-what-it-catches">Examples of What It Catches</h3>
 
 <ul>
   <li><strong>IDOR (Insecure Direct Object Reference)</strong> - An API endpoint that looks up a resource by user-controlled ID without verifying the requesting user owns that resource.</li>
-  <li><strong>Race conditions in transactions</strong> - Logic that allows a resource to be consumed multiple times if requests arrive simultaneously, before a lock is applied.</li>
-  <li><strong>Authorization on the wrong layer</strong> - UI-level access controls that aren't enforced at the API layer, allowing direct API calls to bypass restrictions.</li>
-  <li><strong>State machine violations</strong> - Workflows that can be driven into invalid states by skipping or repeating steps in an unexpected order.</li>
-  <li><strong>Privilege abuse paths</strong> - Sequences of otherwise-legitimate operations that, when combined, achieve an outcome an attacker shouldn't be able to reach.</li>
+  <li><strong>Race conditions in transactions</strong> - Logic that allows a resource to be consumed multiple times if requests arrive simultaneously.</li>
+  <li><strong>Authorization on the wrong layer</strong> - UI-level access controls that aren't enforced at the API layer.</li>
+  <li><strong>State machine violations</strong> - Workflows that can be driven into invalid states by skipping or repeating steps.</li>
+  <li><strong>Privilege abuse paths</strong> - Sequences of otherwise-legitimate operations that achieve an outcome an attacker shouldn't be able to reach.</li>
 </ul>
 
-<h2 id="why-this-matters">Why This Matters</h2>
+<h3 id="example-queries-logic">Example Queries</h3>
 
-<p>Business logic flaws are responsible for some of the most significant security breaches in modern applications - particularly in fintech, e-commerce, and any domain where the application itself mediates valuable transactions or sensitive data access. Because these vulnerabilities don't match any CVE or pattern signature, they persist in codebases for months or years until discovered through manual penetration testing or in production exploitation.</p>
-
-<p>DryRun Security brings automated business logic analysis into the PR review workflow, giving development teams a systematic way to catch these vulnerabilities before they reach production.</p>
-
+<ul>
+  <li><strong>&ldquo;Show me all business logic findings across our repos this quarter&rdquo;</strong> &mdash; Surfaces the category of findings traditional tools miss entirely.</li>
+  <li><strong>&ldquo;Which repos have the most IDOR findings?&rdquo;</strong> &mdash; Identifies authorization pattern weaknesses by codebase.</li>
+  <li><strong>&ldquo;What race condition risks have been flagged in our payment services?&rdquo;</strong> &mdash; Focuses on a specific risk class in a critical domain.</li>
+</ul>
 
 <h2 id="model-verification">Model-Independent Verification</h2>
 
-<h2 id="the-challenge">The Challenge</h2>
+<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> provides a natural verification layer. When multiple specialized agents analyze the same code from different perspectives - one focused on injection, another on authorization, another on data flow - their findings serve as cross-checks on each other. The combination of AI-powered contextual analysis and deterministic validation (CVE lookups, secrets format checks, IaC specification matching) produces findings that are both contextually relevant and factually grounded.</p>
 
-<p>AI-powered security tools face a fundamental trust problem: large language models can produce inconsistent results, hallucinate findings, or miss vulnerabilities depending on how they reason about a particular piece of code. For security tooling to be reliable in production, findings must be verified independently of any single model's output.</p>
-
-<h2 id="multi-agent-verification">Multi-Agent Verification</h2>
-
-<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> provides a natural verification layer. When multiple specialized agents analyze the same code from different perspectives - one focused on injection, another on authorization, another on data flow - their findings serve as cross-checks on each other.</p>
-
-<p>If one agent flags a SQL injection but the data flow analysis agent confirms that the input is parameterized, the finding is downgraded or removed. If an IDOR finding is flagged but authorization middleware is detected in the request pipeline, the finding includes that context. This cross-validation happens automatically as part of the agent coordination process.</p>
-
-<h2 id="deterministic-checks">Deterministic Checks</h2>
-
-<p>Not every security check requires AI reasoning. DryRun Security supplements its AI-powered analysis with deterministic checks where appropriate:</p>
+<h3 id="example-queries-verification">Example Queries</h3>
 
 <ul>
-  <li><strong>Dependency vulnerability matching</strong> - CVE lookups against known vulnerability databases are exact matches, not probabilistic</li>
-  <li><strong>Secrets pattern validation</strong> - candidate credentials are validated against known formats (AWS key structure, JWT format, RSA key headers)</li>
-  <li><strong>Configuration checks</strong> - infrastructure as code misconfigurations can be verified against documented specifications</li>
+  <li><strong>&ldquo;How consistent are our findings across repeated scans?&rdquo;</strong> &mdash; Evaluates reliability of the multi-agent verification process.</li>
+  <li><strong>&ldquo;Which findings were confirmed by multiple agents?&rdquo;</strong> &mdash; Surfaces high-confidence results validated through cross-checking.</li>
 </ul>
 
-<p>The combination of AI-powered contextual analysis and deterministic validation produces findings that are both contextually relevant and factually grounded.</p>
+<h2 id="use-cases">Use Cases</h2>
 
-<h2 id="consistency">Consistency Across Runs</h2>
-
-<p>A key requirement for enterprise adoption is that the same code produces the same findings when analyzed multiple times. DryRun Security's agent architecture is designed for consistency - the same PR analyzed twice should produce the same set of findings. The multi-agent cross-validation process helps ensure this by filtering out non-deterministic edge cases.</p>
-
-<h2 id="enterprise-trust">Why This Matters for Enterprise</h2>
-
-<p>Organizations adopting AI-powered security tooling need confidence that findings are reliable enough to block merges, drive remediation work, and satisfy audit requirements. Model-independent verification provides that confidence by ensuring no single point of AI reasoning failure can produce a false finding that reaches a developer or an audit report.</p>
+<ul>
+  <li><strong>Deep finding investigation</strong> &mdash; Query the index to understand the full context behind any finding &mdash; what analysis methods detected it and why.</li>
+  <li><strong>Coverage assessment</strong> &mdash; Evaluate what categories of vulnerabilities your scans are catching beyond what pattern matchers detect.</li>
+  <li><strong>Audit evidence</strong> &mdash; Demonstrate the depth and rigor of your security analysis methodology. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
 ''',
 }
 
 PAGES['pr-variant-analysis'] = {
     'title': 'PR Variant Analysis',
-    'description': 'Behavioral analysis and multi-agent PR review architecture.',
+    'description': 'Query DryRun Security\'s intelligence index for behavioral analysis, multi-agent PR review results, and specialized analyzer findings.',
     'section': 'Code Security Intelligence',
     'content': '''
-<h2 id="behavioral-analysis">Git Behavioral Analysis</h2>
+<h2 id="overview">Overview</h2>
 
+<p>DryRun Security uses behavioral analysis and a multi-agent architecture to review every pull request. The results of this analysis &mdash; including Git behavioral graphs, specialized analyzer findings, and cross-agent verification outcomes &mdash; are captured in the intelligence index and queryable through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page. It describes the analytical methods behind PR review and how to query for their results. You can also trigger a <strong>Variant Analysis</strong> investigation on any specific PR directly from the Insights page using the <strong>Investigate PR</strong> action.</p>
+
+<h2 id="behavioral-analysis">Git Behavioral Analysis</h2>
 
 <p class="lead">DryRun Security constructs a <strong>Git Behavioral Graph</strong> before its AI agent reads a single line of code - analyzing commit history across five behavioral axes to steer the scanner toward the code that matters most.</p>
 
@@ -1292,297 +1338,103 @@ PAGES['pr-variant-analysis'] = {
 <p>The techniques described here are grounded in Adam Tornhill's <em>Your Code as a Crime Scene</em> (2nd ed., Pragmatic Programmers, 2024). DryRun Security engineered these forensic principles into a pipeline that steers an AI agent with deterministic precision. <a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Read the full blog post</a> for additional context.</p>
 </div>
 
-<h2 id="why-git-history-matters">Why Git History Matters for Security</h2>
+<h3 id="why-git-history-matters">Why Git History Matters for Security</h3>
 
-<p>Traditional static analysis (SAST) using abstract syntax tree (AST) parsing and call graphs is well studied, but these scanners lack a fundamental dimension of context: the human element. Vulnerabilities are rarely just syntactical errors - they are the byproduct of diffuse ownership, shifting requirements, and knowledge decay.</p>
+<p>Traditional static analysis lacks a fundamental dimension of context: the human element. Vulnerabilities are rarely just syntactical errors - they are the byproduct of diffuse ownership, shifting requirements, and knowledge decay. The Git Behavioral Graph provides a deterministic, high-signal heuristic to prioritize the agent's attention before it reads any code.</p>
 
-<p>LLM context windows are finite, and agentic loops are computationally expensive. You cannot feed a giant monorepo into an LLM and ask it to find bugs. While DryRun Security already uses a hybrid LLM-driven context gathering and SAST-style multi-agent architecture to surface traditional vulnerabilities, hunting non-traditional structural flaws requires an additional layer. For deeper, complex logic issues, the agent needs a deterministic, high-signal heuristic to prioritize its attention.</p>
-
-<p>The Git Behavioral Graph provides exactly this. Before our agent reads any code, it analyzes the repository's commit history across five distinct behavioral axes.</p>
-
-<h2 id="data-ingestion">The Data Ingestion Engine</h2>
-
-<p>Parsing git history across a decade-old monorepo is notoriously memory-intensive. Loading the entire commit tree into memory guarantees out-of-memory (OOM) crashes.</p>
-
-<p>DryRun Security's harvester uses an <strong>asynchronous subprocess streaming architecture</strong>. It pipes <code>git log --numstat</code> with custom delimiters into a generator function, yielding, parsing, and evaluating a single commit block at a time - resolving complex git brace rename notations on the fly while maintaining a strictly bounded memory footprint.</p>
-
-<h2 id="five-behavioral-axes">The Five Behavioral Axes</h2>
-
-<h3 id="code-churn">1. Code Churn: Quantifying Diffuse Ownership</h3>
-
-<p>Code churn is mathematically one of the strongest historical predictors of vulnerability density. The pipeline extracts total revisions, distinct contributor counts, and cumulative line additions and deletions. Two heuristic anomalies are particularly accurate:</p>
+<h3 id="five-behavioral-axes">The Five Behavioral Axes</h3>
 
 <ul>
-<li><strong>The "Many-Hands" Anti-Pattern:</strong> When the number of distinct authors scales linearly with the commit count, ownership becomes completely diffuse. No single engineer holds a comprehensive mental model of the module's security boundaries.</li>
-<li><strong>Security Contract Renegotiation:</strong> When a file exhibits high churn velocity where cumulative deleted lines approximate cumulative added lines, it indicates continuous heavy rewriting - a classic signature of a module whose design is fundamentally unstable and lacks a clean architectural reset.</li>
+  <li><strong>Code churn</strong> &mdash; Files with high revision counts and many distinct contributors historically correlate with vulnerability density. The pipeline quantifies this as a normalized churn score.</li>
+  <li><strong>Contributor coupling</strong> &mdash; When many authors touch the same file, implicit knowledge can be lost. The ratio of unique contributors to total revisions produces a diffuse-ownership signal.</li>
+  <li><strong>Temporal coupling</strong> &mdash; Files that change together frequently suggest hidden dependencies. If a change to <code>auth_middleware.py</code> always accompanies changes to <code>session_handler.py</code>, a change to one without the other is suspicious.</li>
+  <li><strong>Recency weighting</strong> &mdash; Recent changes carry more risk than ancient stable code. The pipeline applies exponential decay weighting so churn from last week outweighs churn from last year.</li>
+  <li><strong>Complexity hotspot scoring</strong> &mdash; Combining churn and contributor metrics with code complexity produces composite hotspot scores that identify the files most likely to harbor latent vulnerabilities.</li>
 </ul>
-
-<p>AI coding agents (Codex, Claude, etc.) do not improve the situation here. They are not humans with long-term knowledge and storage. They have a point-in-time concept of the changing code with discrete directions and narrow focus, and the range of contributors can widen dramatically with increased shipping velocity.</p>
-
-<h3 id="temporal-coupling">2. Temporal Coupling: Mapping Invisible Dependencies</h3>
-
-<p>Attackers exploit the invisible gaps between microservices. To find these, DryRun Security uses <strong>temporal coupling</strong> - a forensic graph technique that identifies files that frequently change together in the same changeset, regardless of whether a formal AST import relationship exists.</p>
-
-<p>This is modeled as a bipartite graph of commits to files. The coupling degree is calculated as the ratio of shared revisions to the average individual revision count of the pair.</p>
-
-<p>To keep the scanner performant, strict pruning heuristics are applied:</p>
-
-<ul>
-<li><strong>Changeset Caps:</strong> Massive repo-wide refactors (e.g., license header sweeps) are filtered out by ignoring any commit touching more than 30 files.</li>
-<li><strong>Cold File Pruning:</strong> A file pair must have at least 5 individual revisions. This prevents a cold file from generating a spurious 100% coupling degree after a single co-commit.</li>
-<li><strong>Aggressive Garbage Collection:</strong> Every 5,000 commits, the engine pauses to prune pairs with only a single co-commit - because of the minimum revision threshold, these can mathematically never reach the 50% target threshold.</li>
-</ul>
-
-<h3 id="knowledge-decay">3. Knowledge Decay: Age and Ownership Concentration</h3>
-
-<p>Age and ownership determine whether anyone actively understands a critical module. Two metrics are combined:</p>
-
-<ul>
-<li><strong>Age in Months:</strong> Calculated by diffing the file's last modified timestamp against current UTC time. High-age files often rely on deprecated cryptographic wrappers or broken standards (MD5, HTTP Basic Auth) that were patched everywhere else but forgotten here.</li>
-<li><strong>Ownership Concentration:</strong> The fraction of a file's total surviving code attributed to its primary contributor. If a single developer owns over 90% of a heavily modified file, it acts as a knowledge silo - if they leave, the implicit security context evaporates.</li>
-</ul>
-
-<h3 id="temporal-anomalies">4. Temporal Anomalies: Circular Statistics for Threat Hunting</h3>
-
-<p>To identify compromised CI pipelines or insider threats, DryRun Security flags commits made at statistically unusual hours. Standard linear math fails on clocks - the linear mean of 23:00 and 01:00 is incorrectly calculated as 12:00, destroying the signal.</p>
-
-<p>Instead, commit timestamps are mapped onto a unit circle using <strong>circular statistics</strong>. The decimal hour is converted to an angle in radians, and the mean of the sine and cosine components across an author's history is computed to find their true circular mean, along with the circular standard deviation based on shortest angular distances.</p>
-
-<p>If a commit's angular distance from the author's circular mean exceeds 3.0 standard deviations, it triggers an anomaly. To filter noise, a baseline commit history per author is required, and anomalies during standard local business hours (9 AM - 5 PM) are ignored.</p>
-
-<h3 id="intent-mining">5. Intent Mining: The Developer Confessional</h3>
-
-<p>Developers narrate their architectural shortcuts in commit messages. Keywords like "bypass," "hardcode," or "remove before" function as explicit confessions of technical debt.</p>
-
-<p>Making this actionable for an AI agent is a data projection problem. Historically interesting hacks on files that no longer exist waste the LLM's finite context window. The pipeline strictly intersects regex matches with the output of <code>git ls-files</code>. If a commit confesses to a "quick fix" and the files modified in that specific commit still exist in the current working tree, the agent is directed to analyze those live paths for latent bypass surfaces.</p>
-
-<p>To prevent sensitive data leaks into the LLM context, all matched commit messages are routed through a dedicated <strong>secrets sanitizer</strong> before being passed to the planner.</p>
-
-<h2 id="agent-orchestration">How the Agent is Orchestrated</h2>
-
-<p>Classic code quality metrics like cyclomatic complexity, code churn, and temporal coupling are traditionally used to predict maintenance burden. From an AppSec perspective, <strong>maintenance burden is computationally indistinguishable from security risk</strong>. Where code quality degrades, structural entropy rises, and vulnerabilities breed.</p>
-
-<p>A seasoned human security auditor does not read a monorepo linearly from <code>main.py</code>. They check <code>git blame</code> on the cryptographic wrappers, look for the auth module everyone hot-patches but nobody owns, and zero in on the files littered with "TODO: fix bypass later" comments. The Git Behavioral Graph explicitly digitizes and scales that human intuition into a deterministic data structure.</p>
-
-<p>Large Language Models are inherently stochastic engines. If deployed naively against a massive codebase, they suffer from context fragmentation, attention decay, and hallucination. By pre-processing the repository into a behavioral artifact, DryRun Security fundamentally alters the agent's execution model: <strong>deterministic, mathematically rigorous algorithms tightly bound the search space</strong>, and only then is the LLM's stochastic reasoning unleashed to evaluate the semantics within that bounded space.</p>
-
-<p>The agent is no longer asked to blindly "find vulnerabilities" in a vacuum. It receives a prioritized, JSON-structured map of human risk - pointing its finite context window precisely at the highly-coupled, heavily-churned, late-night architectural hacks. This synthesis of deterministic graph analysis and agentic semantic reasoning is what allows DryRun Security to scale elite, human-level security auditing across enterprise codebases.</p>
-
-<h2 id="privacy-and-developer-trust">Privacy and Developer Trust</h2>
-
-<p>Behavioral analysis is designed to augment security findings, not to monitor individual developers. The analysis is used to prioritize and contextualize security findings - never to generate reports about individual developer behavior or to create surveillance capabilities. The goal is better security outcomes, not productivity monitoring.</p>
-
-<h2 id="further-reading">Further Reading</h2>
-
-<ul>
-<li><a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Steering Agentic Security Scanners with Git Behavioral Graphs</a> - DryRun Security Blog</li>
-<li><a href="https://pragprog.com/titles/atcrime2" target="_blank" rel="noopener noreferrer">Your Code as a Crime Scene, Second Edition</a> - Adam Tornhill (Pragmatic Programmers, 2024)</li>
-<li><em>Software Design X-Rays</em> - Adam Tornhill (Pragmatic Programmers) - also worth reading for change coupling algorithms</li>
-</ul>
-
-
-
-<h2 id="security-analyzers">Security Analyzers</h2>
-
-<h2 id="investigate-from-insights">Investigate from Insights</h2>
-
-<p>Variant analysis can be triggered directly from the <a href="../docs/feature-ships.html">Insights</a> page using the <strong>Investigate PR</strong> action. This allows you to seamlessly move from a high-level security question to a deep investigation of a specific pull request, with the full context of the variant analysis applied.</p>
-
-<h2 id="how-analyzers-work">How Analyzers Work</h2>
-
-<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> deploys specialized sub-agents on every pull request. Each analyzer focuses on a specific class of vulnerability and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> to evaluate code in full context rather than matching patterns.</p>
-
-<p>Analyzers run in parallel during a PR review. The <strong>Code Review Agent</strong> coordinates the sub-agents, collects their findings, validates exploitability, and presents a consolidated report in the PR comment. Each analyzer can also call just-in-time research sub-agents to look up framework-specific behavior, CVE details, or license information as needed.</p>
-
-<h2 id="sql-injection-analyzer">SQL Injection (SQLi) Analyzer</h2>
-
-<p>Detects unsafe query composition across languages by tracing data flow from user input sources to query execution sinks. The analyzer distinguishes between genuinely unsafe dynamic queries and parameterized queries, ORM abstractions, and other safe patterns that happen to involve user-derived values.</p>
-
-<p>Covers SQL injection in raw queries, stored procedures, ORM misuse, and query builder patterns across all <a href="../docs/documentation.html">supported languages</a>.</p>
-
-<h2 id="xss-analyzer">Cross-Site Scripting (XSS) Analyzer</h2>
-
-<p>Finds unescaped user input rendered in HTML output. Goes beyond simple <code>innerHTML</code> detection to cover framework-specific pitfalls - template engine auto-escaping bypass, React <code>dangerouslySetInnerHTML</code>, Vue <code>v-html</code> directives, and server-side rendering contexts where escaping rules differ.</p>
-
-<p>The analyzer evaluates whether the rendering context (HTML body, attribute, script, URL) matches the escaping applied, catching cases where input is escaped for one context but used in another.</p>
-
-<h2 id="idor-analyzer">Insecure Direct Object Reference (IDOR) Analyzer</h2>
-
-<p>Surfaces broken object-level authorization by tracing data paths from request parameters to data access. The analyzer looks for cases where a user-supplied identifier (ID, slug, filename) is used to retrieve or modify a resource without verifying that the requesting user has access to that resource.</p>
-
-<p>This goes well beyond checking whether an endpoint exists - the analyzer reasons about authorization middleware, access control decorators, and ownership checks in the data access layer.</p>
-
-<h2 id="mass-assignment-analyzer">Mass Assignment Analyzer</h2>
-
-<p>Flags unsafe binding patterns that allow user input to overwrite sensitive model fields or escalate privileges. Common in web frameworks that automatically map request parameters to model attributes (Rails <code>params.permit</code>, Django model forms, Express body parsing).</p>
-
-<p>The analyzer identifies when user-controlled input reaches a model update without an explicit allowlist of permitted fields, and evaluates whether any of the unprotected fields are security-sensitive (roles, permissions, account status, pricing).</p>
-
-<h2 id="ssrf-analyzer">Server-Side Request Forgery (SSRF) Analyzer</h2>
-
-<p>Inspects outbound HTTP calls, DNS lookups, and other network operations for user-controlled target URLs or hostnames. The analyzer checks for missing URL validation, allowlist enforcement, and internal network access restrictions.</p>
-
-<p>Covers direct SSRF (user input in URL), blind SSRF (request made but response not returned to user), and partial SSRF (user controls part of the URL path or query parameters).</p>
-
-<h2 id="secrets-analyzer">Secrets Analyzer</h2>
-
-<p>Stops committed API keys, tokens, database passwords, private keys, and other credentials at PR time. Unlike simple regex scanners, the Secrets Analyzer evaluates context - distinguishing between real credentials and test fixtures, example configurations, public documentation keys, and placeholder values.</p>
-
-<p>When a confirmed secret is found, the finding includes the file path and line number with a plain-language explanation of the risk, without reproducing the credential value in the report. See <a href="../docs/secrets-scanning.html">Secrets Detection</a> for the full details.</p>
-
-<h2 id="general-security-analyzer">General Security Analyzer (GSA)</h2>
-
-<p>The GSA is the broadest analyzer, covering security issues that do not fall neatly into a single vulnerability class:</p>
-
-<ul>
-  <li><strong>Authentication and authorization gaps</strong> - missing auth middleware, inconsistent access controls, broken session management</li>
-  <li><strong>Risky cryptography</strong> - weak algorithms, hardcoded IVs, improper key management</li>
-  <li><strong>Debug artifacts</strong> - debug endpoints, verbose error messages, development-mode settings left in production code</li>
-  <li><strong>Unsafe deserialization</strong> - untrusted data passed to deserialization functions without validation</li>
-  <li><strong>Leaky error handling</strong> - stack traces, internal paths, or database details exposed in error responses</li>
-  <li><strong>Missing rate limiting</strong> - authentication endpoints, API routes, and form submissions without throttling</li>
-  <li><strong>Security misconfigurations</strong> - permissive CORS, missing security headers, unsafe defaults</li>
-  <li><strong>General logic flaws</strong> - race conditions, time-of-check/time-of-use issues, and other semantic vulnerabilities</li>
-</ul>
-
-<h2 id="core-code-policies">Core Code Policies</h2>
-
-<p>In addition to the specialized analyzers, DryRun runs a set of Core Code Policies on every PR. These cover the OWASP Top 10 and other well-established vulnerability patterns using the same contextual analysis approach. Core Code Policies are always active and require no configuration.</p>
-
-<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Custom Code Policies</a>.</p>
-
-<h2 id="configuring-analyzers">Configuring Analyzers</h2>
-
-<p>Each Security Analyzer can be individually configured per repository through the <a href="../docs/pr-scanning-configuration.html">Configurations</a> page. In the <strong>Code Security Agents</strong> section of a configuration, every analyzer has three controls:</p>
-
-<ul>
-  <li><strong>Blocking</strong> - When enabled, a finding from this analyzer creates a GitHub status check that must pass before the PR can be merged. The check appears under the analyzer's name (e.g., "Secrets Analyzer").</li>
-  <li><strong>Silent Mode</strong> - When enabled, the analyzer still runs and records findings in the Risk Register, but does not post them in the PR comment. Useful for evaluating an analyzer before turning it on for developers.</li>
-  <li><strong>Risk Level</strong> - Sets the default severity label for findings from this analyzer. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>. This controls how findings appear in the PR comment and Risk Register.</li>
-</ul>
-
-<p>These settings let teams gradually roll out analyzers - for example, starting in Silent Mode to evaluate signal quality before enabling Blocking for enforcement.</p>
-
-<h2 id="related-pages">Related Pages</h2>
-
-<ul>
-  <li><a href="../docs/pr-variant-analysis.html">Multi-Agent Architecture</a> - how agents coordinate</li>
-  <li><a href="../docs/vulnerability-trends.html">Vulnerability Coverage</a> - full scope of detected vulnerability classes</li>
-  <li><a href="../docs/pr-scanning.html">PR Code Reviews</a> - how findings appear in pull requests</li>
-  <li><a href="../docs/finding-tuning.html">False Positive Reduction</a> - why analyzers produce low noise</li>
-  <li><a href="../docs/pr-scanning-configuration.html">Configure Repositories</a> - per-repository agent and policy configuration</li>
-</ul>
-
 
 <h2 id="multi-agent-architecture">Multi-Agent Architecture</h2>
 
-<h2 id="why-multi-agent">Why Multi-Agent</h2>
+<p>DryRun Security deploys specialized sub-agents on every pull request. Each analyzer focuses on a specific class of vulnerability and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> to evaluate code in full context rather than matching patterns.</p>
 
-<p>DryRun Security uses a multi-agent architecture rather than a single monolithic model. Each agent specializes in a specific aspect of security analysis, and agents collaborate to produce comprehensive findings. This design mirrors how a senior security team works - one person focuses on authentication, another on injection, another on infrastructure - and the team's combined expertise exceeds what any individual could achieve.</p>
-
-<p>The alternative - running all security analysis through a single model or pipeline - limits depth. A monolithic system must balance breadth against the context window and reasoning capacity available for any single vulnerability class. Multi-agent design removes this constraint.</p>
-
-<h2 id="primary-agents">Primary Agents</h2>
-
-<h3 id="code-review-agent">Code Review Agent</h3>
-
-<p>The Code Review Agent is the primary agent that runs on every pull request. It coordinates the overall review process: retrieving the PR diff and surrounding context, dispatching specialized sub-agents, collecting and validating findings, and posting the consolidated result as a PR comment and check.</p>
-
-<p>The Code Review Agent also runs DryRun's <strong>Core Code Policies</strong> - a set of built-in checks covering the OWASP Top 10 and common vulnerability patterns. These are always active and require no configuration.</p>
-
-<h3 id="custom-policy-agent">Custom Policy Agent</h3>
-
-<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Custom Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
-
-<p>The Custom Policy Agent can call specialized sub-agents for SCA lookups, codebase analysis, and just-in-time research to fully evaluate whether a policy is satisfied.</p>
-
-<h3 id="deepscan-agent">DeepScan Agent</h3>
-
-<p>The <a href="../docs/deepscan.html">DeepScan Agent</a> performs full-repository security analysis on demand. While the Code Review Agent operates on PR diffs, the DeepScan Agent analyzes the entire repository tree at a given commit. This enables it to find vulnerabilities that span many files, were introduced gradually across multiple commits, or existed before DryRun Security was installed.</p>
-
-<h3 id="codebase-insight-agent">Codebase Insight Agent</h3>
-
-<p>The Codebase Insight Agent powers <a href="../docs/feature-ships.html">Code Security Intelligence</a> - natural language queries about your codebase's security posture. Instead of navigating dashboards and exports, you ask questions like "what new API endpoints were added this week?" or "show me a chart of risky alerts by repo" and get precise, contextual answers.</p>
-
-<h2 id="specialized-sub-agents">Specialized Sub-Agents</h2>
-
-<p>Primary agents dispatch specialized sub-agents to handle specific vulnerability classes. Each sub-agent focuses on one area and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> for high-signal, low-noise findings:</p>
+<h3 id="specialized-analyzers">Specialized Analyzers</h3>
 
 <ul>
-  <li><strong>SQLi Analyzer</strong> - SQL injection across languages, tracing sources to sinks</li>
-  <li><strong>XSS Analyzer</strong> - cross-site scripting including framework-specific templating pitfalls</li>
-  <li><strong>IDOR Analyzer</strong> - broken object-level authorization via data path tracing</li>
-  <li><strong>Mass Assignment Analyzer</strong> - unsafe model binding from user input</li>
-  <li><strong>SSRF Analyzer</strong> - server-side request forgery via user-controlled URLs</li>
-  <li><strong>Secrets Analyzer</strong> - credentials in code, distinguished from test fixtures</li>
-  <li><strong>General Security Analyzer</strong> - auth gaps, risky crypto, debug artifacts, deserialization, and more</li>
+  <li><strong>General Security Analyzer (GSA)</strong> &mdash; Broad vulnerability detection across all categories.</li>
+  <li><strong>SQL Injection Analyzer</strong> &mdash; Deep analysis of database query construction and input handling.</li>
+  <li><strong>IDOR Analyzer</strong> &mdash; Authorization verification for direct object references.</li>
+  <li><strong>Secrets Analyzer</strong> &mdash; Credential detection with context-aware validation to distinguish real secrets from test fixtures.</li>
+  <li><strong>SSRF Analyzer</strong> &mdash; Server-side request forgery detection in URL handling code.</li>
+  <li><strong>XSS Analyzer</strong> &mdash; Cross-site scripting detection with framework-aware context.</li>
+  <li><strong>Codebase Insight Agent</strong> &mdash; Powers the intelligence index queries &mdash; natural language questions about your codebase&rsquo;s security posture.</li>
 </ul>
 
-<p>See <a href="../docs/pr-variant-analysis.html">Security Analyzers</a> for detailed documentation on each sub-agent.</p>
+<h3 id="agent-coordination">Agent Coordination</h3>
 
-<h2 id="agent-coordination">How Agents Coordinate</h2>
+<p>Primary agents dispatch specialized sub-agents to handle specific vulnerability classes. Agents cross-check each other's findings to reduce the risk of any single model hallucinating or producing inconsistent results. This multi-agent verification is a key reason DryRun Security achieves high consistency and reliability. See <a href="../docs/security-reviews.html">Model-Independent Verification</a> for more detail.</p>
 
-<p>When a PR is opened or updated, the flow works as follows:</p>
+<h2 id="example-queries">Example Queries</h2>
 
-<ol>
-  <li>The <strong>Code Review Agent</strong> receives the PR event and retrieves the diff plus relevant surrounding files for context</li>
-  <li>The agent dispatches <strong>specialized sub-agents</strong> in parallel, each analyzing the changes for their specific vulnerability class</li>
-  <li>Sub-agents may call <strong>just-in-time research</strong> to look up framework behavior, CVE details, or license information</li>
-  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Custom Code Policies against the changes</li>
-  <li>Findings from all agents are collected, validated for exploitability, and deduplicated</li>
-  <li>The consolidated result is posted as a PR comment with findings, code references, and remediation guidance</li>
-</ol>
+<ul>
+  <li><strong>&ldquo;Which files in repo X have the highest behavioral risk scores?&rdquo;</strong> &mdash; Surfaces the hotspots identified by Git behavioral analysis.</li>
+  <li><strong>&ldquo;What did the IDOR analyzer find across our repos this month?&rdquo;</strong> &mdash; Queries findings from a specific specialized analyzer.</li>
+  <li><strong>&ldquo;Show me PRs where multiple agents flagged the same issue&rdquo;</strong> &mdash; Identifies high-confidence findings confirmed by cross-agent verification.</li>
+  <li><strong>&ldquo;What are the top temporal coupling patterns in our monorepo?&rdquo;</strong> &mdash; Explores hidden dependencies detected by behavioral analysis.</li>
+</ul>
 
-<h2 id="model-independence">Model-Independent Verification</h2>
+<h2 id="use-cases">Use Cases</h2>
 
-<p>Agents cross-check each other's findings to reduce the risk of any single model hallucinating or producing inconsistent results. This multi-agent verification is a key reason DryRun Security achieves high consistency and reliability in production environments. See <a href="../docs/security-reviews.html">Model-Independent Verification</a> for more detail.</p>
+<ul>
+  <li><strong>Targeted investigation</strong> &mdash; Use the <strong>Investigate PR</strong> action from the Insights page to run a deep variant analysis on any specific pull request.</li>
+  <li><strong>Risk hotspot identification</strong> &mdash; Query the index for behavioral risk scores to prioritize code review and <a href="../docs/deepscan.html">DeepScan</a> targets.</li>
+  <li><strong>Analyzer performance</strong> &mdash; Query findings by analyzer to understand which vulnerability classes are most active in your codebase.</li>
+  <li><strong>Audit evidence</strong> &mdash; Demonstrate the depth and rigor of multi-agent analysis for compliance purposes. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
 ''',
 }
 
 PAGES['vulnerability-trends'] = {
     'title': 'Vulnerability Trends',
-    'description': 'Track vulnerability coverage, risk trends, and coverage matrix over time.',
+    'description': 'Query DryRun Security\'s intelligence index for vulnerability coverage, risk trends, and the full coverage matrix.',
     'section': 'Code Security Intelligence',
     'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security builds and maintains a continuous security baseline across every connected repository. The intelligence index captures vulnerability trends, coverage data, and risk trajectories from every PR review and <a href="../docs/deepscan.html">DeepScan</a> &mdash; making them queryable as use cases through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone dashboard. It describes queryable use cases for understanding how your vulnerability landscape is evolving and what DryRun Security covers.</p>
+
 <h2 id="risk-trending">Risk Trending</h2>
 
-<h2 id="continuous-security-baseline">Continuous Security Baseline</h2>
+<h3 id="continuous-security-baseline">Continuous Security Baseline</h3>
 
-<p>Point-in-time security assessments give you a snapshot of your security posture on the day the assessment runs. But software is always changing - new code is deployed, old vulnerabilities are closed, new ones are introduced. Understanding whether your organization's security is improving or degrading over time requires continuous measurement, not periodic snapshots.</p>
+<p>As scans run &mdash; on each pull request and each DeepScan &mdash; findings are recorded and trend data is updated. This creates a running picture of security posture that you can query at any level of granularity: the full organization, a specific team, a single repository, or a particular vulnerability class.</p>
 
-<p>DryRun Security automatically builds and maintains a continuous security baseline for every connected repository. As scans run - on each pull request and each DeepScan - findings are recorded and trend data is updated. This creates a running picture of security posture that you can interrogate at any level of granularity: the full organization, a specific team, a single repository, or a particular vulnerability class.</p>
+<h3 id="comparing-periods">Comparing Periods</h3>
 
-<h2 id="comparing-periods">Comparing Periods</h2>
-
-<p>Risk trending allows you to select any two time periods and compare them directly. Common comparisons include:</p>
+<p>Risk trending queries allow you to compare any two time periods. Common comparisons include:</p>
 
 <ul>
-  <li><strong>Week over week</strong> - Are you introducing new findings faster than you're closing old ones? Is the mix of severities changing?</li>
-  <li><strong>Sprint over sprint</strong> - Are security remediation efforts keeping pace with development velocity?</li>
-  <li><strong>Quarter over quarter</strong> - Is the security program producing measurable improvement in overall risk posture?</li>
-  <li><strong>Before and after an initiative</strong> - Did the shift-left push, the security training, or the new policy configuration actually change outcomes?</li>
+  <li><strong>Week over week</strong> &mdash; Are you introducing new findings faster than you're closing old ones?</li>
+  <li><strong>Sprint over sprint</strong> &mdash; Are security remediation efforts keeping pace with development velocity?</li>
+  <li><strong>Quarter over quarter</strong> &mdash; Is the security program producing measurable improvement?</li>
+  <li><strong>Before and after an initiative</strong> &mdash; Did the shift-left push or the new policy configuration actually change outcomes?</li>
 </ul>
 
-<h2 id="identifying-regression">Identifying Regression</h2>
+<h3 id="example-queries-trending">Example Queries</h3>
 
-<p>Risk trending surfaces regression early. If a repository's finding rate spikes or a new vulnerability class begins appearing frequently, trend analysis will show the inflection point - making it easier to identify which changes or teams introduced the regression and prioritize remediation accordingly.</p>
-
-<h2 id="reporting">Reporting</h2>
-
-<p>Trend data is available through the DryRun Security dashboard and via the <a href="./dryrun-api.html">Simple API</a> for integration into your own reporting systems, security scorecards, or executive dashboards. Organizations using DryRun Security for compliance purposes can use trend reports as evidence of continuous monitoring and improving security posture over time.</p>
-
+<ul>
+  <li><strong>&ldquo;How has our critical finding count changed over the last quarter?&rdquo;</strong> &mdash; Tracks risk trajectory over time.</li>
+  <li><strong>&ldquo;Which repos showed the biggest increase in findings this month?&rdquo;</strong> &mdash; Identifies regression hotspots.</li>
+  <li><strong>&ldquo;Compare our finding rates before and after we enabled Custom Code Policies&rdquo;</strong> &mdash; Measures the impact of a security initiative.</li>
+</ul>
 
 <h2 id="vulnerability-coverage">Vulnerability Coverage</h2>
 
-<h2 id="coverage-overview">Coverage Overview</h2>
+<h3 id="coverage-overview">Coverage Overview</h3>
 
-<p>DryRun Security detects vulnerabilities across a broad spectrum of security categories. Unlike pattern-matching tools that rely on a fixed database of known-bad code patterns, DryRun's <a href="../docs/security-reviews.html">Contextual Security Analysis</a> evaluates code in context - tracing data flows, reasoning about authorization logic, and assessing exploitability. This means coverage extends beyond what signature-based tools can detect.</p>
+<p>DryRun Security detects vulnerabilities across a broad spectrum of security categories. Unlike pattern-matching tools that rely on a fixed database of known-bad code patterns, DryRun's <a href="../docs/security-reviews.html">Contextual Security Analysis</a> evaluates code in context &mdash; tracing data flows, reasoning about authorization logic, and assessing exploitability. This means coverage extends beyond what signature-based tools can detect.</p>
 
-<p>The categories below represent the vulnerability classes that DryRun's <a href="../docs/pr-variant-analysis.html">specialized analyzers</a> actively detect on every pull request and <a href="../docs/deepscan.html">DeepScan</a>.</p>
-
-<h2 id="owasp-top-10">OWASP Top 10 Coverage</h2>
-
-<p>DryRun Security provides comprehensive coverage of the OWASP Top 10:</p>
+<h3 id="owasp-top-10">OWASP Top 10 Coverage</h3>
 
 <div class="table-wrap">
 <table>
@@ -1602,43 +1454,31 @@ PAGES['vulnerability-trends'] = {
 </table>
 </div>
 
-<h2 id="beyond-owasp">Beyond OWASP</h2>
+<h3 id="beyond-owasp">Beyond OWASP</h3>
 
 <p>Many real-world vulnerabilities do not fit neatly into the OWASP Top 10. DryRun Security's contextual approach catches classes of issues that pattern-matching tools typically miss entirely:</p>
 
 <ul>
-  <li><strong>Business logic flaws</strong> - authorization bypasses, race conditions, and workflow manipulation that depend on application-specific semantics rather than universal patterns</li>
-  <li><strong>Mass assignment</strong> - unsafe binding of user input to internal model fields, enabling privilege escalation or data tampering</li>
-  <li><strong>Cross-site scripting (XSS)</strong> - including framework-specific pitfalls in templating engines that generic regex rules miss</li>
-  <li><strong>Secrets and credentials</strong> - API keys, tokens, and passwords distinguished from test fixtures and placeholders through context analysis</li>
-  <li><strong>Infrastructure as code misconfigurations</strong> - overly permissive IAM policies, public S3 buckets, missing encryption at rest</li>
+  <li><strong>Business logic flaws</strong> &mdash; Authorization bypasses, race conditions, and workflow manipulation that depend on application-specific semantics.</li>
+  <li><strong>Mass assignment</strong> &mdash; Unsafe binding of user input to internal model fields.</li>
+  <li><strong>Cross-site scripting (XSS)</strong> &mdash; Including framework-specific pitfalls in templating engines.</li>
+  <li><strong>Secrets and credentials</strong> &mdash; Distinguished from test fixtures through context analysis.</li>
+  <li><strong>Infrastructure as code misconfigurations</strong> &mdash; Overly permissive IAM policies, public S3 buckets, missing encryption.</li>
 </ul>
 
-<h2 id="how-coverage-differs">How Contextual Coverage Differs</h2>
-
-<p>Traditional tools measure coverage by counting the number of rules or patterns they maintain. DryRun Security measures coverage by the range of vulnerability classes it can reason about, because contextual analysis is not limited to pre-defined patterns.</p>
-
-<p>A pattern-matching tool might have a rule for <code>execute_query(user_input)</code> but miss the same vulnerability when the user input passes through a variable rename, a helper function, or a framework abstraction. DryRun traces the actual data flow and evaluates whether the input is sanitized, regardless of how the code is structured.</p>
-
-<p>This is why DryRun achieves <a href="../docs/finding-tuning.html">90% lower noise</a> while maintaining broader real coverage - fewer false positives do not come at the cost of missed vulnerabilities.</p>
-
-<h2 id="related-pages">Related Pages</h2>
+<h3 id="example-queries-coverage">Example Queries</h3>
 
 <ul>
-  <li><a href="../docs/pr-variant-analysis.html">Security Analyzers</a> - details on each specialized analyzer</li>
-  <li><a href="../docs/vulnerability-trends.html">Coverage Matrix</a> - language-specific vulnerability category support</li>
-  <li><a href="../docs/finding-tuning.html">False Positive Reduction</a> - how contextual analysis reduces noise</li>
-  <li><a href="../docs/documentation.html">Language Support</a> - supported programming languages</li>
+  <li><strong>&ldquo;What vulnerability categories are most common in our codebase?&rdquo;</strong> &mdash; Maps your actual vulnerability landscape.</li>
+  <li><strong>&ldquo;Do we have any OWASP A01 findings open right now?&rdquo;</strong> &mdash; Checks coverage against a specific OWASP category.</li>
+  <li><strong>&ldquo;Which analyzers are generating the most findings?&rdquo;</strong> &mdash; Identifies which vulnerability classes are most active.</li>
 </ul>
-
 
 <h2 id="coverage-matrix">Coverage Matrix</h2>
 
-<p>This table lists the vulnerability categories DryRun Security can detect with the Code Review Agent. CWE mappings below are examples to help readers anchor each category to common weakness definitions.</p>
+<p>This table lists the vulnerability categories DryRun Security can detect with the Code Review Agent. CWE mappings are examples to help anchor each category to common weakness definitions.</p>
 
-<p>We are always adding features and capabilities, and this list is updated accordingly.</p>
-
-<h2 id="vulnerability-categories">Vulnerability Categories</h2>
+<h3 id="vulnerability-categories">Vulnerability Categories</h3>
 
 <div class="table-wrap">
 <table>
@@ -1653,82 +1493,100 @@ PAGES['vulnerability-trends'] = {
     <tr><td>API Query Injection</td><td>Improper handling of user-controlled input in API queries that allows attackers to manipulate backend queries or filters.</td><td>CWE-943, CWE-74</td></tr>
     <tr><td>Authentication Bypass</td><td>Flaws that allow users to bypass authentication mechanisms and gain access without valid credentials.</td><td>CWE-287, CWE-306</td></tr>
     <tr><td>Missing Authorization Checks</td><td>Endpoints or functions that fail to enforce authorization, allowing users to access resources they should not.</td><td>CWE-862</td></tr>
-    <tr><td>Business Logic Flaw</td><td>Errors in application logic that can be abused to gain unintended outcomes, even when traditional security controls are in place.</td><td>CWE-840</td></tr>
+    <tr><td>Business Logic Flaw</td><td>Errors in application logic that can be abused to gain unintended outcomes.</td><td>CWE-840</td></tr>
     <tr><td>Cache Poisoning</td><td>Manipulation of cache entries to serve malicious or incorrect content to other users.</td><td>CWE-444, CWE-113</td></tr>
     <tr><td>Configuration Injection</td><td>Injection of untrusted input into configuration files, environment variables, or runtime settings.</td><td>CWE-15, CWE-20</td></tr>
     <tr><td>Cryptographic Weakness</td><td>Use of weak, broken, or outdated cryptographic algorithms, keys, or practices.</td><td>CWE-327, CWE-326</td></tr>
-    <tr><td>Cross-Site Request Forgery (CSRF)</td><td>Actions performed on behalf of an authenticated user without their consent due to missing or weak CSRF protections.</td><td>CWE-352</td></tr>
-    <tr><td>CSV Injection</td><td>Injection of spreadsheet formulas into CSV exports that execute when opened in spreadsheet software.</td><td>CWE-1236</td></tr>
-    <tr><td>Email Header Injection</td><td>Manipulation of email headers through unsanitized input, potentially enabling spam or phishing attacks.</td><td>CWE-93</td></tr>
-    <tr><td>Excessive Privileges</td><td>Users, services, or tokens granted more permissions than required for their intended function.</td><td>CWE-250, CWE-269</td></tr>
-    <tr><td>Hardcoded Credentials</td><td>Credentials such as passwords, API keys, or tokens embedded directly in source code.</td><td>CWE-798, CWE-259</td></tr>
-    <tr><td>HTTP Header Injection</td><td>Injection of malicious content into HTTP headers due to improper input validation.</td><td>CWE-113, CWE-93</td></tr>
-    <tr><td>Insecure Direct Object Reference (IDOR)</td><td>Direct access to internal objects using user-controlled identifiers without proper authorization checks.</td><td>CWE-639, CWE-284</td></tr>
-    <tr><td>Information Disclosure</td><td>Exposure of sensitive data such as secrets, internal paths, stack traces, or system details.</td><td>CWE-200, CWE-209</td></tr>
-    <tr><td>Insecure Client Storage</td><td>Sensitive data stored insecurely on the client side, such as in local storage or cookies.</td><td>CWE-922, CWE-312</td></tr>
-    <tr><td>Insecure Defaults</td><td>Unsafe default configurations that weaken security if not explicitly changed.</td><td>CWE-276, CWE-1188</td></tr>
+    <tr><td>Cross-Site Request Forgery (CSRF)</td><td>Actions performed on behalf of an authenticated user without their consent.</td><td>CWE-352</td></tr>
+    <tr><td>CSV Injection</td><td>Injection of spreadsheet formulas into CSV exports that execute when opened.</td><td>CWE-1236</td></tr>
+    <tr><td>Email Header Injection</td><td>Manipulation of email headers through unsanitized input.</td><td>CWE-93</td></tr>
+    <tr><td>Excessive Privileges</td><td>Users, services, or tokens granted more permissions than required.</td><td>CWE-250, CWE-269</td></tr>
+    <tr><td>Hardcoded Credentials</td><td>Credentials embedded directly in source code.</td><td>CWE-798, CWE-259</td></tr>
+    <tr><td>HTTP Header Injection</td><td>Injection of malicious content into HTTP headers.</td><td>CWE-113, CWE-93</td></tr>
+    <tr><td>Insecure Direct Object Reference (IDOR)</td><td>Direct access to internal objects using user-controlled identifiers without proper authorization.</td><td>CWE-639, CWE-284</td></tr>
+    <tr><td>Information Disclosure</td><td>Exposure of sensitive data such as secrets, internal paths, or stack traces.</td><td>CWE-200, CWE-209</td></tr>
+    <tr><td>Insecure Client Storage</td><td>Sensitive data stored insecurely on the client side.</td><td>CWE-922, CWE-312</td></tr>
+    <tr><td>Insecure Defaults</td><td>Unsafe default configurations that weaken security.</td><td>CWE-276, CWE-1188</td></tr>
     <tr><td>Insecure Deserialization</td><td>Deserializing untrusted data in a way that allows code execution or data manipulation.</td><td>CWE-502</td></tr>
     <tr><td>Insecure File Upload</td><td>File upload functionality that allows malicious files or unrestricted file types.</td><td>CWE-434</td></tr>
-    <tr><td>Insecure Transport</td><td>Use of unencrypted or improperly secured network communication channels.</td><td>CWE-319, CWE-295</td></tr>
-    <tr><td>Intent Redirection</td><td>Unvalidated or unsafe redirection logic that can be abused to send users to unintended destinations.</td><td>CWE-601</td></tr>
-    <tr><td>Language Version Risk</td><td>Use of outdated or unsupported programming language versions with known security issues.</td><td>CWE-1104</td></tr>
-    <tr><td>LLM Tool Misuse</td><td>Unsafe or unintended use of large language model tools, including insecure prompt handling or tool misuse.</td><td>CWE-20, CWE-74, CWE-1426</td></tr>
-    <tr><td>Log Injection</td><td>Injection of untrusted input into logs that can mislead monitoring systems or hide malicious activity.</td><td>CWE-117</td></tr>
+    <tr><td>Insecure Transport</td><td>Use of unencrypted or improperly secured network communication.</td><td>CWE-319, CWE-295</td></tr>
+    <tr><td>Intent Redirection</td><td>Unvalidated redirection logic that can send users to unintended destinations.</td><td>CWE-601</td></tr>
+    <tr><td>Language Version Risk</td><td>Use of outdated or unsupported programming language versions.</td><td>CWE-1104</td></tr>
+    <tr><td>LLM Tool Misuse</td><td>Unsafe use of large language model tools, including insecure prompt handling.</td><td>CWE-20, CWE-74, CWE-1426</td></tr>
+    <tr><td>Log Injection</td><td>Injection of untrusted input into logs.</td><td>CWE-117</td></tr>
     <tr><td>Mass Assignment</td><td>Automatic binding of user input to object properties without restricting sensitive fields.</td><td>CWE-915</td></tr>
-    <tr><td>Memory Safety Issue</td><td>Unsafe memory operations that can lead to crashes, data corruption, or code execution.</td><td>CWE-119, CWE-787, CWE-416</td></tr>
+    <tr><td>Memory Safety Issue</td><td>Unsafe memory operations that can lead to crashes or code execution.</td><td>CWE-119, CWE-787, CWE-416</td></tr>
     <tr><td>Network Exposure</td><td>Unintended exposure of internal services, ports, or network resources.</td><td>CWE-668</td></tr>
-    <tr><td>Open CORS Policy</td><td>Overly permissive Cross-Origin Resource Sharing policies that allow unintended access.</td><td>CWE-942</td></tr>
-    <tr><td>Open Redirect</td><td>Redirects that accept untrusted input, enabling phishing or malicious redirection attacks.</td><td>CWE-601</td></tr>
-    <tr><td>Path Traversal</td><td>Manipulation of file paths to access files or directories outside the intended scope.</td><td>CWE-22</td></tr>
-    <tr><td>Privilege Escalation</td><td>Flaws that allow users or processes to gain higher privileges than intended.</td><td>CWE-269, CWE-284</td></tr>
-    <tr><td>Prompt Injection</td><td>Manipulation of LLM prompts that alters behavior, bypasses safeguards, or leaks sensitive data.</td><td>CWE-77, CWE-74, CWE-913, CWE-1427</td></tr>
-    <tr><td>Prototype Pollution</td><td>Modification of object prototypes that can impact application logic or security.</td><td>CWE-1321</td></tr>
+    <tr><td>Open CORS Policy</td><td>Overly permissive Cross-Origin Resource Sharing policies.</td><td>CWE-942</td></tr>
+    <tr><td>Open Redirect</td><td>Redirects that accept untrusted input, enabling phishing attacks.</td><td>CWE-601</td></tr>
+    <tr><td>Path Traversal</td><td>Manipulation of file paths to access files outside the intended scope.</td><td>CWE-22</td></tr>
+    <tr><td>Privilege Escalation</td><td>Flaws that allow users to gain higher privileges than intended.</td><td>CWE-269, CWE-284</td></tr>
+    <tr><td>Prompt Injection</td><td>Manipulation of LLM prompts that alters behavior or leaks data.</td><td>CWE-77, CWE-74, CWE-913, CWE-1427</td></tr>
+    <tr><td>Prototype Pollution</td><td>Modification of object prototypes that can impact application logic.</td><td>CWE-1321</td></tr>
     <tr><td>Remote Code Execution (RCE)</td><td>Flaws that allow attackers to execute arbitrary code on the host system.</td><td>CWE-94, CWE-78</td></tr>
-    <tr><td>Resource Exhaustion</td><td>Operations that can be abused to consume excessive CPU, memory, or other resources.</td><td>CWE-400</td></tr>
+    <tr><td>Resource Exhaustion</td><td>Operations that can consume excessive CPU, memory, or resources.</td><td>CWE-400</td></tr>
     <tr><td>SQL Injection (SQLi)</td><td>Injection of malicious SQL queries through unsanitized input.</td><td>CWE-89</td></tr>
-    <tr><td>Server-Side Request Forgery (SSRF)</td><td>Ability to make server-side requests to internal or unintended external resources.</td><td>CWE-918</td></tr>
-    <tr><td>Subdomain Takeover</td><td>Dangling or misconfigured subdomains that can be claimed by attackers, as defined by Infrastructure as Code changes.</td><td>CWE-668, CWE-284</td></tr>
-    <tr><td>Supply Chain Risk</td><td>Risks introduced through third-party libraries, dependencies, or external services.</td><td>CWE-1104, CWE-829</td></tr>
-    <tr><td>Terminal Escape Injection</td><td>Injection of terminal control characters that can manipulate terminal output or behavior.</td><td>CWE-150, CWE-74</td></tr>
+    <tr><td>Server-Side Request Forgery (SSRF)</td><td>Server-side requests to internal or unintended external resources.</td><td>CWE-918</td></tr>
+    <tr><td>Subdomain Takeover</td><td>Dangling subdomains that can be claimed by attackers.</td><td>CWE-668, CWE-284</td></tr>
+    <tr><td>Supply Chain Risk</td><td>Risks introduced through third-party libraries or dependencies.</td><td>CWE-1104, CWE-829</td></tr>
+    <tr><td>Terminal Escape Injection</td><td>Injection of terminal control characters that manipulate terminal output.</td><td>CWE-150, CWE-74</td></tr>
     <tr><td>Time-of-Check Time-of-Use (TOCTOU)</td><td>Race conditions where system state changes between validation and use.</td><td>CWE-367</td></tr>
     <tr><td>Timing Side Channel</td><td>Information leakage through measurable differences in execution time.</td><td>CWE-208</td></tr>
-    <tr><td>UI Spoofing</td><td>User interface elements designed to deceive users into taking unintended actions.</td><td>CWE-451</td></tr>
+    <tr><td>UI Spoofing</td><td>User interface elements designed to deceive users.</td><td>CWE-451</td></tr>
     <tr><td>User Enumeration</td><td>Ability to determine valid users based on application responses.</td><td>CWE-203, CWE-204</td></tr>
     <tr><td>Vulnerable Dependency</td><td>Use of third-party dependencies with known security vulnerabilities.</td><td>CWE-937, CWE-1104</td></tr>
-    <tr><td>XML Injection</td><td>Injection of malicious XML content that alters processing or behavior.</td><td>CWE-91</td></tr>
+    <tr><td>XML Injection</td><td>Injection of malicious XML content that alters processing.</td><td>CWE-91</td></tr>
     <tr><td>Cross-Site Scripting (XSS)</td><td>Injection of malicious scripts that execute in a user's browser.</td><td>CWE-79</td></tr>
     <tr><td>XML External Entity (XXE)</td><td>XML parsing vulnerabilities that allow access to internal files or services.</td><td>CWE-611</td></tr>
   </tbody>
 </table>
 </div>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Risk trending</strong> &mdash; Query the index to understand whether your security posture is improving or degrading over time.</li>
+  <li><strong>Coverage validation</strong> &mdash; Verify that your scans are detecting the vulnerability categories relevant to your technology stack.</li>
+  <li><strong>Compliance reporting</strong> &mdash; Generate trend data and coverage evidence for auditors and leadership. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
 ''',
 }
 
 PAGES['application-summary'] = {
     'title': 'Application Summary',
-    'description': 'Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.',
+    'description': 'Query DryRun Security\'s intelligence index for organization-wide security posture, analytics, and repository-level insights.',
     'section': 'Code Security Intelligence',
     'content': '''
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="overview">Overview</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. The intelligence index captures analytics, risk trends, and repository-level insights from every PR review and <a href="../docs/deepscan.html">DeepScan</a> &mdash; making them queryable through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<p>The dashboard itself supports both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently. The queries described below extend this data into a conversational, on-demand interface.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What were the biggest findings last week?&rdquo;</strong> &mdash; Surfaces the most significant security issues across your organization.</li>
+  <li><strong>&ldquo;Which repos need the most attention right now?&rdquo;</strong> &mdash; Identifies repositories with the highest concentration of open findings.</li>
+  <li><strong>&ldquo;Show me a chart of risky alerts by repo&rdquo;</strong> &mdash; Generates a visual breakdown of risk distribution.</li>
+  <li><strong>&ldquo;What percentage of our PRs are being scanned?&rdquo;</strong> &mdash; Checks coverage metrics across the organization.</li>
+  <li><strong>&ldquo;How has our finding velocity changed this quarter?&rdquo;</strong> &mdash; Compares the rate of new findings versus closures over time.</li>
+</ul>
 
 <h2 id="analytics-overview">Analytics Overview</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<p>The intelligence index tracks aggregate metrics across your connected repositories, all queryable through natural language:</p>
 
 <ul>
   <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or triaged</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
+  <li><strong>Finding velocity</strong> &mdash; How many new findings are being introduced versus how many are being closed or triaged</li>
+  <li><strong>Coverage metrics</strong> &mdash; What percentage of PRs across your organization are being scanned, and scan volume over time</li>
+  <li><strong>Agent breakdown</strong> &mdash; Which security agents are generating the most findings, identifying which vulnerability classes are most prevalent</li>
 </ul>
 
 <h2 id="repository-level-insights">Repository-Level Insights</h2>
 
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>Drilling down to the repository level, the intelligence index can surface:</p>
 
 <ul>
   <li>Open findings by severity and type</li>
@@ -1738,45 +1596,45 @@ PAGES['application-summary'] = {
   <li>Configuration settings currently applied</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
-
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./vulnerability-trends.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
-
-<h2 id="ai-assistance">AI Assistance</h2>
-
-<p>The Insights page (marked <strong>Beta</strong> in the sidebar) includes a conversational AI assistant that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./feature-ships.html">Feature Ships</a> for an example of querying the intelligence index.</p>
-
-<h2 id="navigation">Platform Navigation</h2>
+<h2 id="platform-navigation">Platform Navigation</h2>
 
 <p>The DryRun Security dashboard organizes its features in a sidebar with three sections:</p>
 
 <ul>
   <li><strong>Main</strong>
     <ul>
-      <li><a href="./risk-register.html">Risk Register</a> - Centralized finding management</li>
-      <li>Repositories - Connected repository list and status</li>
-      <li>Pull Requests - PR scan history and results</li>
-      <li><a href="../docs/deepscan.html">DeepScan</a> - Full-repository security analysis</li>
-      <li><a href="../docs/custom-code-policies.html">Code Policies</a> - Custom Code Policy management</li>
-      <li><a href="./feature-ships.html">Intelligence Queries</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
+      <li><a href="./risk-register.html">Risk Register</a> &mdash; Centralized finding management</li>
+      <li>Repositories &mdash; Connected repository list and status</li>
+      <li>Pull Requests &mdash; PR scan history and results</li>
+      <li><a href="../docs/deepscan.html">DeepScan</a> &mdash; Full-repository security analysis</li>
+      <li><a href="../docs/custom-code-policies.html">Code Policies</a> &mdash; Custom Code Policy management</li>
+      <li><a href="./feature-ships.html">Intelligence Queries</a> <em>(Beta)</em> &mdash; AI-powered security Q&amp;A</li>
     </ul>
   </li>
   <li><strong>Settings</strong>
     <ul>
-      <li><a href="./pr-scanning-configuration.html">Configurations</a> - Per-repository agent and policy settings</li>
-      <li><a href="../docs/slack-integration.html">Integrations</a> - Slack and webhook notification setup</li>
-      <li><a href="../docs/dryrun-api.html">Access Keys</a> - API key management</li>
+      <li><a href="./pr-scanning-configuration.html">Configurations</a> &mdash; Per-repository agent and policy settings</li>
+      <li><a href="../docs/slack-integration.html">Integrations</a> &mdash; Slack and webhook notification setup</li>
+      <li><a href="../docs/dryrun-api.html">Access Keys</a> &mdash; API key management</li>
     </ul>
   </li>
   <li><strong>Help</strong>
     <ul>
-      <li>Docs - Link to this documentation site</li>
-      <li>Ask Questions - Contact DryRun Security support</li>
+      <li>Docs &mdash; Link to this documentation site</li>
+      <li>Ask Questions &mdash; Contact DryRun Security support</li>
     </ul>
   </li>
 </ul>
 
 <p>A <strong>Dark Mode</strong> toggle at the bottom of the sidebar lets you switch between light and dark themes.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Executive reporting</strong> &mdash; Generate on-demand security posture summaries for leadership and board reporting.</li>
+  <li><strong>Team standups</strong> &mdash; Query for a quick overview of what changed since yesterday across your repositories.</li>
+  <li><strong>Audit preparation</strong> &mdash; Pull comprehensive security posture data for compliance reviews. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
 ''',
 }
 

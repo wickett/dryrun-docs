@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Developer Trends - DryRun Security Docs</title>
-  <meta name="description" content="Analyze developer behavior and contribution patterns through DryRun Security&#x27;s intelligence index.">
+  <meta name="description" content="Analyze developer behavior and security trend patterns by querying DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,17 +120,19 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
         <h1 class="page-heading">Developer Trends</h1>
-        <p class="page-description">Analyze developer behavior and contribution patterns through DryRun Security&#x27;s intelligence index.</p>
+        <p class="page-description">Analyze developer behavior and security trend patterns by querying DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of PR and repository scanning. The Developer Trends page explains how to query this index to understand team-level security trends, identify areas where additional training may help, and track how security practices evolve over time.</p>
+<p>Understanding how your team&rsquo;s security practices evolve over time requires more than point-in-time snapshots. DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone dashboard or report. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about development trends using the structured findings and insights generated across your repositories.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
 <p>As DryRun Security reviews pull requests, the models record patterns at the contributor level: which types of findings are most common, how quickly findings are addressed, what categories of code changes are being made, and how security posture trends over time. This data is aggregated and anonymizable, designed to improve team processes rather than single out individuals.</p>
 
-<p>Teams can query the intelligence index to understand development patterns and their security implications.</p>
+<p>When you query for developer trends, the LLM has access to this full history and can identify patterns, inflection points, and areas where additional attention may help.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -150,6 +152,17 @@
   <li><strong>Remediation velocity</strong> &mdash; How quickly findings are addressed after detection.</li>
   <li><strong>Code change patterns</strong> &mdash; Volume and nature of changes across repositories, highlighting areas of high activity.</li>
   <li><strong>Policy compliance</strong> &mdash; How often <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are triggered and resolved.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Developer trend queries integrate with DryRun Security&rsquo;s broader analysis. Each trend identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that drive the trend</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
 </ul>
 
 <h2 id="use-cases">Use Cases</h2>
@@ -173,6 +186,7 @@
 <li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
 <li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
 <li class="toc-h2"><a href="#trend-categories">Trend Categories</a></li>
+<li class="toc-h2"><a href="#security-review-integration">Security Review Integration</a></li>
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>

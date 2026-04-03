@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Feature or Repository Security Review - DryRun Security Docs</title>
-  <meta name="description" content="Request security reviews for new features or repositories using DryRun Security&#x27;s intelligence index.">
+  <meta name="description" content="Request security reviews for new features or repositories by querying DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,17 +120,17 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
         <h1 class="page-heading">New Feature or Repository Security Review</h1>
-        <p class="page-description">Request security reviews for new features or repositories using DryRun Security&#x27;s intelligence index.</p>
+        <p class="page-description">Request security reviews for new features or repositories by querying DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>When a new feature is proposed or a new repository is onboarded, security teams need to quickly assess the risk landscape. DryRun Security&rsquo;s intelligence index provides the foundation for these reviews &mdash; enabling teams to query historical patterns, similar implementations, and known risks to inform their assessment.</p>
+<p>When a new feature is proposed or a new repository is onboarded, security teams need to quickly assess the risk landscape. DryRun Security&rsquo;s intelligence index provides the foundation for these reviews &mdash; enabling teams to query historical patterns, similar implementations, and known risks through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone review tool. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM to assess new features or repositories using the structured findings and insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a> across your organization.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>The intelligence index accumulated from PR and repository scanning contains a structured record of security patterns across your entire codebase. When reviewing a new feature or repository, teams can query this index to find relevant precedents: how similar features were implemented elsewhere, what security issues arose, and what patterns to watch for.</p>
-
-<p>Queries can be made through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+<p>The intelligence index accumulated from PR and repository scanning contains a structured record of security patterns across your entire codebase. When reviewing a new feature or repository, you query the LLM to find relevant precedents: how similar features were implemented elsewhere, what security issues arose, and what patterns to watch for. The LLM has access to all findings details and insights generated across your repositories.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -150,6 +150,17 @@
   <li><strong>Risk baseline</strong> &mdash; For new repositories, query the index for common finding categories in similar technology stacks.</li>
   <li><strong>Policy alignment</strong> &mdash; Verify that appropriate <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are configured for the new feature or repository.</li>
   <li><strong>Ongoing monitoring</strong> &mdash; After the review, the intelligence index continues to track the feature or repository as it evolves.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Security review queries integrate with DryRun Security&rsquo;s broader analysis. Each query draws on:</p>
+
+<ul>
+  <li>Security findings from the PR reviews across your repositories</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
 </ul>
 
 <h2 id="use-cases">Use Cases</h2>
@@ -174,6 +185,7 @@
 <li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
 <li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
 <li class="toc-h2"><a href="#review-workflow">Review Workflow</a></li>
+<li class="toc-h2"><a href="#security-review-integration">Security Review Integration</a></li>
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>
