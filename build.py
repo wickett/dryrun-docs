@@ -132,31 +132,41 @@ PAGES['quick-start'] = {
     'content': '''
 <h2 id="authorize-and-install">Authorize and Install the DryRun Security GitHub Application</h2>
 
+<div class="video-embed"><iframe src="https://www.loom.com/embed/79c20cca70ac4a61907f64e530068301?sid=0ed0b19c-942a-4729-9a12-ad9fea64e3ff?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;border-radius:8px;"></iframe></div>
+
 <ol>
   <li>
     <p>Navigate to <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a> and click the <strong>Log in with GitHub</strong> button.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/01-login.png" alt="DryRun Security Login page" loading="lazy"></figure>
   </li>
   <li>
     <p>Log in to the GitHub account where DryRun Security will be installed.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/02-github-login.png" alt="GitHub Login for DryRun Security" loading="lazy"></figure>
   </li>
   <li>
     <p>Authorize the DryRun Security GitHub Application by clicking the <strong>Authorize DryRunSecurity</strong> button.</p>
     <p><strong>Note:</strong> This is a standard authorization screen for all applications in GitHub.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/06-github-authorize.png" alt="Authorize DryRun Security on GitHub" loading="lazy"></figure>
   </li>
   <li>
     <p>You'll be redirected to the DryRun Security portal. Click the <strong>Install</strong> button.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/04-install.png" alt="DryRun Security Install button" loading="lazy"></figure>
   </li>
   <li>
     <p>Click the <strong>Install</strong> button on the DryRunSecurity GitHub Application page.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/03-github-install.png" alt="DryRun Security GitHub Application install" loading="lazy"></figure>
   </li>
   <li>
     <p>Choose the GitHub repositories DryRun Security will run by selecting <strong>All Repositories</strong> or <strong>Only selected repositories</strong>.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/05-github-installation.png" alt="Select repositories for DryRun Security" loading="lazy"></figure>
   </li>
   <li>
     <p>After step one your installation may be paused for up to 2 business days as we activate your account.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/07-awaiting-activation.png" alt="DryRun Security awaiting account activation" loading="lazy"></figure>
   </li>
   <li>
     <p>Once your account has been activated, you'll see the <strong>Installation Complete</strong> message the next time you visit <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</p>
+    <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/install/08-installation-complete.png" alt="DryRun Security installation complete" loading="lazy"></figure>
   </li>
 </ol>
 
@@ -191,6 +201,7 @@ PAGES['quick-start-gitlab'] = {
 
 <ol>
   <li>Log in to <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer">gitlab.com</a>.</li>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/01-add-token.png" alt="GitLab Add New Token page" loading="lazy"></figure>
   <li>Navigate to <a href="https://gitlab.com/-/user_settings/personal_access_tokens" target="_blank" rel="noopener noreferrer">https://gitlab.com/-/user_settings/personal_access_tokens</a>.</li>
   <li>Under <strong>Personal Access Tokens</strong> click <strong>Add new token</strong>.</li>
   <li>Add a token name and select the <code>api</code> and <code>read_user</code> scopes.</li>
@@ -214,6 +225,17 @@ PAGES['quick-start-gitlab'] = {
 <h2 id="activation">Activation</h2>
 
 <p>Your installation may be paused for up to 2 business days as we activate your account. We'll notify you by email once your account is active.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/10-activate.png" alt="Activate DryRun Security for GitLab" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/11-activation-pending.png" alt="GitLab activation pending" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/12-activation-complete.png" alt="GitLab installation complete" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/04-gitlab-oauth.png" alt="GitLab OAuth authorization" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/05-select-group.png" alt="Select GitLab User or Group" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/06-enter-pat.png" alt="Enter GitLab Personal Access Token" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/07-confirm-access.png" alt="Confirm API access" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/08-install-projects.png" alt="Install DryRun Security on GitLab projects" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/09-select-projects.png" alt="Select GitLab projects" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/03-copy-token.png" alt="Copy GitLab personal access token" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/02-token-scopes.png" alt="GitLab token scopes selection" loading="lazy"></figure>
 
 <p>Once your account has been activated, you'll see the <strong>Installation Complete</strong> message the next time you visit <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</p>
 
@@ -265,6 +287,37 @@ PAGES['pr-code-reviews'] = {
     'section': 'Scanning',
     'content': '''
 <p>In this section we describe how DryRun Security runs and where to see the results. To illustrate, we walk through an example of modifying code in a sample repository and reviewing the results.</p>
+
+
+<h2 id="see-it-in-action">See DryRun Security in Action</h2>
+
+<p>Here is a complete walkthrough of what DryRun Security produces when analyzing a pull request.</p>
+
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/01-update-file.png" alt="Example PR with code changes being analyzed by DryRun Security" loading="lazy"></figure>
+
+<h3 id="summary-comment">Summary Comment</h3>
+<p>DryRun Security posts a summary comment on the PR with an overview of all findings.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/02-summary-comment.png" alt="DryRun Security summary comment on a pull request" loading="lazy"></figure>
+
+<h3 id="policy-enforcement-results">Policy Enforcement</h3>
+<p>If Natural Language Code Policies are configured, the results appear in the summary.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/03-code-policy.png" alt="DryRun Security code policy enforcement results" loading="lazy"></figure>
+
+<h3 id="code-security-findings">Code Security Findings</h3>
+<p>The Code Security section shows detailed findings from the security analysis.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/04-code-analysis.png" alt="DryRun Security code analysis findings" loading="lazy"></figure>
+
+<h3 id="risk-level-assessment">Risk Level</h3>
+<p>Each PR is assigned a risk level based on the combined findings.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/05-riskiness.png" alt="DryRun Security risk level assessment" loading="lazy"></figure>
+
+<h3 id="github-checks-integration">GitHub Checks</h3>
+<p>DryRun Security integrates with GitHub Checks to provide pass/fail status on PRs.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/06-checks.png" alt="DryRun Security GitHub Checks integration" loading="lazy"></figure>
+
+<p>Detailed check results include the specific vulnerability identified and remediation guidance.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/07-checks-sql.png" alt="DryRun Security check detail showing SQL injection finding" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/08-checks-finding.png" alt="DryRun Security check finding with remediation details" loading="lazy"></figure>
 
 <h2 id="open-a-pull-request">Open a Pull Request</h2>
 
@@ -895,6 +948,27 @@ PAGES['natural-language-code-policies'] = {
 
 <p>In this section we demonstrate how to build and save a Natural Language Code Policy in the DryRun Security Dashboard.</p>
 
+
+<h2 id="creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</h2>
+
+<p>Navigate to the Code Policies section of the DryRun Security dashboard.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/01-code-policies.png" alt="Code Policies list in DryRun Security dashboard" loading="lazy"></figure>
+
+<p>Click <strong>Add New Policy</strong> to start creating a new NLCP.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/02-add-new.png" alt="Add New Code Policy button" loading="lazy"></figure>
+
+<p>Enter a descriptive name for your policy and fill in the Question, Background, and Guidance fields.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/03-policy-name.png" alt="Naming a new code policy" loading="lazy"></figure>
+
+<p>Select the repository to test the policy against.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/04-policy-repo.png" alt="Selecting a repository for policy testing" loading="lazy"></figure>
+
+<p>Click <strong>Run</strong> to evaluate the policy against a sample PR and review the results.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/05-policy-run.png" alt="Running a code policy for evaluation" loading="lazy"></figure>
+
+<p>Once satisfied with the results, click <strong>Save</strong> to add the policy to your organization.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/06-policy-save.png" alt="Saving a validated code policy" loading="lazy"></figure>
+
 <h2 id="creating-a-policy">Creating a Policy</h2>
 
 <ol>
@@ -1292,6 +1366,8 @@ PAGES['risk-register'] = {
     'content': '''
 <p>Risk Register centralizes findings from PR scans and DeepScans into a single view. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
 
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/01-risk-register.png" alt="DryRun Security Risk Register dashboard" loading="lazy"></figure>
+
 <h2 id="severity-overview">Severity Overview</h2>
 
 <p>At the top of the Risk Register, four severity cards display the current count of findings by level:</p>
@@ -1308,6 +1384,7 @@ PAGES['risk-register'] = {
 <h2 id="search-and-filter">Search and Filter</h2>
 
 <p>Below the severity cards, the Risk Register provides several ways to narrow your view:</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/02-risk-filter.png" alt="Risk Register filtering and search options" loading="lazy"></figure>
 
 <ul>
   <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
@@ -1340,8 +1417,10 @@ PAGES['risk-register'] = {
 <h2 id="finding-triage">Finding Triage</h2>
 
 <p>Risk Register supports Finding Triage so teams can categorize findings and feed decisions back into DryRun Security. Every triage decision - the reason, the context you provide - is a learning signal that improves future scan accuracy. See <a href="../finding-triage.html">Finding Triage</a> for the full workflow.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/03-finding-triage.png" alt="Finding triage in the Risk Register" loading="lazy"></figure>
 
 <p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/04-triage-pr.png" alt="Finding triage from the PR workflow" loading="lazy"></figure>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -1438,6 +1517,51 @@ PAGES['configurations'] = {
     'section': 'Platform',
     'content': '''
 <p>Configurations let you customize how DryRun Security behaves for each repository or group of repositories. You can control which agents run, which policies are enforced, whether findings block PRs, and how notifications are delivered.</p>
+
+
+<h2 id="configuration-walkthrough">Configuration Walkthrough</h2>
+
+<p>The Configurations page shows all your existing repository configurations.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/01-configurations.png" alt="Repository configurations list in DryRun Security dashboard" loading="lazy"></figure>
+
+<p>Click <strong>Add New Configuration</strong> to create a configuration for your repositories.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/02-add-new-config.png" alt="Add New Configuration dialog" loading="lazy"></figure>
+
+<h3 id="select-repositories">Select Repositories</h3>
+<p>Choose which repositories this configuration applies to.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/03-select-repos.png" alt="Selecting repositories for a configuration" loading="lazy"></figure>
+
+<h3 id="pr-comments-and-notifications">PR Comments and Notifications</h3>
+<p>Enable or disable PR issue comments for this configuration.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/04-issue-comment.png" alt="Issue comment toggle" loading="lazy"></figure>
+
+<p>Enable notifications to get alerts when security findings are detected.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
+
+<h3 id="attach-policies">Attach Code Policies</h3>
+<p>Add up to 7 Natural Language Code Policies to a configuration.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/07-configure-policies.png" alt="Configuring attached policies" loading="lazy"></figure>
+
+<h3 id="code-security-agents">Code Security Agents</h3>
+<p>Configure which security agents are enabled and whether they block or run silently.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/08-configure-agents.png" alt="Configuring code security agents" loading="lazy"></figure>
+
+<p>Save the configuration when complete.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/09-config-save.png" alt="Saving a repository configuration" loading="lazy"></figure>
+
+<h3 id="branch-protection-rules">GitHub Branch Protection Rules</h3>
+<p>Use GitHub Branch Protection Rules to enforce DryRun Security checks before merging.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/10-github-settings.png" alt="GitHub repository Settings page" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/11-github-branches.png" alt="GitHub Branches settings" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/12-branch-protection.png" alt="GitHub Branch Protection rule" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/13-branch-name.png" alt="Branch name pattern for protection" loading="lazy"></figure>
+
+<p>Require DryRun Security status checks to pass before merging.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/14-require-checks.png" alt="Requiring status checks for DryRun Security" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/15-checks-policies.png" alt="DryRun Security policy checks in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/16-checks-secrets.png" alt="DryRun Security secrets check in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/17-checks-details.png" alt="DryRun Security check details in branch protection" loading="lazy"></figure>
 
 <h2 id="creating-a-configuration">Creating a Configuration</h2>
 
@@ -1539,6 +1663,44 @@ PAGES['notifications'] = {
 
 <p><strong>Prerequisite:</strong> You'll need to have already created a Webhook URL on the system you wish to integrate. Messages sent are JSON-formatted POST requests.</p>
 
+
+<h2 id="notifications-setup-walkthrough">Notification Setup Walkthrough</h2>
+
+<p>The Integrations page in the DryRun Security dashboard shows available notification channels.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/01-integrations.png" alt="Notification integrations page in DryRun Security" loading="lazy"></figure>
+
+<h3 id="slack-integration">Slack Integration</h3>
+<p>Connect DryRun Security to Slack for real-time security alerts.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/02-slack-setup.png" alt="Slack integration setup" loading="lazy"></figure>
+
+<h3 id="generic-webhook">Generic Webhook</h3>
+<p>Configure a generic webhook to send notifications to any HTTP endpoint.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/03-generic-webhook.png" alt="Generic webhook configuration" loading="lazy"></figure>
+
+<h3 id="integration-scope">Integration Scope</h3>
+<p>Global integrations notify on findings across all repositories in your organization.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/04-global-integration.png" alt="Global integration settings" loading="lazy"></figure>
+
+<p>Targeted integrations notify only for specific repositories.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/05-targeted-integration.png" alt="Targeted integration settings" loading="lazy"></figure>
+
+<h3 id="risk-triggers">Risk Level Triggers</h3>
+<p>Configure which risk levels trigger notifications.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/06-risk-trigger.png" alt="Risk level trigger configuration" loading="lazy"></figure>
+
+<p>Use the test button to validate your notification configuration.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/07-test-notification.png" alt="Test notification button" loading="lazy"></figure>
+
+<h3 id="webhook-format">Webhook Format</h3>
+<p>Example JSON body sent by the generic webhook:</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/08-webhook-body.png" alt="Generic webhook JSON body example" loading="lazy"></figure>
+
+<p>Example of a Slack notification message:</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/09-slack-message.png" alt="Slack notification message example" loading="lazy"></figure>
+
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/10-notification-config.png" alt="Notification configuration overview" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/notifications/11-notification-list.png" alt="List of configured notifications" loading="lazy"></figure>
+
 <h2 id="configure-global-integration">Configure a Global Integration</h2>
 
 <p>A global integration works across all repositories in your organization with no additional configuration required.</p>
@@ -1588,6 +1750,9 @@ PAGES['ai-insights'] = {
     'description': 'Natural language queries about your codebase risk, trends, and exposure - powered by the Codebase Insight Agent.',
     'section': 'Platform',
     'content': '''
+
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/insights/01-insights-chat.png" alt="AI Insights chat interface in DryRun Security" loading="lazy"></figure>
+
 <h2 id="overview">Overview</h2>
 
 <p>The Insights page provides a conversational interface for exploring your security data. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <strong>DryRun AI Assistant</strong> retrieves the answer. Insights is currently available as a <strong>Beta</strong> feature.</p>
@@ -1627,6 +1792,7 @@ PAGES['ai-insights'] = {
 <p>At the bottom of the Insights page, the <strong>Customize Insights</strong> section lets you tailor the analysis to your organization's priorities. Expand this section to configure which types of insights are generated and how the assistant prioritizes its responses.</p>
 
 <h2 id="use-cases">Use Cases</h2>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/insights/02-insights-results.png" alt="AI Insights results showing security analysis" loading="lazy"></figure>
 
 <h3 id="audit-reporting">Audit-Ready Reporting</h3>
 <p>Generate compliance evidence and audit reports by querying your security data directly. Instead of exporting CSV files and building spreadsheets, ask for the exact view auditors need. See <a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a> for more on audit workflows.</p>
@@ -1807,6 +1973,9 @@ PAGES['mcp-integration'] = {
     'section': 'Developer Tools',
     'content': '''
 <p>The DryRun Security Insights MCP enables AI assistants to securely connect to your organization's security data for powerful, context-aware code analysis. Think of it as "USB-C for AI" - a standard way for agents to interact with security insights, trends, and context across your codebase.</p>
+
+
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/mcp/01-mcp-setup.png" alt="DryRun Security MCP Integration setup" loading="lazy"></figure>
 
 <h2 id="what-is-the-insights-mcp">What Is the Insights MCP?</h2>
 
@@ -2144,6 +2313,9 @@ PAGES['api-guide'] = {
 <h2 id="authentication">Authentication</h2>
 
 <p>All API requests require an API key generated from the DryRun Security dashboard.</p>
+
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/api-guide/02-swagger.png" alt="DryRun Security API Swagger documentation" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/api-guide/01-api-key.png" alt="API key generation in DryRun Security Settings" loading="lazy"></figure>
 
 <h3 id="getting-an-api-key">Getting an API Key</h3>
 
@@ -3175,6 +3347,7 @@ def render_doc_page(slug: str, page: dict, asset_prefix: str = '../') -> str:
     description = page['description']
     section_name = page.get('section', get_section_for_slug(slug))
     raw_content = page['content'].strip()
+    raw_content = raw_content.replace('{asset_prefix}', asset_prefix)
     content_with_ids = inject_heading_ids(raw_content)
     toc_items = extract_toc(content_with_ids)
 
