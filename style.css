@@ -126,7 +126,7 @@ body {
 }
 .logo-link svg,
 .footer-col-logo a svg {
-  fill: #ffffff;
+  fill: #fff;
 }
 html[data-theme="light"] .logo-link svg,
 html[data-theme="light"] .footer-col-logo a svg {
