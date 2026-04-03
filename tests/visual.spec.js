@@ -303,7 +303,7 @@ test.describe('Navigation Flow', () => {
     await page.goto('/index.html');
     await page.waitForLoadState('domcontentloaded');
     // Click first doc link in sidebar nav (skip section headers)
-    const firstLink = page.locator('.sidebar-nav .sidebar-link').first();
+    const firstLink = page.locator('.sidebar-nav .sidebar-links a').first();
     await firstLink.click();
     await page.waitForLoadState('domcontentloaded');
     // Should be on a doc page with header and content
@@ -555,7 +555,7 @@ test.describe('UI Acceptance', () => {
     expect(count).toBeGreaterThanOrEqual(5);
     // Each section should have at least one link
     for (let i = 0; i < count; i++) {
-      const links = sections.nth(i).locator('.sidebar-link');
+      const links = sections.nth(i).locator('.sidebar-links a');
       const linkCount = await links.count();
       expect(linkCount).toBeGreaterThan(0);
     }
