@@ -1543,7 +1543,7 @@ PAGES['configurations'] = {
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/07-configure-policies.png" alt="Configuring attached policies" loading="lazy"></figure>
 
-<h3 id="code-security-agents">Code Security Agents</h3>
+<h3 id="configure-security-agents">Code Security Agents</h3>
 <p>Configure which security agents are enabled and whether they block or run silently.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/08-configure-agents.png" alt="Configuring code security agents" loading="lazy"></figure>
 
