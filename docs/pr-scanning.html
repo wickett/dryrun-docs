@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PR Code Reviews - DryRun Security Docs</title>
-  <meta name="description" content="How DryRun Security analyzes pull requests and surfaces findings in GitHub and GitLab.">
+  <title>PR Scanning - DryRun Security Docs</title>
+  <meta name="description" content="Understand how DryRun Security automatically analyzes your pull requests for security vulnerabilities.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,87 +59,53 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Getting Started</p>
 <ul class="sidebar-links">
-<li><a href="../docs/quick-start.html">Install DryRun Security</a></li>
-<li><a href="../docs/quick-start-gitlab.html">Install DryRun Security for GitLab</a></li>
+<li><a href="../docs/documentation.html">Documentation</a></li>
+<li><a href="../docs/quick-start.html">Quick Start</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Scanning</p>
 <ul class="sidebar-links">
-<li><a href="../docs/sast-overview.html">How DryRun Security SAST Works</a></li>
-<li><a href="../docs/pr-code-reviews.html" class="active">PR Code Reviews</a></li>
-<li><a href="../docs/deepscan.html">DeepScan - Full Repository Scan</a></li>
-<li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
-<li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
-<li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
-<li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
-<li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
+<li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
+<li><a href="../docs/pr-scanning.html" class="active">PR Scanning</a></li>
+<li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
+<li><a href="../docs/sca.html">SCA</a></li>
+<li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">AI &amp; Intelligence</p>
+<p class="sidebar-section-title">Code Security Intelligence</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ai-native-architecture.html">AI-Native Architecture</a></li>
-<li><a href="../docs/contextual-security-analysis.html">Contextual Security Analysis</a></li>
-<li><a href="../docs/false-positive-reduction.html">False Positive Reduction</a></li>
-<li><a href="../docs/business-logic-detection.html">Business Logic Detection</a></li>
-<li><a href="../docs/git-behavioral-analysis.html">Git Behavioral Analysis</a></li>
-<li><a href="../docs/code-security-knowledge-graph.html">Code Security Knowledge Graph</a></li>
-<li><a href="../docs/multi-agent-architecture.html">Multi-Agent Architecture</a></li>
-<li><a href="../docs/model-verification.html">Model-Independent Verification</a></li>
-<li><a href="../docs/natural-language-code-policies.html">Natural Language Code Policies</a></li>
-<li><a href="../docs/nlcp-starter-pack.html">NLCP Starter Pack</a></li>
-<li><a href="../docs/nlcp-best-practices.html">NLCP Best Practices</a></li>
-<li><a href="../docs/policy-library.html">Policy Library</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">Remediation</p>
-<ul class="sidebar-links">
-<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
-<li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
+<li><a href="../docs/code-insights.html">Code Insights</a></li>
+<li><a href="../docs/security-reviews.html">Security Reviews</a></li>
+<li><a href="../docs/pr-variant-analysis.html">PR Variant Analysis</a></li>
+<li><a href="../docs/vulnerability-trends.html">Vulnerability Trends</a></li>
+<li><a href="../docs/application-summary.html">Application Summary</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
 <p class="sidebar-section-title">Platform</p>
 <ul class="sidebar-links">
+<li><a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a></li>
+<li><a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+<li><a href="../docs/repository-context.html">Repository Context</a></li>
 <li><a href="../docs/risk-register.html">Risk Register</a></li>
-<li><a href="../docs/security-dashboard.html">Security Dashboard</a></li>
-<li><a href="../docs/configurations.html">Configure Repositories</a></li>
-<li><a href="../docs/notifications.html">Notifications</a></li>
-<li><a href="../docs/ai-insights.html">Code Insights</a></li>
-<li><a href="../docs/risk-trending.html">Risk Trending</a></li>
-<li><a href="../docs/sbom-generation.html">SBOM Generation</a></li>
-<li><a href="../docs/compliance-audit.html">Compliance and Audit Readiness</a></li>
+<li><a href="../docs/finding-tuning.html">Finding Tuning with Feedback</a></li>
+<li><a href="../docs/pr-blocking.html">PR Blocking</a></li>
+<li><a href="../docs/compliance-grc.html">Compliance &amp; GRC</a></li>
+<li><a href="../docs/permissions.html">Permissions</a></li>
+<li><a href="../docs/mcp.html">MCP</a></li>
+<li><a href="../docs/dryrun-api.html">DryRun API</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
-<p class="sidebar-section-title">Developer Tools</p>
+<p class="sidebar-section-title">Integrations</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
-<li><a href="../docs/agents-md.html">AGENTS.md</a></li>
-<li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
-<li><a href="../docs/scm-support.html">SCM Support</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">AI Agent Security</p>
-<ul class="sidebar-links">
-<li><a href="../docs/securing-ai-code.html">Securing AI-Generated Code</a></li>
-<li><a href="../docs/malicious-agent-detection.html">Malicious Agent Detection</a></li>
-<li><a href="../docs/ai-coding-visibility.html">AI Coding Visibility</a></li>
-<li><a href="../docs/ai-tool-integrations.html">AI Coding Tool Integrations</a></li>
-<li><a href="../docs/ai-red-teaming.html">AI Red Teaming</a></li>
-</ul>
-</div>
-<div class="sidebar-section">
-<p class="sidebar-section-title">API Reference</p>
-<ul class="sidebar-links">
-<li><a href="../docs/api-guide.html">API Usage Guide</a></li>
-<li><a href="../docs/language-support.html">Language Support</a></li>
+<li><a href="../docs/slack-integration.html">Slack Integration</a></li>
+<li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
+<li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
+<li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
 </div>
 </div>
@@ -148,8 +114,8 @@
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
-        <h1 class="page-heading">PR Code Reviews</h1>
-        <p class="page-description">How DryRun Security analyzes pull requests and surfaces findings in GitHub and GitLab.</p>
+        <h1 class="page-heading">PR Scanning</h1>
+        <p class="page-description">Understand how DryRun Security automatically analyzes your pull requests for security vulnerabilities.</p>
         <div class="doc-content">
 <p>In this section we describe how DryRun Security runs and where to see the results. To illustrate, we walk through an example of modifying code in a sample repository and reviewing the results.</p>
 
@@ -214,11 +180,42 @@
 
 <h2 id="gitlab-merge-requests">GitLab Merge Requests</h2>
 
-<p>DryRun Security works identically on GitLab, posting findings as Merge Request comments and in the GitLab pipeline status checks area. See <a href="../quick-start-gitlab.html">Install DryRun Security for GitLab</a> for setup instructions.</p>
+<p>DryRun Security works identically on GitLab, posting findings as Merge Request comments and in the GitLab pipeline status checks area. See <a href="../quick-start.html">Install DryRun Security for GitLab</a> for setup instructions.</p>
+
+
+<h2 id="how-sast-works">How DryRun Security SAST Works</h2>
+
+<h2 id="not-pattern-matching">This Is Not Pattern Matching</h2>
+
+<p>Traditional static application security testing (SAST) tools work by comparing your code against a database of known-bad patterns. If a function call or code fragment matches a signature, it gets flagged. This approach is fast to implement and easy to explain - but it misses the vast majority of real vulnerabilities while generating enormous volumes of noise on code that happens to look like a pattern but is actually safe.</p>
+
+<p>DryRun Security takes a fundamentally different approach. Our <strong>Contextual Security Analysis (CSA)</strong> evaluates code within its full context: the data flowing into a function, the authorization logic surrounding it, the framework being used, the developer's apparent intent, and the broader architecture of the application. A SQL query constructed from user input is only a problem if input sanitization is absent - and CSA can determine that, while a pattern matcher cannot.</p>
+
+<h2 id="how-csa-works">How Contextual Security Analysis Works</h2>
+
+<p>When a Pull Request is opened, DryRun Security's Code Review Agent retrieves the diff along with the relevant surrounding code context. It does not analyze the diff in isolation - it considers the complete code path, imported libraries, authentication middleware, and any applicable security policies configured for the repository.</p>
+
+<p>The analysis is performed by a multi-agent system where each specialized agent focuses on a specific class of vulnerability or security concern. The SQL Injection Analyzer, for example, traces the full data flow from input to query execution. The Secrets Analyzer looks for credential patterns in context - distinguishing between a real API key and a test fixture. Each agent reports findings with precise file locations and a plain-language explanation of the risk.</p>
+
+<h2 id="ai-native-architecture">AI-Native Architecture</h2>
+
+<p>DryRun Security is built AI-first. Every layer of the platform - from ingestion to analysis to reporting - is designed around large language model capabilities rather than bolted on top of a legacy rules engine. This means findings reflect the same kind of reasoning a senior security engineer would apply: considering intent, context, and consequence rather than matching syntax.</p>
+
+<p>Importantly, DryRun uses <strong>model-independent verification</strong>. Findings are validated across multiple AI models before being surfaced, reducing hallucinations and ensuring that every result has been cross-checked. This multi-model approach means DryRun Security is not dependent on the behavior of any single model provider, and findings remain consistent even as underlying models evolve.</p>
+
+<h2 id="what-this-means-for-developers">What This Means for Developers</h2>
+
+<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time triaging irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
+
+<p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews - security analysis happens in real time as code is being written.</p>
+
+<h2 id="coverage">Coverage</h2>
+
+<p>DryRun Security's agents cover over 47 vulnerability categories, from SQL injection and cross-site scripting to business logic flaws, IDOR, and AI-specific risks like prompt injection. See the <a href="./vulnerability-trends.html">Coverage Matrix</a> for the full list with CWE mappings.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/sast-overview.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">How DryRun Security SAST Works</span></a>
-<a href="../docs/deepscan.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">DeepScan - Full Repository Scan</span></a>
+<a href="../docs/deepscan.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Repository Scanning with DeepScan</span></a>
+<a href="../docs/secrets-scanning.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Secrets Scanning</span></a>
 </nav>
       </div>
     </main>
@@ -238,6 +235,12 @@
 <li class="toc-h2"><a href="#risk-level">Risk Level</a></li>
 <li class="toc-h2"><a href="#github-checks">GitHub Checks</a></li>
 <li class="toc-h2"><a href="#gitlab-merge-requests">GitLab Merge Requests</a></li>
+<li class="toc-h2"><a href="#how-sast-works">How DryRun Security SAST Works</a></li>
+<li class="toc-h2"><a href="#not-pattern-matching">This Is Not Pattern Matching</a></li>
+<li class="toc-h2"><a href="#how-csa-works">How Contextual Security Analysis Works</a></li>
+<li class="toc-h2"><a href="#ai-native-architecture">AI-Native Architecture</a></li>
+<li class="toc-h2"><a href="#what-this-means-for-developers">What This Means for Developers</a></li>
+<li class="toc-h2"><a href="#coverage">Coverage</a></li>
 </ul>
 </aside>
   </div>
