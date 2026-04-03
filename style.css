@@ -26,6 +26,8 @@
   --accent-hover: rgba(200,255,9,0.18);
   --green: #38D92D;
   --green-dim: rgba(56,217,45,0.12);
+  --link: #38D92D;
+  --link-hover: #56E84A;
   --blue: #3B1EF9;
   --purple: #6851FA;
   --red: #FF4D6A;
@@ -272,8 +274,8 @@ body {
   background: rgba(255,255,255,0.03);
 }
 .sidebar-links a.active {
-  color: var(--accent);
-  border-left-color: var(--accent);
+  color: var(--link);
+  border-left-color: var(--link);
   background: var(--accent-dim);
   font-weight: 600;
 }
@@ -361,11 +363,11 @@ body {
 }
 
 .doc-content a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
-  transition: opacity var(--transition);
+  transition: color var(--transition);
 }
-.doc-content a:hover { opacity: 0.8; }
+.doc-content a:hover { color: var(--link-hover); }
 
 .doc-content strong { color: var(--text-primary); font-weight: 600; }
 
@@ -599,7 +601,7 @@ body {
   line-height: 1.5;
 }
 .toc-list a:hover { color: var(--text-primary); }
-.toc-list a.active { color: var(--accent); }
+.toc-list a.active { color: var(--link); }
 .toc-list .toc-h3 a { padding-left: 12px; }
 
 /* ===== Prev/Next Navigation ===== */
@@ -642,7 +644,7 @@ body {
 .prev-next-title {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--link);
 }
 
 /* ===== Index / Landing Page ===== */
@@ -845,11 +847,11 @@ body {
   display: block;
   padding: 3px 0;
   font-size: 0.82rem;
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
-  transition: opacity var(--transition);
+  transition: color var(--transition);
 }
-.index-card-links a:hover { opacity: 0.7; }
+.index-card-links a:hover { color: var(--link-hover); }
 
 /* ===== Footer ===== */
 .site-footer {
@@ -894,11 +896,11 @@ body {
   display: inline-block;
   margin-top: 12px;
   font-size: 0.78rem;
-  color: var(--accent);
+  color: var(--link);
   text-decoration: none;
-  transition: opacity var(--transition);
+  transition: color var(--transition);
 }
-.footer-g2-link:hover { opacity: 0.7; }
+.footer-g2-link:hover { color: var(--link-hover); }
 
 .footer-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 .footer-col-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
@@ -987,6 +989,8 @@ html[data-theme="light"] {
   --accent-dim: rgba(138,175,0,0.12);
   --accent-hover: rgba(138,175,0,0.20);
   --gray-dim: rgba(0,0,0,0.05);
+  --link: #2AAF22;
+  --link-hover: #1E8C1A;
   --shadow: 0 4px 24px rgba(0,0,0,0.10);
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
 }
@@ -1026,8 +1030,6 @@ html[data-theme="light"] .doc-content pre code {
   background: var(--bg-hover);
 }
 .theme-toggle svg { display: block; }
-html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-html:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
 
 /* ===== Animations ===== */
 @keyframes fadeIn {
