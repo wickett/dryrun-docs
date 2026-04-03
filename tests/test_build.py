@@ -173,11 +173,11 @@ class TestRelativePaths:
                 f"{html_file.name} should reference ../style.css"
             )
 
-    def test_doc_pages_use_relative_logo(self):
+    def test_doc_pages_have_inline_logo_svg(self):
         for html_file in DOCS_DIR.glob("*.html"):
             content = html_file.read_text()
-            assert '../assets/logo.svg' in content, (
-                f"{html_file.name} should reference ../assets/logo.svg"
+            assert 'class="logo" viewBox="0 0 450 119"' in content, (
+                f"{html_file.name} should contain inline logo SVG"
             )
 
     def test_root_page_uses_relative_css(self):
