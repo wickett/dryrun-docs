@@ -2,6 +2,8 @@
 DryRun Security Documentation Site Generator
 Generates all HTML pages for the docs site.
 Usage: python3 build.py
+
+Site structure: 5 sections, 27 pages
 """
 import html
 import re
