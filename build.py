@@ -308,7 +308,7 @@ PAGES['quick-start'] = {
 <ul>
   <li>See <a href="./pr-scanning.html">PR Code Reviews</a> to understand how DryRun Security analyzes your pull requests.</li>
   <li>See <a href="./pr-scanning-configuration.html">Configurations</a> to customize which agents and policies run on each repository.</li>
-  <li>See <a href="./custom-code-policies.html">Natural Language Code Policies</a> to create custom security rules in plain English.</li>
+  <li>See <a href="./custom-code-policies.html">Custom Code Policies</a> to create custom security rules in plain English.</li>
 </ul>
 
 
@@ -468,7 +468,7 @@ PAGES['quick-start'] = {
 
 <p>Available status checks include:</p>
 <ul>
-  <li><strong>Code Policies</strong> - A single aggregated check for all NLCP policy findings.</li>
+  <li><strong>Code Policies</strong> - A single aggregated check for all Custom Code Policy policy findings.</li>
   <li><strong>Individual agent checks</strong> - One check per enabled Code Security Agent (e.g., <code>Secrets Analyzer</code>, <code>SQL Injection Analyzer</code>).</li>
 </ul>
 
@@ -554,7 +554,7 @@ PAGES['pr-scanning'] = {
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/02-summary-comment.png" alt="DryRun Security summary comment on a pull request" loading="lazy"></figure>
 
 <h3 id="policy-enforcement-results">Policy Enforcement</h3>
-<p>If Natural Language Code Policies are configured, the results appear in the summary.</p>
+<p>If Custom Code Policies are configured, the results appear in the summary.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/walkthrough/03-code-policy.png" alt="DryRun Security code policy enforcement results" loading="lazy"></figure>
 
 <h3 id="code-security-findings">Code Security Findings</h3>
@@ -575,7 +575,7 @@ PAGES['pr-scanning'] = {
 
 <h2 id="open-a-pull-request">Open a Pull Request</h2>
 
-<p>When code is updated and a Pull Request is opened, DryRun Security's Policy Enforcement Agent will immediately run any user-configured Natural Language Code Policies against the code. DryRun Security's many Code Security Agents will also run against the code and report back with any findings.</p>
+<p>When code is updated and a Pull Request is opened, DryRun Security's Policy Enforcement Agent will immediately run any user-configured Custom Code Policies against the code. DryRun Security's many Code Security Agents will also run against the code and report back with any findings.</p>
 
 <p>You'll see the results of the analysis in both a summary comment and the Checks area of the Pull Request.</p>
 
@@ -585,7 +585,7 @@ PAGES['pr-scanning'] = {
 
 <h2 id="policy-enforcement">Policy Enforcement</h2>
 
-<p>The Policy Enforcement Agent runs any user-configured Natural Language Code Policies that are set up for the repository. If a policy has findings, they will be listed in the Pull Request comment. This enables your team to enforce custom, organization-specific security rules - like "no new API endpoints without authorization" - written in plain English.</p>
+<p>The Policy Enforcement Agent runs any user-configured Custom Code Policies that are set up for the repository. If a policy has findings, they will be listed in the Pull Request comment. This enables your team to enforce custom, organization-specific security rules - like "no new API endpoints without authorization" - written in plain English.</p>
 
 <h2 id="code-security">Code Security</h2>
 
@@ -892,7 +892,7 @@ PAGES['code-insights'] = {
 <ul>
   <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
   <li><strong>"What are the top risks in my repositories?"</strong> - Prioritized view of your highest-severity findings</li>
-  <li><strong>"Show me recent policy violations"</strong> - List of Natural Language Code Policy violations from recent PRs</li>
+  <li><strong>"Show me recent policy violations"</strong> - List of Custom Code Policy violations from recent PRs</li>
   <li><strong>More</strong> - Expand to see additional suggested prompts</li>
 </ul>
 
@@ -1246,7 +1246,7 @@ PAGES['pr-variant-analysis'] = {
 
 <p>In addition to the specialized analyzers, DryRun runs a set of Core Code Policies on every PR. These cover the OWASP Top 10 and other well-established vulnerability patterns using the same contextual analysis approach. Core Code Policies are always active and require no configuration.</p>
 
-<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a>.</p>
+<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Custom Code Policies</a>.</p>
 
 <h2 id="configuring-analyzers">Configuring Analyzers</h2>
 
@@ -1289,7 +1289,7 @@ PAGES['pr-variant-analysis'] = {
 
 <h3 id="custom-policy-agent">Custom Policy Agent</h3>
 
-<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
+<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Custom Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
 
 <p>The Custom Policy Agent can call specialized sub-agents for SCA lookups, codebase analysis, and just-in-time research to fully evaluate whether a policy is satisfied.</p>
 
@@ -1325,7 +1325,7 @@ PAGES['pr-variant-analysis'] = {
   <li>The <strong>Code Review Agent</strong> receives the PR event and retrieves the diff plus relevant surrounding files for context</li>
   <li>The agent dispatches <strong>specialized sub-agents</strong> in parallel, each analyzing the changes for their specific vulnerability class</li>
   <li>Sub-agents may call <strong>just-in-time research</strong> to look up framework behavior, CVE details, or license information</li>
-  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Natural Language Code Policies against the changes</li>
+  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Custom Code Policies against the changes</li>
   <li>Findings from all agents are collected, validated for exploitability, and deduplicated</li>
   <li>The consolidated result is posted as a PR comment with findings, code references, and remediation guidance</li>
 </ol>
@@ -1554,7 +1554,7 @@ PAGES['application-summary'] = {
       <li>Repositories - Connected repository list and status</li>
       <li>Pull Requests - PR scan history and results</li>
       <li><a href="../docs/deepscan.html">DeepScan</a> - Full-repository security analysis</li>
-      <li><a href="../docs/custom-code-policies.html">Code Policies</a> - Natural Language Code Policy management</li>
+      <li><a href="../docs/custom-code-policies.html">Code Policies</a> - Custom Code Policy management</li>
       <li><a href="./code-insights.html">Insights</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
     </ul>
   </li>
@@ -1608,7 +1608,7 @@ PAGES['pr-scanning-configuration'] = {
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
 
 <h3 id="attach-policies">Attach Code Policies</h3>
-<p>Add up to 7 Natural Language Code Policies to a configuration.</p>
+<p>Add up to 7 Custom Code Policies to a configuration.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/07-configure-policies.png" alt="Configuring attached policies" loading="lazy"></figure>
 
@@ -1656,11 +1656,11 @@ PAGES['pr-scanning-configuration'] = {
 
 <h2 id="policy-enforcement">Policy Enforcement Agent</h2>
 
-<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Natural Language Code Policies to this configuration:</p>
+<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Custom Code Policies to this configuration:</p>
 
 <ul>
   <li><strong>Add Policy</strong> - Attach an existing policy from your organization's <a href="../docs/custom-code-policies.html">Policy Library</a></li>
-  <li><strong>Create Policy</strong> - Write a new Natural Language Code Policy directly from this screen</li>
+  <li><strong>Create Policy</strong> - Write a new Custom Code Policy directly from this screen</li>
 </ul>
 
 <p>Each attached policy is shown as a row with its own controls:</p>
@@ -1704,7 +1704,7 @@ PAGES['pr-scanning-configuration'] = {
 
 <h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
 
-<p>Both Natural Language Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
 
 <h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
 
@@ -1715,24 +1715,24 @@ PAGES['pr-scanning-configuration'] = {
   <li>Choose <strong>Add classic branch protection rule</strong>.</li>
   <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
   <li>Select <strong>Require status checks to pass before merging</strong>.</li>
-  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Natural Language Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
+  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Custom Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
   <li>Click <strong>Create</strong>.</li>
 </ol>
 
-<p>When a Natural Language Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+<p>When a Custom Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
 ''',
 }
 
 PAGES['custom-code-policies'] = {
     'title': 'Custom Code Policies',
-    'description': 'Create custom security rules in plain English using Natural Language Code Policies.',
+    'description': 'Create custom security rules in plain English using Custom Code Policies.',
     'section': 'Platform',
     'content': '''
-<h2 id="natural-language-code-policies">Natural Language Code Policies</h2>
+<h2 id="custom-code-policies">Custom Code Policies</h2>
 
-<p>DryRun Security's Natural Language Code Policies (NLCPs) are a way to define and enforce security policies in a codebase using natural language instead of complex scripting or specialized rule languages.</p>
+<p>DryRun Security's Custom Code Policies are a way to define and enforce security policies in a codebase using natural language instead of complex scripting or specialized rule languages.</p>
 
-<p>In this section we demonstrate how to build and save a Natural Language Code Policy in the DryRun Security Dashboard.</p>
+<p>In this section we demonstrate how to build and save a Custom Code Policy in the DryRun Security Dashboard.</p>
 
 
 <h2 id="creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</h2>
@@ -1740,7 +1740,7 @@ PAGES['custom-code-policies'] = {
 <p>Navigate to the Code Policies section of the DryRun Security dashboard.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/01-code-policies.png" alt="Code Policies list in DryRun Security dashboard" loading="lazy"></figure>
 
-<p>Click <strong>Add New Policy</strong> to start creating a new NLCP.</p>
+<p>Click <strong>Add New Policy</strong> to start creating a new Custom Code Policy.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/nlcp-create/02-add-new.png" alt="Add New Code Policy button" loading="lazy"></figure>
 
 <p>Enter a descriptive name for your policy and fill in the Question, Background, and Guidance fields.</p>
@@ -1760,10 +1760,10 @@ PAGES['custom-code-policies'] = {
 <ol>
   <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
   <li>Navigate to the <strong>Code Policies</strong> section. You'll see a list of previously saved Code Policies.</li>
-  <li>Click <strong>Add New Code Policy</strong>. You'll see the Code Policy Builder, which can be used to evaluate and save a Natural Language Code Policy.</li>
+  <li>Click <strong>Add New Code Policy</strong>. You'll see the Code Policy Builder, which can be used to evaluate and save a Custom Code Policy.</li>
   <li>Enter a <strong>Name</strong> for the policy.</li>
   <li>Choose a <strong>Repository</strong> and <strong>Pull Request</strong> to evaluate.</li>
-  <li>Enter the Natural Language Code Policy details:
+  <li>Enter the Custom Code Policy details:
     <ul>
       <li><strong>Question</strong> (required): A natural language question that identifies whether a specific change relates to the policy. For example, "Does this change expose any sensitive data?"</li>
       <li><strong>Background</strong> (optional): Background information or examples that may be used to refine the evaluation. For example, "We are concerned about..."</li>
@@ -1778,20 +1778,20 @@ PAGES['custom-code-policies'] = {
 
 <h2 id="policy-enforcement-agent">Policy Enforcement Agent</h2>
 
-<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Natural Language Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
+<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Custom Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
 
 <h2 id="next-steps">Next Steps</h2>
 
 <ul>
-  <li>See the <a href="./custom-code-policies.html">NLCP Starter Pack</a> for ready-to-use policy examples.</li>
-  <li>See <a href="./custom-code-policies.html">NLCP Best Practices</a> for guidance on writing effective policy backgrounds.</li>
+  <li>See the <a href="./custom-code-policies.html">Custom Code Policy Starter Pack</a> for ready-to-use policy examples.</li>
+  <li>See <a href="./custom-code-policies.html">Custom Code Policy Best Practices</a> for guidance on writing effective policy backgrounds.</li>
   <li>See <a href="./pr-scanning-configuration.html">Configurations</a> to attach policies to repositories.</li>
 </ul>
 
 
 <h2 id="starter-pack">Starter Pack</h2>
 
-<p>The following Natural Language Code Policies can be used to help you get started. They are generic enough to be customized by your organization but can also be used as-is.</p>
+<p>The following Custom Code Policies can be used to help you get started. They are generic enough to be customized by your organization but can also be used as-is.</p>
 
 <h2 id="starter-policies">Starter Policies</h2>
 
@@ -1877,11 +1877,11 @@ PAGES['custom-code-policies'] = {
 
 <h2 id="best-practices">Best Practices</h2>
 
-<p>When you provide more clarity in your Natural Language Code Policy's background, your policy becomes more reliable and accurate. The tips below help your policies accurately scope which files are considered, reason about your code, and decide when deeper analysis is necessary.</p>
+<p>When you provide more clarity in your Custom Code Policy's background, your policy becomes more reliable and accurate. The tips below help your policies accurately scope which files are considered, reason about your code, and decide when deeper analysis is necessary.</p>
 
 <h2 id="what-is-a-background">What Is a Background?</h2>
 
-<p>When writing your Natural Language Code Policy, you provide:</p>
+<p>When writing your Custom Code Policy, you provide:</p>
 <ul>
   <li><strong>Question:</strong> The question to ask against a pull request. This should be a yes or no question.</li>
   <li><strong>Background:</strong> Optional background information about the question. This provides context for your question.</li>
@@ -1988,7 +1988,7 @@ PAGES['custom-code-policies'] = {
 
 <h2 id="overview">Overview</h2>
 
-<p>The Policy Library provides curated, pre-built <a href="../docs/custom-code-policies.html">Natural Language Code Policy</a> templates that you can deploy immediately or customize for your organization. Instead of writing policies from scratch, start from a tested template and adapt it to your specific architecture and requirements.</p>
+<p>The Policy Library provides curated, pre-built <a href="../docs/custom-code-policies.html">Custom Code Policy</a> templates that you can deploy immediately or customize for your organization. Instead of writing policies from scratch, start from a tested template and adapt it to your specific architecture and requirements.</p>
 
 <h2 id="policy-categories">Policy Categories</h2>
 
@@ -2052,9 +2052,9 @@ PAGES['custom-code-policies'] = {
 <h2 id="related-pages">Related Pages</h2>
 
 <ul>
-  <li><a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> - how NLCP works</li>
-  <li><a href="../docs/custom-code-policies.html">NLCP Starter Pack</a> - getting started with your first policies</li>
-  <li><a href="../docs/custom-code-policies.html">NLCP Best Practices</a> - writing effective policies</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policies</a> - how Custom Code Policy works</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policy Starter Pack</a> - getting started with your first policies</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policy Best Practices</a> - writing effective policies</li>
 </ul>
 ''',
 }
@@ -2134,7 +2134,7 @@ this application.</code></pre>
 <ul>
   <li><strong>Code Review Agent</strong> - The primary agent that analyzes pull request diffs for security vulnerabilities across all supported categories.</li>
   <li><strong>DeepScan Agent</strong> - Performs full-repository analysis, tracing multi-file data flows and identifying vulnerabilities that span across modules.</li>
-  <li><strong>Policy Enforcement Agent</strong> - Evaluates code changes against user-defined Natural Language Code Policies and enforces organizational security standards.</li>
+  <li><strong>Policy Enforcement Agent</strong> - Evaluates code changes against user-defined Custom Code Policies and enforces organizational security standards.</li>
   <li><strong>Secrets Analyzer</strong> - Specialized detection of hardcoded credentials, API keys, and authentication tokens with contextual false-positive reduction.</li>
   <li><strong>SQL Injection Analyzer</strong> - Deep data-flow tracing for SQL injection vulnerabilities, covering both direct injection and ORM misuse patterns.</li>
   <li><strong>Infrastructure as Code Agent</strong> - Analyzes Terraform, CloudFormation, Kubernetes, and other IaC formats for misconfigurations and infrastructure security risks.</li>
@@ -2227,7 +2227,7 @@ DryRun Security normalizes outputs to Critical, High, Medium, and Low. For PR sc
 Risk is the primary sortable column. Type, File, Repo, Detected, Agent, and Status columns are also sortable.</p>
 
 <p><strong>What agents appear in the Agent column?</strong><br>
-You will see SCA (Software Composition Analysis), Code Policy (Natural Language Code Policies), DeepScan, and individual <a href="../docs/pr-variant-analysis.html">Security Analyzers</a> listed as the source of each finding.</p>
+You will see SCA (Software Composition Analysis), Code Policy (Custom Code Policies), DeepScan, and individual <a href="../docs/pr-variant-analysis.html">Security Analyzers</a> listed as the source of each finding.</p>
 ''',
 }
 
@@ -2438,7 +2438,7 @@ PAGES['compliance-grc'] = {
 <ul>
   <li><strong>Findings history</strong> - complete record of every vulnerability found, when it was found, and when it was resolved</li>
   <li><strong>Remediation timelines</strong> - time-to-fix metrics for each finding, broken down by severity and category</li>
-  <li><strong>Policy enforcement records</strong> - which <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> were evaluated, what they found, and how findings were resolved</li>
+  <li><strong>Policy enforcement records</strong> - which <a href="../docs/custom-code-policies.html">Custom Code Policies</a> were evaluated, what they found, and how findings were resolved</li>
   <li><strong>Scan coverage</strong> - which repositories were scanned, how frequently, and what percentage of PRs received security review</li>
   <li><strong>DeepScan reports</strong> - point-in-time full-repository security assessments for baseline evidence</li>
 </ul>
@@ -2813,7 +2813,7 @@ PAGES['dryrun-api'] = {
 
 <h3 id="custom-policies-api">Custom Policies</h3>
 
-<p><code>GET /v1/accounts/{account_id}/custom_policies</code> - List all Natural Language Code Policies for an account.</p>
+<p><code>GET /v1/accounts/{account_id}/custom_policies</code> - List all Custom Code Policies for an account.</p>
 
 <h3 id="insights-api">Insights</h3>
 
@@ -3224,7 +3224,7 @@ PAGES['ai-coding-integration'] = {
   <li><strong>Risk concentration</strong> - Identify whether certain areas of the codebase or certain development patterns are producing disproportionate security risk from AI-generated code.</li>
   <li><strong>Audit trail</strong> - For regulated industries, maintaining a record of AI involvement in code production is increasingly an audit requirement.</li>
   <li><strong>Supply chain transparency</strong> - AI-BOM generation (see <a href="../compliance-grc.html">SBOM Generation</a>) provides a formal record of AI involvement in software production for compliance purposes.</li>
-  <li><strong>Policy enforcement</strong> - Natural Language Code Policies can be configured specifically for AI-generated code sections, enforcing stricter review criteria where AI involvement is detected.</li>
+  <li><strong>Policy enforcement</strong> - Custom Code Policies can be configured specifically for AI-generated code sections, enforcing stricter review criteria where AI involvement is detected.</li>
 </ul>
 
 
@@ -3253,7 +3253,7 @@ PAGES['ai-coding-integration'] = {
 
 <h2 id="defense-in-depth">Defense in Depth</h2>
 
-<p>Malicious agent detection is one layer in a defense-in-depth approach to AI coding security. Combined with Natural Language Code Policies that enforce organizational coding standards, the Secrets Analyzer detecting credential introduction, and the code security knowledge graph tracking behavioral patterns over time, DryRun Security provides comprehensive coverage against AI-specific security risks in the development pipeline.</p>
+<p>Malicious agent detection is one layer in a defense-in-depth approach to AI coding security. Combined with Custom Code Policies that enforce organizational coding standards, the Secrets Analyzer detecting credential introduction, and the code security knowledge graph tracking behavioral patterns over time, DryRun Security provides comprehensive coverage against AI-specific security risks in the development pipeline.</p>
 
 
 <h2 id="ai-red-teaming">AI Red Teaming</h2>

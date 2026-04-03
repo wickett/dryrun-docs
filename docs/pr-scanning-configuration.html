@@ -140,7 +140,7 @@
 <figure class="docs-screenshot"><img src="../assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
 
 <h3 id="attach-policies">Attach Code Policies</h3>
-<p>Add up to 7 Natural Language Code Policies to a configuration.</p>
+<p>Add up to 7 Custom Code Policies to a configuration.</p>
 <figure class="docs-screenshot"><img src="../assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
 <figure class="docs-screenshot"><img src="../assets/images/configurations/07-configure-policies.png" alt="Configuring attached policies" loading="lazy"></figure>
 
@@ -188,11 +188,11 @@
 
 <h2 id="policy-enforcement">Policy Enforcement Agent</h2>
 
-<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Natural Language Code Policies to this configuration:</p>
+<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Custom Code Policies to this configuration:</p>
 
 <ul>
   <li><strong>Add Policy</strong> - Attach an existing policy from your organization's <a href="../docs/custom-code-policies.html">Policy Library</a></li>
-  <li><strong>Create Policy</strong> - Write a new Natural Language Code Policy directly from this screen</li>
+  <li><strong>Create Policy</strong> - Write a new Custom Code Policy directly from this screen</li>
 </ul>
 
 <p>Each attached policy is shown as a row with its own controls:</p>
@@ -236,7 +236,7 @@
 
 <h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
 
-<p>Both Natural Language Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
 
 <h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
 
@@ -247,11 +247,11 @@
   <li>Choose <strong>Add classic branch protection rule</strong>.</li>
   <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
   <li>Select <strong>Require status checks to pass before merging</strong>.</li>
-  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Natural Language Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
+  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Custom Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
   <li>Click <strong>Create</strong>.</li>
 </ol>
 
-<p>When a Natural Language Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+<p>When a Custom Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/application-summary.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Application Summary</span></a>

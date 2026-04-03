@@ -451,7 +451,7 @@ test.describe('Content Coverage', () => {
     await expect(table).toBeVisible();
   });
 
-  test('NLCP page has content about policies', async ({ page }) => {
+  test('Custom Code Policy page has content about policies', async ({ page }) => {
     await page.goto('/docs/custom-code-policies.html');
     await page.waitForLoadState('domcontentloaded');
     const text = await page.locator('.doc-content').textContent();

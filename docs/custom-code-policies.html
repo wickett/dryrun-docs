@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Code Policies - DryRun Security Docs</title>
-  <meta name="description" content="Create custom security rules in plain English using Natural Language Code Policies.">
+  <meta name="description" content="Create custom security rules in plain English using Custom Code Policies.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,13 +115,13 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Platform</div>
         <h1 class="page-heading">Custom Code Policies</h1>
-        <p class="page-description">Create custom security rules in plain English using Natural Language Code Policies.</p>
+        <p class="page-description">Create custom security rules in plain English using Custom Code Policies.</p>
         <div class="doc-content">
-<h2 id="natural-language-code-policies">Natural Language Code Policies</h2>
+<h2 id="custom-code-policies">Custom Code Policies</h2>
 
-<p>DryRun Security's Natural Language Code Policies (NLCPs) are a way to define and enforce security policies in a codebase using natural language instead of complex scripting or specialized rule languages.</p>
+<p>DryRun Security's Custom Code Policies are a way to define and enforce security policies in a codebase using natural language instead of complex scripting or specialized rule languages.</p>
 
-<p>In this section we demonstrate how to build and save a Natural Language Code Policy in the DryRun Security Dashboard.</p>
+<p>In this section we demonstrate how to build and save a Custom Code Policy in the DryRun Security Dashboard.</p>
 
 
 <h2 id="creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</h2>
@@ -129,7 +129,7 @@
 <p>Navigate to the Code Policies section of the DryRun Security dashboard.</p>
 <figure class="docs-screenshot"><img src="../assets/images/nlcp-create/01-code-policies.png" alt="Code Policies list in DryRun Security dashboard" loading="lazy"></figure>
 
-<p>Click <strong>Add New Policy</strong> to start creating a new NLCP.</p>
+<p>Click <strong>Add New Policy</strong> to start creating a new Custom Code Policy.</p>
 <figure class="docs-screenshot"><img src="../assets/images/nlcp-create/02-add-new.png" alt="Add New Code Policy button" loading="lazy"></figure>
 
 <p>Enter a descriptive name for your policy and fill in the Question, Background, and Guidance fields.</p>
@@ -149,10 +149,10 @@
 <ol>
   <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
   <li>Navigate to the <strong>Code Policies</strong> section. You'll see a list of previously saved Code Policies.</li>
-  <li>Click <strong>Add New Code Policy</strong>. You'll see the Code Policy Builder, which can be used to evaluate and save a Natural Language Code Policy.</li>
+  <li>Click <strong>Add New Code Policy</strong>. You'll see the Code Policy Builder, which can be used to evaluate and save a Custom Code Policy.</li>
   <li>Enter a <strong>Name</strong> for the policy.</li>
   <li>Choose a <strong>Repository</strong> and <strong>Pull Request</strong> to evaluate.</li>
-  <li>Enter the Natural Language Code Policy details:
+  <li>Enter the Custom Code Policy details:
     <ul>
       <li><strong>Question</strong> (required): A natural language question that identifies whether a specific change relates to the policy. For example, "Does this change expose any sensitive data?"</li>
       <li><strong>Background</strong> (optional): Background information or examples that may be used to refine the evaluation. For example, "We are concerned about..."</li>
@@ -167,20 +167,20 @@
 
 <h2 id="policy-enforcement-agent">Policy Enforcement Agent</h2>
 
-<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Natural Language Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
+<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Custom Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
 
 <h2 id="next-steps">Next Steps</h2>
 
 <ul>
-  <li>See the <a href="./custom-code-policies.html">NLCP Starter Pack</a> for ready-to-use policy examples.</li>
-  <li>See <a href="./custom-code-policies.html">NLCP Best Practices</a> for guidance on writing effective policy backgrounds.</li>
+  <li>See the <a href="./custom-code-policies.html">Custom Code Policy Starter Pack</a> for ready-to-use policy examples.</li>
+  <li>See <a href="./custom-code-policies.html">Custom Code Policy Best Practices</a> for guidance on writing effective policy backgrounds.</li>
   <li>See <a href="./pr-scanning-configuration.html">Configurations</a> to attach policies to repositories.</li>
 </ul>
 
 
 <h2 id="starter-pack">Starter Pack</h2>
 
-<p>The following Natural Language Code Policies can be used to help you get started. They are generic enough to be customized by your organization but can also be used as-is.</p>
+<p>The following Custom Code Policies can be used to help you get started. They are generic enough to be customized by your organization but can also be used as-is.</p>
 
 <h2 id="starter-policies">Starter Policies</h2>
 
@@ -266,11 +266,11 @@
 
 <h2 id="best-practices">Best Practices</h2>
 
-<p>When you provide more clarity in your Natural Language Code Policy's background, your policy becomes more reliable and accurate. The tips below help your policies accurately scope which files are considered, reason about your code, and decide when deeper analysis is necessary.</p>
+<p>When you provide more clarity in your Custom Code Policy's background, your policy becomes more reliable and accurate. The tips below help your policies accurately scope which files are considered, reason about your code, and decide when deeper analysis is necessary.</p>
 
 <h2 id="what-is-a-background">What Is a Background?</h2>
 
-<p>When writing your Natural Language Code Policy, you provide:</p>
+<p>When writing your Custom Code Policy, you provide:</p>
 <ul>
   <li><strong>Question:</strong> The question to ask against a pull request. This should be a yes or no question.</li>
   <li><strong>Background:</strong> Optional background information about the question. This provides context for your question.</li>
@@ -377,7 +377,7 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>The Policy Library provides curated, pre-built <a href="../docs/custom-code-policies.html">Natural Language Code Policy</a> templates that you can deploy immediately or customize for your organization. Instead of writing policies from scratch, start from a tested template and adapt it to your specific architecture and requirements.</p>
+<p>The Policy Library provides curated, pre-built <a href="../docs/custom-code-policies.html">Custom Code Policy</a> templates that you can deploy immediately or customize for your organization. Instead of writing policies from scratch, start from a tested template and adapt it to your specific architecture and requirements.</p>
 
 <h2 id="policy-categories">Policy Categories</h2>
 
@@ -441,9 +441,9 @@
 <h2 id="related-pages">Related Pages</h2>
 
 <ul>
-  <li><a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> - how NLCP works</li>
-  <li><a href="../docs/custom-code-policies.html">NLCP Starter Pack</a> - getting started with your first policies</li>
-  <li><a href="../docs/custom-code-policies.html">NLCP Best Practices</a> - writing effective policies</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policies</a> - how Custom Code Policy works</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policy Starter Pack</a> - getting started with your first policies</li>
+  <li><a href="../docs/custom-code-policies.html">Custom Code Policy Best Practices</a> - writing effective policies</li>
 </ul>
         </div>
 <nav class="prev-next">
@@ -455,7 +455,7 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#natural-language-code-policies">Natural Language Code Policies</a></li>
+<li class="toc-h2"><a href="#custom-code-policies">Custom Code Policies</a></li>
 <li class="toc-h2"><a href="#creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</a></li>
 <li class="toc-h2"><a href="#creating-a-policy">Creating a Policy</a></li>
 <li class="toc-h2"><a href="#policy-enforcement-agent">Policy Enforcement Agent</a></li>
