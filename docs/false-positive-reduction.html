@@ -89,7 +89,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-dismissal.html">Finding Dismissal</a></li>
+<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -185,7 +185,7 @@
 
 <p>It is important to distinguish between false positive <strong>reduction</strong> and false positive <strong>suppression</strong>. Many tools achieve lower noise by letting users suppress finding categories, raise severity thresholds, or ignore entire file paths. This hides findings but does not prevent them from being generated.</p>
 
-<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/sub-agent-analyzers.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-dismissal.html">Finding Dismissal</a>), but they are the exception rather than the primary noise management strategy.</p>
+<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/sub-agent-analyzers.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-triage.html">Finding Triage</a>), but they are the exception rather than the primary noise management strategy. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
 
 <h2 id="developer-trust">Impact on Developer Trust</h2>
 

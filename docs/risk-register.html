@@ -89,7 +89,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-dismissal.html">Finding Dismissal</a></li>
+<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -164,7 +164,7 @@
   <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
   <li><strong>30D date filter</strong> - Quickly scope findings to the last 30 days, or adjust the date range to match your review period</li>
   <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type, status, and more</li>
-  <li><strong>Dismiss</strong> - Select one or more findings and dismiss them in bulk with a reason and optional context</li>
+  <li><strong>Triage</strong> - Select one or more findings and triage them in bulk with a reason and optional context</li>
 </ul>
 
 <h2 id="findings-table">Findings Table</h2>
@@ -182,17 +182,17 @@
     <tr><td><strong>Repo</strong></td><td>The repository name where the finding originated</td></tr>
     <tr><td><strong>Detected</strong></td><td>Timestamp showing when the finding was first detected (e.g., 03/18/26 16:51:18)</td></tr>
     <tr><td><strong>Agent</strong></td><td>Which agent produced the finding - SCA, Code Policy, DeepScan, or a specific Security Analyzer</td></tr>
-    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, dismissed, or resolved</td></tr>
+    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, triaged, or resolved</td></tr>
   </tbody>
 </table>
 
 <p>Each row has a checkbox for bulk selection, and findings are paginated (e.g., "Showing 1-20 of 203 entries") with page navigation at the bottom.</p>
 
-<h2 id="finding-dismissal">Finding Dismissal</h2>
+<h2 id="finding-triage">Finding Triage</h2>
 
-<p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. See <a href="../finding-dismissal.html">Finding Dismissal</a> for the full workflow.</p>
+<p>Risk Register supports Finding Triage so teams can categorize findings and feed decisions back into DryRun Security. Every triage decision - the reason, the context you provide - is a learning signal that improves future scan accuracy. See <a href="../finding-triage.html">Finding Triage</a> for the full workflow.</p>
 
-<p>Select one or more findings using the checkboxes, then click <strong>Dismiss</strong> to choose a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
+<p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -206,7 +206,7 @@ Risk is the primary sortable column. Type, File, Repo, Detected, Agent, and Stat
 You will see SCA (Software Composition Analysis), Code Policy (Natural Language Code Policies), DeepScan, and individual <a href="../docs/sub-agent-analyzers.html">Security Analyzers</a> listed as the source of each finding.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/finding-dismissal.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Finding Dismissal</span></a>
+<a href="../docs/finding-triage.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Finding Triage</span></a>
 <a href="../docs/security-dashboard.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Security Dashboard</span></a>
 </nav>
       </div>
@@ -217,7 +217,7 @@ You will see SCA (Software Composition Analysis), Code Policy (Natural Language 
 <li class="toc-h2"><a href="#severity-overview">Severity Overview</a></li>
 <li class="toc-h2"><a href="#search-and-filter">Search and Filter</a></li>
 <li class="toc-h2"><a href="#findings-table">Findings Table</a></li>
-<li class="toc-h2"><a href="#finding-dismissal">Finding Dismissal</a></li>
+<li class="toc-h2"><a href="#finding-triage">Finding Triage</a></li>
 <li class="toc-h2"><a href="#faqs">FAQs</a></li>
 </ul>
 </aside>

@@ -88,7 +88,7 @@ SECTIONS = [
     {
         'name': 'Remediation',
         'slug': 'remediation',
-        'pages': ['auto-fix', 'fix-verification', 'finding-dismissal'],
+        'pages': ['auto-fix', 'fix-verification', 'finding-triage'],
     },
     {
         'name': 'Platform',
@@ -250,7 +250,7 @@ PAGES['sast-overview'] = {
 
 <h2 id="what-this-means-for-developers">What This Means for Developers</h2>
 
-<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time dismissing irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
+<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time triaging irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
 
 <p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews - security analysis happens in real time as code is being written.</p>
 
@@ -337,7 +337,7 @@ PAGES['deepscan'] = {
 
 <h2 id="deepscan-findings-in-the-risk-register">DeepScan Findings in the Risk Register</h2>
 
-<p>DeepScan results appear alongside PR findings in the <a href="../risk-register.html">Risk Register</a>. You can filter by agent type to view DeepScan-specific findings separately from PR findings. All the same dismissal, fingerprinting, and suppression capabilities apply - findings dismissed as false positives from a DeepScan will be suppressed in future scans as well.</p>
+<p>DeepScan results appear alongside PR findings in the <a href="../risk-register.html">Risk Register</a>. You can filter by agent type to view DeepScan-specific findings separately from PR findings. All the same triage, fingerprinting, and suppression capabilities apply - findings triaged as false positives from a DeepScan will be suppressed in future scans as well, and triage context feeds back into the system to improve future accuracy.</p>
 
 <h2 id="triggering-a-deepscan">Triggering a DeepScan</h2>
 
@@ -382,7 +382,7 @@ PAGES['secrets-detection'] = {
 
 <h2 id="suppression-and-false-positives">Suppression and False Positives</h2>
 
-<p>Not every high-entropy string is a real credential. The Risk Register's <a href="../finding-dismissal.html">Finding Dismissal</a> workflow allows teams to mark findings as false positives with contextual notes - for example, to record that a particular string is a well-known public test key. Dismissed fingerprints are suppressed in future scans automatically.</p>
+<p>Not every high-entropy string is a real credential. The Risk Register's <a href="../finding-triage.html">Finding Triage</a> workflow allows teams to mark findings as false positives with contextual notes - for example, to record that a particular string is a well-known public test key. Triaged fingerprints are suppressed in future scans automatically, and DryRun Security learns from the context to improve detection accuracy over time.</p>
 ''',
 }
 
@@ -770,7 +770,7 @@ PAGES['false-positive-reduction'] = {
 
 <p>DryRun Security does not rely on suppression to achieve low noise. The findings are correct because the analysis is correct. There are no rules to maintain, no allowlists to update, and no blind spots created by exclusions. The 90% noise reduction is a product of analysis quality, not filtering.</p>
 
-<p>Dismissals are still supported - when a finding represents a risk the organization has decided to accept - but dismissals are used for genuine risk acceptance decisions, not for silencing incorrect findings.</p>
+<p>Triage is still supported for the rare false positive - and when a finding represents a risk the organization has decided to accept - but triage decisions are used for genuine risk acceptance, not for silencing incorrect findings. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
 
 <h2 id="developer-experience-and-trust">Impact on Developer Experience and Trust</h2>
 
@@ -860,7 +860,7 @@ PAGES['code-security-knowledge-graph'] = {
     'content': '''
 <h2 id="beyond-stateless-scanning">Beyond Stateless Scanning</h2>
 
-<p>Most security scanning tools are stateless: they analyze a PR, produce findings, and forget everything. The next PR is analyzed completely fresh, with no memory of what was found before, what was dismissed as a false positive, or how the codebase has evolved over time. This means every scan starts from zero, and every improvement to accuracy must be re-learned.</p>
+<p>Most security scanning tools are stateless: they analyze a PR, produce findings, and forget everything. The next PR is analyzed completely fresh, with no memory of what was found before, what was triaged as a false positive, or how the codebase has evolved over time. This means every scan starts from zero, and every improvement to accuracy must be re-learned.</p>
 
 <p>DryRun Security builds and maintains a <strong>Code Security Knowledge Graph</strong> - a persistent, structured representation of security intelligence about your codebase that accumulates over time and informs every subsequent analysis.</p>
 
@@ -869,9 +869,9 @@ PAGES['code-security-knowledge-graph'] = {
 <p>The knowledge graph captures and connects multiple dimensions of security knowledge about your repositories:</p>
 
 <ul>
-  <li><strong>Finding history</strong> - Which vulnerabilities have been identified, when, in which files, and what their current disposition is (open, dismissed, fixed).</li>
-  <li><strong>False positive suppression</strong> - When a finding is dismissed as a false positive, that judgment is encoded as a fingerprint and applied to suppress the same finding in future scans automatically.</li>
-  <li><strong>Developer-provided context</strong> - Context added by developers and security teams when dismissing findings is stored and used to calibrate future analysis in similar situations.</li>
+  <li><strong>Finding history</strong> - Which vulnerabilities have been identified, when, in which files, and what their current disposition is (open, triaged, fixed).</li>
+  <li><strong>False positive suppression</strong> - When a finding is triaged as a false positive, that judgment is encoded as a fingerprint and applied to suppress the same finding in future scans automatically.</li>
+  <li><strong>Developer-provided context</strong> - Context added by developers and security teams when triaging findings is stored and used to calibrate future analysis in similar situations.</li>
   <li><strong>Codebase patterns</strong> - Understanding of the frameworks, authentication patterns, and security-relevant design choices in your codebase that inform how code changes should be evaluated.</li>
 </ul>
 
@@ -883,7 +883,7 @@ PAGES['code-security-knowledge-graph'] = {
 
 <h2 id="accumulating-accuracy-over-time">Accumulating Accuracy Over Time</h2>
 
-<p>The practical impact of the knowledge graph is that DryRun Security gets more accurate over time as it learns the specific characteristics of your codebase. False positive rates decrease as the system accumulates dismissal context. The risk model becomes better calibrated to your specific risk profile, frameworks, and deployment patterns. Security intelligence is a durable organizational asset - not something that evaporates between scans.</p>
+<p>The practical impact of the knowledge graph is that DryRun Security gets more accurate over time as it learns the specific characteristics of your codebase. False positive rates decrease as the system accumulates triage context. The risk model becomes better calibrated to your specific risk profile, frameworks, and deployment patterns. Security intelligence is a durable organizational asset - not something that evaporates between scans.</p>
 ''',
 }
 
@@ -1210,35 +1210,47 @@ PAGES['fix-verification'] = {
 ''',
 }
 
-PAGES['finding-dismissal'] = {
-    'title': 'Finding Dismissal',
-    'description': 'Dismiss false positives with context, suppress recurring findings with fingerprinting, and manage risk through developer and security team workflows.',
+PAGES['finding-triage'] = {
+    'title': 'Finding Triage',
+    'description': 'Triage findings with context, suppress recurring false positives with fingerprinting, and feed decisions back into DryRun Security so it learns and improves over time.',
     'section': 'Remediation',
     'content': '''
-<p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. Dismissed findings are fingerprinted and suppressed in future scans automatically.</p>
+<p>Every triage decision makes DryRun Security smarter. When you triage a finding - whether you mark it as a false positive, accept the risk, or add context - DryRun Security learns from that decision and applies it to future scans across your organization.</p>
 
-<h2 id="dismissing-a-finding">Dismissing a Finding</h2>
+<h2 id="how-dryrun-learns">How DryRun Security Learns from Triage</h2>
 
-<p>In the Risk Register, click <strong>Dismiss</strong> on a finding to:</p>
+<p>Most security tools treat triage as a dead end: you dismiss a finding, and it disappears until it shows up again next week. DryRun Security treats every triage decision as a learning signal:</p>
 <ul>
-  <li>Select a reason for dismissal (for example: False Positive, Won't Fix)</li>
-  <li>Add supporting context in a text box</li>
+  <li><strong>False positive fingerprinting</strong> - When you mark a finding as a false positive, DryRun Security fingerprints the vulnerability pattern and automatically suppresses it in future PR scans and DeepScans.</li>
+  <li><strong>Context-based learning</strong> - When you add context explaining why a finding is safe, that context is stored and used to calibrate future analysis in similar situations across your codebase.</li>
+  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../code-security-knowledge-graph.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
 </ul>
+<p>The result: false positive rates decrease over time as DryRun Security accumulates organizational knowledge from your team's triage decisions.</p>
+
+<h2 id="triaging-a-finding">Triaging a Finding</h2>
+
+<p>In the Risk Register, click <strong>Triage</strong> on a finding to:</p>
+<ul>
+  <li>Select a triage reason (for example: False Positive, Accepted Risk, Won't Fix)</li>
+  <li>Add supporting context in a text box explaining your reasoning</li>
+</ul>
+<p>The more context you provide, the more DryRun Security can learn from the decision. Even a short explanation helps improve future scan accuracy.</p>
 
 <h2 id="false-positive-fingerprinting">False Positive Fingerprinting</h2>
 
-<p>When you dismiss a finding as <strong>False Positive</strong>:</p>
+<p>When you mark a finding as <strong>False Positive</strong>:</p>
 <ul>
-  <li>DryRun Security creates a fingerprint of that vulnerability.</li>
-  <li>Future PR and DeepScans will suppress the finding when the same fingerprint is detected, so it doesn't come back.</li>
+  <li>DryRun Security creates a fingerprint of that vulnerability pattern.</li>
+  <li>Future PR scans and DeepScans automatically suppress the finding when the same fingerprint is detected, so it does not come back.</li>
+  <li>The fingerprint and your context are stored in the Knowledge Graph and used to improve detection accuracy for similar patterns.</li>
 </ul>
 
-<h2 id="context-suppression">Context-Based Suppression</h2>
+<h2 id="context-based-learning">Context-Based Learning</h2>
 
-<p>When you include context in the text box:</p>
+<p>When you include context in the triage text box, DryRun Security uses it in two ways:</p>
 <ul>
-  <li>That context is stored and used in future evaluations to further suppress like or similar false positives.</li>
-  <li>This is useful for cases where a finding is safe because of your framework behavior, implementation pattern, or deployment topology.</li>
+  <li><strong>Immediate suppression</strong> - Similar false positives matching the context are suppressed in future scans.</li>
+  <li><strong>Long-term learning</strong> - The context feeds into the Knowledge Graph to improve analysis for similar code patterns, framework behaviors, and deployment topologies.</li>
 </ul>
 
 <p>Examples of useful context:</p>
@@ -1248,23 +1260,26 @@ PAGES['finding-dismissal'] = {
   <li>"This query is constructed only from validated constants, never from user input."</li>
 </ul>
 
-<h2 id="dismissal-from-pr-workflow">Dismissal from the PR Workflow</h2>
+<h2 id="triage-from-pr-workflow">Triage from the PR Workflow</h2>
 
-<p>Developers can also mark findings as False Positive and add context from the developer comment workflow in GitHub and GitLab. Those dismissals flow into the Risk Register and are applied to future scans the same way - keeping the feedback loop close to where developers work.</p>
+<p>Developers can also triage findings directly from GitHub and GitLab comments - marking findings as false positives and adding context without leaving the PR workflow. Those triage decisions flow into the Risk Register and feed the same learning loop, keeping the feedback close to where developers work.</p>
 
 <h2 id="faqs">FAQs</h2>
 
-<p><strong>What is Finding Dismissal?</strong><br>
-Finding Dismissal lets you dismiss a finding and record why, using a dismissal reason and optional context. Dismissed findings are marked resolved in the UI.</p>
+<p><strong>What is Finding Triage?</strong><br>
+Finding Triage lets you categorize a finding and record why, using a triage reason and optional context. Triaged findings are marked resolved in the UI, and the decisions feed back into DryRun Security to improve future scans.</p>
 
-<p><strong>What happens when I dismiss a finding as a False Positive?</strong><br>
-DryRun Security fingerprints the vulnerability. If the same fingerprint is detected in a future PR or DeepScan, the finding is automatically suppressed.</p>
+<p><strong>Does DryRun Security actually learn from my triage decisions?</strong><br>
+Yes. Every triage decision - the reason, the context you provide, the fingerprint - is stored in the Code Security Knowledge Graph. DryRun Security uses this to suppress duplicate findings immediately and to improve detection accuracy for similar patterns over time.</p>
+
+<p><strong>What happens when I mark a finding as a False Positive?</strong><br>
+DryRun Security fingerprints the vulnerability pattern. If the same fingerprint is detected in a future PR scan or DeepScan, the finding is automatically suppressed.</p>
 
 <p><strong>How is the context field used?</strong><br>
-Context is stored with the dismissal and used in future scan evaluations to further suppress like or similar false positives.</p>
+Context is stored with the triage decision and used in two ways: immediately to suppress similar false positives, and over time to improve analysis accuracy through the Knowledge Graph.</p>
 
-<p><strong>Can developers dismiss findings too?</strong><br>
-Yes. Developers can mark findings as False Positive from GitHub and GitLab comments. Those dismissals are synced to the Risk Register.</p>
+<p><strong>Can developers triage findings from their PR workflow?</strong><br>
+Yes. Developers can triage findings directly from GitHub and GitLab comments. Those decisions sync to the Risk Register and feed the same learning loop.</p>
 ''',
 }
 
@@ -1299,7 +1314,7 @@ PAGES['risk-register'] = {
   <li><strong>Search</strong> - A full-text search box lets you search across finding titles, file paths, repository names, and other fields</li>
   <li><strong>30D date filter</strong> - Quickly scope findings to the last 30 days, or adjust the date range to match your review period</li>
   <li><strong>Filter</strong> - Opens advanced filtering options to narrow by risk level, agent type, status, and more</li>
-  <li><strong>Dismiss</strong> - Select one or more findings and dismiss them in bulk with a reason and optional context</li>
+  <li><strong>Triage</strong> - Select one or more findings and triage them in bulk with a reason and optional context</li>
 </ul>
 
 <h2 id="findings-table">Findings Table</h2>
@@ -1317,17 +1332,17 @@ PAGES['risk-register'] = {
     <tr><td><strong>Repo</strong></td><td>The repository name where the finding originated</td></tr>
     <tr><td><strong>Detected</strong></td><td>Timestamp showing when the finding was first detected (e.g., 03/18/26 16:51:18)</td></tr>
     <tr><td><strong>Agent</strong></td><td>Which agent produced the finding - SCA, Code Policy, DeepScan, or a specific Security Analyzer</td></tr>
-    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, dismissed, or resolved</td></tr>
+    <tr><td><strong>Status</strong></td><td>The current state of the finding, shown as an icon indicating open, triaged, or resolved</td></tr>
   </tbody>
 </table>
 
 <p>Each row has a checkbox for bulk selection, and findings are paginated (e.g., "Showing 1-20 of 203 entries") with page navigation at the bottom.</p>
 
-<h2 id="finding-dismissal">Finding Dismissal</h2>
+<h2 id="finding-triage">Finding Triage</h2>
 
-<p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. See <a href="../finding-dismissal.html">Finding Dismissal</a> for the full workflow.</p>
+<p>Risk Register supports Finding Triage so teams can categorize findings and feed decisions back into DryRun Security. Every triage decision - the reason, the context you provide - is a learning signal that improves future scan accuracy. See <a href="../finding-triage.html">Finding Triage</a> for the full workflow.</p>
 
-<p>Select one or more findings using the checkboxes, then click <strong>Dismiss</strong> to choose a dismissal reason and optionally add context. When you dismiss a finding as <strong>False Positive</strong>, DryRun Security creates a fingerprint of that vulnerability and suppresses it in future scans automatically.</p>
+<p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -1359,7 +1374,7 @@ PAGES['security-dashboard'] = {
 
 <ul>
   <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or dismissed</li>
+  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or triaged</li>
   <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
   <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
 </ul>
@@ -1977,7 +1992,7 @@ PAGES['cicd-integration'] = {
 <ol>
   <li>DryRun Security posts a failing status check to the PR when findings exceed the configured risk threshold.</li>
   <li>Your Branch Protection Rule requires this check to pass before a merge is allowed.</li>
-  <li>The PR is blocked from merging until the finding is addressed or dismissed.</li>
+  <li>The PR is blocked from merging until the finding is addressed or triaged.</li>
 </ol>
 
 <p>See <a href="./configurations.html">Configure Repositories</a> for the full branch protection setup walkthrough.</p>
@@ -2499,7 +2514,7 @@ PAGES['false-positive-reduction'] = {
 
 <p>It is important to distinguish between false positive <strong>reduction</strong> and false positive <strong>suppression</strong>. Many tools achieve lower noise by letting users suppress finding categories, raise severity thresholds, or ignore entire file paths. This hides findings but does not prevent them from being generated.</p>
 
-<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/sub-agent-analyzers.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-dismissal.html">Finding Dismissal</a>), but they are the exception rather than the primary noise management strategy.</p>
+<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/sub-agent-analyzers.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-triage.html">Finding Triage</a>), but they are the exception rather than the primary noise management strategy. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
 
 <h2 id="developer-trust">Impact on Developer Trust</h2>
 
@@ -2661,7 +2676,7 @@ PAGES['compliance-audit'] = {
   <li>The specific code change that introduced the vulnerability</li>
   <li>Which analyzer detected it and why</li>
   <li>The remediation status and any associated PR that fixed it</li>
-  <li>Dismissal records with notes explaining why a finding was marked as acceptable risk</li>
+  <li>Triage records with notes explaining why a finding was marked as acceptable risk</li>
 </ul>
 
 <p>This level of traceability satisfies auditors who need to understand not just what vulnerabilities exist, but how the organization identified and responded to them.</p>
