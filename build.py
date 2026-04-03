@@ -1716,8 +1716,8 @@ PAGES['sbom-generation'] = {
 # -- Developer Tools --
 
 PAGES['ide-integration'] = {
-    'title': 'IDE Integration',
-    'description': 'DryRun Security integrates with VS Code, Cursor, and other IDEs - bringing security intelligence into your development environment.',
+    'title': 'AI Coding Tool Integrations',
+    'description': 'DryRun Security integrates with Cursor, Codex, Claude Code, Windsurf, VS Code, and Claude Desktop - bringing security intelligence into your development environment.',
     'section': 'Developer Tools',
     'content': '''
 <h2 id="security-in-your-editor">Security in Your Editor</h2>
@@ -1726,19 +1726,62 @@ PAGES['ide-integration'] = {
 
 <p>Rather than waiting for a PR to be opened to receive security feedback, developers with the IDE integration can get security context inline as they work - understanding the security implications of the code they're writing and the codebase they're modifying without leaving their editor.</p>
 
-<h2 id="vs-code-and-cursor">VS Code and Cursor</h2>
+<h2 id="ai-coding-integrations">AI Coding Integrations</h2>
 
-<p>DryRun Security integrates with Visual Studio Code and Cursor through two complementary mechanisms:</p>
+<p>DryRun Security integrates with the most popular AI coding tools. Each integration is available from the <strong>Settings &gt; Integrations</strong> page in the DryRun Security dashboard. Every AI coding integration provides two connection options:</p>
 
-<h3 id="mcp-integration">MCP Integration</h3>
-<p>The DryRun Security Insights MCP (Model Context Protocol) server connects your IDE's AI assistant directly to your organization's security data. When coding in Cursor or GitHub Copilot in VS Code, the AI assistant can answer security questions about your codebase, pull up findings for files you're working on, and provide context about your organization's security posture. See <a href="./mcp-integration.html">MCP Integration</a> for configuration details.</p>
+<ul>
+  <li><strong>Connect</strong> - Connects the DryRun Insights MCP to the tool, giving its AI assistant access to your organization's security data for context-aware code analysis</li>
+  <li><strong>Add Skill</strong> - Installs the DryRun remediation skill/plugin, enabling the tool to discover and fix security findings directly</li>
+</ul>
 
-<h3 id="direct-extension">Direct Extension</h3>
-<p>The DryRun Security extension surfaces security findings from your most recent scans inline in your editor, showing you open findings for the file you're currently editing without requiring you to switch to the dashboard. Findings from both PR scans and DeepScans are available.</p>
+<h3 id="supported-tools">Supported AI Coding Tools</h3>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cursor</strong></td><td>Connect DryRun Insights MCP to Cursor IDE for AI-powered code analysis</td></tr>
+    <tr><td><strong>Codex</strong></td><td>Integrate DryRun Insights MCP with OpenAI Codex for enhanced code review</td></tr>
+    <tr><td><strong>Claude Code</strong></td><td>Use DryRun Insights MCP with Claude Code for security-aware coding assistance</td></tr>
+    <tr><td><strong>Windsurf</strong></td><td>Integrate DryRun Insights MCP with Windsurf IDE for AI-assisted code review</td></tr>
+    <tr><td><strong>VS Code</strong></td><td>Connect DryRun Insights MCP to Visual Studio Code for AI-powered security analysis</td></tr>
+  </tbody>
+</table>
+
+<h3 id="connect-flow">Connecting an AI Coding Tool</h3>
+
+<p>Clicking <strong>Connect</strong> on a tool card provides the setup command or configuration for that tool. For example, connecting Claude Code provides this command:</p>
+
+<pre><code>claude mcp add --transport http dryrun-security \
+  https://insights-mcp.dryrun.security/api/insights/mcp \
+  --header "Authorization: Bearer &lt;dryrunsec_token&gt;"</code></pre>
+
+<p>Replace <code>&lt;dryrunsec_token&gt;</code> with your API token from <strong>Settings &gt; Access Keys</strong>. See <a href="../docs/api-guide.html">API Usage Guide</a> for how to generate an access key.</p>
+
+<h3 id="add-skill-flow">Adding the Remediation Skill</h3>
+
+<p>Clicking <strong>Add Skill</strong> installs the DryRun remediation plugin into your coding tool. For example, in Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace
+/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<p>Once the skill is installed, the AI assistant can discover security findings from DryRun Security and generate fixes directly within your coding session.</p>
+
+<h2 id="desktop-integrations">Desktop Integrations</h2>
+
+<p>For desktop AI applications that support MCP, DryRun Security offers dedicated integration cards:</p>
+
+<ul>
+  <li><strong>Claude Desktop</strong> - Connect the DryRun Insights MCP to Claude Desktop for security-aware conversations about your codebase</li>
+</ul>
+
+<p>See <a href="./mcp-integration.html">MCP Integration</a> for detailed configuration instructions for all supported clients.</p>
 
 <h2 id="ai-native-ide">AI-Native IDE Workflows</h2>
 
-<p>For teams using AI coding assistants like Cursor, GitHub Copilot, or Claude Code, the DryRun Security IDE integration is particularly valuable. It allows the AI assistant to query DryRun Security's security intelligence as part of code generation - helping AI assistants write more secure code by understanding what vulnerabilities have been found in the codebase and what security patterns are in use.</p>
+<p>For teams using AI coding assistants, the DryRun Security integration is particularly valuable. It allows the AI assistant to query DryRun Security's security intelligence as part of code generation - helping AI assistants write more secure code by understanding what vulnerabilities have been found in the codebase and what security patterns are in use.</p>
 
 <p>This is especially relevant as teams adopt <code>AGENTS.md</code> to guide AI coding agents. See <a href="./agents-md.html">AGENTS.md</a> for how to configure security guidelines that AI agents and DryRun Security both use.</p>
 ''',
@@ -1771,15 +1814,41 @@ PAGES['mcp-integration'] = {
 
 <p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
 
-<h3 id="direct-http">Direct HTTP Configuration (Recommended)</h3>
+<h3 id="quick-setup">Quick Setup from the Dashboard</h3>
 
-<p>If your client supports HTTP-based MCP servers with OAuth, connect directly:</p>
+<p>The fastest way to connect is through <strong>Settings &gt; Integrations</strong> in the DryRun Security dashboard. Each supported tool has a card with a <strong>Connect</strong> button that provides the exact command or configuration for that tool. See <a href="./ide-integration.html">AI Coding Tool Integrations</a> for the full list of supported tools.</p>
+
+<h3 id="claude-code">Claude Code (CLI)</h3>
+
+<pre><code>claude mcp add --transport http dryrun-security \
+  https://insights-mcp.dryrun.security/api/insights/mcp \
+  --header "Authorization: Bearer &lt;dryrunsec_token&gt;"</code></pre>
+
+<p>Replace <code>&lt;dryrunsec_token&gt;</code> with your token from <strong>Settings &gt; Access Keys</strong>.</p>
+
+<h3 id="claude-desktop">Claude Desktop or Claude Web</h3>
+
+<ol>
+  <li>Navigate to <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">https://claude.ai</a>.</li>
+  <li>Select <strong>Settings</strong>.</li>
+  <li>Select <strong>Connectors</strong>.</li>
+  <li>Click <strong>Add custom connector</strong>.</li>
+  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/api/insights/mcp</code></li>
+  <li>Select <strong>Add</strong>.</li>
+</ol>
+
+<h3 id="direct-http">Direct HTTP Configuration</h3>
+
+<p>For clients that support HTTP-based MCP servers, use this JSON configuration:</p>
 
 <pre><code>{
   "mcpServers": {
     "dryrun-security": {
       "type": "http",
-      "url": "https://insights-mcp.dryrun.security/insights/mcp"
+      "url": "https://insights-mcp.dryrun.security/api/insights/mcp",
+      "headers": {
+        "Authorization": "Bearer &lt;dryrunsec_token&gt;"
+      }
     }
   }
 }</code></pre>
@@ -1787,21 +1856,6 @@ PAGES['mcp-integration'] = {
 <h3 id="cursor-notice">Cursor Compatibility Notice</h3>
 
 <p><strong>Known issue:</strong> Cursor currently has a known bug in its MCP implementation that may cause authentication failures. Contact <a href="mailto:hi@dryrun.security">hi@dryrun.security</a> if you need the workaround enabled for your environment.</p>
-
-<h3 id="claude-shortcuts">Claude Shortcuts</h3>
-
-<p><strong>Claude Code (CLI):</strong></p>
-<pre><code>claude mcp add --transport http dryrun-security https://insights-mcp.dryrun.security/insights/mcp</code></pre>
-
-<p><strong>Claude Desktop or Claude Web:</strong></p>
-<ol>
-  <li>Navigate to <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">https://claude.ai</a>.</li>
-  <li>Select <strong>Settings</strong>.</li>
-  <li>Select <strong>Connectors</strong>.</li>
-  <li>Click <strong>Add custom connector</strong>.</li>
-  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/insights/mcp</code></li>
-  <li>Select <strong>Add</strong>.</li>
-</ol>
 
 <h3 id="mcp-remote">Using mcp-remote (Fallback)</h3>
 
@@ -1813,7 +1867,7 @@ PAGES['mcp-integration'] = {
       "command": "npx",
       "args": [
         "mcp-remote",
-        "https://insights-mcp.dryrun.security/insights/mcp",
+        "https://insights-mcp.dryrun.security/api/insights/mcp",
         "--transport", "http-first",
         "--allow-http"
       ],
@@ -1826,7 +1880,18 @@ PAGES['mcp-integration'] = {
 
 <h2 id="authorization">Authorization</h2>
 
-<p>When you first start the DryRun Security Insights MCP, you'll be prompted in a browser to authorize the <code>dryrunsecurity-insights-mcp</code> GitHub OAuth application. Click the <strong>Grant</strong> button to grant access to the appropriate GitHub Organization.</p>
+<p>The Insights MCP uses API token authentication. Generate a token from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard and pass it as a Bearer token in the <code>Authorization</code> header. See <a href="./api-guide.html">API Usage Guide</a> for details on key management.</p>
+
+<p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
+
+<h2 id="remediation-skill">DryRun Remediation Skill</h2>
+
+<p>In addition to connecting the Insights MCP, you can install the <strong>DryRun remediation skill</strong> into supported AI coding tools. The skill enables the tool to discover security findings and generate fixes directly. For Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace
+/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<p>Use the <strong>Add Skill</strong> button on the Integrations page for tool-specific instructions.</p>
 
 <h2 id="verifying">Verifying the Connection</h2>
 

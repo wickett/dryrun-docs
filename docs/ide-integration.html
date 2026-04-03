@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IDE Integration - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security integrates with VS Code, Cursor, and other IDEs - bringing security intelligence into your development environment.">
+  <title>AI Coding Tool Integrations - DryRun Security Docs</title>
+  <meta name="description" content="DryRun Security integrates with Cursor, Codex, Claude Code, Windsurf, VS Code, and Claude Desktop - bringing security intelligence into your development environment.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +108,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Developer Tools</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html" class="active">IDE Integration</a></li>
+<li><a href="../docs/ide-integration.html" class="active">AI Coding Tool Integrations</a></li>
 <li><a href="../docs/mcp-integration.html">MCP Integration</a></li>
 <li><a href="../docs/agents-md.html">AGENTS.md</a></li>
 <li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
@@ -138,8 +138,8 @@
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Developer Tools</div>
-        <h1 class="page-heading">IDE Integration</h1>
-        <p class="page-description">DryRun Security integrates with VS Code, Cursor, and other IDEs - bringing security intelligence into your development environment.</p>
+        <h1 class="page-heading">AI Coding Tool Integrations</h1>
+        <p class="page-description">DryRun Security integrates with Cursor, Codex, Claude Code, Windsurf, VS Code, and Claude Desktop - bringing security intelligence into your development environment.</p>
         <div class="doc-content">
 <h2 id="security-in-your-editor">Security in Your Editor</h2>
 
@@ -147,19 +147,60 @@
 
 <p>Rather than waiting for a PR to be opened to receive security feedback, developers with the IDE integration can get security context inline as they work - understanding the security implications of the code they're writing and the codebase they're modifying without leaving their editor.</p>
 
-<h2 id="vs-code-and-cursor">VS Code and Cursor</h2>
+<h2 id="ai-coding-integrations">AI Coding Integrations</h2>
 
-<p>DryRun Security integrates with Visual Studio Code and Cursor through two complementary mechanisms:</p>
+<p>DryRun Security integrates with the most popular AI coding tools. Each integration is available from the <strong>Settings &gt; Integrations</strong> page in the DryRun Security dashboard. Every AI coding integration provides two connection options:</p>
 
-<h3 id="mcp-integration">MCP Integration</h3>
-<p>The DryRun Security Insights MCP (Model Context Protocol) server connects your IDE's AI assistant directly to your organization's security data. When coding in Cursor or GitHub Copilot in VS Code, the AI assistant can answer security questions about your codebase, pull up findings for files you're working on, and provide context about your organization's security posture. See <a href="./mcp-integration.html">MCP Integration</a> for configuration details.</p>
+<ul>
+  <li><strong>Connect</strong> - Connects the DryRun Insights MCP to the tool, giving its AI assistant access to your organization's security data for context-aware code analysis</li>
+  <li><strong>Add Skill</strong> - Installs the DryRun remediation skill/plugin, enabling the tool to discover and fix security findings directly</li>
+</ul>
 
-<h3 id="direct-extension">Direct Extension</h3>
-<p>The DryRun Security extension surfaces security findings from your most recent scans inline in your editor, showing you open findings for the file you're currently editing without requiring you to switch to the dashboard. Findings from both PR scans and DeepScans are available.</p>
+<h3 id="supported-tools">Supported AI Coding Tools</h3>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Cursor</strong></td><td>Connect DryRun Insights MCP to Cursor IDE for AI-powered code analysis</td></tr>
+    <tr><td><strong>Codex</strong></td><td>Integrate DryRun Insights MCP with OpenAI Codex for enhanced code review</td></tr>
+    <tr><td><strong>Claude Code</strong></td><td>Use DryRun Insights MCP with Claude Code for security-aware coding assistance</td></tr>
+    <tr><td><strong>Windsurf</strong></td><td>Integrate DryRun Insights MCP with Windsurf IDE for AI-assisted code review</td></tr>
+    <tr><td><strong>VS Code</strong></td><td>Connect DryRun Insights MCP to Visual Studio Code for AI-powered security analysis</td></tr>
+  </tbody>
+</table>
+
+<h3 id="connect-flow">Connecting an AI Coding Tool</h3>
+
+<p>Clicking <strong>Connect</strong> on a tool card provides the setup command or configuration for that tool. For example, connecting Claude Code provides this command:</p>
+
+<pre><code>claude mcp add --transport http dryrun-security   https://insights-mcp.dryrun.security/api/insights/mcp   --header "Authorization: Bearer &lt;dryrunsec_token&gt;"</code></pre>
+
+<p>Replace <code>&lt;dryrunsec_token&gt;</code> with your API token from <strong>Settings &gt; Access Keys</strong>. See <a href="../docs/api-guide.html">API Usage Guide</a> for how to generate an access key.</p>
+
+<h3 id="add-skill-flow">Adding the Remediation Skill</h3>
+
+<p>Clicking <strong>Add Skill</strong> installs the DryRun remediation plugin into your coding tool. For example, in Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace
+/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<p>Once the skill is installed, the AI assistant can discover security findings from DryRun Security and generate fixes directly within your coding session.</p>
+
+<h2 id="desktop-integrations">Desktop Integrations</h2>
+
+<p>For desktop AI applications that support MCP, DryRun Security offers dedicated integration cards:</p>
+
+<ul>
+  <li><strong>Claude Desktop</strong> - Connect the DryRun Insights MCP to Claude Desktop for security-aware conversations about your codebase</li>
+</ul>
+
+<p>See <a href="./mcp-integration.html">MCP Integration</a> for detailed configuration instructions for all supported clients.</p>
 
 <h2 id="ai-native-ide">AI-Native IDE Workflows</h2>
 
-<p>For teams using AI coding assistants like Cursor, GitHub Copilot, or Claude Code, the DryRun Security IDE integration is particularly valuable. It allows the AI assistant to query DryRun Security's security intelligence as part of code generation - helping AI assistants write more secure code by understanding what vulnerabilities have been found in the codebase and what security patterns are in use.</p>
+<p>For teams using AI coding assistants, the DryRun Security integration is particularly valuable. It allows the AI assistant to query DryRun Security's security intelligence as part of code generation - helping AI assistants write more secure code by understanding what vulnerabilities have been found in the codebase and what security patterns are in use.</p>
 
 <p>This is especially relevant as teams adopt <code>AGENTS.md</code> to guide AI coding agents. See <a href="./agents-md.html">AGENTS.md</a> for how to configure security guidelines that AI agents and DryRun Security both use.</p>
         </div>
@@ -173,9 +214,11 @@
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
 <li class="toc-h2"><a href="#security-in-your-editor">Security in Your Editor</a></li>
-<li class="toc-h2"><a href="#vs-code-and-cursor">VS Code and Cursor</a></li>
-<li class="toc-h3"><a href="#mcp-integration">MCP Integration</a></li>
-<li class="toc-h3"><a href="#direct-extension">Direct Extension</a></li>
+<li class="toc-h2"><a href="#ai-coding-integrations">AI Coding Integrations</a></li>
+<li class="toc-h3"><a href="#supported-tools">Supported AI Coding Tools</a></li>
+<li class="toc-h3"><a href="#connect-flow">Connecting an AI Coding Tool</a></li>
+<li class="toc-h3"><a href="#add-skill-flow">Adding the Remediation Skill</a></li>
+<li class="toc-h2"><a href="#desktop-integrations">Desktop Integrations</a></li>
 <li class="toc-h2"><a href="#ai-native-ide">AI-Native IDE Workflows</a></li>
 </ul>
 </aside>

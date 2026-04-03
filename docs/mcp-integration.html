@@ -108,7 +108,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Developer Tools</p>
 <ul class="sidebar-links">
-<li><a href="../docs/ide-integration.html">IDE Integration</a></li>
+<li><a href="../docs/ide-integration.html">AI Coding Tool Integrations</a></li>
 <li><a href="../docs/mcp-integration.html" class="active">MCP Integration</a></li>
 <li><a href="../docs/agents-md.html">AGENTS.md</a></li>
 <li><a href="../docs/cicd-integration.html">CI/CD Integration</a></li>
@@ -163,15 +163,39 @@
 
 <p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
 
-<h3 id="direct-http">Direct HTTP Configuration (Recommended)</h3>
+<h3 id="quick-setup">Quick Setup from the Dashboard</h3>
 
-<p>If your client supports HTTP-based MCP servers with OAuth, connect directly:</p>
+<p>The fastest way to connect is through <strong>Settings &gt; Integrations</strong> in the DryRun Security dashboard. Each supported tool has a card with a <strong>Connect</strong> button that provides the exact command or configuration for that tool. See <a href="./ide-integration.html">AI Coding Tool Integrations</a> for the full list of supported tools.</p>
+
+<h3 id="claude-code">Claude Code (CLI)</h3>
+
+<pre><code>claude mcp add --transport http dryrun-security   https://insights-mcp.dryrun.security/api/insights/mcp   --header "Authorization: Bearer &lt;dryrunsec_token&gt;"</code></pre>
+
+<p>Replace <code>&lt;dryrunsec_token&gt;</code> with your token from <strong>Settings &gt; Access Keys</strong>.</p>
+
+<h3 id="claude-desktop">Claude Desktop or Claude Web</h3>
+
+<ol>
+  <li>Navigate to <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">https://claude.ai</a>.</li>
+  <li>Select <strong>Settings</strong>.</li>
+  <li>Select <strong>Connectors</strong>.</li>
+  <li>Click <strong>Add custom connector</strong>.</li>
+  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/api/insights/mcp</code></li>
+  <li>Select <strong>Add</strong>.</li>
+</ol>
+
+<h3 id="direct-http">Direct HTTP Configuration</h3>
+
+<p>For clients that support HTTP-based MCP servers, use this JSON configuration:</p>
 
 <pre><code>{
   "mcpServers": {
     "dryrun-security": {
       "type": "http",
-      "url": "https://insights-mcp.dryrun.security/insights/mcp"
+      "url": "https://insights-mcp.dryrun.security/api/insights/mcp",
+      "headers": {
+        "Authorization": "Bearer &lt;dryrunsec_token&gt;"
+      }
     }
   }
 }</code></pre>
@@ -179,21 +203,6 @@
 <h3 id="cursor-notice">Cursor Compatibility Notice</h3>
 
 <p><strong>Known issue:</strong> Cursor currently has a known bug in its MCP implementation that may cause authentication failures. Contact <a href="mailto:hi@dryrun.security">hi@dryrun.security</a> if you need the workaround enabled for your environment.</p>
-
-<h3 id="claude-shortcuts">Claude Shortcuts</h3>
-
-<p><strong>Claude Code (CLI):</strong></p>
-<pre><code>claude mcp add --transport http dryrun-security https://insights-mcp.dryrun.security/insights/mcp</code></pre>
-
-<p><strong>Claude Desktop or Claude Web:</strong></p>
-<ol>
-  <li>Navigate to <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">https://claude.ai</a>.</li>
-  <li>Select <strong>Settings</strong>.</li>
-  <li>Select <strong>Connectors</strong>.</li>
-  <li>Click <strong>Add custom connector</strong>.</li>
-  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/insights/mcp</code></li>
-  <li>Select <strong>Add</strong>.</li>
-</ol>
 
 <h3 id="mcp-remote">Using mcp-remote (Fallback)</h3>
 
@@ -205,7 +214,7 @@
       "command": "npx",
       "args": [
         "mcp-remote",
-        "https://insights-mcp.dryrun.security/insights/mcp",
+        "https://insights-mcp.dryrun.security/api/insights/mcp",
         "--transport", "http-first",
         "--allow-http"
       ],
@@ -218,7 +227,18 @@
 
 <h2 id="authorization">Authorization</h2>
 
-<p>When you first start the DryRun Security Insights MCP, you'll be prompted in a browser to authorize the <code>dryrunsecurity-insights-mcp</code> GitHub OAuth application. Click the <strong>Grant</strong> button to grant access to the appropriate GitHub Organization.</p>
+<p>The Insights MCP uses API token authentication. Generate a token from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard and pass it as a Bearer token in the <code>Authorization</code> header. See <a href="./api-guide.html">API Usage Guide</a> for details on key management.</p>
+
+<p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
+
+<h2 id="remediation-skill">DryRun Remediation Skill</h2>
+
+<p>In addition to connecting the Insights MCP, you can install the <strong>DryRun remediation skill</strong> into supported AI coding tools. The skill enables the tool to discover security findings and generate fixes directly. For Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace
+/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<p>Use the <strong>Add Skill</strong> button on the Integrations page for tool-specific instructions.</p>
 
 <h2 id="verifying">Verifying the Connection</h2>
 
@@ -227,7 +247,7 @@
 <p>If you encounter any issues, reach out at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/ide-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">IDE Integration</span></a>
+<a href="../docs/ide-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">AI Coding Tool Integrations</span></a>
 <a href="../docs/agents-md.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">AGENTS.md</span></a>
 </nav>
       </div>
@@ -238,11 +258,14 @@
 <li class="toc-h2"><a href="#what-is-the-insights-mcp">What Is the Insights MCP?</a></li>
 <li class="toc-h2"><a href="#capabilities">Capabilities</a></li>
 <li class="toc-h2"><a href="#configuration">Configuration</a></li>
-<li class="toc-h3"><a href="#direct-http">Direct HTTP Configuration (Recommended)</a></li>
+<li class="toc-h3"><a href="#quick-setup">Quick Setup from the Dashboard</a></li>
+<li class="toc-h3"><a href="#claude-code">Claude Code (CLI)</a></li>
+<li class="toc-h3"><a href="#claude-desktop">Claude Desktop or Claude Web</a></li>
+<li class="toc-h3"><a href="#direct-http">Direct HTTP Configuration</a></li>
 <li class="toc-h3"><a href="#cursor-notice">Cursor Compatibility Notice</a></li>
-<li class="toc-h3"><a href="#claude-shortcuts">Claude Shortcuts</a></li>
 <li class="toc-h3"><a href="#mcp-remote">Using mcp-remote (Fallback)</a></li>
 <li class="toc-h2"><a href="#authorization">Authorization</a></li>
+<li class="toc-h2"><a href="#remediation-skill">DryRun Remediation Skill</a></li>
 <li class="toc-h2"><a href="#verifying">Verifying the Connection</a></li>
 </ul>
 </aside>
