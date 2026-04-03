@@ -26,7 +26,7 @@
   <url><loc>https://docs.dryrun.security/docs/policy-library.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/auto-fix.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/fix-verification.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.dryrun.security/docs/finding-dismissal.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/finding-triage.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/risk-register.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/security-dashboard.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/configurations.html</loc><priority>0.8</priority></url>

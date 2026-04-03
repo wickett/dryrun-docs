@@ -89,7 +89,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-dismissal.html">Finding Dismissal</a></li>
+<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -143,7 +143,7 @@
         <div class="doc-content">
 <h2 id="beyond-stateless-scanning">Beyond Stateless Scanning</h2>
 
-<p>Most security scanning tools are stateless: they analyze a PR, produce findings, and forget everything. The next PR is analyzed completely fresh, with no memory of what was found before, what was dismissed as a false positive, or how the codebase has evolved over time. This means every scan starts from zero, and every improvement to accuracy must be re-learned.</p>
+<p>Most security scanning tools are stateless: they analyze a PR, produce findings, and forget everything. The next PR is analyzed completely fresh, with no memory of what was found before, what was triaged as a false positive, or how the codebase has evolved over time. This means every scan starts from zero, and every improvement to accuracy must be re-learned.</p>
 
 <p>DryRun Security builds and maintains a <strong>Code Security Knowledge Graph</strong> - a persistent, structured representation of security intelligence about your codebase that accumulates over time and informs every subsequent analysis.</p>
 
@@ -152,9 +152,9 @@
 <p>The knowledge graph captures and connects multiple dimensions of security knowledge about your repositories:</p>
 
 <ul>
-  <li><strong>Finding history</strong> - Which vulnerabilities have been identified, when, in which files, and what their current disposition is (open, dismissed, fixed).</li>
-  <li><strong>False positive suppression</strong> - When a finding is dismissed as a false positive, that judgment is encoded as a fingerprint and applied to suppress the same finding in future scans automatically.</li>
-  <li><strong>Developer-provided context</strong> - Context added by developers and security teams when dismissing findings is stored and used to calibrate future analysis in similar situations.</li>
+  <li><strong>Finding history</strong> - Which vulnerabilities have been identified, when, in which files, and what their current disposition is (open, triaged, fixed).</li>
+  <li><strong>False positive suppression</strong> - When a finding is triaged as a false positive, that judgment is encoded as a fingerprint and applied to suppress the same finding in future scans automatically.</li>
+  <li><strong>Developer-provided context</strong> - Context added by developers and security teams when triaging findings is stored and used to calibrate future analysis in similar situations.</li>
   <li><strong>Codebase patterns</strong> - Understanding of the frameworks, authentication patterns, and security-relevant design choices in your codebase that inform how code changes should be evaluated.</li>
 </ul>
 
@@ -166,7 +166,7 @@
 
 <h2 id="accumulating-accuracy-over-time">Accumulating Accuracy Over Time</h2>
 
-<p>The practical impact of the knowledge graph is that DryRun Security gets more accurate over time as it learns the specific characteristics of your codebase. False positive rates decrease as the system accumulates dismissal context. The risk model becomes better calibrated to your specific risk profile, frameworks, and deployment patterns. Security intelligence is a durable organizational asset - not something that evaporates between scans.</p>
+<p>The practical impact of the knowledge graph is that DryRun Security gets more accurate over time as it learns the specific characteristics of your codebase. False positive rates decrease as the system accumulates triage context. The risk model becomes better calibrated to your specific risk profile, frameworks, and deployment patterns. Security intelligence is a durable organizational asset - not something that evaporates between scans.</p>
         </div>
 <nav class="prev-next">
 <a href="../docs/git-behavioral-analysis.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Git Behavioral Analysis</span></a>

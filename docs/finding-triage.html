@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coverage Matrix - Vulnerability Categories - DryRun Security Docs</title>
-  <meta name="description" content="The 47 vulnerability categories DryRun Security detects, with CWE mappings.">
+  <title>Finding Triage - DryRun Security Docs</title>
+  <meta name="description" content="Triage findings with context, suppress recurring false positives with fingerprinting, and feed decisions back into DryRun Security so it learns and improves over time.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +62,7 @@
 <li><a href="../docs/secrets-detection.html">Secrets Detection</a></li>
 <li><a href="../docs/sca.html">Software Composition Analysis (SCA)</a></li>
 <li><a href="../docs/iac-scanning.html">Infrastructure as Code Scanning</a></li>
-<li><a href="../docs/coverage-matrix.html" class="active">Coverage Matrix - Vulnerability Categories</a></li>
+<li><a href="../docs/coverage-matrix.html">Coverage Matrix - Vulnerability Categories</a></li>
 <li><a href="../docs/vulnerability-coverage.html">Vulnerability Coverage</a></li>
 <li><a href="../docs/sub-agent-analyzers.html">Security Analyzers</a></li>
 </ul>
@@ -89,7 +89,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
+<li><a href="../docs/finding-triage.html" class="active">Finding Triage</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -137,88 +137,91 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
-        <h1 class="page-heading">Coverage Matrix - Vulnerability Categories</h1>
-        <p class="page-description">The 47 vulnerability categories DryRun Security detects, with CWE mappings.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Remediation</div>
+        <h1 class="page-heading">Finding Triage</h1>
+        <p class="page-description">Triage findings with context, suppress recurring false positives with fingerprinting, and feed decisions back into DryRun Security so it learns and improves over time.</p>
         <div class="doc-content">
-<p>This table lists the vulnerability categories DryRun Security can detect with the Code Review Agent. CWE mappings below are examples to help readers anchor each category to common weakness definitions.</p>
+<p>Every triage decision makes DryRun Security smarter. When you triage a finding - whether you mark it as a false positive, accept the risk, or add context - DryRun Security learns from that decision and applies it to future scans across your organization.</p>
 
-<p>We are always adding features and capabilities, and this list is updated accordingly.</p>
+<h2 id="how-dryrun-learns">How DryRun Security Learns from Triage</h2>
 
-<h2 id="vulnerability-categories">Vulnerability Categories</h2>
+<p>Most security tools treat triage as a dead end: you dismiss a finding, and it disappears until it shows up again next week. DryRun Security treats every triage decision as a learning signal:</p>
+<ul>
+  <li><strong>False positive fingerprinting</strong> - When you mark a finding as a false positive, DryRun Security fingerprints the vulnerability pattern and automatically suppresses it in future PR scans and DeepScans.</li>
+  <li><strong>Context-based learning</strong> - When you add context explaining why a finding is safe, that context is stored and used to calibrate future analysis in similar situations across your codebase.</li>
+  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../code-security-knowledge-graph.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
+</ul>
+<p>The result: false positive rates decrease over time as DryRun Security accumulates organizational knowledge from your team's triage decisions.</p>
 
-<div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Example CWEs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>API Query Injection</td><td>Improper handling of user-controlled input in API queries that allows attackers to manipulate backend queries or filters.</td><td>CWE-943, CWE-74</td></tr>
-    <tr><td>Authentication Bypass</td><td>Flaws that allow users to bypass authentication mechanisms and gain access without valid credentials.</td><td>CWE-287, CWE-306</td></tr>
-    <tr><td>Missing Authorization Checks</td><td>Endpoints or functions that fail to enforce authorization, allowing users to access resources they should not.</td><td>CWE-862</td></tr>
-    <tr><td>Business Logic Flaw</td><td>Errors in application logic that can be abused to gain unintended outcomes, even when traditional security controls are in place.</td><td>CWE-840</td></tr>
-    <tr><td>Cache Poisoning</td><td>Manipulation of cache entries to serve malicious or incorrect content to other users.</td><td>CWE-444, CWE-113</td></tr>
-    <tr><td>Configuration Injection</td><td>Injection of untrusted input into configuration files, environment variables, or runtime settings.</td><td>CWE-15, CWE-20</td></tr>
-    <tr><td>Cryptographic Weakness</td><td>Use of weak, broken, or outdated cryptographic algorithms, keys, or practices.</td><td>CWE-327, CWE-326</td></tr>
-    <tr><td>Cross-Site Request Forgery (CSRF)</td><td>Actions performed on behalf of an authenticated user without their consent due to missing or weak CSRF protections.</td><td>CWE-352</td></tr>
-    <tr><td>CSV Injection</td><td>Injection of spreadsheet formulas into CSV exports that execute when opened in spreadsheet software.</td><td>CWE-1236</td></tr>
-    <tr><td>Email Header Injection</td><td>Manipulation of email headers through unsanitized input, potentially enabling spam or phishing attacks.</td><td>CWE-93</td></tr>
-    <tr><td>Excessive Privileges</td><td>Users, services, or tokens granted more permissions than required for their intended function.</td><td>CWE-250, CWE-269</td></tr>
-    <tr><td>Hardcoded Credentials</td><td>Credentials such as passwords, API keys, or tokens embedded directly in source code.</td><td>CWE-798, CWE-259</td></tr>
-    <tr><td>HTTP Header Injection</td><td>Injection of malicious content into HTTP headers due to improper input validation.</td><td>CWE-113, CWE-93</td></tr>
-    <tr><td>Insecure Direct Object Reference (IDOR)</td><td>Direct access to internal objects using user-controlled identifiers without proper authorization checks.</td><td>CWE-639, CWE-284</td></tr>
-    <tr><td>Information Disclosure</td><td>Exposure of sensitive data such as secrets, internal paths, stack traces, or system details.</td><td>CWE-200, CWE-209</td></tr>
-    <tr><td>Insecure Client Storage</td><td>Sensitive data stored insecurely on the client side, such as in local storage or cookies.</td><td>CWE-922, CWE-312</td></tr>
-    <tr><td>Insecure Defaults</td><td>Unsafe default configurations that weaken security if not explicitly changed.</td><td>CWE-276, CWE-1188</td></tr>
-    <tr><td>Insecure Deserialization</td><td>Deserializing untrusted data in a way that allows code execution or data manipulation.</td><td>CWE-502</td></tr>
-    <tr><td>Insecure File Upload</td><td>File upload functionality that allows malicious files or unrestricted file types.</td><td>CWE-434</td></tr>
-    <tr><td>Insecure Transport</td><td>Use of unencrypted or improperly secured network communication channels.</td><td>CWE-319, CWE-295</td></tr>
-    <tr><td>Intent Redirection</td><td>Unvalidated or unsafe redirection logic that can be abused to send users to unintended destinations.</td><td>CWE-601</td></tr>
-    <tr><td>Language Version Risk</td><td>Use of outdated or unsupported programming language versions with known security issues.</td><td>CWE-1104</td></tr>
-    <tr><td>LLM Tool Misuse</td><td>Unsafe or unintended use of large language model tools, including insecure prompt handling or tool misuse.</td><td>CWE-20, CWE-74, CWE-1426</td></tr>
-    <tr><td>Log Injection</td><td>Injection of untrusted input into logs that can mislead monitoring systems or hide malicious activity.</td><td>CWE-117</td></tr>
-    <tr><td>Mass Assignment</td><td>Automatic binding of user input to object properties without restricting sensitive fields.</td><td>CWE-915</td></tr>
-    <tr><td>Memory Safety Issue</td><td>Unsafe memory operations that can lead to crashes, data corruption, or code execution.</td><td>CWE-119, CWE-787, CWE-416</td></tr>
-    <tr><td>Network Exposure</td><td>Unintended exposure of internal services, ports, or network resources.</td><td>CWE-668</td></tr>
-    <tr><td>Open CORS Policy</td><td>Overly permissive Cross-Origin Resource Sharing policies that allow unintended access.</td><td>CWE-942</td></tr>
-    <tr><td>Open Redirect</td><td>Redirects that accept untrusted input, enabling phishing or malicious redirection attacks.</td><td>CWE-601</td></tr>
-    <tr><td>Path Traversal</td><td>Manipulation of file paths to access files or directories outside the intended scope.</td><td>CWE-22</td></tr>
-    <tr><td>Privilege Escalation</td><td>Flaws that allow users or processes to gain higher privileges than intended.</td><td>CWE-269, CWE-284</td></tr>
-    <tr><td>Prompt Injection</td><td>Manipulation of LLM prompts that alters behavior, bypasses safeguards, or leaks sensitive data.</td><td>CWE-77, CWE-74, CWE-913, CWE-1427</td></tr>
-    <tr><td>Prototype Pollution</td><td>Modification of object prototypes that can impact application logic or security.</td><td>CWE-1321</td></tr>
-    <tr><td>Remote Code Execution (RCE)</td><td>Flaws that allow attackers to execute arbitrary code on the host system.</td><td>CWE-94, CWE-78</td></tr>
-    <tr><td>Resource Exhaustion</td><td>Operations that can be abused to consume excessive CPU, memory, or other resources.</td><td>CWE-400</td></tr>
-    <tr><td>SQL Injection (SQLi)</td><td>Injection of malicious SQL queries through unsanitized input.</td><td>CWE-89</td></tr>
-    <tr><td>Server-Side Request Forgery (SSRF)</td><td>Ability to make server-side requests to internal or unintended external resources.</td><td>CWE-918</td></tr>
-    <tr><td>Subdomain Takeover</td><td>Dangling or misconfigured subdomains that can be claimed by attackers, as defined by Infrastructure as Code changes.</td><td>CWE-668, CWE-284</td></tr>
-    <tr><td>Supply Chain Risk</td><td>Risks introduced through third-party libraries, dependencies, or external services.</td><td>CWE-1104, CWE-829</td></tr>
-    <tr><td>Terminal Escape Injection</td><td>Injection of terminal control characters that can manipulate terminal output or behavior.</td><td>CWE-150, CWE-74</td></tr>
-    <tr><td>Time-of-Check Time-of-Use (TOCTOU)</td><td>Race conditions where system state changes between validation and use.</td><td>CWE-367</td></tr>
-    <tr><td>Timing Side Channel</td><td>Information leakage through measurable differences in execution time.</td><td>CWE-208</td></tr>
-    <tr><td>UI Spoofing</td><td>User interface elements designed to deceive users into taking unintended actions.</td><td>CWE-451</td></tr>
-    <tr><td>User Enumeration</td><td>Ability to determine valid users based on application responses.</td><td>CWE-203, CWE-204</td></tr>
-    <tr><td>Vulnerable Dependency</td><td>Use of third-party dependencies with known security vulnerabilities.</td><td>CWE-937, CWE-1104</td></tr>
-    <tr><td>XML Injection</td><td>Injection of malicious XML content that alters processing or behavior.</td><td>CWE-91</td></tr>
-    <tr><td>Cross-Site Scripting (XSS)</td><td>Injection of malicious scripts that execute in a user's browser.</td><td>CWE-79</td></tr>
-    <tr><td>XML External Entity (XXE)</td><td>XML parsing vulnerabilities that allow access to internal files or services.</td><td>CWE-611</td></tr>
-  </tbody>
-</table>
-</div>
+<h2 id="triaging-a-finding">Triaging a Finding</h2>
+
+<p>In the Risk Register, click <strong>Triage</strong> on a finding to:</p>
+<ul>
+  <li>Select a triage reason (for example: False Positive, Accepted Risk, Won't Fix)</li>
+  <li>Add supporting context in a text box explaining your reasoning</li>
+</ul>
+<p>The more context you provide, the more DryRun Security can learn from the decision. Even a short explanation helps improve future scan accuracy.</p>
+
+<h2 id="false-positive-fingerprinting">False Positive Fingerprinting</h2>
+
+<p>When you mark a finding as <strong>False Positive</strong>:</p>
+<ul>
+  <li>DryRun Security creates a fingerprint of that vulnerability pattern.</li>
+  <li>Future PR scans and DeepScans automatically suppress the finding when the same fingerprint is detected, so it does not come back.</li>
+  <li>The fingerprint and your context are stored in the Knowledge Graph and used to improve detection accuracy for similar patterns.</li>
+</ul>
+
+<h2 id="context-based-learning">Context-Based Learning</h2>
+
+<p>When you include context in the triage text box, DryRun Security uses it in two ways:</p>
+<ul>
+  <li><strong>Immediate suppression</strong> - Similar false positives matching the context are suppressed in future scans.</li>
+  <li><strong>Long-term learning</strong> - The context feeds into the Knowledge Graph to improve analysis for similar code patterns, framework behaviors, and deployment topologies.</li>
+</ul>
+
+<p>Examples of useful context:</p>
+<ul>
+  <li>"This endpoint is only accessible from internal services - no user input reaches this code path."</li>
+  <li>"TLS offloading is handled upstream; the application does not need to enforce HTTPS internally."</li>
+  <li>"This query is constructed only from validated constants, never from user input."</li>
+</ul>
+
+<h2 id="triage-from-pr-workflow">Triage from the PR Workflow</h2>
+
+<p>Developers can also triage findings directly from GitHub and GitLab comments - marking findings as false positives and adding context without leaving the PR workflow. Those triage decisions flow into the Risk Register and feed the same learning loop, keeping the feedback close to where developers work.</p>
+
+<h2 id="faqs">FAQs</h2>
+
+<p><strong>What is Finding Triage?</strong><br>
+Finding Triage lets you categorize a finding and record why, using a triage reason and optional context. Triaged findings are marked resolved in the UI, and the decisions feed back into DryRun Security to improve future scans.</p>
+
+<p><strong>Does DryRun Security actually learn from my triage decisions?</strong><br>
+Yes. Every triage decision - the reason, the context you provide, the fingerprint - is stored in the Code Security Knowledge Graph. DryRun Security uses this to suppress duplicate findings immediately and to improve detection accuracy for similar patterns over time.</p>
+
+<p><strong>What happens when I mark a finding as a False Positive?</strong><br>
+DryRun Security fingerprints the vulnerability pattern. If the same fingerprint is detected in a future PR scan or DeepScan, the finding is automatically suppressed.</p>
+
+<p><strong>How is the context field used?</strong><br>
+Context is stored with the triage decision and used in two ways: immediately to suppress similar false positives, and over time to improve analysis accuracy through the Knowledge Graph.</p>
+
+<p><strong>Can developers triage findings from their PR workflow?</strong><br>
+Yes. Developers can triage findings directly from GitHub and GitLab comments. Those decisions sync to the Risk Register and feed the same learning loop.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/iac-scanning.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Infrastructure as Code Scanning</span></a>
-<a href="../docs/vulnerability-coverage.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Vulnerability Coverage</span></a>
+<a href="../docs/fix-verification.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Fix Verification</span></a>
+<a href="../docs/risk-register.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Risk Register</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#vulnerability-categories">Vulnerability Categories</a></li>
+<li class="toc-h2"><a href="#how-dryrun-learns">How DryRun Security Learns from Triage</a></li>
+<li class="toc-h2"><a href="#triaging-a-finding">Triaging a Finding</a></li>
+<li class="toc-h2"><a href="#false-positive-fingerprinting">False Positive Fingerprinting</a></li>
+<li class="toc-h2"><a href="#context-based-learning">Context-Based Learning</a></li>
+<li class="toc-h2"><a href="#triage-from-pr-workflow">Triage from the PR Workflow</a></li>
+<li class="toc-h2"><a href="#faqs">FAQs</a></li>
 </ul>
 </aside>
   </div>
