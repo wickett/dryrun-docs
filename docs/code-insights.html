@@ -127,15 +127,13 @@
 
 <h2 id="dryrun-ai-assistant">DryRun AI Assistant</h2>
 
-<p>The main interface is a chat window powered by the <strong>DryRun AI Assistant</strong>. When you open Insights, the assistant greets you with:</p>
-
-<blockquote>"Hello! I'm here to help you explore your security insights. You can ask me questions about the analysis results, specific patterns detected, or guidance on addressing findings. What would you like to know?"</blockquote>
+<p>The main interface features an <strong>inline AI Assistant chat</strong> with streaming responses. When you open Insights, the assistant is ready to answer questions about your security data in real time.</p>
 
 <p>Type a question in natural language and the assistant responds with contextual answers drawn from your PR reviews, DeepScans, policy enforcement records, and Risk Register data. Responses can include tables, charts, links to specific PRs, and code references.</p>
 
 <h2 id="suggested-prompts">Suggested Prompts</h2>
 
-<p>Below the chat window, the Insights page offers quick-start prompts you can click to begin a conversation:</p>
+<p>Below the chat window, a <strong>More</strong> dropdown provides quick question suggestions to help you get started:</p>
 
 <ul>
   <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
@@ -155,7 +153,7 @@
 
 <h2 id="customize-insights">Customize Insights</h2>
 
-<p>At the bottom of the Insights page, the <strong>Customize Insights</strong> section lets you tailor the analysis to your organization's priorities. Expand this section to configure which types of insights are generated and how the assistant prioritizes its responses.</p>
+<p>The <strong>Category Manager</strong> provides tabbed controls for customizing <strong>Categories</strong> and <strong>Quick Questions</strong>. Categories let you define the types of insights generated, while Quick Questions configure the suggested prompts available in the More dropdown. Redesigned Insights cards with expandable sections provide a cleaner, more organized view of your security data.</p>
 
 <h2 id="use-cases">Use Cases</h2>
 <figure class="docs-screenshot"><img src="../assets/images/insights/02-insights-results.png" alt="AI Insights results showing security analysis" loading="lazy"></figure>
@@ -165,6 +163,9 @@
 
 <h3 id="risk-trend-analysis">Risk Trend Analysis</h3>
 <p>Track how your security posture changes over time. Ask about trends by repository, team, vulnerability type, or time period. Identify whether remediation is keeping pace with new findings.</p>
+
+<h3 id="investigate-pr">Investigate PR</h3>
+<p>The <strong>Investigate PR</strong> action triggers <a href="../docs/pr-variant-analysis.html">variant analysis</a> directly from the Insights page to enhance vulnerability investigation. When you identify a finding of interest, you can deep-dive into the specific PR to understand the full security context, related patterns, and potential blast radius.</p>
 
 <h3 id="attack-surface-discovery">Attack Surface Discovery</h3>
 <p>Understand what new attack surface your team is creating. Query for new endpoints, new dependencies, new infrastructure, or any code pattern that expands your exposure.</p>
@@ -236,6 +237,7 @@
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 <li class="toc-h3"><a href="#audit-reporting">Audit-Ready Reporting</a></li>
 <li class="toc-h3"><a href="#risk-trend-analysis">Risk Trend Analysis</a></li>
+<li class="toc-h3"><a href="#investigate-pr">Investigate PR</a></li>
 <li class="toc-h3"><a href="#attack-surface-discovery">Attack Surface Discovery</a></li>
 <li class="toc-h3"><a href="#remediation-automation">Automated Discovery and Remediation</a></li>
 <li class="toc-h2"><a href="#how-it-works">How It Works</a></li>

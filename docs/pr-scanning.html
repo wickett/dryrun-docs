@@ -172,6 +172,20 @@
 
 <p>DryRun Security calculates and assigns a risk level to each change: <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This risk level can be used to trigger notifications or block the merging of a Pull Request via GitHub Branch Protection Rules.</p>
 
+<h2 id="vulnerability-severity">Vulnerability Severity Workflow</h2>
+
+<p>DryRun Security evaluates each finding based on both <strong>impact</strong> and <strong>exploitability</strong>, assigning a severity rating of <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This model goes beyond simple pattern matching to assess how likely a finding is to be exploitable in your specific codebase context.</p>
+
+<p>A configuration toggle is available to block PRs based on this severity model. See <a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a> for setup.</p>
+
+<h2 id="false-positive-reduction">False Positive Reduction</h2>
+
+<p>DryRun Security continuously improves its false positive detection rate and matching across your organization. When findings are triaged as false positives, the system fingerprints those patterns and applies suppression across all repositories in your org. Recent improvements have expanded the matching logic to reduce repeat false positives more effectively.</p>
+
+<h2 id="context-handling">Context Handling</h2>
+
+<p>Package handling context has been expanded to inject better context where and when it matters during analysis. This means DryRun Security&rsquo;s agents have richer understanding of dependency relationships, framework conventions, and package-level security patterns when evaluating code changes.</p>
+
 <h2 id="github-checks">GitHub Checks</h2>
 
 <p>DryRun Security also posts agent results to the <strong>Checks</strong> area on the Pull Request. This can be seen on the Pull Request default page or by clicking the <strong>Checks</strong> tab at the top of the Pull Request page.</p>
@@ -233,6 +247,9 @@
 <li class="toc-h2"><a href="#policy-enforcement">Policy Enforcement</a></li>
 <li class="toc-h2"><a href="#code-security">Code Security</a></li>
 <li class="toc-h2"><a href="#risk-level">Risk Level</a></li>
+<li class="toc-h2"><a href="#vulnerability-severity">Vulnerability Severity Workflow</a></li>
+<li class="toc-h2"><a href="#false-positive-reduction">False Positive Reduction</a></li>
+<li class="toc-h2"><a href="#context-handling">Context Handling</a></li>
 <li class="toc-h2"><a href="#github-checks">GitHub Checks</a></li>
 <li class="toc-h2"><a href="#gitlab-merge-requests">GitLab Merge Requests</a></li>
 <li class="toc-h2"><a href="#how-sast-works">How DryRun Security SAST Works</a></li>
