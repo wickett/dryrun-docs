@@ -2179,42 +2179,6 @@ Ignore any issues related to Cookies missing Secure flags, requiring
 HTTPS in build configurations, or certificate requirements in
 this application.</code></pre>
 
-
-<h2 id="ai-native-architecture">AI-Native Architecture</h2>
-
-<h2 id="built-for-ai-not-bolted-on">Built for AI, Not Bolted On</h2>
-
-<p>Most security tools began as rules engines, signature databases, or AST analyzers - and then added AI as a post-processing layer. DryRun Security was designed from the ground up as an AI-native system. Every component, from how code is ingested to how findings are reported, is built around the capabilities of large language models operating as specialized agents.</p>
-
-<p>This architectural difference is fundamental. A rules engine with AI layered on top can summarize findings. An AI-native system can reason about code intent, trace data flows across files, evaluate the security implications of a business logic decision, and assess risk in the way a senior security engineer would - not by matching patterns, but by understanding context.</p>
-
-<h2 id="multi-agent-system">Multi-Agent System</h2>
-
-<p>DryRun Security's analysis is performed by a coordinated system of specialized agents. Each agent is designed for a specific domain of security analysis, allowing deep expertise without sacrificing coverage breadth.</p>
-
-<p>Core agents include:</p>
-
-<ul>
-  <li><strong>Code Review Agent</strong> - The primary agent that analyzes pull request diffs for security vulnerabilities across all supported categories.</li>
-  <li><strong>DeepScan Agent</strong> - Performs full-repository analysis, tracing multi-file data flows and identifying vulnerabilities that span across modules.</li>
-  <li><strong>Policy Enforcement Agent</strong> - Evaluates code changes against user-defined Custom Code Policies and enforces organizational security standards.</li>
-  <li><strong>Secrets Analyzer</strong> - Specialized detection of hardcoded credentials, API keys, and authentication tokens with contextual false-positive reduction.</li>
-  <li><strong>SQL Injection Analyzer</strong> - Deep data-flow tracing for SQL injection vulnerabilities, covering both direct injection and ORM misuse patterns.</li>
-  <li><strong>Infrastructure as Code Agent</strong> - Analyzes Terraform, CloudFormation, Kubernetes, and other IaC formats for misconfigurations and infrastructure security risks.</li>
-  <li><strong>Dependency Risk Agent</strong> - Evaluates third-party packages and supply chain risk, including vulnerable dependency detection and SCA.</li>
-</ul>
-
-<h2 id="agentic-architecture">Agentic Architecture</h2>
-
-<p>DryRun Security's agents operate with genuine agentic capability - they don't just classify code; they reason about it. An agent can decide to look up the definition of a called function, trace an import across files, or consult project-specific context from an <code>AGENTS.md</code> file before reaching a conclusion. This tool-use capability is what enables cross-file analysis and false-positive reduction that isn't possible with single-pass analysis.</p>
-
-<p>Agents operate in parallel on each scan, with results coordinated into a unified report. This parallel architecture means that even complex repositories with many files and many potential findings can be analyzed quickly without sacrificing depth.</p>
-
-<h2 id="model-independent-verification">Model-Independent Verification</h2>
-
-<p>DryRun Security uses <strong>model-independent verification</strong> to validate findings before surfacing them. Candidate findings are cross-checked across multiple AI models, ensuring that a result is not an artifact of a single model's quirks or hallucination tendencies. This multi-model validation is a key part of why DryRun Security achieves significantly lower false-positive rates than single-model approaches.</p>
-
-<p>This architecture also means DryRun Security is not locked to any single AI provider. As models improve and new capabilities emerge, DryRun Security can incorporate them without disrupting the underlying analysis framework.</p>
 ''',
 }
 
