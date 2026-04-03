@@ -119,9 +119,15 @@ body {
   width: auto;
 }
 
-/* Logo text paths: white in dark mode, dark in light mode */
-.logo-text { fill: #ffffff; }
-html[data-theme="light"] .logo-text { fill: #1A1825; }
+/* Logo colors: currentColor on SVG inherits from container's color */
+.logo-link,
+.footer-col-logo a {
+  color: #ffffff;
+}
+html[data-theme="light"] .logo-link,
+html[data-theme="light"] .footer-col-logo a {
+  color: #1A1825;
+}
 
 .header-divider {
   width: 1px;
