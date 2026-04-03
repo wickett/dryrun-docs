@@ -233,31 +233,6 @@ html[data-theme="light"] .footer-col-logo a svg {
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 2px; }
 
-.sidebar-header {
-  padding: 16px 20px 12px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 8px;
-}
-
-.sidebar-home-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  transition: color 0.15s ease;
-}
-.sidebar-home-link:hover { color: var(--accent); }
-.sidebar-home-link svg {
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity 0.15s ease;
-}
-.sidebar-home-link:hover svg { opacity: 1; }
-
 .sidebar-search {
   padding: 10px 14px 6px;
   position: relative;
