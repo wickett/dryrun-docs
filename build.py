@@ -3420,6 +3420,14 @@ def render_sidebar(current_slug: str, asset_prefix: str) -> str:
     parts.append('<span>Documentation</span>')
     parts.append('</a>')
     parts.append('</div>')
+    parts.append('<div class="sidebar-search">')
+    parts.append('<div class="sidebar-search-wrap">')
+    parts.append('<svg class="sidebar-search-icon" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>')
+    parts.append('<input type="text" id="docsSearch" placeholder="Search docs..." autocomplete="off">')
+    parts.append('<span class="sidebar-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>')
+    parts.append('</div>')
+    parts.append('<div id="searchResults" class="search-results" hidden></div>')
+    parts.append('</div>')
     parts.append('<div class="sidebar-nav">')
     for section in SECTIONS:
         parts.append('<div class="sidebar-section">')
@@ -3596,7 +3604,8 @@ FOOTER_HTML = '''  <footer class="site-footer">
   </footer>'''
 
 
-def render_doc_page(slug: str, page: dict, asset_prefix: str = '../') -> str:
+def render_doc_page(slug: str, page: dict, asset_prefix: str = '../',
+                    search_index: str = '[]') -> str:
     title = page['title']
     description = page['description']
     section_name = page.get('section', get_section_for_slug(slug))
@@ -3644,61 +3653,41 @@ def render_doc_page(slug: str, page: dict, asset_prefix: str = '../') -> str:
 {toc}
   </div>
 {footer}
+  <script>window.__SEARCH_INDEX__={search_index};</script>
   <script src="{asset_prefix}app.js"></script>
 </body>
 </html>'''
 
 
 # ---------------------------------------------------------------------------
-# Index page
+# Index page — renders the documentation intro in doc-page layout
 # ---------------------------------------------------------------------------
 
-SECTION_ICONS = {
-    'Getting Started': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>',
-    'Scanning': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
-    'Code Security Intelligence': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a4 4 0 014 4v1h2a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2V6a4 4 0 014-4z"/></svg>',
-    'Platform': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
-    'Integrations': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14"/></svg>',
-}
-
-SECTION_DESCRIPTIONS = {
-    'Getting Started': 'Install DryRun Security on GitHub or GitLab and get your first scan running.',
-    'Scanning': 'How DryRun Security analyzes code - from PR reviews to full repository DeepScans.',
-    'Code Security Intelligence': 'Query the intelligence index for feature ships, architecture risks, developer trends, incident response, and security reviews.',
-    'Platform': 'Configuration, policies, risk management, compliance, permissions, and API access.',
-    'Integrations': 'Connect DryRun Security with Slack, webhooks, API keys, and AI coding tools.',
-}
-
-
 def render_index_page() -> str:
-    header = HEADER_HTML.replace('{asset_prefix}', './')
-    footer = FOOTER_HTML.replace('{asset_prefix}', './')
+    """Render index.html as the Documentation page with full sidebar nav."""
+    page = PAGES['documentation']
+    title = page['title']
+    description = page['description']
+    asset_prefix = './'
+
+    raw_content = page['content'].strip()
+    raw_content = raw_content.replace('{asset_prefix}', asset_prefix)
+    # Rewrite internal doc links for root-level index:
+    # ./slug.html → ./docs/slug.html
+    raw_content = re.sub(
+        r'href="\./([-a-z0-9]+)\.html"',
+        r'href="./docs/\1.html"',
+        raw_content,
+    )
+    content_with_ids = inject_heading_ids(raw_content)
+    toc_items = extract_toc(content_with_ids)
+
+    header = HEADER_HTML.replace('{asset_prefix}', asset_prefix)
+    footer = FOOTER_HTML.replace('{asset_prefix}', asset_prefix)
+    sidebar = render_sidebar('documentation', asset_prefix)
+    toc = render_toc(toc_items)
+    prev_next = render_prev_next('documentation', asset_prefix)
     search_index = generate_search_index()
-
-    cards_html = []
-    for section in SECTIONS:
-        section_name = section['name']
-        icon = SECTION_ICONS.get(section_name, '')
-        section_desc = SECTION_DESCRIPTIONS.get(section_name, '')
-
-        links_html = []
-        for slug in section['pages']:
-            page = PAGES.get(slug, {})
-            title = page.get('title', slug)
-            links_html.append(
-                f'<li><a href="./docs/{esc(slug)}.html">{esc(title)}</a></li>'
-            )
-
-        cards_html.append(f'''      <div class="index-card">
-        <div class="index-card-icon">{icon}</div>
-        <h2 class="index-card-title">{esc(section_name)}</h2>
-        <p class="index-card-desc">{esc(section_desc)}</p>
-        <ul class="index-card-links">
-          {''.join(links_html)}
-        </ul>
-      </div>''')
-
-    cards_joined = '\n'.join(cards_html)
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -3706,60 +3695,34 @@ def render_index_page() -> str:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DryRun Security Documentation</title>
-  <meta name="description" content="DryRun Security documentation - learn how to install, configure, and use DryRun Security to protect your codebase.">
-  <link rel="icon" href="./assets/favicon.ico" type="image/png">
-  <link rel="apple-touch-icon" href="./assets/logo192.png">
+  <meta name="description" content="{esc(description)}">
+  <link rel="icon" href="{asset_prefix}assets/favicon.ico" type="image/png">
+  <link rel="apple-touch-icon" href="{asset_prefix}assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="{asset_prefix}style.css">
 </head>
 <body>
 {header}
-  <section class="docs-hero">
-    <div class="docs-hero-inner">
-      <p class="docs-hero-eyebrow">Documentation</p>
-      <h1 class="docs-hero-title">DryRun Security Docs</h1>
-      <p class="docs-hero-subtitle">Everything you need to install, configure, and get the most out of DryRun Security - the AI-native application security platform.</p>
-      <div class="docs-hero-search">
-        <svg class="docs-search-icon" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
-        <input type="text" id="docsSearch" placeholder="Search documentation..." autocomplete="off">
-        <span class="docs-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>
-        <div id="searchResults" class="search-results" hidden></div>
+  <div class="docs-layout">
+{sidebar}
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
+    <main class="content-area">
+      <div class="content-inner">
+        <h1 class="page-heading">{esc(title)}</h1>
+        <p class="page-description">{esc(description)}</p>
+        <div class="doc-content">
+{content_with_ids}
+        </div>
+{prev_next}
       </div>
-    </div>
-  </section>
-  <section class="docs-quickstart">
-    <div class="docs-quickstart-inner">
-      <p class="docs-quickstart-label">Quick start</p>
-      <div class="docs-quickstart-links">
-        <a href="./docs/quick-start.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Install for GitHub
-        </a>
-        <a href="./docs/quick-start.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Install for GitLab
-        </a>
-        <a href="./docs/pr-scanning.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          How scanning works
-        </a>
-        <a href="./docs/custom-code-policies.html" class="docs-quickstart-link">
-          <span class="docs-quickstart-arrow">→</span>
-          Custom code policies
-        </a>
-      </div>
-    </div>
-  </section>
-  <section class="index-cards-section">
-    <div class="index-cards-inner">
-{cards_joined}
-    </div>
-  </section>
+    </main>
+{toc}
+  </div>
 {footer}
   <script>window.__SEARCH_INDEX__={search_index};</script>
-  <script src="./app.js"></script>
+  <script src="{asset_prefix}app.js"></script>
 </body>
 </html>'''
 
@@ -3834,13 +3797,17 @@ def build(output_dir: str = None) -> None:
     docs_dir = output_dir / 'docs'
     docs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Pre-generate the search index once for all pages
+    search_index = generate_search_index()
+
     # Generate doc pages
     for slug in ORDERED_PAGES:
         page = PAGES.get(slug)
         if page is None:
             print(f'WARNING: No content defined for slug: {slug}')
             continue
-        html_content = render_doc_page(slug, page, asset_prefix='../')
+        html_content = render_doc_page(slug, page, asset_prefix='../',
+                                       search_index=search_index)
         out_path = docs_dir / f'{slug}.html'
         out_path.write_text(html_content, encoding='utf-8')
         print(f'  Generated: docs/{slug}.html')
