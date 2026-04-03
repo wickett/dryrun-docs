@@ -108,21 +108,20 @@ body {
   gap: 16px;
 }
 
-/* Logo color - inherits into inline SVG fill="inherit" paths */
+/* Logo */
 .logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--text-primary);
 }
 .logo {
   height: 36px;
   width: auto;
-  color: var(--text-primary);
 }
-.footer-logo-img {
-  color: var(--text-primary);
-}
+
+/* Logo text: white in dark mode, dark in light mode */
+.logo-text { fill: #ffffff; }
+html[data-theme="light"] .logo-text { fill: #1A1825; }
 
 .header-divider {
   width: 1px;
