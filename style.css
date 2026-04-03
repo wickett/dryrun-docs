@@ -119,14 +119,18 @@ body {
   width: auto;
 }
 
-/* Logo colors: currentColor on SVG inherits from container's color */
+/* Logo SVG fill: target SVG directly to avoid link color cascade */
 .logo-link,
 .footer-col-logo a {
-  color: #ffffff;
+  color: inherit;
 }
-html[data-theme="light"] .logo-link,
-html[data-theme="light"] .footer-col-logo a {
-  color: #1A1825;
+.logo-link svg,
+.footer-col-logo a svg {
+  fill: #ffffff;
+}
+html[data-theme="light"] .logo-link svg,
+html[data-theme="light"] .footer-col-logo a svg {
+  fill: #1A1825;
 }
 
 .header-divider {
