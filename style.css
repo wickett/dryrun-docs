@@ -1022,14 +1022,18 @@ html[data-theme="light"] .doc-content pre code {
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: color var(--transition), background var(--transition), border-color var(--transition);
+  opacity: 0.75;
+  transition: color var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
   flex-shrink: 0;
 }
 .theme-toggle:hover {
   color: var(--text-primary);
   background: var(--bg-hover);
+  opacity: 1;
 }
 .theme-toggle svg { display: block; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+html:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
 
 /* ===== Animations ===== */
 @keyframes fadeIn {
