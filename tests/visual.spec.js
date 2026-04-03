@@ -224,7 +224,7 @@ test.describe('Documentation Pages  -  Sidebar', () => {
     await page.goto('/docs/quick-start.html');
     await page.waitForLoadState('domcontentloaded');
     // Click on a different page link in the sidebar
-    const prLink = page.locator('.sidebar-links a', { hasText: 'PR Scanning' });
+    const prLink = page.locator('.sidebar-links a:text-is("PR Scanning")');
     await prLink.click();
     await page.waitForLoadState('domcontentloaded');
     await expect(page.locator('.page-heading')).toContainText('PR Scanning');
@@ -263,7 +263,7 @@ test.describe('Mobile Navigation', () => {
 
   test('no horizontal overflow on mobile doc pages', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/quick-start.html');
+    await page.goto('/docs/pr-blocking.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() =>
       document.documentElement.scrollWidth > document.documentElement.clientWidth
@@ -447,7 +447,7 @@ test.describe('Content Coverage', () => {
   test('coverage matrix page has a table', async ({ page }) => {
     await page.goto('/docs/vulnerability-trends.html');
     await page.waitForLoadState('domcontentloaded');
-    const table = page.locator('.doc-content table');
+    const table = page.locator('.doc-content table').first();
     await expect(table).toBeVisible();
   });
 
@@ -488,7 +488,7 @@ test.describe('UI Acceptance', () => {
 
   test('no horizontal overflow on mobile doc pages', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'Mobile only');
-    await page.goto('/docs/quick-start.html');
+    await page.goto('/docs/pr-blocking.html');
     await page.waitForLoadState('domcontentloaded');
     const hasOverflow = await page.evaluate(() => {
       return document.body.scrollWidth > window.innerWidth;

@@ -3577,23 +3577,17 @@ def render_doc_page(slug: str, page: dict, asset_prefix: str = '../') -> str:
 SECTION_ICONS = {
     'Getting Started': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>',
     'Scanning': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
-    'AI & Intelligence': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a4 4 0 014 4v1h2a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2V6a4 4 0 014-4z"/></svg>',
-    'Remediation': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    'Code Security Intelligence': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a4 4 0 014 4v1h2a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2V6a4 4 0 014-4z"/></svg>',
     'Platform': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
-    'Developer Tools': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14"/></svg>',
-    'AI Agent Security': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4l2 2"/></svg>',
-    'API Reference': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z"/><path d="M8 9h8M8 13h5"/></svg>',
+    'Integrations': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14"/></svg>',
 }
 
 SECTION_DESCRIPTIONS = {
     'Getting Started': 'Install DryRun Security on GitHub or GitLab and get your first scan running.',
     'Scanning': 'How DryRun Security analyzes code - from PR reviews to full repository DeepScans.',
-    'AI & Intelligence': 'The architecture, methodology, and intelligence capabilities behind DryRun Security.',
-    'Remediation': 'Fix findings, verify remediations, and manage false positives with precision.',
-    'Platform': 'Dashboard, risk register, configurations, notifications, and platform analytics.',
-    'Developer Tools': 'IDE integrations, MCP, AGENTS.md, and CI/CD pipeline integration.',
-    'AI Agent Security': 'Security for AI-generated code, malicious agent detection, and AI coding visibility.',
-    'API Reference': 'Programmatic access to DryRun Security data and supported languages.',
+    'Code Security Intelligence': 'AI-powered code insights, security reviews, vulnerability trends, and analysis.',
+    'Platform': 'Configuration, policies, risk management, compliance, permissions, and API access.',
+    'Integrations': 'Connect DryRun Security with Slack, webhooks, API keys, and AI coding tools.',
 }
 
 

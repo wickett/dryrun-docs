@@ -262,7 +262,7 @@ test.describe('Interactive Elements', () => {
   test('search filters cards on input', async ({ page }) => {
     await page.goto('/index.html');
     const search = page.locator('#docsSearch');
-    await search.fill('remediation');
+    await search.fill('scanning');
     await page.waitForTimeout(200);
 
     const visibleCards = await page.evaluate(() => {
@@ -271,7 +271,7 @@ test.describe('Interactive Elements', () => {
     });
     // Should show fewer cards when filtering
     expect(visibleCards).toBeGreaterThan(0);
-    expect(visibleCards).toBeLessThan(8);
+    expect(visibleCards).toBeLessThan(5);
   });
 
   test('Cmd+K focuses search input', async ({ page, isMobile }) => {
