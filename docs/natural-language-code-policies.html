@@ -87,7 +87,7 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
 <li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
@@ -145,6 +145,27 @@
 
 <p>In this section we demonstrate how to build and save a Natural Language Code Policy in the DryRun Security Dashboard.</p>
 
+
+<h2 id="creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</h2>
+
+<p>Navigate to the Code Policies section of the DryRun Security dashboard.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/01-code-policies.png" alt="Code Policies list in DryRun Security dashboard" loading="lazy"></figure>
+
+<p>Click <strong>Add New Policy</strong> to start creating a new NLCP.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/02-add-new.png" alt="Add New Code Policy button" loading="lazy"></figure>
+
+<p>Enter a descriptive name for your policy and fill in the Question, Background, and Guidance fields.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/03-policy-name.png" alt="Naming a new code policy" loading="lazy"></figure>
+
+<p>Select the repository to test the policy against.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/04-policy-repo.png" alt="Selecting a repository for policy testing" loading="lazy"></figure>
+
+<p>Click <strong>Run</strong> to evaluate the policy against a sample PR and review the results.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/05-policy-run.png" alt="Running a code policy for evaluation" loading="lazy"></figure>
+
+<p>Once satisfied with the results, click <strong>Save</strong> to add the policy to your organization.</p>
+<figure class="docs-screenshot"><img src="../assets/images/nlcp-create/06-policy-save.png" alt="Saving a validated code policy" loading="lazy"></figure>
+
 <h2 id="creating-a-policy">Creating a Policy</h2>
 
 <ol>
@@ -187,6 +208,7 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
+<li class="toc-h2"><a href="#creating-a-policy-walkthrough">Creating a Policy - Visual Walkthrough</a></li>
 <li class="toc-h2"><a href="#creating-a-policy">Creating a Policy</a></li>
 <li class="toc-h2"><a href="#policy-enforcement-agent">Policy Enforcement Agent</a></li>
 <li class="toc-h2"><a href="#next-steps">Next Steps</a></li>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Finding Dismissal - DryRun Security Docs</title>
-  <meta name="description" content="Dismiss false positives with context, suppress recurring findings with fingerprinting, and manage risk through developer and security team workflows.">
+  <title>Remediation Guidance - DryRun Security Docs</title>
+  <meta name="description" content="DryRun Security provides detailed remediation guidance, code examples, and context so your coding agents can fix vulnerabilities with full understanding - not auto-fix, but empowerment.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,9 +87,9 @@
 <div class="sidebar-section">
 <p class="sidebar-section-title">Remediation</p>
 <ul class="sidebar-links">
-<li><a href="../docs/auto-fix.html">Auto-Fix</a></li>
+<li><a href="../docs/remediation-guidance.html" class="active">Remediation Guidance</a></li>
 <li><a href="../docs/fix-verification.html">Fix Verification</a></li>
-<li><a href="../docs/finding-dismissal.html" class="active">Finding Dismissal</a></li>
+<li><a href="../docs/finding-triage.html">Finding Triage</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -138,74 +138,81 @@
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Remediation</div>
-        <h1 class="page-heading">Finding Dismissal</h1>
-        <p class="page-description">Dismiss false positives with context, suppress recurring findings with fingerprinting, and manage risk through developer and security team workflows.</p>
+        <h1 class="page-heading">Remediation Guidance</h1>
+        <p class="page-description">DryRun Security provides detailed remediation guidance, code examples, and context so your coding agents can fix vulnerabilities with full understanding - not auto-fix, but empowerment.</p>
         <div class="doc-content">
-<p>Risk Register supports Finding Dismissal so teams can formally close out incorrect findings and reduce noise over time. Dismissed findings are fingerprinted and suppressed in future scans automatically.</p>
+<h2 id="philosophy">Remediation, Not Auto-Fix</h2>
 
-<h2 id="dismissing-a-finding">Dismissing a Finding</h2>
+<p class="lead">DryRun Security does not auto-fix your code. Instead, it provides rich remediation guidance designed to empower the coding and generation agents you already use - Cursor, Claude Code, GitHub Copilot, and others - to fix issues with full context and understanding.</p>
 
-<p>In the Risk Register, click <strong>Dismiss</strong> on a finding to:</p>
+<p>This is a deliberate philosophical choice. Your coding agents have the deepest context about your codebase and the work being performed. They understand your architecture, your patterns, and your intent. DryRun Security's role is to identify the security problem, explain it clearly, and give your agents everything they need to resolve it correctly - not to layer in generated code from a scanner that lacks that context.</p>
+
+<div class="callout callout-info">
+<p><strong>Why this matters:</strong> Auto-fix tools risk introducing new problems because they lack the full architectural context of your codebase. By providing guidance rather than generated patches, DryRun Security keeps code generation where it belongs - with the agents and developers who understand the code best.</p>
+</div>
+
+<h2 id="what-dryrun-provides">What DryRun Security Provides</h2>
+
+<p>When DryRun Security identifies a vulnerability, the finding includes detailed remediation guidance:</p>
+
 <ul>
-  <li>Select a reason for dismissal (for example: False Positive, Won't Fix)</li>
-  <li>Add supporting context in a text box</li>
+  <li><strong>Specific code examples</strong> - Concrete lines of code showing what the fix looks like, tailored to your codebase's frameworks and patterns</li>
+  <li><strong>Root cause explanation</strong> - A clear explanation of why the code is vulnerable, so your coding agent understands the underlying problem</li>
+  <li><strong>Remediation approach</strong> - Step-by-step guidance on how to address the vulnerability, including considerations for edge cases</li>
+  <li><strong>Security context</strong> - The vulnerability class, severity, and any relevant CWE references to help prioritize the fix</li>
 </ul>
 
-<h2 id="false-positive-fingerprinting">False Positive Fingerprinting</h2>
+<h2 id="contextual-guidance">Guidance That Matches Your Code</h2>
 
-<p>When you dismiss a finding as <strong>False Positive</strong>:</p>
+<p>Remediation guidance is generated in the context of your specific codebase - not from generic templates. The guidance considers:</p>
+
 <ul>
-  <li>DryRun Security creates a fingerprint of that vulnerability.</li>
-  <li>Future PR and DeepScans will suppress the finding when the same fingerprint is detected, so it doesn't come back.</li>
+  <li>The frameworks, libraries, and language idioms your code uses</li>
+  <li>The existing patterns in your codebase for similar problems (if you validate input one way elsewhere, the guidance follows the same pattern)</li>
+  <li>The surrounding code structure and dependencies that a fix must integrate with</li>
+  <li>Security best practices for the specific vulnerability class</li>
 </ul>
 
-<h2 id="context-suppression">Context-Based Suppression</h2>
+<p>The result is guidance that a developer or coding agent can act on with confidence - not a generic "sanitize this input" suggestion that still requires significant interpretation.</p>
 
-<p>When you include context in the text box:</p>
+<h2 id="designed-for-coding-agents">Designed for Coding Agents</h2>
+
+<p>DryRun Security's remediation guidance is structured so that AI coding agents can consume it directly. When a finding with remediation guidance is surfaced in a PR comment, your coding agent can:</p>
+
+<ol>
+  <li>Read the vulnerability description and understand the security issue</li>
+  <li>Review the code examples and remediation approach</li>
+  <li>Apply the fix using its own understanding of your codebase context</li>
+  <li>Push the update, which DryRun Security will re-analyze to verify the fix (see <a href="./fix-verification.html">Fix Verification</a>)</li>
+</ol>
+
+<p>This workflow keeps the security scanner and the code generator in their respective strengths: DryRun Security excels at finding and explaining vulnerabilities, and your coding agent excels at writing code that fits your codebase.</p>
+
+<h2 id="where-guidance-appears">Where Guidance Appears</h2>
+
+<p>Remediation guidance is presented alongside findings in multiple places:</p>
+
 <ul>
-  <li>That context is stored and used in future evaluations to further suppress like or similar false positives.</li>
-  <li>This is useful for cases where a finding is safe because of your framework behavior, implementation pattern, or deployment topology.</li>
+  <li><strong>PR comments</strong> - Inline with each finding in the DryRun Security summary comment</li>
+  <li><strong>GitHub Checks</strong> - In the detailed check output for each finding</li>
+  <li><strong>Risk Register</strong> - In the finding detail view in the DryRun Security dashboard</li>
+  <li><strong>AI Coding Integrations</strong> - Through the DryRun Remediation Skill for Claude Code and other MCP-compatible agents</li>
 </ul>
-
-<p>Examples of useful context:</p>
-<ul>
-  <li>"This endpoint is only accessible from internal services - no user input reaches this code path."</li>
-  <li>"TLS offloading is handled upstream; the application does not need to enforce HTTPS internally."</li>
-  <li>"This query is constructed only from validated constants, never from user input."</li>
-</ul>
-
-<h2 id="dismissal-from-pr-workflow">Dismissal from the PR Workflow</h2>
-
-<p>Developers can also mark findings as False Positive and add context from the developer comment workflow in GitHub and GitLab. Those dismissals flow into the Risk Register and are applied to future scans the same way - keeping the feedback loop close to where developers work.</p>
-
-<h2 id="faqs">FAQs</h2>
-
-<p><strong>What is Finding Dismissal?</strong><br>
-Finding Dismissal lets you dismiss a finding and record why, using a dismissal reason and optional context. Dismissed findings are marked resolved in the UI.</p>
-
-<p><strong>What happens when I dismiss a finding as a False Positive?</strong><br>
-DryRun Security fingerprints the vulnerability. If the same fingerprint is detected in a future PR or DeepScan, the finding is automatically suppressed.</p>
-
-<p><strong>How is the context field used?</strong><br>
-Context is stored with the dismissal and used in future scan evaluations to further suppress like or similar false positives.</p>
-
-<p><strong>Can developers dismiss findings too?</strong><br>
-Yes. Developers can mark findings as False Positive from GitHub and GitLab comments. Those dismissals are synced to the Risk Register.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/fix-verification.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Fix Verification</span></a>
-<a href="../docs/risk-register.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Risk Register</span></a>
+<a href="../docs/policy-library.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Policy Library</span></a>
+<a href="../docs/fix-verification.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Fix Verification</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#dismissing-a-finding">Dismissing a Finding</a></li>
-<li class="toc-h2"><a href="#false-positive-fingerprinting">False Positive Fingerprinting</a></li>
-<li class="toc-h2"><a href="#context-suppression">Context-Based Suppression</a></li>
-<li class="toc-h2"><a href="#dismissal-from-pr-workflow">Dismissal from the PR Workflow</a></li>
-<li class="toc-h2"><a href="#faqs">FAQs</a></li>
+<li class="toc-h2"><a href="#philosophy">Remediation, Not Auto-Fix</a></li>
+<li class="toc-h2"><a href="#what-dryrun-provides">What DryRun Security Provides</a></li>
+<li class="toc-h2"><a href="#contextual-guidance">Guidance That Matches Your Code</a></li>
+<li class="toc-h2"><a href="#designed-for-coding-agents">Designed for Coding Agents</a></li>
+<li class="toc-h2"><a href="#where-guidance-appears">Where Guidance Appears</a></li>
 </ul>
 </aside>
   </div>
