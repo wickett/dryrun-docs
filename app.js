@@ -1,8 +1,50 @@
 /**
  * DryRun Security Docs - app.js
- * Handles: mobile sidebar toggle, TOC active state on scroll, smooth scroll,
- * docs search (index page), keyboard shortcuts, and copy buttons.
+ * Handles: theme toggle, mobile sidebar toggle, TOC active state on scroll,
+ * smooth scroll, docs search (index page), keyboard shortcuts, and copy buttons.
  */
+
+// ── Theme toggle ──────────────────────────────────────────────────────────
+(function () {
+  var STORAGE_KEY = 'drs-theme';
+  var html = document.documentElement;
+
+  function getPreferred() {
+    var stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return stored;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      html.setAttribute('data-theme', 'light');
+    } else {
+      html.removeAttribute('data-theme');
+    }
+  }
+
+  // Apply immediately to avoid flash
+  applyTheme(getPreferred());
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      var current = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      var next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      localStorage.setItem(STORAGE_KEY, next);
+    });
+
+    // Respond to OS-level preference changes
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        applyTheme(e.matches ? 'light' : 'dark');
+      }
+    });
+  });
+})();
 
 (function () {
   'use strict';
