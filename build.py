@@ -3414,12 +3414,6 @@ def get_section_for_slug(slug: str) -> str:
 def render_sidebar(current_slug: str, asset_prefix: str) -> str:
     parts = []
     parts.append('<nav class="sidebar" id="sidebar">')
-    parts.append('<div class="sidebar-header">')
-    parts.append(f'<a href="{esc(asset_prefix)}index.html" class="sidebar-home-link">')
-    parts.append('<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5L8 2l5.5 4.5V13a1 1 0 01-1 1h-3V10H6.5v4h-3a1 1 0 01-1-1V6.5z"/></svg>')
-    parts.append('<span>Documentation</span>')
-    parts.append('</a>')
-    parts.append('</div>')
     parts.append('<div class="sidebar-search">')
     parts.append('<div class="sidebar-search-wrap">')
     parts.append('<svg class="sidebar-search-icon" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>')
