@@ -1,7 +1,7 @@
 /**
  * DryRun Security Docs - app.js
  * Handles: mobile sidebar toggle, TOC active state on scroll, smooth scroll,
- * docs search (index page), and minor UX polish.
+ * docs search (index page), keyboard shortcuts, and copy buttons.
  */
 
 (function () {
@@ -20,6 +20,13 @@
       if (sidebarOverlay) {
         sidebarOverlay.style.display = isOpen ? 'block' : 'none';
       }
+    });
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', function () {
+      if (sidebar) sidebar.classList.remove('open');
+      sidebarOverlay.style.display = 'none';
     });
   }
 
@@ -62,7 +69,7 @@
       if (current) {
         const id = current.getAttribute('id');
         if (id) {
-          const matchingLink = document.querySelector(`.toc-list a[href="#${CSS.escape(id)}"]`);
+          const matchingLink = document.querySelector('.toc-list a[href="#' + CSS.escape(id) + '"]');
           if (matchingLink) {
             setActiveLink(matchingLink);
           }
@@ -104,7 +111,7 @@
     e.preventDefault();
     const headerHeight = document.querySelector('.site-header')
       ? document.querySelector('.site-header').offsetHeight
-      : 64;
+      : 56;
     const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
 
@@ -113,7 +120,7 @@
   });
 
   // -------------------------------------------------------------------------
-  // Docs index search (index.html only)
+  // Docs index search (index.html only) + keyboard shortcut
   // -------------------------------------------------------------------------
   const docsSearch = document.getElementById('docsSearch');
   if (docsSearch) {
@@ -158,6 +165,15 @@
         this.blur();
       }
     });
+
+    // Cmd/Ctrl+K to focus search
+    document.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        docsSearch.focus();
+        docsSearch.select();
+      }
+    });
   }
 
   // -------------------------------------------------------------------------
@@ -169,22 +185,25 @@
   }
 
   // -------------------------------------------------------------------------
-  // Code block copy button (optional enhancement)
+  // Code block copy button
   // -------------------------------------------------------------------------
   document.querySelectorAll('.doc-content pre').forEach(function (pre) {
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
     btn.textContent = 'Copy';
-    btn.setAttribute('aria-label', 'Copy code');
-    pre.style.position = 'relative';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
     pre.appendChild(btn);
 
     btn.addEventListener('click', function () {
       const code = pre.querySelector('code');
       const text = code ? code.textContent : pre.textContent;
       navigator.clipboard.writeText(text).then(function () {
-        btn.textContent = 'Copied!';
-        setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
       }).catch(function () {
         btn.textContent = 'Error';
         setTimeout(function () { btn.textContent = 'Copy'; }, 2000);

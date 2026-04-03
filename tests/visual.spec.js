@@ -59,7 +59,7 @@ test.describe('Landing Page  -  Structure', () => {
     const footer = page.locator('.site-footer');
     await footer.scrollIntoViewIfNeeded();
     await expect(footer).toBeVisible();
-    await expect(footer.locator('.footer-logo')).toBeVisible();
+    await expect(footer.locator('.footer-logo-img')).toBeVisible();
   });
 });
 
@@ -321,7 +321,7 @@ test.describe('Navigation Flow', () => {
     await nextLink.click();
     await page.waitForLoadState('domcontentloaded');
     const heading = await page.locator('.page-heading').textContent();
-    expect(heading).not.toContain('Install DryRun Security');
+    expect(heading).not.toContain('Quick Start');
     // Now should have a prev link
     const newPrev = page.locator('.prev-next-link.prev-link');
     await expect(newPrev).toBeVisible();
