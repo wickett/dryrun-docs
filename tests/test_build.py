@@ -155,6 +155,34 @@ class TestGeneratedFiles:
         content = (ROOT / "index.html").read_text()
         assert 'search' in content.lower(), "index.html missing search"
 
+    def test_index_has_search_index(self):
+        content = (ROOT / "index.html").read_text()
+        assert '__SEARCH_INDEX__' in content, "index.html missing search index"
+
+    def test_search_index_contains_all_pages(self):
+        import json
+        content = (ROOT / "index.html").read_text()
+        start = content.index('__SEARCH_INDEX__=') + len('__SEARCH_INDEX__=')
+        end = content.index(';</script>', start)
+        index = json.loads(content[start:end])
+        assert len(index) == len(build.PAGES), (
+            f"Search index has {len(index)} entries but PAGES has {len(build.PAGES)}"
+        )
+        slugs = {entry['s'] for entry in index}
+        for slug in build.PAGES:
+            assert slug in slugs, f"Page '{slug}' missing from search index"
+
+    def test_search_index_entries_have_body_text(self):
+        import json
+        content = (ROOT / "index.html").read_text()
+        start = content.index('__SEARCH_INDEX__=') + len('__SEARCH_INDEX__=')
+        end = content.index(';</script>', start)
+        index = json.loads(content[start:end])
+        for entry in index:
+            assert len(entry['b']) > 50, (
+                f"Page '{entry['s']}' has insufficient body text in search index"
+            )
+
 
 class TestRelativePaths:
     """Verify no hardcoded domains in internal links."""

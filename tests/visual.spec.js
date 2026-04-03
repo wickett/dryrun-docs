@@ -281,11 +281,39 @@ test.describe('Search', () => {
     await page.waitForLoadState('domcontentloaded');
     const input = page.locator('#docsSearch');
     await input.fill('secrets');
-    await page.waitForTimeout(300);
-    // Search should show results or filter  -  check the search results container exists
-    // At minimum, verify the input accepted text
+    await page.waitForTimeout(400);
     const value = await input.inputValue();
     expect(value).toBe('secrets');
+    // Full-text search should show result items
+    const results = page.locator('#searchResults .search-result-item');
+    expect(await results.count()).toBeGreaterThan(0);
+  });
+
+  test('search matches content inside page body', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForLoadState('domcontentloaded');
+    const input = page.locator('#docsSearch');
+    // Search for a term that only appears inside page body content,
+    // not in any page title
+    await input.fill('false positive');
+    await page.waitForTimeout(400);
+    const results = page.locator('#searchResults .search-result-item');
+    expect(await results.count()).toBeGreaterThan(0);
+    // Each result should have a title and snippet
+    const firstTitle = results.first().locator('.search-result-title');
+    await expect(firstTitle).not.toBeEmpty();
+    const firstSnippet = results.first().locator('.search-result-snippet');
+    await expect(firstSnippet).not.toBeEmpty();
+  });
+
+  test('search shows no results message for nonsense query', async ({ page }) => {
+    await page.goto('/index.html');
+    await page.waitForLoadState('domcontentloaded');
+    const input = page.locator('#docsSearch');
+    await input.fill('xyzzyspqr12345');
+    await page.waitForTimeout(400);
+    const noResults = page.locator('.search-no-results');
+    await expect(noResults).toBeVisible();
   });
 });
 

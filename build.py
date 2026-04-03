@@ -6,6 +6,7 @@ Usage: python3 build.py
 Site structure: 5 sections, 27 pages
 """
 import html
+import json
 import re
 from pathlib import Path
 
@@ -3594,6 +3595,7 @@ SECTION_DESCRIPTIONS = {
 def render_index_page() -> str:
     header = HEADER_HTML.replace('{asset_prefix}', './')
     footer = FOOTER_HTML.replace('{asset_prefix}', './')
+    search_index = generate_search_index()
 
     cards_html = []
     for section in SECTIONS:
@@ -3645,6 +3647,7 @@ def render_index_page() -> str:
         <svg class="docs-search-icon" viewBox="0 0 20 20" fill="currentColor" width="18" height="18" aria-hidden="true"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
         <input type="text" id="docsSearch" placeholder="Search documentation..." autocomplete="off">
         <span class="docs-search-kbd"><kbd>&#8984;</kbd><kbd>K</kbd></span>
+        <div id="searchResults" class="search-results" hidden></div>
       </div>
     </div>
   </section>
@@ -3677,6 +3680,7 @@ def render_index_page() -> str:
     </div>
   </section>
 {footer}
+  <script>window.__SEARCH_INDEX__={search_index};</script>
   <script src="./app.js"></script>
 </body>
 </html>'''
@@ -3702,6 +3706,41 @@ Allow: /
 
 Sitemap: https://docs.dryrun.security/sitemap.xml
 '''
+
+
+# ---------------------------------------------------------------------------
+# Search index generation
+# ---------------------------------------------------------------------------
+
+_TAG_RE = re.compile(r'<[^>]+>')
+_WHITESPACE_RE = re.compile(r'\s+')
+
+
+def _strip_html(raw_html: str) -> str:
+    """Remove HTML tags and collapse whitespace to produce plain text."""
+    text = _TAG_RE.sub(' ', raw_html)
+    text = html.unescape(text)
+    text = _WHITESPACE_RE.sub(' ', text).strip()
+    return text
+
+
+def generate_search_index() -> str:
+    """Build a JSON search index of all pages with full text content."""
+    index = []
+    for slug in ORDERED_PAGES:
+        page = PAGES.get(slug)
+        if page is None:
+            continue
+        content_html = page.get('content', '')
+        plain_text = _strip_html(content_html)
+        index.append({
+            's': slug,
+            't': page.get('title', slug),
+            'n': page.get('section', ''),
+            'd': page.get('description', ''),
+            'b': plain_text,
+        })
+    return json.dumps(index, separators=(',', ':'))
 
 
 # ---------------------------------------------------------------------------

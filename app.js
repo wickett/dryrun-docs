@@ -162,50 +162,172 @@
   });
 
   // -------------------------------------------------------------------------
-  // Docs index search (index.html only) + keyboard shortcut
+  // Full-text docs search (index.html only) + keyboard shortcut
   // -------------------------------------------------------------------------
   const docsSearch = document.getElementById('docsSearch');
   if (docsSearch) {
+    const resultsContainer = document.getElementById('searchResults');
     const cards = document.querySelectorAll('.index-card');
+    const searchIndex = window.__SEARCH_INDEX__ || [];
+    const MAX_RESULTS = 12;
+    const SNIPPET_RADIUS = 60;
+    let activeIdx = -1;
 
-    docsSearch.addEventListener('input', function () {
-      const query = this.value.trim().toLowerCase();
+    // Build a snippet around the first match of query in text
+    function buildSnippet(text, query) {
+      var lower = text.toLowerCase();
+      var pos = lower.indexOf(query);
+      if (pos === -1) return '';
+      var start = Math.max(0, pos - SNIPPET_RADIUS);
+      var end = Math.min(text.length, pos + query.length + SNIPPET_RADIUS);
+      var snippet = '';
+      if (start > 0) snippet += '\u2026';
+      var raw = text.slice(start, end);
+      // Highlight the matched term
+      var matchStart = pos - start;
+      snippet += raw.slice(0, matchStart)
+        + '<mark>' + raw.slice(matchStart, matchStart + query.length) + '</mark>'
+        + raw.slice(matchStart + query.length);
+      if (end < text.length) snippet += '\u2026';
+      return snippet;
+    }
 
-      cards.forEach(function (card) {
-        if (!query) {
-          card.style.display = '';
-          // Reset all links visibility
-          card.querySelectorAll('.index-card-links li').forEach(function (li) {
+    function runSearch(query) {
+      if (!resultsContainer) return;
+      activeIdx = -1;
+
+      if (!query) {
+        resultsContainer.innerHTML = '';
+        resultsContainer.hidden = true;
+        // Show all cards again
+        cards.forEach(function (c) {
+          c.style.display = '';
+          c.querySelectorAll('.index-card-links li').forEach(function (li) {
             li.style.display = '';
           });
-          return;
-        }
-
-        // Check card title and description
-        const cardTitle = (card.querySelector('.index-card-title') || {}).textContent || '';
-        const cardDesc = (card.querySelector('.index-card-desc') || {}).textContent || '';
-        let cardMatches = cardTitle.toLowerCase().includes(query) || cardDesc.toLowerCase().includes(query);
-
-        // Check individual links
-        let anyLinkVisible = false;
-        card.querySelectorAll('.index-card-links li').forEach(function (li) {
-          const linkText = li.textContent.toLowerCase();
-          const linkMatches = linkText.includes(query);
-          li.style.display = (cardMatches || linkMatches) ? '' : 'none';
-          if (linkMatches) anyLinkVisible = true;
         });
+        return;
+      }
 
-        card.style.display = (cardMatches || anyLinkVisible) ? '' : 'none';
-      });
+      // Hide cards while showing search results
+      cards.forEach(function (c) { c.style.display = 'none'; });
+
+      var results = [];
+      for (var i = 0; i < searchIndex.length; i++) {
+        var entry = searchIndex[i];
+        var titleLower = entry.t.toLowerCase();
+        var descLower = entry.d.toLowerCase();
+        var bodyLower = entry.b.toLowerCase();
+        var titleMatch = titleLower.indexOf(query) !== -1;
+        var descMatch = descLower.indexOf(query) !== -1;
+        var bodyMatch = bodyLower.indexOf(query) !== -1;
+
+        if (titleMatch || descMatch || bodyMatch) {
+          var snippet = '';
+          var score = 0;
+          if (titleMatch) {
+            score = 3;
+            snippet = buildSnippet(entry.d || entry.b, query) || buildSnippet(entry.b, query);
+          } else if (descMatch) {
+            score = 2;
+            snippet = buildSnippet(entry.d, query);
+          } else {
+            score = 1;
+            snippet = buildSnippet(entry.b, query);
+          }
+          results.push({ entry: entry, score: score, snippet: snippet });
+        }
+      }
+
+      // Sort: title matches first, then description, then body
+      results.sort(function (a, b) { return b.score - a.score; });
+      results = results.slice(0, MAX_RESULTS);
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<div class="search-no-results">No results found</div>';
+        resultsContainer.hidden = false;
+        return;
+      }
+
+      var html = '';
+      for (var j = 0; j < results.length; j++) {
+        var r = results[j];
+        html += '<a class="search-result-item" href="./docs/' + r.entry.s + '.html"'
+          + ' data-idx="' + j + '">'
+          + '<span class="search-result-title">' + escHtml(r.entry.t) + '</span>'
+          + '<span class="search-result-section">' + escHtml(r.entry.n) + '</span>'
+          + (r.snippet ? '<span class="search-result-snippet">' + r.snippet + '</span>' : '')
+          + '</a>';
+      }
+      resultsContainer.innerHTML = html;
+      resultsContainer.hidden = false;
+    }
+
+    function escHtml(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    function setActive(idx) {
+      var items = resultsContainer.querySelectorAll('.search-result-item');
+      if (items.length === 0) return;
+      items.forEach(function (el) { el.classList.remove('active'); });
+      if (idx >= 0 && idx < items.length) {
+        items[idx].classList.add('active');
+        items[idx].scrollIntoView({ block: 'nearest' });
+      }
+      activeIdx = idx;
+    }
+
+    // Debounced input handler
+    var searchTimer = null;
+    docsSearch.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      var q = this.value.trim().toLowerCase();
+      searchTimer = setTimeout(function () { runSearch(q); }, 150);
     });
 
-    // Clear search on Escape
+    // Keyboard navigation within results
     docsSearch.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
+      var items = resultsContainer ? resultsContainer.querySelectorAll('.search-result-item') : [];
+      if (e.key === 'ArrowDown' && items.length > 0) {
+        e.preventDefault();
+        setActive(Math.min(activeIdx + 1, items.length - 1));
+      } else if (e.key === 'ArrowUp' && items.length > 0) {
+        e.preventDefault();
+        setActive(Math.max(activeIdx - 1, 0));
+      } else if (e.key === 'Enter' && activeIdx >= 0 && items[activeIdx]) {
+        e.preventDefault();
+        items[activeIdx].click();
+      } else if (e.key === 'Escape') {
         this.value = '';
-        this.dispatchEvent(new Event('input'));
+        runSearch('');
         this.blur();
       }
+    });
+
+    // Close results when clicking outside
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.docs-hero-search')) {
+        if (resultsContainer) {
+          resultsContainer.innerHTML = '';
+          resultsContainer.hidden = true;
+        }
+        // Restore cards
+        cards.forEach(function (c) {
+          c.style.display = '';
+          c.querySelectorAll('.index-card-links li').forEach(function (li) {
+            li.style.display = '';
+          });
+        });
+      }
+    });
+
+    // Re-show results when focusing back into search with a query
+    docsSearch.addEventListener('focus', function () {
+      var q = this.value.trim().toLowerCase();
+      if (q) runSearch(q);
     });
 
     // Cmd/Ctrl+K to focus search

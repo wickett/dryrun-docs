@@ -259,19 +259,21 @@ test.describe('Interactive Elements', () => {
     await expect(kbd).toBeVisible();
   });
 
-  test('search filters cards on input', async ({ page }) => {
+  test('search shows results dropdown on input', async ({ page }) => {
     await page.goto('/index.html');
     const search = page.locator('#docsSearch');
     await search.fill('scanning');
-    await page.waitForTimeout(200);
+    await page.waitForTimeout(400);
 
+    // Full-text search should show result items in dropdown
+    const results = page.locator('#searchResults .search-result-item');
+    expect(await results.count()).toBeGreaterThan(0);
+    // Cards should be hidden while results are shown
     const visibleCards = await page.evaluate(() => {
       return Array.from(document.querySelectorAll('.index-card'))
         .filter(c => getComputedStyle(c).display !== 'none').length;
     });
-    // Should show fewer cards when filtering
-    expect(visibleCards).toBeGreaterThan(0);
-    expect(visibleCards).toBeLessThan(5);
+    expect(visibleCards).toBe(0);
   });
 
   test('Cmd+K focuses search input', async ({ page, isMobile }) => {
