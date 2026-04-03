@@ -379,6 +379,13 @@ html[data-theme="light"] .footer-col-logo a svg {
 .breadcrumb-sep { opacity: 0.4; }
 
 /* Page title */
+.page-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .page-heading {
   font-size: 2.1rem;
   font-weight: 800;
@@ -386,6 +393,33 @@ html[data-theme="light"] .footer-col-logo a svg {
   letter-spacing: -0.025em;
   margin-bottom: 10px;
   color: var(--text-primary);
+}
+
+.btn-download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin-top: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+.btn-download-pdf:hover {
+  border-color: rgba(200,255,9,0.25);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.btn-download-pdf svg {
+  flex-shrink: 0;
 }
 
 .page-description {
@@ -1037,4 +1071,31 @@ html[data-theme="light"] .doc-content pre code {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* ===== Print / PDF ===== */
+@media print {
+  .site-header, .sidebar, .sidebar-overlay, .toc-sidebar,
+  .prev-next, .site-footer, .btn-download-pdf, .breadcrumb,
+  .copy-btn { display: none !important; }
+  .docs-layout { display: block; }
+  .content-area {
+    padding: 0;
+    max-width: 100%;
+    margin: 0;
+  }
+  .content-inner { max-width: 100%; }
+  .page-heading { font-size: 1.8rem; }
+  body { background: white; color: #111; }
+  .doc-content { color: #222; }
+  .doc-content a { color: #111; text-decoration: underline; }
+  .doc-content pre {
+    border: 1px solid #ccc;
+    background: #f5f5f5 !important;
+    color: #111 !important;
+  }
+  .doc-content code { background: #f0f0f0; color: #111; }
+  .doc-content table { border-color: #ccc; }
+  .doc-content th { background: #eee !important; color: #111; }
+  .doc-content td { color: #222; }
 }

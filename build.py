@@ -3636,7 +3636,10 @@ def render_doc_page(slug: str, page: dict, asset_prefix: str = '../',
     <main class="content-area">
       <div class="content-inner">
         <div class="breadcrumb"><a href="{asset_prefix}index.html">Docs</a><span class="breadcrumb-sep">\u203a</span>{esc(section_name)}</div>
-        <h1 class="page-heading">{esc(title)}</h1>
+        <div class="page-heading-row">
+          <h1 class="page-heading">{esc(title)}</h1>
+          <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
+        </div>
         <p class="page-description">{esc(description)}</p>
         <div class="doc-content">
 {content_with_ids}
@@ -3704,7 +3707,10 @@ def render_index_page() -> str:
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <h1 class="page-heading">{esc(title)}</h1>
+        <div class="page-heading-row">
+          <h1 class="page-heading">{esc(title)}</h1>
+          <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
+        </div>
         <p class="page-description">{esc(description)}</p>
         <div class="doc-content">
 {content_with_ids}
