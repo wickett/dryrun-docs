@@ -9,7 +9,12 @@
   <url><loc>https://docs.dryrun.security/docs/iac-scanning.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/sca.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/auto-fix.html</loc><priority>0.8</priority></url>
-  <url><loc>https://docs.dryrun.security/docs/code-insights.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/feature-ships.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/architecture-risks.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/developer-trends.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/incident-response.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/shadow-ai.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/security-review-requests.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/security-reviews.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/pr-variant-analysis.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/vulnerability-trends.html</loc><priority>0.8</priority></url>

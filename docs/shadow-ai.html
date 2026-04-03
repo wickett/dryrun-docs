@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IaC Scanning - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security scans IaC configurations for security misconfigurations, subdomain takeover risks, and infrastructure vulnerabilities.">
+  <title>Shadow AI - DryRun Security Docs</title>
+  <meta name="description" content="Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,7 +69,7 @@
 <li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
 <li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
 <li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
-<li><a href="../docs/iac-scanning.html" class="active">IaC Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
 <li><a href="../docs/sca.html">SCA</a></li>
 <li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
@@ -81,7 +81,7 @@
 <li><a href="../docs/architecture-risks.html">Architecture Risks</a></li>
 <li><a href="../docs/developer-trends.html">Developer Trends</a></li>
 <li><a href="../docs/incident-response.html">Incident Response Investigation</a></li>
-<li><a href="../docs/shadow-ai.html">Shadow AI</a></li>
+<li><a href="../docs/shadow-ai.html" class="active">Shadow AI</a></li>
 <li><a href="../docs/security-review-requests.html">New Feature or Repository Security Review</a></li>
 <li><a href="../docs/security-reviews.html">Security Reviews</a></li>
 <li><a href="../docs/pr-variant-analysis.html">PR Variant Analysis</a></li>
@@ -118,60 +118,63 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
-        <h1 class="page-heading">IaC Scanning</h1>
-        <p class="page-description">DryRun Security scans IaC configurations for security misconfigurations, subdomain takeover risks, and infrastructure vulnerabilities.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
+        <h1 class="page-heading">Shadow AI</h1>
+        <p class="page-description">Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
-<h2 id="what-is-iac-scanning">What Is IaC Scanning?</h2>
+<h2 id="overview">Overview</h2>
 
-<p>Infrastructure as Code (IaC) has transformed how teams provision and manage cloud resources. Terraform, CloudFormation, Pulumi, Kubernetes manifests, Helm charts, and similar formats let infrastructure be defined, versioned, and reviewed just like application code. But they also introduce a new class of security risk: configuration errors that expose infrastructure to attack before a single line of application code runs.</p>
+<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during PR and repository scanning, enabling teams to detect, investigate, and govern AI usage across their codebase.</p>
 
-<p>DryRun Security scans IaC configurations on every pull request, identifying misconfigurations and risks that could lead to data exposure, privilege escalation, or infrastructure compromise.</p>
+<h2 id="how-it-works">How It Works</h2>
 
-<h2 id="supported-formats">Supported IaC Formats</h2>
+<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed and made queryable. Teams can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
 
-<p>DryRun Security's IaC scanning supports the most widely used infrastructure definition formats:</p>
+<p>This capability builds on DryRun Security&rsquo;s <a href="../docs/ai-coding-integration.html">AI Coding Integration</a> analysis, extending it into the intelligence index for historical querying and trend analysis.</p>
 
-<ul>
-  <li><strong>Terraform</strong> - <code>.tf</code> files for any provider (AWS, GCP, Azure, and others)</li>
-  <li><strong>AWS CloudFormation</strong> - JSON and YAML templates</li>
-  <li><strong>Kubernetes</strong> - Deployment, Service, Ingress, RBAC, and other resource manifests</li>
-  <li><strong>Helm</strong> - Chart templates and values files</li>
-  <li><strong>Docker and Docker Compose</strong> - Dockerfile and compose configuration</li>
-  <li><strong>GitHub Actions</strong> - Workflow YAML files</li>
-</ul>
-
-<h2 id="what-iac-scanning-catches">What IaC Scanning Catches</h2>
-
-<p>DryRun Security's IaC analysis goes beyond generic misconfiguration detection. Common findings include:</p>
+<h2 id="example-queries">Example Queries</h2>
 
 <ul>
-  <li><strong>Subdomain takeover</strong> - Dangling DNS records or CDN configurations that could be claimed by an attacker to serve malicious content under your domain</li>
-  <li><strong>Excessive IAM permissions</strong> - Roles and policies granting broader access than the service requires, violating least privilege</li>
-  <li><strong>Public storage buckets</strong> - S3 buckets, GCS buckets, or blob storage containers with unrestricted public access</li>
-  <li><strong>Insecure network configurations</strong> - Security groups or firewall rules that expose services to the public internet unnecessarily</li>
-  <li><strong>Unencrypted data stores</strong> - Database instances, file systems, or volumes without encryption at rest</li>
-  <li><strong>Missing logging and monitoring</strong> - Resources lacking audit trails or access logging</li>
-  <li><strong>Container misconfigurations</strong> - Containers running as root, privilege escalation enabled, or with overly broad capabilities</li>
+  <li><strong>&ldquo;Show me PRs with AI-generated code indicators this month&rdquo;</strong> &mdash; Surfaces pull requests where AI involvement was detected.</li>
+  <li><strong>&ldquo;Which repositories have the highest percentage of AI-assisted contributions?&rdquo;</strong> &mdash; Identifies where AI tools are most actively used.</li>
+  <li><strong>&ldquo;Are there AI-generated code patterns in security-critical paths?&rdquo;</strong> &mdash; Focuses investigation on high-risk areas.</li>
+  <li><strong>&ldquo;What AI coding tools are being used across our organization?&rdquo;</strong> &mdash; Maps the AI tool landscape in your development workflow.</li>
 </ul>
 
-<h2 id="contextual-iac-analysis">Contextual IaC Analysis</h2>
+<h2 id="detection-signals">Detection Signals</h2>
 
-<p>Like all DryRun Security analysis, IaC scanning is contextual. A finding is evaluated against the full intent of the infrastructure change - an intentionally public static asset bucket is treated differently from an accidentally public database. When your team uses <a href="../repository-context.html">AGENTS.md</a> to document known-safe infrastructure patterns, DryRun Security's agents apply that context during analysis to reduce false positives.</p>
+<p>The intelligence index tracks multiple dimensions of AI involvement:</p>
+
+<ul>
+  <li><strong>Code pattern analysis</strong> &mdash; Structural and stylistic indicators that suggest AI generation.</li>
+  <li><strong>Commit metadata</strong> &mdash; Signals from commit messages, authorship patterns, and contribution timing.</li>
+  <li><strong>Tool fingerprints</strong> &mdash; Identifiable patterns associated with specific AI coding assistants.</li>
+  <li><strong>Volume anomalies</strong> &mdash; Unusual spikes in code contribution volume that may indicate AI-assisted development.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Policy enforcement</strong> &mdash; Verify that AI tool usage complies with organizational policies. Use <a href="../docs/custom-code-policies.html">Custom Code Policies</a> to enforce AI-specific rules.</li>
+  <li><strong>Risk assessment</strong> &mdash; Evaluate the security implications of AI-generated code in your codebase.</li>
+  <li><strong>Governance reporting</strong> &mdash; Provide leadership with visibility into AI adoption patterns across engineering teams.</li>
+  <li><strong>Compliance</strong> &mdash; Document AI usage for regulatory requirements. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
         </div>
 <nav class="prev-next">
-<a href="../docs/secrets-scanning.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Secrets Scanning</span></a>
-<a href="../docs/sca.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">SCA</span></a>
+<a href="../docs/incident-response.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Incident Response Investigation</span></a>
+<a href="../docs/security-review-requests.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">New Feature or Repository Security Review</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#what-is-iac-scanning">What Is IaC Scanning?</a></li>
-<li class="toc-h2"><a href="#supported-formats">Supported IaC Formats</a></li>
-<li class="toc-h2"><a href="#what-iac-scanning-catches">What IaC Scanning Catches</a></li>
-<li class="toc-h2"><a href="#contextual-iac-analysis">Contextual IaC Analysis</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
+<li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
+<li class="toc-h2"><a href="#detection-signals">Detection Signals</a></li>
+<li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>
   </div>

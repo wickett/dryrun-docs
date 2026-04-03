@@ -74,7 +74,7 @@ SECTIONS = [
     {
         'name': 'Code Security Intelligence',
         'slug': 'code-security-intelligence',
-        'pages': ['code-insights', 'security-reviews', 'pr-variant-analysis', 'vulnerability-trends', 'application-summary'],
+        'pages': ['feature-ships', 'architecture-risks', 'developer-trends', 'incident-response', 'shadow-ai', 'security-review-requests', 'security-reviews', 'pr-variant-analysis', 'vulnerability-trends', 'application-summary'],
     },
     {
         'name': 'Platform',
@@ -134,7 +134,12 @@ PAGES['documentation'] = {
 <p>Go beyond simple pattern matching with DryRun Security's AI-powered intelligence:</p>
 
 <ul>
-  <li><a href="./code-insights.html">Code Insights</a> &mdash; Knowledge graph and insights across your codebase.</li>
+  <li><a href="./feature-ships.html">Feature Ships</a> &mdash; Track features shipped across your codebase.</li>
+  <li><a href="./architecture-risks.html">Architecture Risks</a> &mdash; Identify structural security risks across your system.</li>
+  <li><a href="./developer-trends.html">Developer Trends</a> &mdash; Analyze developer behavior and security trend patterns.</li>
+  <li><a href="./incident-response.html">Incident Response Investigation</a> &mdash; Investigate security incidents with queryable code intelligence.</li>
+  <li><a href="./shadow-ai.html">Shadow AI</a> &mdash; Detect and govern unauthorized AI tool usage.</li>
+  <li><a href="./security-review-requests.html">New Feature or Repository Security Review</a> &mdash; Request security reviews informed by historical intelligence.</li>
   <li><a href="./security-reviews.html">Security Reviews</a> &mdash; Contextual security analysis and business logic detection.</li>
   <li><a href="./pr-variant-analysis.html">PR Variant Analysis</a> &mdash; Behavioral analysis and multi-agent architecture for PR review.</li>
   <li><a href="./vulnerability-trends.html">Vulnerability Trends</a> &mdash; Track vulnerability coverage and risk trends over time.</li>
@@ -896,115 +901,275 @@ PAGES['auto-fix'] = {
 
 # -- Code Security Intelligence --
 
-PAGES['code-insights'] = {
-    'title': 'Code Insights',
-    'description': 'AI-powered code insights and security knowledge graph for your codebase.',
+PAGES['feature-ships'] = {
+    'title': 'Feature Ships',
+    'description': 'Track and review features shipped across your codebase using DryRun Security\'s intelligence index.',
     'section': 'Code Security Intelligence',
     'content': '''
-
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/insights/01-insights-chat.png" alt="AI Insights chat interface in DryRun Security" loading="lazy"></figure>
-
 <h2 id="overview">Overview</h2>
 
-<p>The Insights page provides a conversational interface for exploring your security data. Instead of navigating dashboards and piecing together data from multiple reports, you describe what you want to know and the <strong>DryRun AI Assistant</strong> retrieves the answer. Insights is currently available as a <strong>Beta</strong> feature.</p>
-
-<p>At the top of the page, a date selector lets you scope your queries to a specific analysis window (e.g., "Mar 20, 2026"). Below it, the subtitle reads "Analysis of recent PRs and code changes," grounding the conversation in your actual repository activity.</p>
-
-<h2 id="dryrun-ai-assistant">DryRun AI Assistant</h2>
-
-<p>The main interface features an <strong>inline AI Assistant chat</strong> with streaming responses. When you open Insights, the assistant is ready to answer questions about your security data in real time.</p>
-
-<p>Type a question in natural language and the assistant responds with contextual answers drawn from your PR reviews, DeepScans, policy enforcement records, and Risk Register data. Responses can include tables, charts, links to specific PRs, and code references.</p>
-
-<h2 id="suggested-prompts">Suggested Prompts</h2>
-
-<p>Below the chat window, a <strong>More</strong> dropdown provides quick question suggestions to help you get started:</p>
-
-<ul>
-  <li><strong>"Get my summary for the past week"</strong> - Overview of recent security activity across all repositories</li>
-  <li><strong>"What are the top risks in my repositories?"</strong> - Prioritized view of your highest-severity findings</li>
-  <li><strong>"Show me recent policy violations"</strong> - List of Custom Code Policy violations from recent PRs</li>
-  <li><strong>More</strong> - Expand to see additional suggested prompts</li>
-</ul>
-
-<p>You can also type free-form questions for more specific queries, such as:</p>
-
-<ul>
-  <li>"Did we add any new Go HTTP endpoints this week or last?"</li>
-  <li>"Tell me the top 5 features we shipped this month that have the most risky security implications. Link me to the PRs."</li>
-  <li>"Make a chart with vulnerabilities by type. Show just the top 3 risky ones."</li>
-  <li>"What IAM policy changes were introduced across all repos this quarter?"</li>
-</ul>
-
-<h2 id="customize-insights">Customize Insights</h2>
-
-<p>The <strong>Category Manager</strong> provides tabbed controls for customizing <strong>Categories</strong> and <strong>Quick Questions</strong>. Categories let you define the types of insights generated, while Quick Questions configure the suggested prompts available in the More dropdown. Redesigned Insights cards with expandable sections provide a cleaner, more organized view of your security data.</p>
-
-<h2 id="use-cases">Use Cases</h2>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/insights/02-insights-results.png" alt="AI Insights results showing security analysis" loading="lazy"></figure>
-
-<h3 id="audit-reporting">Audit-Ready Reporting</h3>
-<p>Generate compliance evidence and audit reports by querying your security data directly. Instead of exporting CSV files and building spreadsheets, ask for the exact view auditors need. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a> for more on audit workflows.</p>
-
-<h3 id="risk-trend-analysis">Risk Trend Analysis</h3>
-<p>Track how your security posture changes over time. Ask about trends by repository, team, vulnerability type, or time period. Identify whether remediation is keeping pace with new findings.</p>
-
-<h3 id="investigate-pr">Investigate PR</h3>
-<p>The <strong>Investigate PR</strong> action triggers <a href="../docs/pr-variant-analysis.html">variant analysis</a> directly from the Insights page to enhance vulnerability investigation. When you identify a finding of interest, you can deep-dive into the specific PR to understand the full security context, related patterns, and potential blast radius.</p>
-
-<h3 id="attack-surface-discovery">Attack Surface Discovery</h3>
-<p>Understand what new attack surface your team is creating. Query for new endpoints, new dependencies, new infrastructure, or any code pattern that expands your exposure.</p>
-
-<h3 id="remediation-automation">Automated Discovery and Remediation</h3>
-<p>Through the MCP integration, AI coding agents can query Code Insights to discover findings, understand context, and generate fixes - creating a closed loop from detection to remediation. See <a href="../docs/mcp.html">MCP Integration</a> for setup details.</p>
+<p>Every pull request DryRun Security reviews contributes to an intelligence index &mdash; a structured, queryable record of what changed, why it matters, and what security implications it carries. The Feature Ships page explains how to use this index to track and review features as they are shipped across your repositories.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
-<p>Insights is powered by the <strong>Codebase Insight Agent</strong>, one of DryRun Security's <a href="../docs/pr-variant-analysis.html">primary agents</a>. The agent has access to:</p>
+<p>During PR and repository scanning, DryRun Security&rsquo;s models analyze code changes to identify feature-level context: new endpoints, new user flows, new capabilities, and new integrations. These observations are indexed and made available for querying through the <strong>DryRun AI Assistant</strong> on the Insights page and programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>Rather than manually tracking feature releases across PRs, teams can query the intelligence index to get a consolidated view of what shipped, when, and what the security implications are.</p>
+
+<h2 id="example-queries">Example Queries</h2>
 
 <ul>
-  <li>All PR review findings and history</li>
-  <li>DeepScan results</li>
-  <li>Policy enforcement records</li>
-  <li>Repository metadata and configuration</li>
-  <li>Risk Register data</li>
+  <li><strong>&ldquo;What features shipped this sprint?&rdquo;</strong> &mdash; Returns a summary of new capabilities introduced across all monitored repositories.</li>
+  <li><strong>&ldquo;Show me the top 5 features we shipped this month with the most risky security implications. Link me to the PRs.&rdquo;</strong> &mdash; Surfaces features ranked by security risk with direct PR links.</li>
+  <li><strong>&ldquo;Did we ship any new payment flows this quarter?&rdquo;</strong> &mdash; Filters the index for domain-specific feature patterns.</li>
+  <li><strong>&ldquo;Which repos had the most feature activity last week?&rdquo;</strong> &mdash; Identifies the most active areas of development.</li>
 </ul>
 
-<p>When you ask a question, the agent interprets your intent, queries the relevant data sources, and returns a formatted answer. The Code Insights MCP (Model Context Protocol) enables the same queries programmatically, so AI coding agents can also access this data. See <a href="../docs/mcp.html">MCP Integration</a> for details.</p>
+<h2 id="security-review-integration">Security Review Integration</h2>
 
-<h2 id="connection-to-dashboard">Connection to Security Dashboard</h2>
-
-<p>Insights complements the <a href="../docs/application-summary.html">Security Dashboard</a>. While the dashboard provides a fixed set of visualizations and metrics, Insights lets you ask ad-hoc questions that the dashboard may not cover. Use the dashboard for ongoing monitoring and Insights for investigation and reporting.</p>
-
-
-<h2 id="security-knowledge-graph">Code Security Knowledge Graph</h2>
-
-<h2 id="beyond-stateless-scanning">Beyond Stateless Scanning</h2>
-
-<p>Most security scanning tools are stateless: they analyze a PR, produce findings, and forget everything. The next PR is analyzed completely fresh, with no memory of what was found before, what was triaged as a false positive, or how the codebase has evolved over time. This means every scan starts from zero, and every improvement to accuracy must be re-learned.</p>
-
-<p>DryRun Security builds and maintains a <strong>Code Security Knowledge Graph</strong> - a persistent, structured representation of security intelligence about your codebase that accumulates over time and informs every subsequent analysis.</p>
-
-<h2 id="what-the-knowledge-graph-contains">What the Knowledge Graph Contains</h2>
-
-<p>The knowledge graph captures and connects multiple dimensions of security knowledge about your repositories:</p>
+<p>Feature ship tracking integrates with DryRun Security&rsquo;s broader analysis. Each feature identified in the index is annotated with:</p>
 
 <ul>
-  <li><strong>Finding history</strong> - Which vulnerabilities have been identified, when, in which files, and what their current disposition is (open, triaged, fixed).</li>
-  <li><strong>False positive suppression</strong> - When a finding is triaged as a false positive, that judgment is encoded as a fingerprint and applied to suppress the same finding in future scans automatically.</li>
-  <li><strong>Developer-provided context</strong> - Context added by developers and security teams when triaging findings is stored and used to calibrate future analysis in similar situations.</li>
-  <li><strong>Codebase patterns</strong> - Understanding of the frameworks, authentication patterns, and security-relevant design choices in your codebase that inform how code changes should be evaluated.</li>
+  <li>Security findings from the PR reviews that introduced it</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
 </ul>
 
-<h2 id="model-independent-verification">Model-Independent Verification</h2>
+<h2 id="use-cases">Use Cases</h2>
 
-<p>The knowledge graph is maintained independently of any single AI model. This is a deliberate architectural choice. AI models change - they're updated, replaced, and improved. DryRun Security's findings and the intelligence encoded in the knowledge graph persist across model changes, ensuring continuity of security coverage even as the underlying AI infrastructure evolves.</p>
+<ul>
+  <li><strong>Sprint reviews</strong> &mdash; Generate a security-aware summary of what your team shipped.</li>
+  <li><strong>Release readiness</strong> &mdash; Verify that all features in a release have been security-reviewed.</li>
+  <li><strong>Audit evidence</strong> &mdash; Provide auditors with a record of features shipped alongside their security assessments. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+''',
+}
 
-<p>Model-independent verification also means findings are validated across multiple models before being surfaced. The knowledge graph records verified findings, not model outputs - the distinction matters for reliability and auditability.</p>
+PAGES['architecture-risks'] = {
+    'title': 'Architecture Risks',
+    'description': 'Identify and investigate architectural security risks using DryRun Security\'s intelligence index.',
+    'section': 'Code Security Intelligence',
+    'content': '''
+<h2 id="overview">Overview</h2>
 
-<h2 id="accumulating-accuracy-over-time">Accumulating Accuracy Over Time</h2>
+<p>DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase. The Architecture Risks page explains how to query this index to identify structural security risks &mdash; the kind that emerge from how components interact, not just from individual code flaws.</p>
 
-<p>The practical impact of the knowledge graph is that DryRun Security gets more accurate over time as it learns the specific characteristics of your codebase. False positive rates decrease as the system accumulates triage context. The risk model becomes better calibrated to your specific risk profile, frameworks, and deployment patterns. Security intelligence is a durable organizational asset - not something that evaporates between scans.</p>
+<h2 id="how-it-works">How It Works</h2>
+
+<p>During every PR review and repository scan, DryRun Security&rsquo;s models observe architectural signals: new service boundaries, authentication pattern changes, data flow modifications, infrastructure-as-code updates, and dependency relationship shifts. These observations accumulate in the intelligence index, building a persistent map of your system&rsquo;s architecture and how it evolves over time.</p>
+
+<p>Teams can query this index to surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What IAM policy changes were introduced across all repos this quarter?&rdquo;</strong> &mdash; Surfaces infrastructure-level permission changes.</li>
+  <li><strong>&ldquo;Show me new service-to-service communication paths added this month&rdquo;</strong> &mdash; Maps architectural expansion.</li>
+  <li><strong>&ldquo;Which repos introduced new external API integrations?&rdquo;</strong> &mdash; Identifies new trust boundaries.</li>
+  <li><strong>&ldquo;Are there any new unauthenticated endpoints?&rdquo;</strong> &mdash; Flags architectural gaps in access control.</li>
+</ul>
+
+<h2 id="risk-patterns">Risk Patterns Detected</h2>
+
+<p>The intelligence index tracks architectural risk patterns including:</p>
+
+<ul>
+  <li><strong>Trust boundary changes</strong> &mdash; New external integrations, API surface expansion, or cross-service data flows.</li>
+  <li><strong>Authentication and authorization drift</strong> &mdash; Changes to auth patterns that may weaken access control.</li>
+  <li><strong>Data flow modifications</strong> &mdash; New paths for sensitive data that may bypass existing controls.</li>
+  <li><strong>Infrastructure changes</strong> &mdash; IaC modifications that alter network topology, permissions, or deployment configuration.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Threat modeling</strong> &mdash; Use the intelligence index to feed threat modeling exercises with real, current architectural data.</li>
+  <li><strong>Architecture review</strong> &mdash; Query for structural changes before approving major releases.</li>
+  <li><strong>Compliance</strong> &mdash; Demonstrate architectural governance by showing how structural changes are tracked and reviewed. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+''',
+}
+
+PAGES['developer-trends'] = {
+    'title': 'Developer Trends',
+    'description': 'Analyze developer behavior and contribution patterns through DryRun Security\'s intelligence index.',
+    'section': 'Code Security Intelligence',
+    'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of PR and repository scanning. The Developer Trends page explains how to query this index to understand team-level security trends, identify areas where additional training may help, and track how security practices evolve over time.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>As DryRun Security reviews pull requests, the models record patterns at the contributor level: which types of findings are most common, how quickly findings are addressed, what categories of code changes are being made, and how security posture trends over time. This data is aggregated and anonymizable, designed to improve team processes rather than single out individuals.</p>
+
+<p>Teams can query the intelligence index to understand development patterns and their security implications.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What are the most common security findings across our team this month?&rdquo;</strong> &mdash; Identifies patterns that may indicate a training opportunity.</li>
+  <li><strong>&ldquo;How has our mean time to remediate findings changed over the last quarter?&rdquo;</strong> &mdash; Tracks security responsiveness trends.</li>
+  <li><strong>&ldquo;Which repositories have the highest density of new findings?&rdquo;</strong> &mdash; Highlights areas under active development that may need more review.</li>
+  <li><strong>&ldquo;Show me a chart of finding categories over the past 6 months&rdquo;</strong> &mdash; Visualizes how the types of issues are shifting.</li>
+</ul>
+
+<h2 id="trend-categories">Trend Categories</h2>
+
+<p>The intelligence index tracks several dimensions of developer activity:</p>
+
+<ul>
+  <li><strong>Finding frequency and type</strong> &mdash; What categories of security issues appear most often and whether they are increasing or decreasing.</li>
+  <li><strong>Remediation velocity</strong> &mdash; How quickly findings are addressed after detection.</li>
+  <li><strong>Code change patterns</strong> &mdash; Volume and nature of changes across repositories, highlighting areas of high activity.</li>
+  <li><strong>Policy compliance</strong> &mdash; How often <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are triggered and resolved.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Security training prioritization</strong> &mdash; Focus training on the finding categories that appear most frequently.</li>
+  <li><strong>Process improvement</strong> &mdash; Track whether process changes (e.g., new policies, new tools) are having the intended effect.</li>
+  <li><strong>Management reporting</strong> &mdash; Generate trend data for leadership reviews and board reporting.</li>
+</ul>
+''',
+}
+
+PAGES['incident-response'] = {
+    'title': 'Incident Response Investigation',
+    'description': 'Use DryRun Security\'s intelligence index to investigate security incidents and trace code changes.',
+    'section': 'Code Security Intelligence',
+    'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>When a security incident occurs, speed of investigation is critical. DryRun Security&rsquo;s intelligence index provides a queryable record of every code change, security finding, and policy evaluation across your repositories &mdash; enabling rapid, targeted investigation without manually searching through PR histories and logs.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>Every PR review and repository scan feeds the intelligence index with structured data: what changed, what was found, which policies were evaluated, and what the security assessment was. During incident response, this index becomes an investigation tool. Instead of piecing together information from Git logs, CI systems, and security dashboards, responders can query the index directly.</p>
+
+<p>Queries can be made through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;Which PR introduced the risky dependency?&rdquo;</strong> &mdash; Traces a vulnerable component back to its introduction.</li>
+  <li><strong>&ldquo;Show me all changes to authentication code in the last 30 days&rdquo;</strong> &mdash; Scopes investigation to security-critical areas.</li>
+  <li><strong>&ldquo;What secrets-related findings were suppressed in repo X?&rdquo;</strong> &mdash; Reviews triage decisions that may be relevant to the incident.</li>
+  <li><strong>&ldquo;List all PRs that modified payment processing logic this quarter&rdquo;</strong> &mdash; Narrows investigation to a specific functional area.</li>
+</ul>
+
+<h2 id="investigation-capabilities">Investigation Capabilities</h2>
+
+<p>The intelligence index supports incident response workflows including:</p>
+
+<ul>
+  <li><strong>Change tracing</strong> &mdash; Identify exactly which PR introduced a specific change, dependency, or configuration.</li>
+  <li><strong>Blast radius assessment</strong> &mdash; Determine what other components or repositories may be affected by the same issue.</li>
+  <li><strong>Timeline reconstruction</strong> &mdash; Build a chronological view of security-relevant changes leading up to an incident.</li>
+  <li><strong>Finding review</strong> &mdash; Surface any prior findings related to the affected code that may have been triaged or deferred.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Vulnerability triage</strong> &mdash; When a CVE is disclosed, quickly determine if and where the affected component exists in your codebase.</li>
+  <li><strong>Breach investigation</strong> &mdash; Trace the code path involved in a security breach back through its development history.</li>
+  <li><strong>Post-incident review</strong> &mdash; Generate a comprehensive timeline of changes for post-mortem analysis. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a> for audit trail documentation.</li>
+</ul>
+''',
+}
+
+PAGES['shadow-ai'] = {
+    'title': 'Shadow AI',
+    'description': 'Detect and investigate unauthorized AI tool usage in your codebase through DryRun Security\'s intelligence index.',
+    'section': 'Code Security Intelligence',
+    'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during PR and repository scanning, enabling teams to detect, investigate, and govern AI usage across their codebase.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals &mdash; including coding patterns, commit metadata, and structural characteristics &mdash; are indexed and made queryable. Teams can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
+
+<p>This capability builds on DryRun Security&rsquo;s <a href="../docs/ai-coding-integration.html">AI Coding Integration</a> analysis, extending it into the intelligence index for historical querying and trend analysis.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;Show me PRs with AI-generated code indicators this month&rdquo;</strong> &mdash; Surfaces pull requests where AI involvement was detected.</li>
+  <li><strong>&ldquo;Which repositories have the highest percentage of AI-assisted contributions?&rdquo;</strong> &mdash; Identifies where AI tools are most actively used.</li>
+  <li><strong>&ldquo;Are there AI-generated code patterns in security-critical paths?&rdquo;</strong> &mdash; Focuses investigation on high-risk areas.</li>
+  <li><strong>&ldquo;What AI coding tools are being used across our organization?&rdquo;</strong> &mdash; Maps the AI tool landscape in your development workflow.</li>
+</ul>
+
+<h2 id="detection-signals">Detection Signals</h2>
+
+<p>The intelligence index tracks multiple dimensions of AI involvement:</p>
+
+<ul>
+  <li><strong>Code pattern analysis</strong> &mdash; Structural and stylistic indicators that suggest AI generation.</li>
+  <li><strong>Commit metadata</strong> &mdash; Signals from commit messages, authorship patterns, and contribution timing.</li>
+  <li><strong>Tool fingerprints</strong> &mdash; Identifiable patterns associated with specific AI coding assistants.</li>
+  <li><strong>Volume anomalies</strong> &mdash; Unusual spikes in code contribution volume that may indicate AI-assisted development.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Policy enforcement</strong> &mdash; Verify that AI tool usage complies with organizational policies. Use <a href="../docs/custom-code-policies.html">Custom Code Policies</a> to enforce AI-specific rules.</li>
+  <li><strong>Risk assessment</strong> &mdash; Evaluate the security implications of AI-generated code in your codebase.</li>
+  <li><strong>Governance reporting</strong> &mdash; Provide leadership with visibility into AI adoption patterns across engineering teams.</li>
+  <li><strong>Compliance</strong> &mdash; Document AI usage for regulatory requirements. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+''',
+}
+
+PAGES['security-review-requests'] = {
+    'title': 'New Feature or Repository Security Review',
+    'description': 'Request security reviews for new features or repositories using DryRun Security\'s intelligence index.',
+    'section': 'Code Security Intelligence',
+    'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>When a new feature is proposed or a new repository is onboarded, security teams need to quickly assess the risk landscape. DryRun Security&rsquo;s intelligence index provides the foundation for these reviews &mdash; enabling teams to query historical patterns, similar implementations, and known risks to inform their assessment.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>The intelligence index accumulated from PR and repository scanning contains a structured record of security patterns across your entire codebase. When reviewing a new feature or repository, teams can query this index to find relevant precedents: how similar features were implemented elsewhere, what security issues arose, and what patterns to watch for.</p>
+
+<p>Queries can be made through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What security findings were associated with our last payment integration?&rdquo;</strong> &mdash; Reviews precedent for a similar new feature.</li>
+  <li><strong>&ldquo;Summarize the security posture of repo X&rdquo;</strong> &mdash; Gets a baseline assessment for a repository under review.</li>
+  <li><strong>&ldquo;What are the most common vulnerabilities in our Go services?&rdquo;</strong> &mdash; Informs a review of a new Go repository.</li>
+  <li><strong>&ldquo;Show me all findings related to file upload handling across our repos&rdquo;</strong> &mdash; Gathers intelligence before reviewing a new file upload feature.</li>
+</ul>
+
+<h2 id="review-workflow">Review Workflow</h2>
+
+<p>The intelligence index supports a structured security review process:</p>
+
+<ul>
+  <li><strong>Precedent search</strong> &mdash; Query for similar features or patterns across your codebase to understand what risks to expect.</li>
+  <li><strong>Risk baseline</strong> &mdash; For new repositories, query the index for common finding categories in similar technology stacks.</li>
+  <li><strong>Policy alignment</strong> &mdash; Verify that appropriate <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are configured for the new feature or repository.</li>
+  <li><strong>Ongoing monitoring</strong> &mdash; After the review, the intelligence index continues to track the feature or repository as it evolves.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>New feature design review</strong> &mdash; Before implementation begins, query the index to inform the security architecture.</li>
+  <li><strong>Repository onboarding</strong> &mdash; When adding a new repository to DryRun Security, use the index to benchmark against similar repos.</li>
+  <li><strong>Acquisition due diligence</strong> &mdash; Assess acquired codebases by querying the index for risk patterns after initial scanning.</li>
+  <li><strong>Compliance pre-checks</strong> &mdash; Verify that new features meet regulatory requirements before they ship. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
 ''',
 }
 
@@ -1221,7 +1386,7 @@ PAGES['pr-variant-analysis'] = {
 
 <h2 id="investigate-from-insights">Investigate from Insights</h2>
 
-<p>Variant analysis can be triggered directly from the <a href="../docs/code-insights.html">Insights</a> page using the <strong>Investigate PR</strong> action. This allows you to seamlessly move from a high-level security question to a deep investigation of a specific pull request, with the full context of the variant analysis applied.</p>
+<p>Variant analysis can be triggered directly from the <a href="../docs/feature-ships.html">Insights</a> page using the <strong>Investigate PR</strong> action. This allows you to seamlessly move from a high-level security question to a deep investigation of a specific pull request, with the full context of the variant analysis applied.</p>
 
 <h2 id="how-analyzers-work">How Analyzers Work</h2>
 
@@ -1337,7 +1502,7 @@ PAGES['pr-variant-analysis'] = {
 
 <h3 id="codebase-insight-agent">Codebase Insight Agent</h3>
 
-<p>The Codebase Insight Agent powers <a href="../docs/code-insights.html">Code Insights</a> - natural language queries about your codebase's security posture. Instead of navigating dashboards and exports, you ask questions like "what new API endpoints were added this week?" or "show me a chart of risky alerts by repo" and get precise, contextual answers.</p>
+<p>The Codebase Insight Agent powers <a href="../docs/feature-ships.html">Code Security Intelligence</a> - natural language queries about your codebase's security posture. Instead of navigating dashboards and exports, you ask questions like "what new API endpoints were added this week?" or "show me a chart of risky alerts by repo" and get precise, contextual answers.</p>
 
 <h2 id="specialized-sub-agents">Specialized Sub-Agents</h2>
 
@@ -1579,7 +1744,7 @@ PAGES['application-summary'] = {
 
 <h2 id="ai-assistance">AI Assistance</h2>
 
-<p>The Insights page (marked <strong>Beta</strong> in the sidebar) includes a conversational AI assistant that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./code-insights.html">Code Insights</a> for full documentation.</p>
+<p>The Insights page (marked <strong>Beta</strong> in the sidebar) includes a conversational AI assistant that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./feature-ships.html">Feature Ships</a> for an example of querying the intelligence index.</p>
 
 <h2 id="navigation">Platform Navigation</h2>
 
@@ -1593,7 +1758,7 @@ PAGES['application-summary'] = {
       <li>Pull Requests - PR scan history and results</li>
       <li><a href="../docs/deepscan.html">DeepScan</a> - Full-repository security analysis</li>
       <li><a href="../docs/custom-code-policies.html">Code Policies</a> - Custom Code Policy management</li>
-      <li><a href="./code-insights.html">Insights</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
+      <li><a href="./feature-ships.html">Intelligence Queries</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
     </ul>
   </li>
   <li><strong>Settings</strong>
@@ -2294,7 +2459,7 @@ PAGES['finding-tuning'] = {
 <ul>
   <li><strong>False positive fingerprinting</strong> - When you mark a finding as a false positive, DryRun Security fingerprints the vulnerability pattern and automatically suppresses it in future PR scans and DeepScans.</li>
   <li><strong>Context-based learning</strong> - When you add context explaining why a finding is safe, that context is stored and used to calibrate future analysis in similar situations across your codebase.</li>
-  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../code-insights.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
+  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../docs/architecture-risks.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
 </ul>
 <p>The result: false positive rates decrease over time as DryRun Security accumulates organizational knowledge from your team's triage decisions.</p>
 
@@ -2503,7 +2668,7 @@ PAGES['compliance-grc'] = {
   <li>Coverage gaps (repositories not yet connected)</li>
 </ul>
 
-<p>Use <a href="../docs/code-insights.html">Code Insights</a> to generate custom audit-ready reports by asking natural language questions like "show me a chart of risky alerts by repo for last quarter."</p>
+<p>Use the <a href="../docs/feature-ships.html">intelligence index</a> to generate custom audit-ready reports by asking natural language questions like "show me a chart of risky alerts by repo for last quarter."</p>
 
 <h2 id="risk-register">Risk Register as Audit Trail</h2>
 
@@ -3346,7 +3511,7 @@ PAGES['ai-coding-integration'] = {
 
 <h2 id="threat-modeling-support">Threat Modeling Support</h2>
 
-<p>DryRun Security's <a href="../docs/code-insights.html">Code Insights</a> capabilities support threat modeling exercises by answering questions like:</p>
+<p>DryRun Security's <a href="../docs/architecture-risks.html">intelligence index</a> capabilities support threat modeling exercises by answering questions like:</p>
 
 <ul>
   <li>"Which repositories have the most AI-generated code changes this month?"</li>
@@ -3641,7 +3806,7 @@ SECTION_ICONS = {
 SECTION_DESCRIPTIONS = {
     'Getting Started': 'Install DryRun Security on GitHub or GitLab and get your first scan running.',
     'Scanning': 'How DryRun Security analyzes code - from PR reviews to full repository DeepScans.',
-    'Code Security Intelligence': 'AI-powered code insights, security reviews, vulnerability trends, and analysis.',
+    'Code Security Intelligence': 'Query the intelligence index for feature ships, architecture risks, developer trends, incident response, and security reviews.',
     'Platform': 'Configuration, policies, risk management, compliance, permissions, and API access.',
     'Integrations': 'Connect DryRun Security with Slack, webhooks, API keys, and AI coding tools.',
 }

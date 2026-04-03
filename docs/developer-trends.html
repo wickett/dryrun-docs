@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IaC Scanning - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security scans IaC configurations for security misconfigurations, subdomain takeover risks, and infrastructure vulnerabilities.">
+  <title>Developer Trends - DryRun Security Docs</title>
+  <meta name="description" content="Analyze developer behavior and contribution patterns through DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,7 +69,7 @@
 <li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
 <li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
 <li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
-<li><a href="../docs/iac-scanning.html" class="active">IaC Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
 <li><a href="../docs/sca.html">SCA</a></li>
 <li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
@@ -79,7 +79,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/feature-ships.html">Feature Ships</a></li>
 <li><a href="../docs/architecture-risks.html">Architecture Risks</a></li>
-<li><a href="../docs/developer-trends.html">Developer Trends</a></li>
+<li><a href="../docs/developer-trends.html" class="active">Developer Trends</a></li>
 <li><a href="../docs/incident-response.html">Incident Response Investigation</a></li>
 <li><a href="../docs/shadow-ai.html">Shadow AI</a></li>
 <li><a href="../docs/security-review-requests.html">New Feature or Repository Security Review</a></li>
@@ -118,60 +118,62 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Scanning</div>
-        <h1 class="page-heading">IaC Scanning</h1>
-        <p class="page-description">DryRun Security scans IaC configurations for security misconfigurations, subdomain takeover risks, and infrastructure vulnerabilities.</p>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
+        <h1 class="page-heading">Developer Trends</h1>
+        <p class="page-description">Analyze developer behavior and contribution patterns through DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
-<h2 id="what-is-iac-scanning">What Is IaC Scanning?</h2>
+<h2 id="overview">Overview</h2>
 
-<p>Infrastructure as Code (IaC) has transformed how teams provision and manage cloud resources. Terraform, CloudFormation, Pulumi, Kubernetes manifests, Helm charts, and similar formats let infrastructure be defined, versioned, and reviewed just like application code. But they also introduce a new class of security risk: configuration errors that expose infrastructure to attack before a single line of application code runs.</p>
+<p>DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of PR and repository scanning. The Developer Trends page explains how to query this index to understand team-level security trends, identify areas where additional training may help, and track how security practices evolve over time.</p>
 
-<p>DryRun Security scans IaC configurations on every pull request, identifying misconfigurations and risks that could lead to data exposure, privilege escalation, or infrastructure compromise.</p>
+<h2 id="how-it-works">How It Works</h2>
 
-<h2 id="supported-formats">Supported IaC Formats</h2>
+<p>As DryRun Security reviews pull requests, the models record patterns at the contributor level: which types of findings are most common, how quickly findings are addressed, what categories of code changes are being made, and how security posture trends over time. This data is aggregated and anonymizable, designed to improve team processes rather than single out individuals.</p>
 
-<p>DryRun Security's IaC scanning supports the most widely used infrastructure definition formats:</p>
+<p>Teams can query the intelligence index to understand development patterns and their security implications.</p>
 
-<ul>
-  <li><strong>Terraform</strong> - <code>.tf</code> files for any provider (AWS, GCP, Azure, and others)</li>
-  <li><strong>AWS CloudFormation</strong> - JSON and YAML templates</li>
-  <li><strong>Kubernetes</strong> - Deployment, Service, Ingress, RBAC, and other resource manifests</li>
-  <li><strong>Helm</strong> - Chart templates and values files</li>
-  <li><strong>Docker and Docker Compose</strong> - Dockerfile and compose configuration</li>
-  <li><strong>GitHub Actions</strong> - Workflow YAML files</li>
-</ul>
-
-<h2 id="what-iac-scanning-catches">What IaC Scanning Catches</h2>
-
-<p>DryRun Security's IaC analysis goes beyond generic misconfiguration detection. Common findings include:</p>
+<h2 id="example-queries">Example Queries</h2>
 
 <ul>
-  <li><strong>Subdomain takeover</strong> - Dangling DNS records or CDN configurations that could be claimed by an attacker to serve malicious content under your domain</li>
-  <li><strong>Excessive IAM permissions</strong> - Roles and policies granting broader access than the service requires, violating least privilege</li>
-  <li><strong>Public storage buckets</strong> - S3 buckets, GCS buckets, or blob storage containers with unrestricted public access</li>
-  <li><strong>Insecure network configurations</strong> - Security groups or firewall rules that expose services to the public internet unnecessarily</li>
-  <li><strong>Unencrypted data stores</strong> - Database instances, file systems, or volumes without encryption at rest</li>
-  <li><strong>Missing logging and monitoring</strong> - Resources lacking audit trails or access logging</li>
-  <li><strong>Container misconfigurations</strong> - Containers running as root, privilege escalation enabled, or with overly broad capabilities</li>
+  <li><strong>&ldquo;What are the most common security findings across our team this month?&rdquo;</strong> &mdash; Identifies patterns that may indicate a training opportunity.</li>
+  <li><strong>&ldquo;How has our mean time to remediate findings changed over the last quarter?&rdquo;</strong> &mdash; Tracks security responsiveness trends.</li>
+  <li><strong>&ldquo;Which repositories have the highest density of new findings?&rdquo;</strong> &mdash; Highlights areas under active development that may need more review.</li>
+  <li><strong>&ldquo;Show me a chart of finding categories over the past 6 months&rdquo;</strong> &mdash; Visualizes how the types of issues are shifting.</li>
 </ul>
 
-<h2 id="contextual-iac-analysis">Contextual IaC Analysis</h2>
+<h2 id="trend-categories">Trend Categories</h2>
 
-<p>Like all DryRun Security analysis, IaC scanning is contextual. A finding is evaluated against the full intent of the infrastructure change - an intentionally public static asset bucket is treated differently from an accidentally public database. When your team uses <a href="../repository-context.html">AGENTS.md</a> to document known-safe infrastructure patterns, DryRun Security's agents apply that context during analysis to reduce false positives.</p>
+<p>The intelligence index tracks several dimensions of developer activity:</p>
+
+<ul>
+  <li><strong>Finding frequency and type</strong> &mdash; What categories of security issues appear most often and whether they are increasing or decreasing.</li>
+  <li><strong>Remediation velocity</strong> &mdash; How quickly findings are addressed after detection.</li>
+  <li><strong>Code change patterns</strong> &mdash; Volume and nature of changes across repositories, highlighting areas of high activity.</li>
+  <li><strong>Policy compliance</strong> &mdash; How often <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are triggered and resolved.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Security training prioritization</strong> &mdash; Focus training on the finding categories that appear most frequently.</li>
+  <li><strong>Process improvement</strong> &mdash; Track whether process changes (e.g., new policies, new tools) are having the intended effect.</li>
+  <li><strong>Management reporting</strong> &mdash; Generate trend data for leadership reviews and board reporting.</li>
+</ul>
         </div>
 <nav class="prev-next">
-<a href="../docs/secrets-scanning.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Secrets Scanning</span></a>
-<a href="../docs/sca.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">SCA</span></a>
+<a href="../docs/architecture-risks.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Architecture Risks</span></a>
+<a href="../docs/incident-response.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Incident Response Investigation</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#what-is-iac-scanning">What Is IaC Scanning?</a></li>
-<li class="toc-h2"><a href="#supported-formats">Supported IaC Formats</a></li>
-<li class="toc-h2"><a href="#what-iac-scanning-catches">What IaC Scanning Catches</a></li>
-<li class="toc-h2"><a href="#contextual-iac-analysis">Contextual IaC Analysis</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
+<li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
+<li class="toc-h2"><a href="#trend-categories">Trend Categories</a></li>
+<li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>
   </div>
