@@ -235,7 +235,10 @@ html[data-theme="light"] .footer-col-logo a svg {
 
 .sidebar-search {
   padding: 10px 14px 6px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-primary);
 }
 
 .sidebar-search-wrap {
