@@ -3267,8 +3267,9 @@ def render_sidebar(current_slug: str, asset_prefix: str) -> str:
     parts = []
     parts.append('<nav class="sidebar" id="sidebar">')
     parts.append('<div class="sidebar-header">')
-    parts.append(f'<a href="{esc(asset_prefix)}index.html" class="sidebar-logo-link">')
-    parts.append(f'<img src="{esc(asset_prefix)}assets/logo.svg" alt="DryRun Security" class="sidebar-logo">')
+    parts.append(f'<a href="{esc(asset_prefix)}index.html" class="sidebar-home-link">')
+    parts.append('<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5L8 2l5.5 4.5V13a1 1 0 01-1 1h-3V10H6.5v4h-3a1 1 0 01-1-1V6.5z"/></svg>')
+    parts.append('<span>Documentation</span>')
     parts.append('</a>')
     parts.append('</div>')
     parts.append('<div class="sidebar-nav">')
