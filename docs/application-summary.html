@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Application Summary - DryRun Security Docs</title>
-  <meta name="description" content="Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.">
+  <meta name="description" content="Query DryRun Security&#x27;s intelligence index for organization-wide security posture, analytics, and repository-level insights.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,28 +120,38 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
         <h1 class="page-heading">Application Summary</h1>
-        <p class="page-description">Overview of the DryRun Security Dashboard - analytics, risk trending, findings overview, and repository-level insights.</p>
+        <p class="page-description">Query DryRun Security&#x27;s intelligence index for organization-wide security posture, analytics, and repository-level insights.</p>
         <div class="doc-content">
-<h2 id="your-security-command-center">Your Security Command Center</h2>
+<h2 id="overview">Overview</h2>
 
-<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. From a single interface, AppSec leads and engineering managers can understand where risk is concentrated, how it's trending over time, which repositories need attention, and what your team has been doing to address findings.</p>
+<p>The DryRun Security Dashboard provides a unified view of your organization's security posture. The intelligence index captures analytics, risk trends, and repository-level insights from every PR review and <a href="../docs/deepscan.html">DeepScan</a> &mdash; making them queryable through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
 
-<p>The dashboard is designed to support both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently.</p>
+<p>The dashboard itself supports both strategic and tactical security work. At the strategic level, it provides the trend data and aggregate visibility needed to report to leadership and make prioritization decisions. At the tactical level, it gives engineers and security reviewers the filtered views they need to work through findings efficiently. The queries described below extend this data into a conversational, on-demand interface.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What were the biggest findings last week?&rdquo;</strong> &mdash; Surfaces the most significant security issues across your organization.</li>
+  <li><strong>&ldquo;Which repos need the most attention right now?&rdquo;</strong> &mdash; Identifies repositories with the highest concentration of open findings.</li>
+  <li><strong>&ldquo;Show me a chart of risky alerts by repo&rdquo;</strong> &mdash; Generates a visual breakdown of risk distribution.</li>
+  <li><strong>&ldquo;What percentage of our PRs are being scanned?&rdquo;</strong> &mdash; Checks coverage metrics across the organization.</li>
+  <li><strong>&ldquo;How has our finding velocity changed this quarter?&rdquo;</strong> &mdash; Compares the rate of new findings versus closures over time.</li>
+</ul>
 
 <h2 id="analytics-overview">Analytics Overview</h2>
 
-<p>The Dashboard's analytics view provides aggregate metrics across your connected repositories:</p>
+<p>The intelligence index tracks aggregate metrics across your connected repositories, all queryable through natural language:</p>
 
 <ul>
   <li><strong>Total findings</strong> by severity (Critical, High, Medium, Low), with trend lines showing how these numbers have changed over your selected time window</li>
-  <li><strong>Finding velocity</strong> - how many new findings are being introduced versus how many are being closed or triaged</li>
-  <li><strong>Coverage metrics</strong> - what percentage of PRs across your organization are being scanned, and scan volume over time</li>
-  <li><strong>Agent breakdown</strong> - which security agents are generating the most findings, identifying which vulnerability classes are most prevalent in your codebase</li>
+  <li><strong>Finding velocity</strong> &mdash; How many new findings are being introduced versus how many are being closed or triaged</li>
+  <li><strong>Coverage metrics</strong> &mdash; What percentage of PRs across your organization are being scanned, and scan volume over time</li>
+  <li><strong>Agent breakdown</strong> &mdash; Which security agents are generating the most findings, identifying which vulnerability classes are most prevalent</li>
 </ul>
 
 <h2 id="repository-level-insights">Repository-Level Insights</h2>
 
-<p>Drilling down to the repository level reveals the specific security posture of individual codebases. Each repository view shows:</p>
+<p>Drilling down to the repository level, the intelligence index can surface:</p>
 
 <ul>
   <li>Open findings by severity and type</li>
@@ -151,45 +161,45 @@
   <li>Configuration settings currently applied</li>
 </ul>
 
-<h2 id="risk-trending">Risk Trending</h2>
-
-<p>The dashboard's risk trending view shows how your organization's security posture evolves over time. Compare periods, identify regressions, and track the impact of security initiatives. See <a href="./vulnerability-trends.html">Risk Trending</a> for a deeper explanation of how trend analysis works.</p>
-
-<h2 id="ai-assistance">AI Assistance</h2>
-
-<p>The Insights page (marked <strong>Beta</strong> in the sidebar) includes a conversational AI assistant that lets admins ask natural language questions about their security data - "What were the biggest findings last week?" or "Which PR introduced the risky dependency?" See <a href="./feature-ships.html">Feature Ships</a> for an example of querying the intelligence index.</p>
-
-<h2 id="navigation">Platform Navigation</h2>
+<h2 id="platform-navigation">Platform Navigation</h2>
 
 <p>The DryRun Security dashboard organizes its features in a sidebar with three sections:</p>
 
 <ul>
   <li><strong>Main</strong>
     <ul>
-      <li><a href="./risk-register.html">Risk Register</a> - Centralized finding management</li>
-      <li>Repositories - Connected repository list and status</li>
-      <li>Pull Requests - PR scan history and results</li>
-      <li><a href="../docs/deepscan.html">DeepScan</a> - Full-repository security analysis</li>
-      <li><a href="../docs/custom-code-policies.html">Code Policies</a> - Custom Code Policy management</li>
-      <li><a href="./feature-ships.html">Intelligence Queries</a> <em>(Beta)</em> - AI-powered security Q&amp;A</li>
+      <li><a href="./risk-register.html">Risk Register</a> &mdash; Centralized finding management</li>
+      <li>Repositories &mdash; Connected repository list and status</li>
+      <li>Pull Requests &mdash; PR scan history and results</li>
+      <li><a href="../docs/deepscan.html">DeepScan</a> &mdash; Full-repository security analysis</li>
+      <li><a href="../docs/custom-code-policies.html">Code Policies</a> &mdash; Custom Code Policy management</li>
+      <li><a href="./feature-ships.html">Intelligence Queries</a> <em>(Beta)</em> &mdash; AI-powered security Q&amp;A</li>
     </ul>
   </li>
   <li><strong>Settings</strong>
     <ul>
-      <li><a href="./pr-scanning-configuration.html">Configurations</a> - Per-repository agent and policy settings</li>
-      <li><a href="../docs/slack-integration.html">Integrations</a> - Slack and webhook notification setup</li>
-      <li><a href="../docs/dryrun-api.html">Access Keys</a> - API key management</li>
+      <li><a href="./pr-scanning-configuration.html">Configurations</a> &mdash; Per-repository agent and policy settings</li>
+      <li><a href="../docs/slack-integration.html">Integrations</a> &mdash; Slack and webhook notification setup</li>
+      <li><a href="../docs/dryrun-api.html">Access Keys</a> &mdash; API key management</li>
     </ul>
   </li>
   <li><strong>Help</strong>
     <ul>
-      <li>Docs - Link to this documentation site</li>
-      <li>Ask Questions - Contact DryRun Security support</li>
+      <li>Docs &mdash; Link to this documentation site</li>
+      <li>Ask Questions &mdash; Contact DryRun Security support</li>
     </ul>
   </li>
 </ul>
 
 <p>A <strong>Dark Mode</strong> toggle at the bottom of the sidebar lets you switch between light and dark themes.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Executive reporting</strong> &mdash; Generate on-demand security posture summaries for leadership and board reporting.</li>
+  <li><strong>Team standups</strong> &mdash; Query for a quick overview of what changed since yesterday across your repositories.</li>
+  <li><strong>Audit preparation</strong> &mdash; Pull comprehensive security posture data for compliance reviews. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
         </div>
 <nav class="prev-next">
 <a href="../docs/vulnerability-trends.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Vulnerability Trends</span></a>
@@ -200,12 +210,12 @@
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#your-security-command-center">Your Security Command Center</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
 <li class="toc-h2"><a href="#analytics-overview">Analytics Overview</a></li>
 <li class="toc-h2"><a href="#repository-level-insights">Repository-Level Insights</a></li>
-<li class="toc-h2"><a href="#risk-trending">Risk Trending</a></li>
-<li class="toc-h2"><a href="#ai-assistance">AI Assistance</a></li>
-<li class="toc-h2"><a href="#navigation">Platform Navigation</a></li>
+<li class="toc-h2"><a href="#platform-navigation">Platform Navigation</a></li>
+<li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>
   </div>

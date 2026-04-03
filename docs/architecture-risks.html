@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Architecture Risks - DryRun Security Docs</title>
-  <meta name="description" content="Identify and investigate architectural security risks using DryRun Security&#x27;s intelligence index.">
+  <meta name="description" content="Identify and investigate architectural security risks by querying DryRun Security&#x27;s intelligence index.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,17 +120,19 @@
       <div class="content-inner">
         <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">›</span>Code Security Intelligence</div>
         <h1 class="page-heading">Architecture Risks</h1>
-        <p class="page-description">Identify and investigate architectural security risks using DryRun Security&#x27;s intelligence index.</p>
+        <p class="page-description">Identify and investigate architectural security risks by querying DryRun Security&#x27;s intelligence index.</p>
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase. The Architecture Risks page explains how to query this index to identify structural security risks &mdash; the kind that emerge from how components interact, not just from individual code flaws.</p>
+<p>Architectural security risks &mdash; the kind that emerge from how components interact rather than from individual code flaws &mdash; are notoriously hard to detect with traditional tools. DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page or dashboard. It is a query pattern &mdash; a way to ask DryRun Security&rsquo;s LLM about architectural risks using the structured findings and insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a>.</p>
 
 <h2 id="how-it-works">How It Works</h2>
 
 <p>During every PR review and repository scan, DryRun Security&rsquo;s models observe architectural signals: new service boundaries, authentication pattern changes, data flow modifications, infrastructure-as-code updates, and dependency relationship shifts. These observations accumulate in the intelligence index, building a persistent map of your system&rsquo;s architecture and how it evolves over time.</p>
 
-<p>Teams can query this index to surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
+<p>When you query for architecture risks, the LLM has access to the full history of these observations and can surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
 
 <h2 id="example-queries">Example Queries</h2>
 
@@ -150,6 +152,17 @@
   <li><strong>Authentication and authorization drift</strong> &mdash; Changes to auth patterns that may weaken access control.</li>
   <li><strong>Data flow modifications</strong> &mdash; New paths for sensitive data that may bypass existing controls.</li>
   <li><strong>Infrastructure changes</strong> &mdash; IaC modifications that alter network topology, permissions, or deployment configuration.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Architecture risk queries integrate with DryRun Security&rsquo;s broader analysis. Each risk pattern identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that introduced the change</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
 </ul>
 
 <h2 id="use-cases">Use Cases</h2>
@@ -173,6 +186,7 @@
 <li class="toc-h2"><a href="#how-it-works">How It Works</a></li>
 <li class="toc-h2"><a href="#example-queries">Example Queries</a></li>
 <li class="toc-h2"><a href="#risk-patterns">Risk Patterns Detected</a></li>
+<li class="toc-h2"><a href="#security-review-integration">Security Review Integration</a></li>
 <li class="toc-h2"><a href="#use-cases">Use Cases</a></li>
 </ul>
 </aside>
