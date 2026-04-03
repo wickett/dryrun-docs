@@ -279,7 +279,7 @@
 
 <p>In addition to the specialized analyzers, DryRun runs a set of Core Code Policies on every PR. These cover the OWASP Top 10 and other well-established vulnerability patterns using the same contextual analysis approach. Core Code Policies are always active and require no configuration.</p>
 
-<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a>.</p>
+<p>For organization-specific rules beyond the Core Code Policies, see <a href="../docs/custom-code-policies.html">Custom Code Policies</a>.</p>
 
 <h2 id="configuring-analyzers">Configuring Analyzers</h2>
 
@@ -322,7 +322,7 @@
 
 <h3 id="custom-policy-agent">Custom Policy Agent</h3>
 
-<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Natural Language Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
+<p>The Custom Policy Agent enforces your organization's <a href="../docs/custom-code-policies.html">Custom Code Policies</a> alongside the standard SAST checks. When you write a policy like "no new API endpoints without authorization enforcement," the Custom Policy Agent interprets that policy and evaluates the PR against it, regardless of language or framework.</p>
 
 <p>The Custom Policy Agent can call specialized sub-agents for SCA lookups, codebase analysis, and just-in-time research to fully evaluate whether a policy is satisfied.</p>
 
@@ -358,7 +358,7 @@
   <li>The <strong>Code Review Agent</strong> receives the PR event and retrieves the diff plus relevant surrounding files for context</li>
   <li>The agent dispatches <strong>specialized sub-agents</strong> in parallel, each analyzing the changes for their specific vulnerability class</li>
   <li>Sub-agents may call <strong>just-in-time research</strong> to look up framework behavior, CVE details, or license information</li>
-  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Natural Language Code Policies against the changes</li>
+  <li>The <strong>Custom Policy Agent</strong> evaluates any configured Custom Code Policies against the changes</li>
   <li>Findings from all agents are collected, validated for exploitability, and deduplicated</li>
   <li>The consolidated result is posted as a PR comment with findings, code references, and remediation guidance</li>
 </ol>
