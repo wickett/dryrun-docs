@@ -3617,30 +3617,160 @@ def render_doc_page(slug: str, page: dict, asset_prefix: str = '../',
 # ---------------------------------------------------------------------------
 
 def render_index_page() -> str:
-    """Render index.html as the Documentation page with full sidebar nav."""
-    page = PAGES['documentation']
-    title = page['title']
-    description = page['description']
+    """Render index.html as a landing page with hero, persona cards, and feature grid."""
     asset_prefix = './'
-
-    raw_content = page['content'].strip()
-    raw_content = raw_content.replace('{asset_prefix}', asset_prefix)
-    # Rewrite internal doc links for root-level index:
-    # ./slug.html → ./docs/slug.html
-    raw_content = re.sub(
-        r'href="\./([-a-z0-9]+)\.html"',
-        r'href="./docs/\1.html"',
-        raw_content,
-    )
-    content_with_ids = inject_heading_ids(raw_content)
-    toc_items = extract_toc(content_with_ids)
+    description = 'DryRun Security documentation - AI-native application security for your development workflow.'
 
     header = HEADER_HTML.replace('{asset_prefix}', asset_prefix)
     footer = FOOTER_HTML.replace('{asset_prefix}', asset_prefix)
     sidebar = render_sidebar('documentation', asset_prefix)
-    toc = render_toc(toc_items)
-    prev_next = render_prev_next('documentation', asset_prefix)
     search_index = generate_search_index()
+
+    dp = './docs/'
+
+    landing_content = f'''
+        <h1 class="page-heading">Documentation</h1>
+        <p class="page-description">DryRun Security is an AI-native application security platform that reviews every pull request for vulnerabilities in real time. These docs cover setup, scanning configuration, code security intelligence, platform administration, and integrations.</p>
+        <div class="doc-content">
+        <div class="landing-hero"></div>
+
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2>Get Started</h2>
+          </div>
+          <div class="landing-grid cols-3">
+            <a class="landing-card persona" href="{esc(dp)}quick-start.html">
+              <span class="landing-card-title">I&#x27;m a Developer</span>
+              <span class="landing-card-desc">Connect your repo, enable PR scanning, and get security findings inline with your pull requests.</span>
+            </a>
+            <a class="landing-card persona" href="{esc(dp)}deepscan.html">
+              <span class="landing-card-title">I&#x27;m in AppSec</span>
+              <span class="landing-card-desc">Discover vulnerabilities across repositories, review findings, configure policies, and track compliance.</span>
+            </a>
+            <a class="landing-card persona" href="{esc(dp)}pr-scanning-configuration.html">
+              <span class="landing-card-title">I&#x27;m an Admin</span>
+              <span class="landing-card-desc">Set up integrations, manage team permissions, configure scanning settings, and generate API tokens.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2>Scanning Products</h2>
+          </div>
+          <div class="landing-grid cols-3">
+            <a class="landing-card" href="{esc(dp)}pr-scanning.html">
+              <span class="landing-card-title">PR Scanning</span>
+              <span class="landing-card-desc">Automatic security review on every pull request with contextual analysis and inline comments.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}deepscan.html">
+              <span class="landing-card-title">Repository Scanning (DeepScan)</span>
+              <span class="landing-card-desc">Full repository analysis for comprehensive vulnerability detection beyond individual PRs.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}secrets-scanning.html">
+              <span class="landing-card-title">Secrets Scanning</span>
+              <span class="landing-card-desc">Detect leaked credentials, API keys, and tokens before they reach production.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}iac-scanning.html">
+              <span class="landing-card-title">IaC Scanning</span>
+              <span class="landing-card-desc">Security analysis for Terraform, CloudFormation, and other infrastructure-as-code configurations.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}sca.html">
+              <span class="landing-card-title">SCA</span>
+              <span class="landing-card-desc">Software composition analysis for known vulnerabilities in open-source dependencies.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}auto-fix.html">
+              <span class="landing-card-title">Auto Fix</span>
+              <span class="landing-card-desc">Automated remediation suggestions with one-click fix verification.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2>Code Security Intelligence</h2>
+          </div>
+          <div class="landing-grid cols-3">
+            <a class="landing-card" href="{esc(dp)}vulnerability-trends.html">
+              <span class="landing-card-title">Vulnerability Trends</span>
+              <span class="landing-card-desc">Track vulnerability coverage and risk trends over time across your organization.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}architecture-risks.html">
+              <span class="landing-card-title">Architecture Risks</span>
+              <span class="landing-card-desc">Identify structural security risks and systemic patterns across your codebase.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}developer-trends.html">
+              <span class="landing-card-title">Developer Trends</span>
+              <span class="landing-card-desc">Analyze developer behavior patterns and security trend data.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}shadow-ai.html">
+              <span class="landing-card-title">Shadow AI</span>
+              <span class="landing-card-desc">Detect and govern unauthorized AI tool usage in your codebase.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}incident-response.html">
+              <span class="landing-card-title">Incident Response</span>
+              <span class="landing-card-desc">Investigate security incidents with queryable code intelligence.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}application-summary.html">
+              <span class="landing-card-title">Application Summary</span>
+              <span class="landing-card-desc">Dashboard overview of your application security posture.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2>Platform &amp; Integrations</h2>
+          </div>
+          <div class="landing-grid cols-3">
+            <a class="landing-card" href="{esc(dp)}pr-blocking.html">
+              <span class="landing-card-title">PR Blocking</span>
+              <span class="landing-card-desc">Block pull requests based on security finding severity and policy rules.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}custom-code-policies.html">
+              <span class="landing-card-title">Custom Code Policies</span>
+              <span class="landing-card-desc">Create custom security rules in plain English to enforce your standards.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}compliance-grc.html">
+              <span class="landing-card-title">Compliance &amp; GRC</span>
+              <span class="landing-card-desc">Compliance reporting, audit trails, and governance readiness.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}slack-integration.html">
+              <span class="landing-card-title">Slack Integration</span>
+              <span class="landing-card-desc">Receive real-time security alerts and findings in your Slack channels.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}webhook-integration.html">
+              <span class="landing-card-title">Webhook Integration</span>
+              <span class="landing-card-desc">Send DryRun Security events to any webhook endpoint for custom workflows.</span>
+            </a>
+            <a class="landing-card" href="{esc(dp)}mcp.html">
+              <span class="landing-card-title">MCP</span>
+              <span class="landing-card-desc">Model Context Protocol integration for AI-powered development tools.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="landing-section">
+          <div class="landing-section-header">
+            <h2>Resources</h2>
+          </div>
+          <div class="landing-resources">
+            <a href="{esc(dp)}documentation.html">
+              <span>Documentation Overview<span class="res-desc">Full table of contents and platform overview</span></span>
+            </a>
+            <a href="{esc(dp)}dryrun-api.html">
+              <span>DryRun API<span class="res-desc">Programmatic access to DryRun Security</span></span>
+            </a>
+            <a href="{esc(dp)}api-access-keys.html">
+              <span>API Access Keys<span class="res-desc">Manage API keys for integrations</span></span>
+            </a>
+            <a href="{esc(dp)}ai-coding-integration.html">
+              <span>AI Coding Integration<span class="res-desc">Integrate with AI coding tools and agents</span></span>
+            </a>
+          </div>
+        </div>
+        </div>
+'''
 
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -3663,18 +3793,9 @@ def render_index_page() -> str:
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="page-heading-row">
-          <h1 class="page-heading">{esc(title)}</h1>
-          <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
-        </div>
-        <p class="page-description">{esc(description)}</p>
-        <div class="doc-content">
-{content_with_ids}
-        </div>
-{prev_next}
+{landing_content}
       </div>
     </main>
-{toc}
   </div>
 {footer}
   <script>window.__SEARCH_INDEX__={search_index};</script>
