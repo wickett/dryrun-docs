@@ -1533,6 +1533,15 @@ PAGES['pr-scanning-configuration'] = {
     'content': '''
 <p>Configurations let you customize how DryRun Security behaves for each repository or group of repositories. You can control which agents run, which policies are enforced, whether findings block PRs, and how notifications are delivered.</p>
 
+<h2 id="creating-a-configuration">Creating a Configuration</h2>
+
+<ol>
+  <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
+  <li>Navigate to <strong>Settings &gt; Configurations</strong> in the sidebar.
+    <br><strong>Note:</strong> The <code>default</code> configuration is editable and applies to all repositories not included in another configuration.</li>
+  <li>Click <strong>Add new Configuration +</strong>.</li>
+  <li>Enter a <strong>Configuration Name</strong> at the top of the page.</li>
+</ol>
 
 <h2 id="configuration-walkthrough">Configuration Walkthrough</h2>
 
@@ -1565,62 +1574,6 @@ PAGES['pr-scanning-configuration'] = {
 <p>Save the configuration when complete.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/09-config-save.png" alt="Saving a repository configuration" loading="lazy"></figure>
 
-<h3 id="branch-protection-rules">GitHub Branch Protection Rules</h3>
-<p>Use GitHub Branch Protection Rules to enforce DryRun Security checks before merging.</p>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/10-github-settings.png" alt="GitHub repository Settings page" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/11-github-branches.png" alt="GitHub Branches settings" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/12-branch-protection.png" alt="GitHub Branch Protection rule" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/13-branch-name.png" alt="Branch name pattern for protection" loading="lazy"></figure>
-
-<p>Require DryRun Security status checks to pass before merging.</p>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/14-require-checks.png" alt="Requiring status checks for DryRun Security" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/15-checks-policies.png" alt="DryRun Security policy checks in branch protection" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/16-checks-secrets.png" alt="DryRun Security secrets check in branch protection" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/17-checks-details.png" alt="DryRun Security check details in branch protection" loading="lazy"></figure>
-
-<h2 id="creating-a-configuration">Creating a Configuration</h2>
-
-<ol>
-  <li>Log in to the DryRun Security portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</li>
-  <li>Navigate to <strong>Settings &gt; Configurations</strong> in the sidebar.
-    <br><strong>Note:</strong> The <code>default</code> configuration is editable and applies to all repositories not included in another configuration.</li>
-  <li>Click <strong>Add new Configuration +</strong>.</li>
-  <li>Enter a <strong>Configuration Name</strong> at the top of the page.</li>
-</ol>
-
-<h2 id="general-settings">General Settings</h2>
-
-<p>The top section of a configuration provides these controls:</p>
-
-<ul>
-  <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
-  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
-  <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
-  <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
-  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
-  <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Toggle off for the familiar behavior where DryRun posts a comment only when scans produce findings. Toggle on to have DryRun post a comment on every PR scanned, useful for visibility and audit trails.</li>
-  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the risk level has not changed. When enabled, repeated notifications for the same risk level are suppressed, reducing noise.</li>
-</ul>
-
-<h2 id="policy-enforcement">Policy Enforcement Agent</h2>
-
-<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Custom Code Policies to this configuration:</p>
-
-<ul>
-  <li><strong>Add Policy</strong> - Attach an existing policy from your organization's <a href="../docs/custom-code-policies.html">Policy Library</a></li>
-  <li><strong>Create Policy</strong> - Write a new Custom Code Policy directly from this screen</li>
-</ul>
-
-<p>Each attached policy is shown as a row with its own controls:</p>
-
-<ul>
-  <li><strong>Blocking</strong> - Toggle to make this policy a required status check. When enabled, a policy violation prevents the PR from being merged.</li>
-  <li><strong>Silent Mode</strong> - Toggle to run the policy without posting findings in the PR comment. Useful for testing new policies before enforcing them.</li>
-  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>.</li>
-</ul>
-
-<p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>
-
 <h2 id="code-security-agents">Code Security Agents</h2>
 
 <p>The bottom section of the configuration page lists all available <a href="../docs/pr-variant-analysis.html">Security Analyzers</a>. Each analyzer has its own row with three controls:</p>
@@ -1640,34 +1593,38 @@ PAGES['pr-scanning-configuration'] = {
   </tbody>
 </table>
 
-<p>Each analyzer row provides:</p>
+<h2 id="setting-descriptions">Setting Descriptions</h2>
+
+<p>The top section of a configuration provides these controls:</p>
 
 <ul>
-  <li><strong>Blocking</strong> - Toggle to make this analyzer a required status check</li>
-  <li><strong>Silent Mode</strong> - Toggle to run the analyzer without posting findings in the PR comment</li>
-  <li><strong>Risk Level</strong> - Dropdown to set the severity label for findings from this analyzer (<strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>)</li>
+  <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
+  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
+  <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
+  <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
+  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
+  <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Toggle off for the familiar behavior where DryRun posts a comment only when scans produce findings. Toggle on to have DryRun post a comment on every PR scanned, useful for visibility and audit trails.</li>
+  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the risk level has not changed. When enabled, repeated notifications for the same risk level are suppressed, reducing noise.</li>
 </ul>
 
-<p>Click <strong>Save</strong> at the bottom to apply changes, or <strong>Cancel</strong> to discard.</p>
+<h3 id="policy-enforcement">Policy Enforcement Agent</h3>
 
-<h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
+<p>Below the general settings, the <strong>Policy Enforcement Agent</strong> section lets you attach Custom Code Policies to this configuration:</p>
 
-<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+<ul>
+  <li><strong>Add Policy</strong> - Attach an existing policy from your organization's <a href="../docs/custom-code-policies.html">Policy Library</a></li>
+  <li><strong>Create Policy</strong> - Write a new Custom Code Policy directly from this screen</li>
+</ul>
 
-<h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
+<p>Each attached policy is shown as a row with its own controls:</p>
 
-<ol>
-  <li>On GitHub, navigate to the main page of the repository.</li>
-  <li>Under your repository name, click <strong>Settings</strong>.</li>
-  <li>In the <strong>Code and automation</strong> section of the sidebar, click <strong>Branches</strong>.</li>
-  <li>Choose <strong>Add classic branch protection rule</strong>.</li>
-  <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
-  <li>Select <strong>Require status checks to pass before merging</strong>.</li>
-  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Custom Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
-  <li>Click <strong>Create</strong>.</li>
-</ol>
+<ul>
+  <li><strong>Blocking</strong> - Toggle to make this policy a required status check. When enabled, a policy violation prevents the PR from being merged.</li>
+  <li><strong>Silent Mode</strong> - Toggle to run the policy without posting findings in the PR comment. Useful for testing new policies before enforcing them.</li>
+  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>.</li>
+</ul>
 
-<p>When a Custom Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+<p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>
 ''',
 }
 
@@ -2336,6 +2293,39 @@ PAGES['pr-blocking'] = {
   <li>Repository administrators can bypass branch protection rules when necessary.</li>
   <li>All overrides are logged in the <a href="./risk-register.html">Risk Register</a> for audit purposes.</li>
 </ul>
+
+<h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
+
+<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+
+<h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
+
+<ol>
+  <li>On GitHub, navigate to the main page of the repository.</li>
+  <li>Under your repository name, click <strong>Settings</strong>.</li>
+  <li>In the <strong>Code and automation</strong> section of the sidebar, click <strong>Branches</strong>.</li>
+  <li>Choose <strong>Add classic branch protection rule</strong>.</li>
+  <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
+  <li>Select <strong>Require status checks to pass before merging</strong>.</li>
+  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Custom Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>When a Custom Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+
+<h2 id="github-branch-protection-rules">GitHub Branch Protection Rules</h2>
+
+<p>Use GitHub Branch Protection Rules to enforce DryRun Security checks before merging.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/10-github-settings.png" alt="GitHub repository Settings page" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/11-github-branches.png" alt="GitHub Branches settings" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/12-branch-protection.png" alt="GitHub Branch Protection rule" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/13-branch-name.png" alt="Branch name pattern for protection" loading="lazy"></figure>
+
+<p>Require DryRun Security status checks to pass before merging.</p>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/14-require-checks.png" alt="Requiring status checks for DryRun Security" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/15-checks-policies.png" alt="DryRun Security policy checks in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/16-checks-secrets.png" alt="DryRun Security secrets check in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/17-checks-details.png" alt="DryRun Security check details in branch protection" loading="lazy"></figure>
 ''',
 }
 
