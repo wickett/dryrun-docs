@@ -231,9 +231,7 @@ PAGES['quick-start'] = {
     'content': '''
 <h2 id="github-installation">GitHub Installation</h2>
 
-<h2 id="authorize-and-install">Authorize and Install the DryRun Security GitHub Application</h2>
-
-<div class="video-embed"><iframe src="https://www.loom.com/embed/79c20cca70ac4a61907f64e530068301?sid=0ed0b19c-942a-4729-9a12-ad9fea64e3ff?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen loading="lazy" style="width:100%;aspect-ratio:16/9;border-radius:8px;"></iframe></div>
+<h3 id="authorize-and-install">Authorize and Install the DryRun Security GitHub Application</h3>
 
 <ol>
   <li>
@@ -273,24 +271,13 @@ PAGES['quick-start'] = {
 
 <p><strong>Congratulations!</strong> Installation is complete. At this point DryRun Security will run checks on your repository as code is committed to Pull Requests.</p>
 
-<h2 id="whats-next">What's Next</h2>
-
-<p>Now that DryRun Security is installed, open a Pull Request against one of your selected repositories. DryRun Security will automatically run its security analysis and post results as a PR comment and in the GitHub Checks area.</p>
-
-<ul>
-  <li>See <a href="./pr-scanning.html">PR Code Reviews</a> to understand how DryRun Security analyzes your pull requests.</li>
-  <li>See <a href="./pr-scanning-configuration.html">Configurations</a> to customize which agents and policies run on each repository.</li>
-  <li>See <a href="./custom-code-policies.html">Custom Code Policies</a> to create custom security rules in plain English.</li>
-</ul>
-
-
 <h2 id="gitlab-installation">GitLab Installation</h2>
 
 <p><strong>Install All for Groups:</strong> When installing DryRun Security on GitLab, the <strong>Install All</strong> option for groups now respects project hierarchy. This means you can install across an entire group and its subgroups while maintaining the correct project structure and permissions.</p>
 
 <p>DryRun Security for GitLab.com enables fast, contextual code reviews that help your team spot unknown risks before they start. This guide walks you through connecting your GitLab environment to DryRun Security by creating a Personal Access Token and completing the installation in the dashboard.</p>
 
-<h2 id="create-a-personal-access-token">Create a Personal Access Token</h2>
+<h3 id="create-a-personal-access-token">Create a Personal Access Token</h3>
 
 <p>This section describes creating a Personal Access Token (PAT) that will be used during the installation of DryRun Security.</p>
 
@@ -309,7 +296,7 @@ PAGES['quick-start'] = {
   <li>Verify that the user who created the PAT has access to the <strong>Group</strong> where DryRun Security will be installed. The user should have at least <strong>Maintainer</strong> access. Add the user if necessary.</li>
 </ol>
 
-<h2 id="install-via-dashboard">Install DryRun Security via the Dashboard</h2>
+<h3 id="install-via-dashboard">Install DryRun Security via the Dashboard</h3>
 
 <ol>
   <li>Navigate to <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a> and click the <strong>Log in with GitLab</strong> button.</li>
@@ -321,7 +308,7 @@ PAGES['quick-start'] = {
   <li>Install on projects by clicking <strong>+</strong> next to the project and then click <strong>Save Projects</strong>.</li>
 </ol>
 
-<h2 id="activation">Activation</h2>
+<h3 id="activation">Activation</h3>
 
 <p>Your installation may be paused for up to 2 business days as we activate your account. We'll notify you by email once your account is active.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/10-activate.png" alt="Activate DryRun Security for GitLab" loading="lazy"></figure>
@@ -341,124 +328,13 @@ PAGES['quick-start'] = {
 <p><strong>Congratulations!</strong> Installation is complete. DryRun Security will now run and analyze changes as code is committed to Merge Requests.</p>
 
 
-<h2 id="scm-support">SCM Support</h2>
-
-<h2 id="supported-platforms">Supported Platforms</h2>
-
-<p>DryRun Security integrates directly with the source code management (SCM) platforms your team already uses:</p>
-
-<div class="table-wrap">
-<table>
-<thead><tr><th>Platform</th><th>Integration Method</th><th>Setup Guide</th></tr></thead>
-<tbody>
-<tr><td>GitHub (Cloud)</td><td>GitHub App</td><td><a href="../docs/quick-start.html">Install for GitHub</a></td></tr>
-<tr><td>GitLab (Cloud)</td><td>GitLab Integration</td><td><a href="../docs/quick-start.html">Install for GitLab</a></td></tr>
-</tbody>
-</table>
-</div>
-
-<h2 id="github-integration">GitHub Integration</h2>
-
-<p>DryRun Security connects to GitHub through a GitHub App installation. The App requests only the permissions necessary for security analysis:</p>
+<h2 id="references">References</h2>
 
 <ul>
-  <li><strong>Repository contents</strong> (read) - to retrieve code for analysis</li>
-  <li><strong>Pull requests</strong> (read/write) - to receive PR events and post review comments</li>
-  <li><strong>Checks</strong> (read/write) - to post pass/fail check results on PRs</li>
-  <li><strong>Metadata</strong> (read) - repository metadata for organization and configuration</li>
+  <li><a href="./pr-scanning.html">PR Code Reviews</a> &mdash; understand how DryRun Security analyzes your pull requests.</li>
+  <li><a href="./pr-scanning-configuration.html">Configurations</a> &mdash; customize which agents and policies run on each repository.</li>
+  <li><a href="./custom-code-policies.html">Custom Code Policies</a> &mdash; create custom security rules in plain English.</li>
 </ul>
-
-<h3 id="github-events">Supported Events</h3>
-
-<p>DryRun Security responds to the following GitHub events:</p>
-
-<ul>
-  <li><strong>Pull request opened</strong> - triggers a full security review of the PR</li>
-  <li><strong>Pull request synchronized</strong> (new commits pushed) - re-runs analysis on updated code</li>
-  <li><strong>Pull request reopened</strong> - re-runs analysis</li>
-</ul>
-
-<h3 id="github-installation-scope">Installation Scope</h3>
-
-<p>You can install the DryRun Security GitHub App for:</p>
-
-<ul>
-  <li><strong>All repositories</strong> in an organization - every repo gets security analysis automatically</li>
-  <li><strong>Selected repositories</strong> - choose specific repos to analyze</li>
-</ul>
-
-<p>New repositories added to the organization will automatically receive coverage if you selected "All repositories" during installation.</p>
-
-<h2 id="gitlab-integration">GitLab Integration</h2>
-
-<p>DryRun Security connects to GitLab through an integration that monitors merge request events. The setup process is documented in the <a href="../docs/quick-start.html">GitLab installation guide</a>.</p>
-
-<h3 id="gitlab-events">Supported Events</h3>
-
-<ul>
-  <li><strong>Merge request opened</strong> - triggers security review</li>
-  <li><strong>Merge request updated</strong> (new commits) - re-runs analysis</li>
-</ul>
-
-<h2 id="how-reviews-appear">How Reviews Appear</h2>
-
-<p>On both platforms, DryRun Security posts findings directly in the PR/MR interface:</p>
-
-<ul>
-  <li><strong>PR comment</strong> with a summary of findings, policy results, and an executive-level overview</li>
-  <li><strong>Check/status</strong> that passes or fails based on finding severity and configuration</li>
-  <li><strong>Inline annotations</strong> on specific lines of code where findings were detected</li>
-</ul>
-
-<p>Developers see security feedback in the same interface they use for code review, with no separate dashboard or tool required to take action.</p>
-
-<h2 id="configuration">Configuration</h2>
-
-<p>After installation, configure repository-level settings through the DryRun Security platform. See <a href="../docs/pr-scanning-configuration.html">Configure Repositories</a> for options including analyzer selection, severity thresholds, and notification routing.</p>
-
-
-<h2 id="cicd-integration">CI/CD Integration</h2>
-
-<h2 id="dryrun-in-your-pipeline">DryRun Security in Your Pipeline</h2>
-
-<p>DryRun Security integrates natively with GitHub and GitLab CI/CD workflows. Because DryRun Security is a GitHub App (and a GitLab integration), it participates directly in the pull request and pipeline status check system - no additional CI/CD configuration is required to get basic integration. Every PR scan automatically posts a status check result that your pipeline infrastructure can act on.</p>
-
-<h2 id="github-branch-protection">GitHub Branch Protection Rules</h2>
-
-<p>The most common CI/CD integration pattern is using GitHub Branch Protection Rules to prevent vulnerable code from being merged into protected branches. DryRun Security supports this through the <strong>Blocking</strong> configuration on both Code Policies and Code Security Agents.</p>
-
-<p>When a Code Policy or Agent has <strong>Blocking</strong> enabled:</p>
-<ol>
-  <li>DryRun Security posts a failing status check to the PR when findings exceed the configured risk threshold.</li>
-  <li>Your Branch Protection Rule requires this check to pass before a merge is allowed.</li>
-  <li>The PR is blocked from merging until the finding is addressed or triaged.</li>
-</ol>
-
-<p>See <a href="./pr-scanning-configuration.html">Configure Repositories</a> for the full branch protection setup walkthrough.</p>
-
-<h2 id="status-checks">Status Checks</h2>
-
-<p>DryRun Security posts individual status checks for each enabled agent and code policy. This granularity lets you enforce specific security gates - for example, requiring the Secrets Analyzer to pass on all PRs to <code>main</code>, while treating other agent findings as advisory.</p>
-
-<p>Available status checks include:</p>
-<ul>
-  <li><strong>Code Policies</strong> - A single aggregated check for all Custom Code Policy policy findings.</li>
-  <li><strong>Individual agent checks</strong> - One check per enabled Code Security Agent (e.g., <code>Secrets Analyzer</code>, <code>SQL Injection Analyzer</code>).</li>
-</ul>
-
-<h2 id="api-triggered-scans">API-Triggered Scans</h2>
-
-<p>For more advanced CI/CD use cases, the <a href="./dryrun-api.html">DryRun Simple API</a> allows you to trigger DeepScans programmatically, retrieve findings, and integrate security data into your existing pipeline tooling. This enables patterns like:</p>
-
-<ul>
-  <li>Triggering a DeepScan on merge to <code>main</code> and ingesting findings into your issue tracker</li>
-  <li>Querying current findings as part of a deployment gate decision</li>
-  <li>Exporting SBOM data as a pipeline artifact on each release build</li>
-</ul>
-
-<h2 id="gitlab-pipelines">GitLab Pipelines</h2>
-
-<p>On GitLab, DryRun Security integrates with Merge Request pipelines. Analysis results are posted as Merge Request comments and pipeline status checks. The same blocking capability is available through GitLab's merge request approval rules, enabling you to require DryRun Security's checks to pass before a merge is allowed.</p>
 ''',
 }
 
