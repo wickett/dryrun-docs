@@ -165,12 +165,30 @@ class TestGeneratedFiles:
         start = content.index('__SEARCH_INDEX__=') + len('__SEARCH_INDEX__=')
         end = content.index(';</script>', start)
         index = json.loads(content[start:end])
-        assert len(index) == len(build.PAGES), (
-            f"Search index has {len(index)} entries but PAGES has {len(build.PAGES)}"
+        # Page-level entries (no anchor) must cover every page
+        page_entries = [e for e in index if 'a' not in e]
+        assert len(page_entries) == len(build.PAGES), (
+            f"Search index has {len(page_entries)} page-level entries but PAGES has {len(build.PAGES)}"
         )
-        slugs = {entry['s'] for entry in index}
+        slugs = {entry['s'] for entry in page_entries}
         for slug in build.PAGES:
             assert slug in slugs, f"Page '{slug}' missing from search index"
+
+    def test_search_index_has_section_entries_with_anchors(self):
+        import json
+        content = (ROOT / "index.html").read_text()
+        start = content.index('__SEARCH_INDEX__=') + len('__SEARCH_INDEX__=')
+        end = content.index(';</script>', start)
+        index = json.loads(content[start:end])
+        section_entries = [e for e in index if 'a' in e]
+        assert len(section_entries) > 0, (
+            "Search index should contain section-level entries with anchor IDs"
+        )
+        for entry in section_entries:
+            assert entry['a'], f"Section entry for '{entry['s']}' has empty anchor"
+            assert entry['s'] in build.PAGES, (
+                f"Section entry anchor '{entry['a']}' references unknown slug '{entry['s']}'"
+            )
 
     def test_search_index_entries_have_body_text(self):
         import json

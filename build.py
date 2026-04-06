@@ -3728,15 +3728,46 @@ def _strip_html(raw_html: str) -> str:
     return text
 
 
+_HEADING_SPLIT_RE = re.compile(
+    r'(<h[23][^>]*id=["\']([^"\']+)["\'][^>]*>(.*?)</h[23]>)',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _extract_sections(content_html: str):
+    """Split HTML content into sections delimited by h2/h3 headings.
+
+    Returns a list of (anchor, heading_text, section_body_html) tuples.
+    """
+    matches = list(_HEADING_SPLIT_RE.finditer(content_html))
+    if not matches:
+        return []
+    sections = []
+    for i, m in enumerate(matches):
+        anchor = m.group(2)
+        heading_text = html.unescape(re.sub(r'<[^>]+>', '', m.group(3)).strip())
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(content_html)
+        body_html = content_html[start:end]
+        sections.append((anchor, heading_text, body_html))
+    return sections
+
+
 def generate_search_index() -> str:
-    """Build a JSON search index of all pages with full text content."""
+    """Build a JSON search index of all pages with section-level entries.
+
+    Each page gets a page-level entry (no anchor) plus one entry per h2/h3
+    section that includes the anchor id for deep linking.
+    """
     index = []
     for slug in ORDERED_PAGES:
         page = PAGES.get(slug)
         if page is None:
             continue
         content_html = page.get('content', '')
+        content_with_ids = inject_heading_ids(content_html)
         plain_text = _strip_html(content_html)
+        # Page-level entry (no anchor)
         index.append({
             's': slug,
             't': page.get('title', slug),
@@ -3744,6 +3775,19 @@ def generate_search_index() -> str:
             'd': page.get('description', ''),
             'b': plain_text,
         })
+        # Section-level entries with anchors
+        for anchor, heading, body_html in _extract_sections(content_with_ids):
+            section_text = _strip_html(body_html)
+            if len(section_text.strip()) < 20:
+                continue
+            index.append({
+                's': slug,
+                't': heading,
+                'n': page.get('section', ''),
+                'd': '',
+                'b': section_text,
+                'a': anchor,
+            })
     return json.dumps(index, separators=(',', ':'))
 
 
