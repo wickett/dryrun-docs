@@ -1575,7 +1575,7 @@ PAGES['pr-scanning-configuration'] = {
 
 <h2 id="code-security-agents">Code Security Agents</h2>
 
-<p>The bottom section of the configuration page lists all available <a href="../docs/pr-variant-analysis.html">Security Analyzers</a>. Each analyzer has its own row with three controls:</p>
+<p>The bottom section of the configuration page lists all available Security Analyzers. Each analyzer has its own row with three controls:</p>
 
 <table>
   <thead>
