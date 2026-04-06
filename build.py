@@ -233,19 +233,19 @@ PAGES['quick-start'] = {
 
 <p>DryRun Security is an AI-native application security platform that reviews every pull request for vulnerabilities in real time. This guide helps you install DryRun Security on GitHub or GitLab, run your first scan, and configure the platform to match your workflow.</p>
 
-<h3 id="best-practices-journey">Best Practices Journey</h3>
+<h3 id="deployment-rollout-best-practices">Deployment Rollout Best Practices</h3>
 
 <p>Follow these steps to get the most out of DryRun Security:</p>
 
 <ol>
-  <li><strong><a href="#github-installation">Install DryRun Security</a></strong> &mdash; Connect your repositories on GitHub or GitLab so every pull request is automatically reviewed.</li>
-  <li><strong><a href="./deepscan.html">Do your first DeepScan</a></strong> &mdash; Run a full-repository scan to establish your baseline security posture.</li>
-  <li><strong><a href="./risk-register.html">Review findings in the Risk Register</a></strong> &mdash; Examine and prioritize vulnerabilities surfaced across your repositories.</li>
-  <li><strong><a href="./finding-tuning.html">Triage false positives as needed</a></strong> &mdash; Suppress findings that are not applicable so future scans stay focused on real risks.</li>
-  <li><strong><a href="./repository-context.html">Configure context</a></strong> &mdash; Provide repository-level context so DryRun Security&#x27;s analysis is tailored to your codebase.</li>
-  <li><strong><a href="./custom-code-policies.html">Create custom code policies</a></strong> &mdash; Define organization-specific security rules written in plain English.</li>
-  <li><strong><a href="./slack-integration.html">Configure integrations and notifications</a></strong> &mdash; Route alerts to Slack, webhooks, or other channels your team already uses.</li>
-  <li><strong><a href="./feature-ships.html">Unlock the power of Code Security Intelligence</a></strong> &mdash; Query the intelligence index to track features, trends, and risks across your organization.</li>
+  <li><strong><a href="#github-installation">Install DryRun Security</a></strong> - Connect your repositories on GitHub or GitLab so every pull request is automatically reviewed.</li>
+  <li><strong><a href="./deepscan.html">Do your first DeepScan</a></strong> - Run a full-repository scan to establish your baseline security posture.</li>
+  <li><strong><a href="./risk-register.html">Review findings in the Risk Register</a></strong> - Examine and prioritize vulnerabilities surfaced across your repositories.</li>
+  <li><strong><a href="./finding-tuning.html">Triage false positives as needed</a></strong> - Suppress findings that are not applicable so future scans stay focused on real risks.</li>
+  <li><strong><a href="./repository-context.html">Configure context</a></strong> - Provide repository-level context so DryRun Security&#x27;s analysis is tailored to your codebase.</li>
+  <li><strong><a href="./custom-code-policies.html">Create custom code policies</a></strong> - Define organization-specific security rules written in plain English.</li>
+  <li><strong><a href="./slack-integration.html">Configure integrations and notifications</a></strong> - Route alerts to Slack, webhooks, or other channels your team already uses.</li>
+  <li><strong><a href="./feature-ships.html">Unlock the power of Code Security Intelligence</a></strong> - Query the intelligence index to track features, trends, and risks across your organization.</li>
 </ol>
 
 <h3 id="supported-platforms">Supported Platforms</h3>
@@ -316,8 +316,6 @@ PAGES['quick-start'] = {
 
 <h2 id="gitlab-installation">GitLab Installation</h2>
 
-<p><strong>Install All for Groups:</strong> When installing DryRun Security on GitLab, the <strong>Install All</strong> option for groups now respects project hierarchy. This means you can install across an entire group and its subgroups while maintaining the correct project structure and permissions.</p>
-
 <p>DryRun Security for GitLab.com enables fast, contextual code reviews that help your team spot unknown risks before they start. This guide walks you through connecting your GitLab environment to DryRun Security by creating a Personal Access Token and completing the installation in the dashboard.</p>
 
 <h3 id="create-a-personal-access-token">Create a Personal Access Token</h3>
@@ -348,7 +346,8 @@ PAGES['quick-start'] = {
   <li>Click the <strong>Add Token</strong> button or navigate to <strong>Settings &gt; GitLab</strong>.</li>
   <li>Enter the Personal Access Token created earlier and click <strong>Save Token</strong>.</li>
   <li>Verify the User/Group for the Installation and click <strong>Confirm</strong> to confirm API access.</li>
-  <li>Install on projects by clicking <strong>+</strong> next to the project and then click <strong>Save Projects</strong>.</li>
+  <li>Install on projects by clicking <strong>+</strong> next to the project and then click <strong>Save Projects</strong>.
+    <br><strong>Note:</strong> The <strong>Install All</strong> option for groups respects project hierarchy. You can install across an entire group and its subgroups while maintaining the correct project structure and permissions.</li>
 </ol>
 
 <h3 id="activation">Activation</h3>
@@ -374,9 +373,9 @@ PAGES['quick-start'] = {
 <h2 id="references">References</h2>
 
 <ul>
-  <li><a href="./pr-scanning.html">PR Code Reviews</a> &mdash; understand how DryRun Security analyzes your pull requests.</li>
-  <li><a href="./pr-scanning-configuration.html">Configurations</a> &mdash; customize which agents and policies run on each repository.</li>
-  <li><a href="./custom-code-policies.html">Custom Code Policies</a> &mdash; create custom security rules in plain English.</li>
+  <li><a href="./pr-scanning.html">PR Code Reviews</a> - understand how DryRun Security analyzes your pull requests.</li>
+  <li><a href="./pr-scanning-configuration.html">Configurations</a> - customize which agents and policies run on each repository.</li>
+  <li><a href="./custom-code-policies.html">Custom Code Policies</a> - create custom security rules in plain English.</li>
 </ul>
 ''',
 }
