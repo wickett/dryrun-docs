@@ -109,9 +109,6 @@ PAGES['documentation'] = {
 </div>
 
 <div class="landing-section">
-  <div class="landing-section-header">
-    <h2 id="get-started">Get Started</h2>
-  </div>
   <div class="landing-grid cols-3">
     <a class="landing-card persona" href="./quick-start.html">
       <span class="landing-card-title">Developers</span>
@@ -130,31 +127,31 @@ PAGES['documentation'] = {
 
 <div class="landing-section">
   <div class="landing-section-header">
-    <h2 id="scanning-products">Scanning Products</h2>
+    <h2 id="scanning-products">Products</h2>
   </div>
   <div class="landing-grid cols-3">
     <a class="landing-card" href="./pr-scanning.html">
-      <span class="landing-card-title">Pull Request Analysis</span>
+      <span class="landing-card-title">PR Scanning</span>
       <span class="landing-card-desc">Every PR is reviewed by DryRun Security&#x27;s AI engine, which posts contextual findings directly in your code review.</span>
     </a>
     <a class="landing-card" href="./deepscan.html">
-      <span class="landing-card-title">Full-Repository DeepScan</span>
+      <span class="landing-card-title">Repository Scanning with DeepScan</span>
       <span class="landing-card-desc">Scan an entire codebase on demand to uncover vulnerabilities that predate PR-level analysis.</span>
     </a>
     <a class="landing-card" href="./secrets-scanning.html">
-      <span class="landing-card-title">Credential &amp; Secret Detection</span>
+      <span class="landing-card-title">Secrets Scanning</span>
       <span class="landing-card-desc">Catch API keys, tokens, and hardcoded passwords in diffs before they are merged into protected branches.</span>
     </a>
     <a class="landing-card" href="./iac-scanning.html">
-      <span class="landing-card-title">Infrastructure-as-Code Analysis</span>
+      <span class="landing-card-title">IaC Scanning</span>
       <span class="landing-card-desc">Evaluate Terraform, CloudFormation, and other IaC templates for misconfigurations and insecure defaults.</span>
     </a>
     <a class="landing-card" href="./sca.html">
-      <span class="landing-card-title">Dependency Risk Analysis</span>
+      <span class="landing-card-title">SCA</span>
       <span class="landing-card-desc">Identify known CVEs and license issues in your open-source dependencies with every pull request.</span>
     </a>
     <a class="landing-card" href="./auto-fix.html">
-      <span class="landing-card-title">One-Click Remediation</span>
+      <span class="landing-card-title">Auto Fix</span>
       <span class="landing-card-desc">Accept AI-generated fixes for common vulnerability patterns and verify the remediation in a single step.</span>
     </a>
   </div>
@@ -166,27 +163,27 @@ PAGES['documentation'] = {
   </div>
   <div class="landing-grid cols-3">
     <a class="landing-card" href="./vulnerability-trends.html">
-      <span class="landing-card-title">Risk &amp; Vulnerability Trends</span>
+      <span class="landing-card-title">Vulnerability Trends</span>
       <span class="landing-card-desc">Monitor how vulnerability counts and severity shift over time across every connected repository.</span>
     </a>
     <a class="landing-card" href="./architecture-risks.html">
-      <span class="landing-card-title">Structural Risk Insights</span>
+      <span class="landing-card-title">Architecture Risks</span>
       <span class="landing-card-desc">Spot recurring design-level weaknesses and systemic patterns that span multiple services or modules.</span>
     </a>
     <a class="landing-card" href="./developer-trends.html">
-      <span class="landing-card-title">Contributor Security Patterns</span>
+      <span class="landing-card-title">Developer Trends</span>
       <span class="landing-card-desc">Track how security finding rates correlate with teams, contributors, and coding activity over time.</span>
     </a>
     <a class="landing-card" href="./shadow-ai.html">
-      <span class="landing-card-title">Ungoverned AI Detection</span>
+      <span class="landing-card-title">Shadow AI</span>
       <span class="landing-card-desc">Flag unapproved AI libraries, model calls, and generated code that bypass your organization&#x27;s AI governance policies.</span>
     </a>
     <a class="landing-card" href="./incident-response.html">
-      <span class="landing-card-title">Security Incident Investigation</span>
+      <span class="landing-card-title">Incident Response Investigation</span>
       <span class="landing-card-desc">Query code intelligence to trace affected paths, identify blast radius, and accelerate root-cause analysis during incidents.</span>
     </a>
     <a class="landing-card" href="./application-summary.html">
-      <span class="landing-card-title">Security Posture Overview</span>
+      <span class="landing-card-title">Application Summary</span>
       <span class="landing-card-desc">Get a single-pane view of open findings, scan coverage, and overall risk across your application portfolio.</span>
     </a>
   </div>
@@ -198,27 +195,27 @@ PAGES['documentation'] = {
   </div>
   <div class="landing-grid cols-3">
     <a class="landing-card" href="./pr-blocking.html">
-      <span class="landing-card-title">Merge Gating</span>
+      <span class="landing-card-title">PR Blocking</span>
       <span class="landing-card-desc">Prevent PRs from merging when findings exceed the severity or policy thresholds you define.</span>
     </a>
     <a class="landing-card" href="./custom-code-policies.html">
-      <span class="landing-card-title">Policy Authoring</span>
+      <span class="landing-card-title">Custom Code Policies</span>
       <span class="landing-card-desc">Write organization-specific security rules in plain language and enforce them on every scan.</span>
     </a>
     <a class="landing-card" href="./compliance-grc.html">
-      <span class="landing-card-title">Governance &amp; Audit Readiness</span>
+      <span class="landing-card-title">Compliance &amp; GRC</span>
       <span class="landing-card-desc">Generate compliance reports, maintain audit trails, and demonstrate regulatory readiness from a single dashboard.</span>
     </a>
     <a class="landing-card" href="./slack-integration.html">
-      <span class="landing-card-title">Slack Notifications</span>
+      <span class="landing-card-title">Slack Integration</span>
       <span class="landing-card-desc">Route finding alerts and scan summaries to the Slack channels your team already monitors.</span>
     </a>
     <a class="landing-card" href="./webhook-integration.html">
-      <span class="landing-card-title">Webhook Delivery</span>
+      <span class="landing-card-title">Generic Webhook Integration</span>
       <span class="landing-card-desc">Stream scan events and finding data to any HTTP endpoint for custom automation and reporting pipelines.</span>
     </a>
     <a class="landing-card" href="./mcp.html">
-      <span class="landing-card-title">MCP Server</span>
+      <span class="landing-card-title">MCP</span>
       <span class="landing-card-desc">Expose DryRun Security data to AI coding assistants and agents through the Model Context Protocol.</span>
     </a>
   </div>
