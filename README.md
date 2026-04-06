@@ -1,13 +1,13 @@
 # DryRun Security Docs
 
-Source for the [DryRun Security documentation site](https://docs.dryrun.security) — a static site built with vanilla HTML/CSS/JS and a Python generator.
+Source for the [DryRun Security documentation site](https://docs.dryrun.security) - a static site built with vanilla HTML/CSS/JS and a Python generator.
 
 ## How it works
 
-All page content is defined as Python data structures in [`build.py`](./build.py). Running the generator produces every HTML file in the repo — nothing is hand-edited in `docs/`.
+All page content is defined as Python data structures in [`build.py`](./build.py). Running the generator produces every HTML file in the repo - nothing is hand-edited in `docs/`.
 
 ```
-build.py          # Site generator — all page content and structure lives here
+build.py          # Site generator - all page content and structure lives here
 style.css         # Brand styles (dark theme, #C8FF09 accent, Inter + JetBrains Mono)
 app.js            # Mobile sidebar, TOC scroll tracking, search, copy buttons
 index.html        # Landing page (generated)
@@ -62,7 +62,7 @@ The generated files (`index.html`, `docs/*.html`, `sitemap.xml`, `robots.txt`) a
 2. Add the slug to the correct section's `pages` list in `SECTIONS`.
 3. Run `python3 build.py` to regenerate.
 4. Run `python3 -m pytest tests/ -v` to verify data integrity and structure.
-5. Open a PR — DryRun Security will automatically review it.
+5. Open a PR - DryRun Security will automatically review it.
 
 ### Editing existing content
 
@@ -70,11 +70,11 @@ All content is in the `PAGES` dict in `build.py`. Find the relevant slug, edit t
 
 ### Coding conventions
 
-- All string values interpolated into HTML **must** use the `esc()` helper — never interpolate raw strings directly.
+- All string values interpolated into HTML **must** use the `esc()` helper - never interpolate raw strings directly.
 - Internal links use relative paths (`./`, `../`). No hardcoded domain names.
 - External links use full URLs with `target="_blank" rel="noopener noreferrer"`.
 - The brand name is **DryRun Security** (no space between Dry and Run).
-- CSS custom properties follow the established pattern (`--bg-primary`, `--accent`, `--green`, etc.) — don't introduce new ones without updating both `style.css` and the existing pages.
+- CSS custom properties follow the established pattern (`--bg-primary`, `--accent`, `--green`, etc.) - don't introduce new ones without updating both `style.css` and the existing pages.
 
 ### CI checks
 
@@ -87,7 +87,7 @@ Every PR runs four automated checks:
 | **Visual & UI Tests** | Playwright tests at desktop (1440×900) and mobile (390×844) |
 | **Link Check** | Verifies all internal links resolve to real pages |
 
-All checks must pass before merging. If DryRun Security flags a security finding on the PR, address it before merge — see [AGENTS.md](./AGENTS.md) for the remediation workflow.
+All checks must pass before merging. If DryRun Security flags a security finding on the PR, address it before merge - see [AGENTS.md](./AGENTS.md) for the remediation workflow.
 
 ## Security
 

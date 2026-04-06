@@ -5,14 +5,14 @@
  *   npm install @playwright/test
  *   npx playwright install chromium
  *
- * Usage (uses a fresh browser — you will need to log in):
+ * Usage (uses a fresh browser - you will need to log in):
  *   node recordings/record-deepscan.js
  *
  * Usage (reuses your existing Chrome profile so you're already logged in):
  *   node recordings/record-deepscan.js --profile
  *
  * Output:
- *   recordings/output/deepscan.webm   — raw Playwright video
+ *   recordings/output/deepscan.webm   - raw Playwright video
  *
  * Then convert to GIF:
  *   bash recordings/convert-to-gif.sh recordings/output/deepscan.webm recordings/output/deepscan.gif
@@ -26,7 +26,7 @@ const fs = require('fs');
 const OUTPUT_DIR = path.join(__dirname, 'output');
 const VIEWPORT = { width: 1280, height: 800 };
 
-// Pause helper — gives the viewer time to see each step
+// Pause helper - gives the viewer time to see each step
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Default Chrome user-data-dir per platform
@@ -50,7 +50,7 @@ function defaultChromeProfile() {
 
   if (useProfile) {
     // ---------------------------------------------------------------
-    // Persistent context — reuses your logged-in Chrome session.
+    // Persistent context - reuses your logged-in Chrome session.
     // NOTE: Close Chrome first; Playwright can't share the profile
     // with a running Chrome instance.
     // ---------------------------------------------------------------
@@ -67,7 +67,7 @@ function defaultChromeProfile() {
     page = context.pages()[0] || await context.newPage();
   } else {
     // ---------------------------------------------------------------
-    // Fresh browser — you'll need to log in manually or the script
+    // Fresh browser - you'll need to log in manually or the script
     // will record the login flow too.
     // ---------------------------------------------------------------
     browser = await chromium.launch({ headless: false });
@@ -90,14 +90,14 @@ function defaultChromeProfile() {
     //    Adjust the selector below if the dashboard layout differs.
     console.log('  → Looking for a repository to scan...');
 
-    // Try common dashboard patterns — click the first repo link visible
+    // Try common dashboard patterns - click the first repo link visible
     const repoLink = page.locator('a[href*="repo"], [data-testid*="repo"], .repo-name, .repository-item, tr a, .repo-link').first();
     if (await repoLink.isVisible({ timeout: 5000 }).catch(() => false)) {
       await repoLink.click();
       await pause(2000);
     } else {
       console.log('  ⚠  Could not find a repo link automatically.');
-      console.log('     Pausing 10s — manually navigate to a repo page now.');
+      console.log('     Pausing 10s - manually navigate to a repo page now.');
       await pause(10000);
     }
 
@@ -119,7 +119,7 @@ function defaultChromeProfile() {
       await pause(3000);
     } else {
       console.log('  ⚠  Could not find a DeepScan button automatically.');
-      console.log('     Pausing 10s — manually click "Start DeepScan" now.');
+      console.log('     Pausing 10s - manually click "Start DeepScan" now.');
       await pause(10000);
     }
 
@@ -146,7 +146,7 @@ function defaultChromeProfile() {
     if (browser) await browser.close();
   }
 
-  // Playwright saves the video with a random name — rename it
+  // Playwright saves the video with a random name - rename it
   const files = fs.readdirSync(OUTPUT_DIR).filter((f) => f.endsWith('.webm'));
   if (files.length > 0) {
     const latest = files
