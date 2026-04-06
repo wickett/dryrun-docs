@@ -406,33 +406,76 @@ PAGES['deepscan'] = {
   <li><strong>Major refactors or dependency upgrades</strong> - When significant portions of the codebase change outside of a single PR, DeepScan ensures the full scope of changes is reviewed.</li>
 </ul>
 
-<h2 id="how-deepscan-differs-from-pr-reviews">How DeepScan Differs from PR Reviews</h2>
-
-<p>PR Code Reviews operate on the diff - the lines added or changed in a specific pull request. DeepScan operates on the entire tree of the repository at a given commit. This means DeepScan can:</p>
-
-<ul>
-  <li>Trace multi-file data flows that span across modules and services</li>
-  <li>Identify patterns that only become apparent when viewing the full codebase together</li>
-  <li>Find vulnerabilities in code that predates DryRun Security's installation</li>
-  <li>Discover nested <code>AGENTS.md</code> security guidelines and apply them across the full analysis</li>
-</ul>
-
-<h2 id="sca-findings">SCA Findings in DeepScan</h2>
-
-<p>DeepScan now surfaces <a href="../docs/sca.html">Software Composition Analysis (SCA)</a> findings alongside its code-level analysis. When a DeepScan runs, it identifies vulnerable dependencies and surfaces them as findings that can be filtered and triaged in the <a href="../docs/risk-register.html">Risk Register</a>. An SBOM endpoint is also available for programmatic access to dependency inventories. See <a href="../docs/dryrun-api.html">DryRun API</a> for endpoint details.</p>
-
 <h2 id="triggering-a-deepscan">Triggering a DeepScan</h2>
-
-<p>You can trigger a DeepScan manually from the dashboard or programmatically via the API:</p>
 
 <ol>
   <li>Log in to the <strong>DryRun Security Dashboard</strong>.</li>
-  <li>Navigate to the <strong>Repositories</strong> page and select the repository you want to scan.</li>
-  <li>Click the <strong>DeepScan</strong> button to start a full-repository analysis.</li>
-  <li>Monitor scan progress on the repository detail page. Results appear in the <a href="../docs/risk-register.html">Risk Register</a> once the scan completes.</li>
+  <li>Navigate to the <strong>DeepScan</strong> page.</li>
+  <li>Click <strong>&ldquo;New Scan&rdquo;</strong>.</li>
+  <li>Select the repository and branch if desired.</li>
+  <li>Monitor scan progress on the <strong>DeepScan</strong> page.</li>
 </ol>
 
-<p>To trigger a DeepScan programmatically, use the <a href="../dryrun-api.html">DryRun Simple API</a> deepscans endpoint. This enables integration into CI/CD pipelines or scheduled workflows.</p>
+<h2 id="deepscan-workflow">DeepScan Workflow</h2>
+
+<ol>
+  <li><strong>Understand the codebase</strong> - Profile the app&rsquo;s language, frameworks, components, and data stores.</li>
+  <li><strong>Gather security-relevant info</strong> - Map routes, auth files, configs, and authorization patterns.</li>
+  <li><strong>Plan the review</strong> - Generate a targeted attack plan for each security domain.</li>
+  <li><strong>Run the reviews</strong> - Analyze each domain (auth, injection, crypto, config, SCA, etc.) and log findings.</li>
+  <li><strong>Clean up the report</strong> - Calibrate severities, remove hallucinations, deduplicate, and add exec summary and recommendations.</li>
+  <li><strong>Publish and triage</strong> - Findings land in the dashboard where users can categorize and annotate each one.</li>
+</ol>
+
+<h2 id="deepscan-findings">DeepScan Findings</h2>
+
+<p>There are two ways to review findings from a completed DeepScan:</p>
+
+<h3 id="option-1-risk-register">Option 1 - Risk Register</h3>
+
+<p>Filter the <a href="../docs/risk-register.html">Risk Register</a> by DeepScan to see all findings surfaced by DeepScan across repositories. This gives a unified view alongside PR scan findings for triage and prioritization.</p>
+
+<h3 id="option-2-deepscan-page">Option 2 - DeepScan Page</h3>
+
+<p>From the DeepScan page, click on a previously scanned repository to see findings from the latest DeepScan. To review past scans, use the date picker at the top of the page and select the date of a previous scan. The &ldquo;View Details&rdquo; button shows app-specific summaries created by DeepScan &mdash; including auth methods, APIs, configurations, and other context discovered during the scan.</p>
+
+<h2 id="vulnerability-categories">Vulnerability Categories</h2>
+
+<p>DeepScan detects a broad range of vulnerability categories across the full codebase, including:</p>
+
+<ul>
+  <li><strong>Injection</strong> - SQL injection, command injection, API query injection, log injection, and XML injection.</li>
+  <li><strong>Authentication &amp; Authorization</strong> - Authentication bypass, missing authorization checks, privilege escalation, and excessive privileges.</li>
+  <li><strong>Cross-Site Scripting (XSS)</strong> - Reflected, stored, and DOM-based script injection.</li>
+  <li><strong>Cryptographic Weakness</strong> - Weak algorithms, broken key management, and insecure transport.</li>
+  <li><strong>Configuration &amp; Secrets</strong> - Hardcoded credentials, insecure defaults, and configuration injection.</li>
+  <li><strong>Server-Side Request Forgery (SSRF)</strong> - Server-side requests to internal or unintended external resources.</li>
+  <li><strong>Insecure Deserialization</strong> - Deserializing untrusted data that may allow code execution or data manipulation.</li>
+  <li><strong>Business Logic Flaws</strong> - Errors in application logic that can be abused for unintended outcomes.</li>
+  <li><strong>Supply Chain Risk</strong> - Vulnerable dependencies identified through <a href="../docs/sca.html">Software Composition Analysis (SCA)</a>.</li>
+  <li><strong>AI/LLM Security</strong> - Prompt injection, LLM tool misuse, and insecure AI integrations.</li>
+</ul>
+
+<p>For the full list of detectable vulnerability categories, see the <a href="../docs/coverage-matrix.html">Coverage Matrix</a>.</p>
+
+<h2 id="supported-languages">Supported Languages</h2>
+
+<p>DeepScan supports repositories written in a wide range of programming languages and frameworks, including:</p>
+
+<ul>
+  <li>JavaScript / TypeScript (Node.js, React, Angular, Vue)</li>
+  <li>Python (Django, Flask, FastAPI)</li>
+  <li>Java (Spring, Jakarta EE)</li>
+  <li>Go</li>
+  <li>Ruby (Rails, Sinatra)</li>
+  <li>PHP (Laravel, Symfony)</li>
+  <li>C# (.NET)</li>
+  <li>Kotlin</li>
+  <li>Swift</li>
+  <li>Rust</li>
+</ul>
+
+<p>DeepScan automatically detects the language and framework in use during the initial codebase profiling step and tailors its analysis accordingly.</p>
 ''',
 }
 
