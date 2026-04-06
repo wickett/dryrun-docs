@@ -476,6 +476,28 @@ PAGES['deepscan'] = {
 </ul>
 
 <p>DeepScan automatically detects the language and framework in use during the initial codebase profiling step and tailors its analysis accordingly.</p>
+
+<h2 id="behavioral-analysis">Git Behavioral Analysis</h2>
+
+<p class="lead">DryRun Security constructs a <strong>Git Behavioral Graph</strong> before its AI agent reads a single line of code - analyzing commit history across five behavioral axes to steer the scanner toward the code that matters most.</p>
+
+<div class="callout callout-info">
+<p>The techniques described here are grounded in Adam Tornhill's <em>Your Code as a Crime Scene</em> (2nd ed., Pragmatic Programmers, 2024). DryRun Security engineered these forensic principles into a pipeline that steers an AI agent with deterministic precision. <a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Read the full blog post</a> for additional context.</p>
+</div>
+
+<h3 id="why-git-history-matters">Why Git History Matters for Security</h3>
+
+<p>Traditional static analysis lacks a fundamental dimension of context: the human element. Vulnerabilities are rarely just syntactical errors - they are the byproduct of diffuse ownership, shifting requirements, and knowledge decay. The Git Behavioral Graph provides a deterministic, high-signal heuristic to prioritize the agent's attention before it reads any code.</p>
+
+<h3 id="five-behavioral-axes">The Five Behavioral Axes</h3>
+
+<ul>
+  <li><strong>Code churn</strong> - Files with high revision counts and many distinct contributors historically correlate with vulnerability density. The pipeline quantifies this as a normalized churn score.</li>
+  <li><strong>Contributor coupling</strong> - When many authors touch the same file, implicit knowledge can be lost. The ratio of unique contributors to total revisions produces a diffuse-ownership signal.</li>
+  <li><strong>Temporal coupling</strong> - Files that change together frequently suggest hidden dependencies. If a change to <code>auth_middleware.py</code> always accompanies changes to <code>session_handler.py</code>, a change to one without the other is suspicious.</li>
+  <li><strong>Recency weighting</strong> - Recent changes carry more risk than ancient stable code. The pipeline applies exponential decay weighting so churn from last week outweighs churn from last year.</li>
+  <li><strong>Complexity hotspot scoring</strong> - Combining churn and contributor metrics with code complexity produces composite hotspot scores that identify the files most likely to harbor latent vulnerabilities.</li>
+</ul>
 ''',
 }
 
@@ -1254,66 +1276,28 @@ PAGES['pr-variant-analysis'] = {
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security uses behavioral analysis and a multi-agent architecture to review every pull request. The results of this analysis - including Git behavioral graphs, specialized analyzer findings, and cross-agent verification outcomes - are captured in the intelligence index and queryable through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+<p>AppSec engineers can perform variant analysis using DryRun Security&rsquo;s Insights capabilities. To get started:</p>
 
-<p>This is not a standalone product page. It describes the analytical methods behind PR review and how to query for their results. You can also trigger a <strong>Variant Analysis</strong> investigation on any specific PR directly from the Insights page using the <strong>Investigate PR</strong> action.</p>
-
-<h2 id="behavioral-analysis">Git Behavioral Analysis</h2>
-
-<p class="lead">DryRun Security constructs a <strong>Git Behavioral Graph</strong> before its AI agent reads a single line of code - analyzing commit history across five behavioral axes to steer the scanner toward the code that matters most.</p>
-
-<div class="callout callout-info">
-<p>The techniques described here are grounded in Adam Tornhill's <em>Your Code as a Crime Scene</em> (2nd ed., Pragmatic Programmers, 2024). DryRun Security engineered these forensic principles into a pipeline that steers an AI agent with deterministic precision. <a href="https://www.dryrun.security/blog/steering-agentic-security-scanners-with-git-behavioral-graphs" target="_blank" rel="noopener noreferrer">Read the full blog post</a> for additional context.</p>
-</div>
-
-<h3 id="why-git-history-matters">Why Git History Matters for Security</h3>
-
-<p>Traditional static analysis lacks a fundamental dimension of context: the human element. Vulnerabilities are rarely just syntactical errors - they are the byproduct of diffuse ownership, shifting requirements, and knowledge decay. The Git Behavioral Graph provides a deterministic, high-signal heuristic to prioritize the agent's attention before it reads any code.</p>
-
-<h3 id="five-behavioral-axes">The Five Behavioral Axes</h3>
-
-<ul>
-  <li><strong>Code churn</strong> - Files with high revision counts and many distinct contributors historically correlate with vulnerability density. The pipeline quantifies this as a normalized churn score.</li>
-  <li><strong>Contributor coupling</strong> - When many authors touch the same file, implicit knowledge can be lost. The ratio of unique contributors to total revisions produces a diffuse-ownership signal.</li>
-  <li><strong>Temporal coupling</strong> - Files that change together frequently suggest hidden dependencies. If a change to <code>auth_middleware.py</code> always accompanies changes to <code>session_handler.py</code>, a change to one without the other is suspicious.</li>
-  <li><strong>Recency weighting</strong> - Recent changes carry more risk than ancient stable code. The pipeline applies exponential decay weighting so churn from last week outweighs churn from last year.</li>
-  <li><strong>Complexity hotspot scoring</strong> - Combining churn and contributor metrics with code complexity produces composite hotspot scores that identify the files most likely to harbor latent vulnerabilities.</li>
-</ul>
-
-<h2 id="multi-agent-architecture">Multi-Agent Architecture</h2>
-
-<p>DryRun Security deploys specialized sub-agents on every pull request. Each analyzer focuses on a specific class of vulnerability and uses <a href="../docs/security-reviews.html">Contextual Security Analysis</a> to evaluate code in full context rather than matching patterns.</p>
-
-<h3 id="specialized-analyzers">Specialized Analyzers</h3>
-
-<ul>
-  <li><strong>General Security Analyzer (GSA)</strong> - Broad vulnerability detection across all categories.</li>
-  <li><strong>SQL Injection Analyzer</strong> - Deep analysis of database query construction and input handling.</li>
-  <li><strong>IDOR Analyzer</strong> - Authorization verification for direct object references.</li>
-  <li><strong>Secrets Analyzer</strong> - Credential detection with context-aware validation to distinguish real secrets from test fixtures.</li>
-  <li><strong>SSRF Analyzer</strong> - Server-side request forgery detection in URL handling code.</li>
-  <li><strong>XSS Analyzer</strong> - Cross-site scripting detection with framework-aware context.</li>
-  <li><strong>Codebase Insight Agent</strong> - Powers the intelligence index queries - natural language questions about your codebase&rsquo;s security posture.</li>
-</ul>
-
-<h3 id="agent-coordination">Agent Coordination</h3>
-
-<p>Primary agents dispatch specialized sub-agents to handle specific vulnerability classes. Agents cross-check each other's findings to reduce the risk of any single model hallucinating or producing inconsistent results. This multi-agent verification is a key reason DryRun Security achieves high consistency and reliability. See <a href="../docs/security-reviews.html">Model-Independent Verification</a> for more detail.</p>
+<ol>
+  <li>Go to the <strong>Insights</strong> tab in the DryRun Security Dashboard.</li>
+  <li>Look at a finding on the page and click <strong>&ldquo;Investigate&rdquo;</strong>.</li>
+  <li>This loads the appropriate question into the AI assistant, where you can then interact with the Insights LLM to explore the finding further.</li>
+</ol>
 
 <h2 id="example-queries">Example Queries</h2>
 
-<ul>
-  <li><strong>&ldquo;Which files in repo X have the highest behavioral risk scores?&rdquo;</strong> - Surfaces the hotspots identified by Git behavioral analysis.</li>
-  <li><strong>&ldquo;What did the IDOR analyzer find across our repos this month?&rdquo;</strong> - Queries findings from a specific specialized analyzer.</li>
-  <li><strong>&ldquo;Show me PRs where multiple agents flagged the same issue&rdquo;</strong> - Identifies high-confidence findings confirmed by cross-agent verification.</li>
-  <li><strong>&ldquo;What are the top temporal coupling patterns in our monorepo?&rdquo;</strong> - Explores hidden dependencies detected by behavioral analysis.</li>
-</ul>
+<ol>
+  <li>What are the security implications of this change?</li>
+  <li>Are there any potential vulnerabilities introduced?</li>
+  <li>What sensitive data or permissions might be affected?</li>
+  <li>Any recommendations for improving the security posture?</li>
+  <li>Have any similar issues been seen before?</li>
+</ol>
 
 <h2 id="use-cases">Use Cases</h2>
 
 <ul>
   <li><strong>Targeted investigation</strong> - Use the <strong>Investigate PR</strong> action from the Insights page to run a deep variant analysis on any specific pull request.</li>
-  <li><strong>Risk hotspot identification</strong> - Query the index for behavioral risk scores to prioritize code review and <a href="../docs/deepscan.html">DeepScan</a> targets.</li>
   <li><strong>Analyzer performance</strong> - Query findings by analyzer to understand which vulnerability classes are most active in your codebase.</li>
   <li><strong>Audit evidence</strong> - Demonstrate the depth and rigor of multi-agent analysis for compliance purposes. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
 </ul>
