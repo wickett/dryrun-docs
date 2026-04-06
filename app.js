@@ -243,7 +243,8 @@
       var html = '';
       for (var j = 0; j < results.length; j++) {
         var r = results[j];
-        html += '<a class="search-result-item" href="' + linkPrefix + r.entry.s + '.html"'
+        var anchor = r.entry.a ? '#' + r.entry.a : '';
+        html += '<a class="search-result-item" href="' + linkPrefix + r.entry.s + '.html' + anchor + '"'
           + ' data-idx="' + j + '">'
           + '<span class="search-result-title">' + escHtml(r.entry.t) + '</span>'
           + '<span class="search-result-section">' + escHtml(r.entry.n) + '</span>'
