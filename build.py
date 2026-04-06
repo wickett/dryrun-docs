@@ -456,8 +456,6 @@ PAGES['deepscan'] = {
   <li><strong>AI/LLM Security</strong> - Prompt injection, LLM tool misuse, and insecure AI integrations.</li>
 </ul>
 
-<p>For the full list of detectable vulnerability categories, see the <a href="../docs/coverage-matrix.html">Coverage Matrix</a>.</p>
-
 <h2 id="supported-languages">Supported Languages</h2>
 
 <p>DeepScan supports repositories written in a wide range of programming languages and frameworks, including:</p>
