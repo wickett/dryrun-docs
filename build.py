@@ -2440,14 +2440,6 @@ PAGES['pr-blocking'] = {
   <li>Repository administrators can bypass branch protection rules when necessary.</li>
   <li>All overrides are logged in the <a href="./risk-register.html">Risk Register</a> for audit purposes.</li>
 </ul>
-
-<h2 id="best-practices">Best Practices</h2>
-
-<ul>
-  <li>Start with a <strong>Critical</strong> threshold and gradually lower it as your team addresses existing findings.</li>
-  <li>Use <a href="./custom-code-policies.html">Custom Code Policies</a> to define organization-specific blocking rules.</li>
-  <li>Review the <a href="./compliance-grc.html">Compliance &amp; GRC</a> section to align blocking policies with your compliance requirements.</li>
-</ul>
 ''',
 }
 
