@@ -110,13 +110,13 @@ PAGES['documentation'] = {
 
 <div class="landing-section">
   <div class="landing-grid cols-3">
+    <a class="landing-card persona" href="./risk-register.html">
+      <span class="landing-card-title">AppSec Engineers</span>
+      <span class="landing-card-desc">Surface top-level risk across your organization, review findings in depth, and run targeted security reviews on any repository.</span>
+    </a>
     <a class="landing-card persona" href="./quick-start.html">
       <span class="landing-card-title">Developers</span>
       <span class="landing-card-desc">Connect your repositories, understand PR findings as they appear, and triage false positives without leaving your workflow.</span>
-    </a>
-    <a class="landing-card persona" href="./deepscan.html">
-      <span class="landing-card-title">AppSec Engineers</span>
-      <span class="landing-card-desc">Surface top-level risk across your organization, review findings in depth, and run targeted security reviews on any repository.</span>
     </a>
     <a class="landing-card persona" href="./pr-scanning-configuration.html">
       <span class="landing-card-title">Admins</span>
@@ -2153,7 +2153,7 @@ PAGES['risk-register'] = {
     'description': 'One view to see, search, and act on all security risk across your organization.',
     'section': 'Platform',
     'content': '''
-<p>Risk Register centralizes findings from PR scans and DeepScans into a single view. It gives AppSec, DevSecOps, and engineering leaders a clear starting point to track, triage, and act on risk across the entire organization.</p>
+<p>The Risk Register is the working space for AppSec engineers, designed to surface findings that need action taken. It aggregates findings from two sources: the <a href="./pr-scanning.html">PR Scanner</a>, which reviews every pull request for vulnerabilities in real time, and <a href="./deepscan.html">DeepScan</a>, which performs full-repository security analysis on demand. Findings range from critical vulnerabilities and secrets exposures to policy violations and dependency risks. Because these findings represent real or potential security issues in your codebase, the Risk Register provides a single place to review, triage, and act on them before they become incidents.</p>
 
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/risk-register/01-risk-register.png" alt="DryRun Security Risk Register dashboard" loading="lazy"></figure>
 
@@ -2217,7 +2217,7 @@ PAGES['risk-register'] = {
 
 <p>Each dismissed finding has a <strong>Restore</strong> button to bring it back to your active queue if circumstances change or the dismissal needs to be revisited.</p>
 
-<p>The dismissal flow now includes two additional values: <strong>Resolved</strong> and <strong>Won&rsquo;t Fix / Nitpick</strong>, giving teams more precise categorization when triaging findings.</p>
+<p>The dismissal flow includes <strong>Resolved</strong> and <strong>Won&rsquo;t Fix / Nitpick</strong> values in addition to the standard options, giving teams more precise categorization when triaging findings.</p>
 
 <h2 id="faqs">FAQs</h2>
 
@@ -2229,6 +2229,17 @@ Risk is the primary sortable column. Type, File, Repo, Detected, Agent, and Stat
 
 <p><strong>What agents appear in the Agent column?</strong><br>
 You will see SCA (Software Composition Analysis), Code Policy (Custom Code Policies), DeepScan, and individual <a href="../docs/pr-variant-analysis.html">Security Analyzers</a> listed as the source of each finding.</p>
+
+<h2 id="common-workflows">Common Workflows</h2>
+
+<h3 id="reviewing-merged-risk">Reviewing Merged Risk</h3>
+<p>Filter by &ldquo;merged&rdquo; PR status. This shows findings DryRun Security identified as containing a vulnerability but that were merged anyway &mdash; the vulnerability lives in the codebase. These represent accepted or overlooked risk and should be reviewed to determine if remediation is needed.</p>
+
+<h3 id="triaging-open-prs">Triaging Open PRs</h3>
+<p>Filter by &ldquo;open&rdquo; PR status. This surfaces findings on pull requests that are still open and have not been merged to main yet. Because the PR is still open, there is still time to fix the issue before it reaches production &mdash; these findings should be prioritized and actioned first.</p>
+
+<h3 id="reviewing-dismissed-findings">Reviewing Dismissed Findings</h3>
+<p>Filter to show dismissed findings. AppSec engineers can see who dismissed each finding and take appropriate follow-up action: override the dismissal if the finding represents real risk, reach out to the developer to help educate them, or stay informed about what is being marked as &ldquo;won&rsquo;t fix&rdquo;, &ldquo;nit pick&rdquo;, or &ldquo;false positive&rdquo;. This workflow supports both risk oversight and developer security education.</p>
 ''',
 }
 
