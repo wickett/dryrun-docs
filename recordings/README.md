@@ -14,7 +14,7 @@ ffmpeg is required for GIF conversion (pre-installed on most macOS/Linux systems
 ## Quick start
 
 ```bash
-# Record (reuses your logged-in Chrome session — close Chrome first)
+# Record (reuses your logged-in Chrome session - close Chrome first)
 node recordings/record-deepscan.js --profile
 
 # Or record with a fresh browser (you'll need to log in)
@@ -27,7 +27,7 @@ bash recordings/convert-to-gif.sh recordings/output/deepscan.webm recordings/out
 ## Writing a new recording
 
 1. Copy an existing recording script (e.g., `record-deepscan.js`)
-2. Edit the navigation steps — use `pause(ms)` between actions to give viewers time to see each step
+2. Edit the navigation steps - use `pause(ms)` between actions to give viewers time to see each step
 3. Run the script, then convert with `convert-to-gif.sh`
 4. Move the final GIF to `assets/recordings/` and reference it in `build.py`
 

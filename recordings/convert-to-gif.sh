@@ -7,8 +7,8 @@
 #   bash recordings/convert-to-gif.sh <input.webm> <output.gif>
 #
 # Options (via environment variables):
-#   FPS=12        Frames per second (default: 12 — good balance of smoothness and size)
-#   WIDTH=960     Output width in pixels (default: 960 — height scales proportionally)
+#   FPS=12        Frames per second (default: 12 - good balance of smoothness and size)
+#   WIDTH=960     Output width in pixels (default: 960 - height scales proportionally)
 #   SPEED=1.0     Playback speed multiplier (default: 1.0; use 1.5 to speed up)
 
 set -euo pipefail
