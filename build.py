@@ -417,21 +417,22 @@ PAGES['deepscan'] = {
   <li>Discover nested <code>AGENTS.md</code> security guidelines and apply them across the full analysis</li>
 </ul>
 
-<h2 id="deepscan-findings-in-the-risk-register">DeepScan Findings in the Risk Register</h2>
-
-<p>DeepScan results appear alongside PR findings in the <a href="../risk-register.html">Risk Register</a>. You can filter by agent type to view DeepScan-specific findings separately from PR findings. All the same triage, fingerprinting, and suppression capabilities apply - findings triaged as false positives from a DeepScan will be suppressed in future scans as well, and triage context feeds back into the system to improve future accuracy.</p>
-
 <h2 id="sca-findings">SCA Findings in DeepScan</h2>
 
 <p>DeepScan now surfaces <a href="../docs/sca.html">Software Composition Analysis (SCA)</a> findings alongside its code-level analysis. When a DeepScan runs, it identifies vulnerable dependencies and surfaces them as findings that can be filtered and triaged in the <a href="../docs/risk-register.html">Risk Register</a>. An SBOM endpoint is also available for programmatic access to dependency inventories. See <a href="../docs/dryrun-api.html">DryRun API</a> for endpoint details.</p>
 
-<h2 id="stability-and-performance">Stability and Performance</h2>
-
-<p>Recent improvements include better handling of malformed files and additional recovery workflows for long-running scans. These changes reduce scan failures and slowdowns on large repositories, making DeepScan more reliable for enterprise-scale codebases.</p>
-
 <h2 id="triggering-a-deepscan">Triggering a DeepScan</h2>
 
-<p>DeepScan can be triggered manually from the DryRun Security dashboard for any connected repository. It can also be triggered programmatically via the <a href="../dryrun-api.html">DryRun Simple API</a>, enabling integration into CI/CD pipelines or scheduled workflows.</p>
+<p>You can trigger a DeepScan manually from the dashboard or programmatically via the API:</p>
+
+<ol>
+  <li>Log in to the <strong>DryRun Security Dashboard</strong>.</li>
+  <li>Navigate to the <strong>Repositories</strong> page and select the repository you want to scan.</li>
+  <li>Click the <strong>DeepScan</strong> button to start a full-repository analysis.</li>
+  <li>Monitor scan progress on the repository detail page. Results appear in the <a href="../docs/risk-register.html">Risk Register</a> once the scan completes.</li>
+</ol>
+
+<p>To trigger a DeepScan programmatically, use the <a href="../dryrun-api.html">DryRun Simple API</a> deepscans endpoint. This enables integration into CI/CD pipelines or scheduled workflows.</p>
 ''',
 }
 
