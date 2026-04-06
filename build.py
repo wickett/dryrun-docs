@@ -229,6 +229,49 @@ PAGES['quick-start'] = {
     'description': 'Install DryRun Security on GitHub or GitLab and start scanning pull requests in minutes.',
     'section': 'Getting Started',
     'content': '''
+<h2 id="getting-started">Getting Started</h2>
+
+<p>DryRun Security is an AI-native application security platform that reviews every pull request for vulnerabilities in real time. This guide helps you install DryRun Security on GitHub or GitLab, run your first scan, and configure the platform to match your workflow.</p>
+
+<h3 id="best-practices-journey">Best Practices Journey</h3>
+
+<p>Follow these steps to get the most out of DryRun Security:</p>
+
+<ol>
+  <li><strong><a href="#github-installation">Install DryRun Security</a></strong> &mdash; Connect your repositories on GitHub or GitLab so every pull request is automatically reviewed.</li>
+  <li><strong><a href="./deepscan.html">Do your first DeepScan</a></strong> &mdash; Run a full-repository scan to establish your baseline security posture.</li>
+  <li><strong><a href="./risk-register.html">Review findings in the Risk Register</a></strong> &mdash; Examine and prioritize vulnerabilities surfaced across your repositories.</li>
+  <li><strong><a href="./finding-tuning.html">Triage false positives as needed</a></strong> &mdash; Suppress findings that are not applicable so future scans stay focused on real risks.</li>
+  <li><strong><a href="./repository-context.html">Configure context</a></strong> &mdash; Provide repository-level context so DryRun Security&#x27;s analysis is tailored to your codebase.</li>
+  <li><strong><a href="./custom-code-policies.html">Create custom code policies</a></strong> &mdash; Define organization-specific security rules written in plain English.</li>
+  <li><strong><a href="./slack-integration.html">Configure integrations and notifications</a></strong> &mdash; Route alerts to Slack, webhooks, or other channels your team already uses.</li>
+  <li><strong><a href="./feature-ships.html">Unlock the power of Code Security Intelligence</a></strong> &mdash; Query the intelligence index to track features, trends, and risks across your organization.</li>
+</ol>
+
+<h3 id="supported-platforms">Supported Platforms</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th>
+      <th>Supported Versions</th>
+      <th>Setup Guide</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GitHub</td>
+      <td>GitHub.com (Cloud)</td>
+      <td><a href="#github-installation">GitHub Installation</a></td>
+    </tr>
+    <tr>
+      <td>GitLab</td>
+      <td>GitLab.com (Cloud)</td>
+      <td><a href="#gitlab-installation">GitLab Installation</a></td>
+    </tr>
+  </tbody>
+</table>
+
 <h2 id="github-installation">GitHub Installation</h2>
 
 <h3 id="authorize-and-install">Authorize and Install the DryRun Security GitHub Application</h3>
