@@ -316,58 +316,62 @@ PAGES['quick-start'] = {
 
 <h2 id="gitlab-installation">GitLab Installation</h2>
 
-<p>DryRun Security for GitLab.com enables fast, contextual code reviews that help your team spot unknown risks before they start. This guide walks you through connecting your GitLab environment to DryRun Security by creating a Personal Access Token and completing the installation in the dashboard.</p>
+<p>DryRun Security for GitLab.com enables fast, contextual code reviews that help your team spot unknown risks before they start.</p>
+
+<p>This guide will walk you through connecting your GitLab environment to DryRun Security by:</p>
+
+<ul>
+  <li>Creating a GitLab Personal Access Token with the correct scopes.</li>
+  <li>Installing DryRun Security via the DryRun Security Dashboard.</li>
+</ul>
+
+<p>Once installed and activated, you&#x27;ll get immediate visibility into security risks across your GitLab projects &mdash; without slowing development down.</p>
 
 <h3 id="create-a-personal-access-token">Create a Personal Access Token</h3>
 
 <p>This section describes creating a Personal Access Token (PAT) that will be used during the installation of DryRun Security.</p>
 
-<p><strong>Note:</strong> The GitLab user used to create the PAT needs to have at least <code>Maintainer</code> access to the Group or Project where DryRun Security will run.</p>
+<p><strong>Note:</strong> The GitLab user used to create the Personal Access Token (PAT) needs to have at least <code>Maintainer</code> access to the Group or Project where DryRun Security will run.</p>
 
-<h3 id="generating-the-pat">Generating the Personal Access Token</h3>
+<h4 id="generating-the-pat">Generating the Personal Access Token</h4>
 
 <ol>
   <li>Log in to <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer">gitlab.com</a>.</li>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/01-add-token.png" alt="GitLab Add New Token page" loading="lazy"></figure>
   <li>Navigate to <a href="https://gitlab.com/-/user_settings/personal_access_tokens" target="_blank" rel="noopener noreferrer">https://gitlab.com/-/user_settings/personal_access_tokens</a>.</li>
-  <li>Under <strong>Personal Access Tokens</strong> click <strong>Add new token</strong>.</li>
+  <li>Under <strong>Personal Access Tokens</strong>, click <strong>Add new token</strong>.</li>
   <li>Add a token name and select the <code>api</code> and <code>read_user</code> scopes.</li>
   <li>Click <strong>Create personal access token</strong>.</li>
-  <li>Copy the token and <strong>save it for later use</strong> - it will not be shown again.</li>
-  <li>Verify that the user who created the PAT has access to the <strong>Group</strong> where DryRun Security will be installed. The user should have at least <strong>Maintainer</strong> access. Add the user if necessary.</li>
+  <li>Copy the token and save it for later use.</li>
+  <li>Verify that the user that created the PAT has access to the Group where DryRun Security will be installed. The user should have at least <strong>Maintainer</strong> access to the Group. Add the user if necessary.</li>
 </ol>
+
+<p>Done! The Personal Access Token can be used to install DryRun Security.</p>
 
 <h3 id="install-via-dashboard">Install DryRun Security via the Dashboard</h3>
 
 <ol>
   <li>Navigate to <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a> and click the <strong>Log in with GitLab</strong> button.</li>
-  <li>Authorize the DryRun Security OAuth Application.
-    <br><strong>Important:</strong> Choose the User or Group where DryRun Security will run from the User/Group Selector. This is usually a GitLab Group.</li>
+  <li>Authorize the DryRun Security OAuth Application.</li>
+</ol>
+
+<p><strong>Important:</strong> Choose the User or Group where DryRun Security will run from the User/Group Selector. This is usually a Group.</p>
+
+<ol start="3">
   <li>Click the <strong>Add Token</strong> button or navigate to <strong>Settings &gt; GitLab</strong>.</li>
   <li>Enter the Personal Access Token created earlier and click <strong>Save Token</strong>.</li>
   <li>Verify the User/Group for the Installation and click <strong>Confirm</strong> to confirm API access.</li>
-  <li>Install on projects by clicking <strong>+</strong> next to the project and then click <strong>Save Projects</strong>.
-    <br><strong>Note:</strong> The <strong>Install All</strong> option for groups respects project hierarchy. You can install across an entire group and its subgroups while maintaining the correct project structure and permissions.</li>
+  <li>Install on Projects by clicking <strong>+</strong> next to the Project and then click <strong>Save Projects</strong>.</li>
 </ol>
 
-<h3 id="activation">Activation</h3>
+<h4 id="activation">Activation</h4>
 
-<p>Your installation may be paused for up to 2 business days as we activate your account. We'll notify you by email once your account is active.</p>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/10-activate.png" alt="Activate DryRun Security for GitLab" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/11-activation-pending.png" alt="GitLab activation pending" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/12-activation-complete.png" alt="GitLab installation complete" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/04-gitlab-oauth.png" alt="GitLab OAuth authorization" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/05-select-group.png" alt="Select GitLab User or Group" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/06-enter-pat.png" alt="Enter GitLab Personal Access Token" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/07-confirm-access.png" alt="Confirm API access" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/08-install-projects.png" alt="Install DryRun Security on GitLab projects" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/09-select-projects.png" alt="Select GitLab projects" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/03-copy-token.png" alt="Copy GitLab personal access token" loading="lazy"></figure>
-<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/gitlab-install/02-token-scopes.png" alt="GitLab token scopes selection" loading="lazy"></figure>
+<p>Your installation may be paused for up to 2 business days as we activate your account. We&#x27;ll notify you as soon as your account has been activated.</p>
 
-<p>Once your account has been activated, you'll see the <strong>Installation Complete</strong> message the next time you visit <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</p>
+<p>Once your account has been activated, you&#x27;ll see the <strong>Installation Complete</strong> message the next time you log in to the portal at <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">https://app.dryrun.security</a>.</p>
 
-<p><strong>Congratulations!</strong> Installation is complete. DryRun Security will now run and analyze changes as code is committed to Merge Requests.</p>
+<p><strong>Congratulations!</strong> Installation is complete.</p>
+
+<p><strong>Note:</strong> At this point the DryRun Security application will run and analyze changes as code is committed to the Project(s).</p>
 
 
 <h2 id="references">References</h2>
