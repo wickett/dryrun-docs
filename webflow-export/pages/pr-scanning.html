@@ -5,24 +5,6 @@
 
 <p>Results appear as a summary comment on the pull request, inline comments on specific lines, and a pass/fail check status that integrates with your branch protection rules. This keeps security feedback inside the developer workflow where it can be acted on immediately.</p>
 
-<h2 id="feature-highlights">Feature Highlights</h2>
-
-<div class="drs-feature-grid">
-
-<h3 id="diff-focused-analysis">Diff-Focused Analysis</h3>
-<p>DryRun Security scans only the files and functions modified in the pull request, along with the surrounding code context needed to evaluate them. This targeted approach keeps scan times fast and findings relevant to the change at hand.</p>
-
-<h3 id="differential-comparison">Differential Comparison</h3>
-<p>Both the target branch and the PR branch are analyzed. DryRun Security compares the two result sets and surfaces only <em>new</em> findings introduced by the change, so developers are never distracted by pre-existing issues.</p>
-
-<h3 id="parallel-security-agents">Parallel Security Agents</h3>
-<p>DryRun Security's specialized agents - SAST, SCA, Secrets, IaC, and Custom Code Policies - execute simultaneously on the changed code. Parallel execution means comprehensive coverage without sequential bottlenecks.</p>
-
-<h3 id="ai-validation">AI Validation</h3>
-<p>Every finding is validated in the context of the actual diff using model-independent verification. Findings are cross-checked across multiple AI models to reduce false positives and ensure each reported issue represents genuine risk.</p>
-
-</div>
-
 <h2 id="supported-platforms">Supported Platforms</h2>
 
 <p>DryRun Security integrates natively with the two most widely used source code platforms:</p>
@@ -56,13 +38,19 @@
 
 <p>When a pull request is opened, DryRun Security retrieves the diff along with relevant surrounding code context - imported modules, authentication middleware, framework conventions, and any configured security policies. Analysis is scoped to the changed regions and the code paths that flow through them.</p>
 
+<p>DryRun Security also reads the repository's <code>agents.md</code> file, if present. This allows teams to provide context and instructions that guide the security analysis - such as project-specific conventions, known safe patterns, or areas of particular concern.</p>
+
 <p>The following security agents run on every PR scan:</p>
 
 <ul>
-  <li><strong>SAST (Code Security Agents)</strong> - Specialized analyzers for SQL injection, XSS, IDOR, SSRF, secrets exposure, and dozens of other vulnerability classes. Each agent traces data flow through the changed code paths.</li>
-  <li><strong>SCA (Software Composition Analysis)</strong> - Detects vulnerable dependencies introduced or updated in the PR, cross-referencing known CVEs and advisories.</li>
-  <li><strong>Secrets</strong> - Identifies hardcoded credentials, API keys, tokens, and private keys in the diff, with context-aware filtering to distinguish real secrets from test fixtures.</li>
-  <li><strong>IaC (Infrastructure as Code)</strong> - Scans Terraform, CloudFormation, Kubernetes manifests, Helm charts, Dockerfiles, and GitHub Actions for misconfigurations and security risks.</li>
+  <li><strong>Cross-Site Scripting Analyzer</strong></li>
+  <li><strong>General Security Analyzer</strong></li>
+  <li><strong>IDOR Analyzer</strong></li>
+  <li><strong>Mass Assignment</strong></li>
+  <li><strong>Secrets Analyzer</strong></li>
+  <li><strong>Server-Side Request Forgery Analyzer</strong></li>
+  <li><strong>SQL Injection Analyzer</strong></li>
+  <li>Any <a href="./custom-code-policies.html">custom code policies</a> created by your team</li>
 </ul>
 
 <p>All findings are filtered to the changed regions of the pull request. Pre-existing issues in unchanged code are excluded from the results so developers can focus on what they introduced.</p>
@@ -89,18 +77,12 @@
       <td><strong>Failure</strong></td>
       <td>One or more findings meet or exceed the blocking threshold. The PR cannot be merged until issues are resolved.</td>
     </tr>
-    <tr>
-      <td><strong>Neutral / Timeout</strong></td>
-      <td>The scan completed but could not produce a definitive result, or it exceeded the time limit. Review the summary comment for details.</td>
-    </tr>
-    <tr>
-      <td><strong>Skipped</strong></td>
-      <td>The agent was disabled for this repository's configuration, or no relevant files were changed.</td>
-    </tr>
   </tbody>
 </table>
 
 <p>When findings are detected, inline comments are posted directly on the affected lines of code with a description of the vulnerability and remediation guidance. For details on enforcing merge gates with check statuses, see <a href="./pr-blocking.html">PR Blocking</a>.</p>
+
+<p>If you are seeing noisy or irrelevant findings, you can <a href="./finding-tuning.html">tune your findings</a> to reduce noise and focus on the issues that matter most to your team.</p>
 
 <h2 id="configuration">Configuration</h2>
 
@@ -187,7 +169,7 @@
     </tr>
     <tr>
       <td>Results Location</td>
-      <td>PR comments, inline annotations, check statuses</td>
+      <td>PR comments, inline annotations, check statuses, and the DryRun Security dashboard</td>
       <td>DryRun Security dashboard and Risk Register</td>
     </tr>
     <tr>
@@ -197,14 +179,4 @@
     </tr>
   </tbody>
 </table>
-
-<h2 id="adoption-guide">Adoption Guide</h2>
-
-<p>Get started with DryRun Security PR scanning in three steps:</p>
-
-<ol>
-  <li><strong>Install DryRun Security</strong> - Connect your GitHub or GitLab organization by following the <a href="./quick-start.html">Quick Start</a> guide. Scanning begins automatically on the next pull request.</li>
-  <li><strong>Configure PR blocking</strong> - Optionally enable merge gates so that PRs with findings above your severity threshold cannot be merged. See <a href="./pr-blocking.html">PR Blocking</a> for setup instructions.</li>
-  <li><strong>Tune your configuration</strong> - Customize which agents run, attach Custom Code Policies, and adjust blocking thresholds per repository. See <a href="./pr-scanning-configuration.html">PR Scanning Configuration</a> for the full walkthrough.</li>
-</ol>
 </div>
