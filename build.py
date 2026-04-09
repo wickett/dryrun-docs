@@ -748,7 +748,9 @@ PAGES['secrets-scanning'] = {
 
 <p>Hardcoded credentials are among the most common and most exploitable security vulnerabilities in modern software. API keys, database passwords, authentication tokens, and private keys committed to source code are routinely discovered by attackers scanning public repositories - and by insiders with unintended access to private ones.</p>
 
-<p>DryRun Security's <strong>Secrets Analyzer</strong> is a specialized agent that runs on every pull request, examining code changes for signs of embedded credentials. It operates contextually - not just matching patterns that look like secrets, but evaluating whether a candidate secret is genuine based on its surrounding context, variable naming, usage patterns, and code structure.</p>
+<p>DryRun Security's <strong>Secrets Analyzer</strong> is a specialized agent that runs on every pull request, examining code changes for signs of embedded credentials. Unlike tools that rely solely on pattern matching, the Secrets Analyzer goes a critical step further: it attempts to <strong>validate detected secrets</strong> to determine whether they are real and currently active. This verification step is a key differentiator - rather than flooding teams with alerts for every string that resembles a credential, DryRun Security confirms which secrets pose a genuine risk by testing them against the services they are meant to authenticate with.</p>
+
+<p>The analyzer also operates contextually, evaluating whether a candidate secret is genuine based on its surrounding context, variable naming, usage patterns, and code structure. Combined with active validation, this approach dramatically reduces false positives while ensuring that truly dangerous credentials are caught before they reach production.</p>
 
 <h2 id="what-secrets-detection-covers">What Secrets Detection Covers</h2>
 
@@ -764,23 +766,6 @@ PAGES['secrets-scanning'] = {
   <li>Generic high-entropy strings that exhibit the statistical properties of cryptographic secrets</li>
 </ul>
 
-<h2 id="deepscan-secrets">DeepScan Secrets Workflow</h2>
-
-<p>Secrets detected during DeepScan are now reviewed through a dedicated, more robust workflow that provides clearer visibility into sensitive exposures. Rather than processing secrets findings through the general analysis pipeline, DeepScan routes them through a specialized handler that improves classification accuracy and surfaces them with richer context in the <a href="../docs/risk-register.html">Risk Register</a>.</p>
-
-<h2 id="contextual-accuracy">Contextual Accuracy</h2>
-
-<p>What distinguishes DryRun's secrets detection from simple regex scanning is context awareness. A string that matches the format of an AWS access key is not automatically a finding - the Secrets Analyzer considers whether it appears in a test fixture, an example configuration file, a comment marked as a placeholder, or a real configuration path being read at runtime. This dramatically reduces false positives without sacrificing genuine detection.</p>
-
-<p>When a confirmed secret is found, the finding includes the file path, line number, and a plain-language explanation of the risk - without reproducing the credential value in the finding report itself.</p>
-
-<h2 id="blocking-and-branch-protection">Blocking and Branch Protection</h2>
-
-<p>The Secrets Analyzer can be configured to block PR merges via GitHub Branch Protection Rules. When a secret is detected and the Secrets Analyzer has blocking enabled, the check will fail and the PR cannot be merged until the credential is removed and the branch is re-scanned. See <a href="../pr-scanning-configuration.html">Configurations</a> for setup instructions.</p>
-
-<h2 id="suppression-and-false-positives">Suppression and False Positives</h2>
-
-<p>Not every high-entropy string is a real credential. The Risk Register's <a href="../finding-tuning.html">Finding Triage</a> workflow allows teams to mark findings as false positives with contextual notes - for example, to record that a particular string is a well-known public test key. Triaged fingerprints are suppressed in future scans automatically, and DryRun Security learns from the context to improve detection accuracy over time.</p>
 ''',
 }
 
