@@ -830,8 +830,6 @@ PAGES['sca'] = {
 
 <h2 id="how-to-view-findings">How to View Findings</h2>
 
-<p>When a vulnerable dependency is detected, DryRun Security posts a finding in the pull request that includes the affected package, the CVE or vulnerability identifier, severity, affected version range, and a recommended remediation such as a version upgrade. Findings appear in both the <a href="./pr-scanning.html">PR comment</a> and the GitHub Checks area.</p>
-
 <p>All SCA findings are tracked in the <a href="./risk-register.html">Risk Register</a> for centralized triage and prioritization. You can filter by the SCA agent type to isolate dependency-related risk from code-level findings. Findings from both PR scans and <a href="./deepscan.html">DeepScan</a> appear together in the Risk Register.</p>
 
 <p>DryRun Security's dependency analysis also feeds into SBOM (Software Bill of Materials) generation. You can download a complete inventory of your software dependencies for compliance and audit purposes from the <a href="./compliance-grc.html">SBOM Generation</a> page.</p>
