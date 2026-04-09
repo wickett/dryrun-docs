@@ -43,7 +43,7 @@ Documentation,documentation,"<div class=""drs-landing-hero"">
     </a>
     <a class=""drs-landing-card"" href=""./sca.html"">
       <span class=""drs-landing-card-title"">SCA</span>
-      <span class=""drs-landing-card-desc"">Identify known CVEs and license issues in your open-source dependencies with every pull request.</span>
+      <span class=""drs-landing-card-desc"">Identify known CVEs and license issues in your open-source dependencies with DeepScan.</span>
     </a>
     <a class=""drs-landing-card"" href=""./auto-fix.html"">
       <span class=""drs-landing-card-title"">Auto Fix</span>
@@ -643,7 +643,7 @@ SCA,sca,"<h2 id=""how-it-works"">How It Works</h2>
 
 <p>Software Composition Analysis (SCA) identifies the third-party libraries and open-source packages your application depends on and checks whether any carry known security vulnerabilities. The majority of code in any production service comes from the open-source ecosystem, making dependency risk one of the most important areas to monitor.</p>
 
-<p>DryRun Security analyzes your dependency manifests and lock files on every pull request, detecting when a new or updated dependency introduces a known vulnerability. Because this analysis runs at the PR level, you catch supply chain risk at the moment it enters the codebase rather than after it reaches production.</p>
+<p>DryRun Security analyzes your dependency manifests and lock files as part of <a href=""./deepscan.html"">DeepScan</a>, detecting when dependencies carry known vulnerabilities. Because this analysis covers the entire codebase, you get a comprehensive view of supply chain risk rather than only seeing what changed in a single commit.</p>
 
 <p>Beyond simple CVE matching, DryRun Security evaluates how a vulnerable dependency is actually used in your code. A vulnerable function in a library you only use for unrelated functionality presents a different risk profile than one you call directly with user-supplied input. This context-aware assessment helps your team prioritize remediation based on actual exploitability rather than CVSS scores alone.</p>
 
@@ -663,15 +663,13 @@ SCA,sca,"<h2 id=""how-it-works"">How It Works</h2>
 
 <p>Each dependency is checked against known vulnerability databases, matching specific CVEs to affected version ranges.</p>
 
-<p>When a <a href=""./deepscan.html"">DeepScan</a> is run, SCA is performed as part of that process. DeepScan identifies vulnerable dependencies across the entire codebase, not just in the files changed by a pull request. This provides a comprehensive baseline of dependency risk across your repositories.</p>
+<p>SCA is performed as part of <a href=""./deepscan.html"">DeepScan</a>, identifying vulnerable dependencies across the entire codebase. This provides a comprehensive baseline of dependency risk across your repositories.</p>
 
 <p>Beyond the built-in SCA checks, teams can use <a href=""./custom-code-policies.html"">Custom Code Policies</a> to monitor additional supply chain concerns. Custom policies let you track specific dependencies, enforce version requirements, flag unapproved libraries, or define any other dependency rules that matter to your organization. This extends SCA coverage to match your team's specific supply chain security requirements.</p>
 
 <h2 id=""how-to-view-findings"">How to View Findings</h2>
 
-<p>When a vulnerable dependency is detected, DryRun Security posts a finding in the pull request that includes the affected package, the CVE or vulnerability identifier, severity, affected version range, and a recommended remediation such as a version upgrade. Findings appear in both the <a href=""./pr-scanning.html"">PR comment</a> and the GitHub Checks area.</p>
-
-<p>All SCA findings are tracked in the <a href=""./risk-register.html"">Risk Register</a> for centralized triage and prioritization. You can filter by the SCA agent type to isolate dependency-related risk from code-level findings. Findings from both PR scans and <a href=""./deepscan.html"">DeepScan</a> appear together in the Risk Register.</p>
+<p>All SCA findings from <a href=""./deepscan.html"">DeepScan</a> are tracked in the <a href=""./risk-register.html"">Risk Register</a> for centralized triage and prioritization. You can filter by the SCA agent type to isolate dependency-related risk from code-level findings.</p>
 
 <p>DryRun Security's dependency analysis also feeds into SBOM (Software Bill of Materials) generation. You can download a complete inventory of your software dependencies for compliance and audit purposes from the <a href=""./compliance-grc.html"">SBOM Generation</a> page.</p>",Dependency scanning and supply chain risk detection - find vulnerable third-party packages before they reach production.,Scanning
 Auto Fix,auto-fix,"<h2 id=""remediation-guidance"">Remediation Guidance</h2>
