@@ -43,7 +43,6 @@ Webflow project's custom CSS (Site Settings > Custom Code > Head):
 | Class | Purpose |
 |-------|---------|
 | `drs-cols-3` | Cols 3 container/element |
-| `drs-feature-grid` | Feature Grid container/element |
 | `drs-landing-card` | Landing Card container/element |
 | `drs-landing-card-desc` | Landing Card Desc container/element |
 | `drs-landing-card-title` | Landing Card Title container/element |
