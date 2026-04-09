@@ -746,6 +746,29 @@ Feature Ships,feature-ships,"<h2 id=""overview"">Overview</h2>
   <li><strong>Sprint reviews</strong> - Generate a security-aware summary of what your team shipped.</li>
   <li><strong>Release readiness</strong> - Verify that all features in a release have been security-reviewed.</li>
   <li><strong>Audit evidence</strong> - Provide auditors with a record of features shipped alongside their security assessments. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a>.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with feature ship intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Summarize the security posture of features shipped this sprint&rdquo;</em> - useful for sprint reviews, release readiness assessments, and security sign-off before deployments.</p>
+
+<p>Because DryRun Security continuously scans every pull request, these summaries are grounded in real findings from your codebase - not generic checklists. They pull from live data, so the answers reflect your current state rather than a stale snapshot.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Continuous context</strong> - Every PR review feeds the intelligence index, so feature tracking is always up to date without manual tagging or spreadsheets.</li>
+  <li><strong>Security-annotated features</strong> - Each feature is linked to its security findings and risk assessments, giving reviewers a complete picture in one query.</li>
+  <li><strong>On-demand reporting</strong> - Generate sprint-level or release-level security summaries instantly instead of compiling data from multiple tools.</li>
 </ul>",Track and review features shipped across your codebase using DryRun Security's intelligence index.,Code Security Intelligence
 Architecture Risks,architecture-risks,"<h2 id=""overview"">Overview</h2>
 
@@ -796,6 +819,29 @@ Architecture Risks,architecture-risks,"<h2 id=""overview"">Overview</h2>
   <li><strong>Threat modeling</strong> - Use the intelligence index to feed threat modeling exercises with real, current architectural data.</li>
   <li><strong>Architecture review</strong> - Query for structural changes before approving major releases.</li>
   <li><strong>Compliance</strong> - Demonstrate architectural governance by showing how structural changes are tracked and reviewed. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a>.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with architecture risk intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;What are the most critical architectural risks in this application?&rdquo;</em> - useful for architecture reviews, technical debt prioritization, and migration planning.</p>
+
+<p>DryRun Security&rsquo;s intelligence is grounded in real findings from continuous scanning, not generic architecture advice. The AI draws on the full history of structural changes across your repositories to surface risks that emerge from how components interact over time.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Cross-repository visibility</strong> - Architectural risks often span multiple repositories. DryRun Security&rsquo;s index connects the dots across your entire codebase.</li>
+  <li><strong>Evolving architecture map</strong> - Every PR review updates the intelligence index, so architecture risk queries always reflect your current system structure.</li>
+  <li><strong>Actionable context</strong> - Risks are linked to specific PRs, findings, and policy results, making it straightforward to investigate and remediate.</li>
 </ul>",Identify and investigate architectural security risks by querying DryRun Security's intelligence index.,Code Security Intelligence
 Developer Trends,developer-trends,"<h2 id=""overview"">Overview</h2>
 
@@ -846,6 +892,29 @@ Developer Trends,developer-trends,"<h2 id=""overview"">Overview</h2>
   <li><strong>Security training prioritization</strong> - Focus training on the finding categories that appear most frequently.</li>
   <li><strong>Process improvement</strong> - Track whether process changes (e.g., new policies, new tools) are having the intended effect.</li>
   <li><strong>Management reporting</strong> - Generate trend data for leadership reviews and board reporting.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with developer trend intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Show me which teams need security training based on finding patterns&rdquo;</em> - useful for security champions programs, training prioritization, and team coaching.</p>
+
+<p>DryRun Security aggregates findings across contributors and repositories over time, so trend summaries reflect real patterns in your development workflow rather than one-off snapshots.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Pattern-based insights</strong> - Trends are derived from continuous PR scanning, surfacing recurring issues that point to systemic gaps rather than individual mistakes.</li>
+  <li><strong>Reduces reporting overhead</strong> - Instead of manually compiling metrics from multiple dashboards, query the intelligence index for ready-made trend summaries.</li>
+  <li><strong>Enables non-security teams</strong> - Engineering managers and team leads can query developer trends directly without needing deep security expertise.</li>
 </ul>",Analyze developer behavior and security trend patterns by querying DryRun Security's intelligence index.,Code Security Intelligence
 Incident Response Investigation,incident-response,"<h2 id=""overview"">Overview</h2>
 
@@ -894,6 +963,29 @@ Incident Response Investigation,incident-response,"<h2 id=""overview"">Overview<
   <li><strong>Vulnerability triage</strong> - When a CVE is disclosed, quickly determine if and where the affected component exists in your codebase.</li>
   <li><strong>Breach investigation</strong> - Trace the code path involved in a security breach back through its development history.</li>
   <li><strong>Post-incident review</strong> - Generate a comprehensive timeline of changes for post-mortem analysis. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a> for audit trail documentation.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with incident response intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Generate an incident response summary for this vulnerability&rdquo;</em> - useful for incident triage, post-mortems, and stakeholder communication.</p>
+
+<p>During an active incident, speed matters. DryRun Security&rsquo;s intelligence index already has the full history of code changes and findings, so responders can get answers in seconds instead of manually correlating data across Git logs, CI systems, and security dashboards.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Pre-indexed investigation data</strong> - Every PR review and scan is already recorded and structured, so incident queries return results immediately without needing to run new scans.</li>
+  <li><strong>Findings-grounded analysis</strong> - Investigation summaries are based on actual security findings, triage decisions, and policy evaluations - not guesswork.</li>
+  <li><strong>Accelerates response time</strong> - Responders can reconstruct timelines and assess blast radius through natural language queries instead of manual log correlation.</li>
 </ul>",Investigate security incidents by querying DryRun Security's intelligence index for code change history and findings.,Code Security Intelligence
 Shadow AI,shadow-ai,"<h2 id=""overview"">Overview</h2>
 
@@ -945,6 +1037,29 @@ Shadow AI,shadow-ai,"<h2 id=""overview"">Overview</h2>
   <li><strong>Risk assessment</strong> - Evaluate the security implications of AI-generated code in your codebase.</li>
   <li><strong>Governance reporting</strong> - Provide leadership with visibility into AI adoption patterns across engineering teams.</li>
   <li><strong>Compliance</strong> - Document AI usage for regulatory requirements. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a>.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with shadow AI intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Identify all AI/LLM usage across our codebase&rdquo;</em> - useful for AI governance, compliance with organizational AI policies, and risk assessment of AI dependencies.</p>
+
+<p>DryRun Security detects AI involvement signals as a byproduct of every PR review, so shadow AI queries reflect cumulative observations across your entire development history - not a one-time scan.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Continuous detection</strong> - AI usage signals are captured on every PR review automatically, building a comprehensive picture over time without requiring separate tooling.</li>
+  <li><strong>Context-aware analysis</strong> - Detection goes beyond simple pattern matching by correlating commit metadata, code patterns, and volume anomalies for higher-confidence identification.</li>
+  <li><strong>Governance-ready reporting</strong> - Query results can be used directly in AI governance reviews, compliance documentation, and policy enforcement workflows.</li>
 </ul>",Detect and investigate unauthorized AI tool usage by querying DryRun Security's intelligence index.,Code Security Intelligence
 New Feature or Repository Security Review,security-review-requests,"<h2 id=""overview"">Overview</h2>
 
@@ -1250,6 +1365,29 @@ Vulnerability Trends,vulnerability-trends,"<h2 id=""overview"">Overview</h2>
   <li><strong>Risk trending</strong> - Query the index to understand whether your security posture is improving or degrading over time.</li>
   <li><strong>Coverage validation</strong> - Verify that your scans are detecting the vulnerability categories relevant to your technology stack.</li>
   <li><strong>Compliance reporting</strong> - Generate trend data and coverage evidence for auditors and leadership. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a>.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with vulnerability trend intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Summarize the top vulnerability trends across my repos for the past quarter&rdquo;</em> - useful for executive reporting, board presentations, and compliance audits.</p>
+
+<p>Because DryRun Security scans continuously, trend summaries always reflect your current vulnerability landscape. There is no lag between when findings are detected and when they appear in trend data.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Always current</strong> - Trend data updates with every PR review and DeepScan, so summaries reflect the latest state of your codebase without manual refresh.</li>
+  <li><strong>Grounded in real findings</strong> - Vulnerability trends are derived from actual scan results, not estimates or sampling, giving you accurate data for executive reporting and compliance.</li>
+  <li><strong>Eliminates manual reporting</strong> - Instead of aggregating data across tools and spreadsheets, query the intelligence index for instant, audit-ready trend summaries.</li>
 </ul>","Query DryRun Security's intelligence index for vulnerability coverage, risk trends, and the full coverage matrix.",Code Security Intelligence
 Application Summary,application-summary,"<h2 id=""overview"">Overview</h2>
 
@@ -1328,6 +1466,29 @@ Application Summary,application-summary,"<h2 id=""overview"">Overview</h2>
   <li><strong>Executive reporting</strong> - Generate on-demand security posture summaries for leadership and board reporting.</li>
   <li><strong>Team standups</strong> - Query for a quick overview of what changed since yesterday across your repositories.</li>
   <li><strong>Audit preparation</strong> - Pull comprehensive security posture data for compliance reviews. See <a href=""../docs/compliance-grc.html"">Compliance and Audit Readiness</a>.</li>
+</ul>
+
+<h2 id=""how-to-access-insights"">How to Access Insights</h2>
+
+<p>You can interact with application summary intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href=""../docs/mcp.html"">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id=""ai-powered-summaries"">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Create an application security profile for this service&rdquo;</em> - useful for onboarding new team members, security review preparation, and compliance documentation.</p>
+
+<p>DryRun Security&rsquo;s dashboard intelligence combines findings, coverage metrics, and trend data into a single queryable interface, so application summaries draw on the full picture rather than a single data source.</p>
+
+<h3 id=""why-dryrun"">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Unified security posture</strong> - Application summaries combine data from PR reviews, DeepScans, risk register entries, and policy evaluations into a single coherent view.</li>
+  <li><strong>Accessible to the full team</strong> - Engineers, managers, and auditors can query the dashboard through natural language without needing to navigate multiple tools or dashboards.</li>
+  <li><strong>Live data</strong> - Summaries pull from continuously updated scan results, so they always reflect the current state of your organization&rsquo;s security posture.</li>
 </ul>","Query DryRun Security's intelligence index for organization-wide security posture, analytics, and repository-level insights.",Code Security Intelligence
 PR Scanning Configuration,pr-scanning-configuration,"<p>Configurations let you customize how DryRun Security behaves for each repository or group of repositories. You can control which agents run, which policies are enforced, whether findings block PRs, and how notifications are delivered.</p>
 
