@@ -25,6 +25,8 @@
 
 <p>When a <a href="./deepscan.html">DeepScan</a> is run, SCA is performed as part of that process. DeepScan identifies vulnerable dependencies across the entire codebase, not just in the files changed by a pull request. This provides a comprehensive baseline of dependency risk across your repositories.</p>
 
+<p>Beyond the built-in SCA checks, teams can use <a href="./custom-code-policies.html">Custom Code Policies</a> to monitor additional supply chain concerns. Custom policies let you track specific dependencies, enforce version requirements, flag unapproved libraries, or define any other dependency rules that matter to your organization. This extends SCA coverage to match your team's specific supply chain security requirements.</p>
+
 <h2 id="how-to-view-findings">How to View Findings</h2>
 
 <p>When a vulnerable dependency is detected, DryRun Security posts a finding in the pull request that includes the affected package, the CVE or vulnerability identifier, severity, affected version range, and a recommended remediation such as a version upgrade. Findings appear in both the <a href="./pr-scanning.html">PR comment</a> and the GitHub Checks area.</p>
