@@ -321,31 +321,29 @@ PAGES['quick-start'] = {
 <p>This guide will walk you through connecting your GitLab environment to DryRun Security by:</p>
 
 <ul>
-  <li>Creating a GitLab Personal Access Token with the correct scopes.</li>
+  <li>Creating a GitLab Group Access Token with the correct scopes.</li>
   <li>Installing DryRun Security via the DryRun Security Dashboard.</li>
 </ul>
 
 <p>Once installed and activated, you&#x27;ll get immediate visibility into security risks across your GitLab projects &mdash; without slowing development down.</p>
 
-<h3 id="create-a-personal-access-token">Create a Personal Access Token</h3>
+<h3 id="create-a-group-access-token">Create a Group Access Token</h3>
 
-<p>This section describes creating a Personal Access Token (PAT) that will be used during the installation of DryRun Security.</p>
+<p>This section describes creating a Group Access Token that will be used during the installation of DryRun Security.</p>
 
-<p><strong>Note:</strong> The GitLab user used to create the Personal Access Token (PAT) needs to have at least <code>Maintainer</code> access to the Group or Project where DryRun Security will run.</p>
-
-<h4 id="generating-the-pat">Generating the Personal Access Token</h4>
+<h4 id="generating-the-group-access-token">Generating the Group Access Token</h4>
 
 <ol>
   <li>Log in to <a href="https://gitlab.com" target="_blank" rel="noopener noreferrer">gitlab.com</a>.</li>
-  <li>Navigate to <a href="https://gitlab.com/-/user_settings/personal_access_tokens" target="_blank" rel="noopener noreferrer">https://gitlab.com/-/user_settings/personal_access_tokens</a>.</li>
-  <li>Under <strong>Personal Access Tokens</strong>, click <strong>Add new token</strong>.</li>
-  <li>Add a token name and select the <code>api</code> and <code>read_user</code> scopes.</li>
-  <li>Click <strong>Create personal access token</strong>.</li>
+  <li>Navigate to the Group where DryRun Security will be installed.</li>
+  <li>Go to <strong>Settings &gt; Access Tokens</strong>.</li>
+  <li>Click <strong>Add new token</strong>.</li>
+  <li>Add a token name, set the role to at least <strong>Maintainer</strong>, and select the <code>api</code> and <code>read_user</code> scopes.</li>
+  <li>Click <strong>Create group access token</strong>.</li>
   <li>Copy the token and save it for later use.</li>
-  <li>Verify that the user that created the PAT has access to the Group where DryRun Security will be installed. The user should have at least <strong>Maintainer</strong> access to the Group. Add the user if necessary.</li>
 </ol>
 
-<p>Done! The Personal Access Token can be used to install DryRun Security.</p>
+<p>Done! The Group Access Token can be used to install DryRun Security.</p>
 
 <h3 id="install-via-dashboard">Install DryRun Security via the Dashboard</h3>
 
@@ -358,7 +356,7 @@ PAGES['quick-start'] = {
 
 <ol start="3">
   <li>Click the <strong>Add Token</strong> button or navigate to <strong>Settings &gt; GitLab</strong>.</li>
-  <li>Enter the Personal Access Token created earlier and click <strong>Save Token</strong>.</li>
+  <li>Enter the Group Access Token created earlier and click <strong>Save Token</strong>.</li>
   <li>Verify the User/Group for the Installation and click <strong>Confirm</strong> to confirm API access.</li>
   <li>Install on Projects by clicking <strong>+</strong> next to the Project and then click <strong>Save Projects</strong>.</li>
 </ol>
@@ -2564,12 +2562,12 @@ PAGES['permissions'] = {
 
 <h2 id="gitlab-permissions">GitLab Permissions</h2>
 
-<p>For GitLab integration, the Personal Access Token used during setup requires:</p>
+<p>For GitLab integration, the Group Access Token used during setup requires:</p>
 
 <ul>
   <li><strong>api</strong> scope - Required for merge request comments and status updates.</li>
   <li><strong>read_repository</strong> scope - Required to analyze code.</li>
-  <li>The token owner must have at least <strong>Maintainer</strong> access to the target group or project.</li>
+  <li>The token must have at least the <strong>Maintainer</strong> role.</li>
 </ul>
 
 <h2 id="configuration-access">Configuration Access</h2>
