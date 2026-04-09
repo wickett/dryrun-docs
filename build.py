@@ -789,6 +789,8 @@ PAGES['iac-scanning'] = {
   <li><strong>Subdomain takeover risks</strong> - Dangling DNS records or CDN configurations that could be claimed by an attacker</li>
 </ul>
 
+<p>Beyond the built-in IaC checks, teams can use <a href="./custom-code-policies.html">Custom Code Policies</a> to monitor additional infrastructure concerns. Custom policies let you enforce specific configuration requirements, flag unapproved resource types, or define any other infrastructure rules that matter to your organization. This extends IaC coverage to match your team's specific infrastructure security requirements.</p>
+
 <h2 id="how-findings-appear">How Findings Appear</h2>
 
 <p>IaC findings are reported the same way as other DryRun Security results: as comments on pull requests and as entries in the <a href="risk-register.html">Risk Register</a> dashboard. Each finding includes the affected resource, a description of the risk, and guidance on remediation.</p>
@@ -825,8 +827,6 @@ PAGES['sca'] = {
 <p>Each dependency is checked against known vulnerability databases, matching specific CVEs to affected version ranges.</p>
 
 <p>SCA is performed as part of <a href="./deepscan.html">DeepScan</a>, identifying vulnerable dependencies across the entire codebase. This provides a comprehensive baseline of dependency risk across your repositories.</p>
-
-<p>Beyond the built-in SCA checks, teams can use <a href="./custom-code-policies.html">Custom Code Policies</a> to monitor additional supply chain concerns. Custom policies let you track specific dependencies, enforce version requirements, flag unapproved libraries, or define any other dependency rules that matter to your organization. This extends SCA coverage to match your team's specific supply chain security requirements.</p>
 
 <h2 id="how-to-view-findings">How to View Findings</h2>
 
