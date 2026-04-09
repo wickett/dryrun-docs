@@ -1,0 +1,52 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>Architectural security risks - the kind that emerge from how components interact rather than from individual code flaws - are notoriously hard to detect with traditional tools. DryRun Security&rsquo;s intelligence index captures architectural patterns and changes as they occur across your codebase, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page or dashboard. It is a query pattern - a way to ask DryRun Security&rsquo;s LLM about architectural risks using the structured findings and insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a>.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>During every PR review and repository scan, DryRun Security&rsquo;s models observe architectural signals: new service boundaries, authentication pattern changes, data flow modifications, infrastructure-as-code updates, and dependency relationship shifts. These observations accumulate in the intelligence index, building a persistent map of your system&rsquo;s architecture and how it evolves over time.</p>
+
+<p>When you query for architecture risks, the LLM has access to the full history of these observations and can surface risks that are invisible at the individual PR level but become apparent when viewed across the full codebase.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What IAM policy changes were introduced across all repos this quarter?&rdquo;</strong> - Surfaces infrastructure-level permission changes.</li>
+  <li><strong>&ldquo;Show me new service-to-service communication paths added this month&rdquo;</strong> - Maps architectural expansion.</li>
+  <li><strong>&ldquo;Which repos introduced new external API integrations?&rdquo;</strong> - Identifies new trust boundaries.</li>
+  <li><strong>&ldquo;Are there any new unauthenticated endpoints?&rdquo;</strong> - Flags architectural gaps in access control.</li>
+</ul>
+
+<h2 id="risk-patterns">Risk Patterns Detected</h2>
+
+<p>The intelligence index tracks architectural risk patterns including:</p>
+
+<ul>
+  <li><strong>Trust boundary changes</strong> - New external integrations, API surface expansion, or cross-service data flows.</li>
+  <li><strong>Authentication and authorization drift</strong> - Changes to auth patterns that may weaken access control.</li>
+  <li><strong>Data flow modifications</strong> - New paths for sensitive data that may bypass existing controls.</li>
+  <li><strong>Infrastructure changes</strong> - IaC modifications that alter network topology, permissions, or deployment configuration.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Architecture risk queries integrate with DryRun Security&rsquo;s broader analysis. Each risk pattern identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that introduced the change</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Threat modeling</strong> - Use the intelligence index to feed threat modeling exercises with real, current architectural data.</li>
+  <li><strong>Architecture review</strong> - Query for structural changes before approving major releases.</li>
+  <li><strong>Compliance</strong> - Demonstrate architectural governance by showing how structural changes are tracked and reviewed. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+</div>

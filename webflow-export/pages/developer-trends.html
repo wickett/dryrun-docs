@@ -1,0 +1,52 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>Understanding how your team&rsquo;s security practices evolve over time requires more than point-in-time snapshots. DryRun Security&rsquo;s intelligence index captures developer activity patterns as a byproduct of every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone dashboard or report. It is a query pattern - a way to ask DryRun Security&rsquo;s LLM about development trends using the structured findings and insights generated across your repositories.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>As DryRun Security reviews pull requests, the models record patterns at the contributor level: which types of findings are most common, how quickly findings are addressed, what categories of code changes are being made, and how security posture trends over time. This data is aggregated and anonymizable, designed to improve team processes rather than single out individuals.</p>
+
+<p>When you query for developer trends, the LLM has access to this full history and can identify patterns, inflection points, and areas where additional attention may help.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What are the most common security findings across our team this month?&rdquo;</strong> - Identifies patterns that may indicate a training opportunity.</li>
+  <li><strong>&ldquo;How has our mean time to remediate findings changed over the last quarter?&rdquo;</strong> - Tracks security responsiveness trends.</li>
+  <li><strong>&ldquo;Which repositories have the highest density of new findings?&rdquo;</strong> - Highlights areas under active development that may need more review.</li>
+  <li><strong>&ldquo;Show me a chart of finding categories over the past 6 months&rdquo;</strong> - Visualizes how the types of issues are shifting.</li>
+</ul>
+
+<h2 id="trend-categories">Trend Categories</h2>
+
+<p>The intelligence index tracks several dimensions of developer activity:</p>
+
+<ul>
+  <li><strong>Finding frequency and type</strong> - What categories of security issues appear most often and whether they are increasing or decreasing.</li>
+  <li><strong>Remediation velocity</strong> - How quickly findings are addressed after detection.</li>
+  <li><strong>Code change patterns</strong> - Volume and nature of changes across repositories, highlighting areas of high activity.</li>
+  <li><strong>Policy compliance</strong> - How often <a href="../docs/custom-code-policies.html">Custom Code Policies</a> are triggered and resolved.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Developer trend queries integrate with DryRun Security&rsquo;s broader analysis. Each trend identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that drive the trend</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Security training prioritization</strong> - Focus training on the finding categories that appear most frequently.</li>
+  <li><strong>Process improvement</strong> - Track whether process changes (e.g., new policies, new tools) are having the intended effect.</li>
+  <li><strong>Management reporting</strong> - Generate trend data for leadership reviews and board reporting.</li>
+</ul>
+</div>

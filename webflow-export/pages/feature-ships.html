@@ -1,0 +1,39 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>Every pull request DryRun Security reviews contributes to an intelligence index - a structured, queryable record of what changed, why it matters, and what security implications it carries. The Feature Ships page explains how to use this index to track and review features as they are shipped across your repositories.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>During PR and repository scanning, DryRun Security&rsquo;s models analyze code changes to identify feature-level context: new endpoints, new user flows, new capabilities, and new integrations. These observations are indexed and made available for querying through the <strong>DryRun AI Assistant</strong> on the Insights page and programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>Rather than manually tracking feature releases across PRs, teams can query the intelligence index to get a consolidated view of what shipped, when, and what the security implications are.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;What features shipped this sprint?&rdquo;</strong> - Returns a summary of new capabilities introduced across all monitored repositories.</li>
+  <li><strong>&ldquo;Show me the top 5 features we shipped this month with the most risky security implications. Link me to the PRs.&rdquo;</strong> - Surfaces features ranked by security risk with direct PR links.</li>
+  <li><strong>&ldquo;Did we ship any new payment flows this quarter?&rdquo;</strong> - Filters the index for domain-specific feature patterns.</li>
+  <li><strong>&ldquo;Which repos had the most feature activity last week?&rdquo;</strong> - Identifies the most active areas of development.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Feature ship tracking integrates with DryRun Security&rsquo;s broader analysis. Each feature identified in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that introduced it</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Sprint reviews</strong> - Generate a security-aware summary of what your team shipped.</li>
+  <li><strong>Release readiness</strong> - Verify that all features in a release have been security-reviewed.</li>
+  <li><strong>Audit evidence</strong> - Provide auditors with a record of features shipped alongside their security assessments. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+</div>

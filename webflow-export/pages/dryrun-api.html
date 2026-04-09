@@ -1,0 +1,115 @@
+<div class="drs-doc-content">
+<h2 id="dryrun-simple-api">DryRun Simple API</h2>
+
+<p>The DryRun Simple API provides programmatic access to your organization's security data - findings, scans, deepscans, configurations, repositories, and insights.</p>
+
+<ul>
+  <li><strong>Swagger UI:</strong> <a href="https://simple-api.dryrun.security/api-docs/index.html" target="_blank" rel="noopener noreferrer">https://simple-api.dryrun.security/api-docs/index.html</a></li>
+  <li><strong>OpenAPI (v3.0) spec:</strong> <a href="https://simple-api.dryrun.security/api-docs/v1/swagger.yaml" target="_blank" rel="noopener noreferrer">https://simple-api.dryrun.security/api-docs/v1/swagger.yaml</a></li>
+  <li><strong>Base URL:</strong> <code>https://simple-api.dryrun.security/v1</code></li>
+</ul>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>All API requests require an API key generated from the DryRun Security dashboard.</p>
+
+<figure class="docs-screenshot"><img src="assets/images/api-guide/02-swagger.png" alt="DryRun Security API Swagger documentation" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/api-guide/01-api-key.png" alt="API key generation in DryRun Security Settings" loading="lazy"></figure>
+
+<h3 id="getting-an-api-key">Getting an API Key</h3>
+
+<p>Navigate to <strong>Settings &gt; Access Keys</strong> in the sidebar at <a href="https://app.dryrun.security/settings/access-keys" target="_blank" rel="noopener noreferrer">app.dryrun.security</a>. The Access Keys page provides two sections:</p>
+
+<ul>
+  <li><strong>API Keys</strong> - Create and manage API keys for your applications. Click <strong>+ Generate New API Key</strong> to create a new key.</li>
+  <li><strong>Your API Keys</strong> - View and manage your existing API keys. You can revoke any key at any time.</li>
+</ul>
+
+<div class="callout callout-warning">
+  <strong>Keep your API keys secure.</strong> Treat API keys like passwords. Never share them in public repositories, client-side code, or unsecured locations. If a key is compromised, revoke it immediately from the Access Keys page.
+</div>
+
+<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
+
+<h3 id="using-your-api-key">Using Your API Key</h3>
+
+<p>Send your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme:</p>
+
+<pre><code>Authorization: Bearer dryrunsec_**********************</code></pre>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<p>Most endpoints are scoped to an account. You'll need:</p>
+<ul>
+  <li><code>account_id</code> - provided by the DryRun Security platform (e.g., <code>12345678-1234-1234-1234-1234567890ab</code>)</li>
+  <li><code>repository_id</code> - a UUID for a repository</li>
+</ul>
+
+<p>Typical workflow:</p>
+<ol>
+  <li>List your accessible accounts.</li>
+  <li>Pick an account, then list repositories in that account.</li>
+  <li>Use repository IDs to fetch scans and findings.</li>
+</ol>
+
+<pre><code>curl   -H "Authorization: Bearer $DRYRUN_API_KEY"   https://simple-api.dryrun.security/v1/accounts</code></pre>
+
+<h2 id="endpoint-reference">Endpoint Reference</h2>
+
+<h3 id="accounts">Accounts</h3>
+
+<p><code>GET /v1/accounts</code> - List all accounts accessible by the API key.</p>
+
+<h3 id="repositories">Repositories</h3>
+
+<p><code>GET /v1/accounts/{account_id}/repositories</code> - List all repositories for an account.</p>
+
+<h3 id="scans">Scans</h3>
+
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans</code> - List PR scans for a repository (supports filtering by status, date, and pagination).</p>
+
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code> - Get detailed PR scan results including findings.</p>
+
+<h3 id="findings">Findings</h3>
+
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/findings</code> - List all PR findings for a repository. Each finding includes a <code>dashboard_url</code> to view it in the DryRun Security dashboard.</p>
+
+<h3 id="deepscans">Deepscans</h3>
+
+<p><code>GET /v1/accounts/{account_id}/deepscans</code> - List all deepscans for an account.</p>
+
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans</code> - List deepscans for a repository.</p>
+
+<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results</code> - List findings for a specific deepscan.</p>
+
+<h3 id="configurations-api">Configurations</h3>
+
+<p><code>GET /v1/accounts/{account_id}/configurations</code> - List configurations for an account.</p>
+<p><code>POST /v1/accounts/{account_id}/configurations</code> - Create a new configuration.</p>
+<p><code>PUT /v1/accounts/{account_id}/configurations/{id}</code> - Update a configuration.</p>
+<p><code>DELETE /v1/accounts/{account_id}/configurations/{id}</code> - Delete a configuration.</p>
+
+<h3 id="analyzers-api">Analyzers</h3>
+
+<p><code>GET /v1/accounts/{account_id}/analyzers</code> - List available analyzers. Use the <code>slug</code> field as the key in configuration analyzer settings.</p>
+
+<h3 id="custom-policies-api">Custom Policies</h3>
+
+<p><code>GET /v1/accounts/{account_id}/custom_policies</code> - List all Custom Code Policies for an account.</p>
+
+<h3 id="insights-api">Insights</h3>
+
+<p><code>GET /v1/accounts/{account_id}/insights</code> - Retrieve the daily insights digest. Insights are generated daily and highlight important security changes. Supports a <code>date</code> query parameter (YYYY-MM-DD).</p>
+
+<h2 id="conventions">Conventions</h2>
+
+<ul>
+  <li><strong>IDs and scoping:</strong> <code>account_id</code> is required for most endpoints. <code>repository_id</code> is required for repository-scoped endpoints.</li>
+  <li><strong>Response shape:</strong> Most list endpoints return a top-level <code>data</code> array.</li>
+  <li><strong>Errors:</strong> If an item is not found, endpoints return <code>404</code> with <code>{"error": "not found"}</code>.</li>
+</ul>
+
+<h2 id="support">Support</h2>
+
+<p>If you have questions about authentication, account access, or expected responses, contact DryRun Security support and include the endpoint URL you called, the HTTP status code, and the <code>request_id</code> header (if present).</p>
+</div>

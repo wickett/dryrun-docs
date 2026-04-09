@@ -1,0 +1,111 @@
+<div class="drs-doc-content">
+<p>In this section we describe how DryRun Security runs and where to see the results. To illustrate, we walk through an example of modifying code in a sample repository and reviewing the results.</p>
+
+
+<h2 id="see-it-in-action">See DryRun Security in Action</h2>
+
+<p>Here is a complete walkthrough of what DryRun Security produces when analyzing a pull request.</p>
+
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/01-update-file.png" alt="Example PR with code changes being analyzed by DryRun Security" loading="lazy"></figure>
+
+<h3 id="summary-comment">Summary Comment</h3>
+<p>DryRun Security posts a summary comment on the PR with an overview of all findings.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/02-summary-comment.png" alt="DryRun Security summary comment on a pull request" loading="lazy"></figure>
+
+<h3 id="policy-enforcement-results">Policy Enforcement</h3>
+<p>If Custom Code Policies are configured, the results appear in the summary.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/03-code-policy.png" alt="DryRun Security code policy enforcement results" loading="lazy"></figure>
+
+<h3 id="code-security-findings">Code Security Findings</h3>
+<p>The Code Security section shows detailed findings from the security analysis.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/04-code-analysis.png" alt="DryRun Security code analysis findings" loading="lazy"></figure>
+
+<h3 id="risk-level-assessment">Risk Level</h3>
+<p>Each PR is assigned a risk level based on the combined findings.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/05-riskiness.png" alt="DryRun Security risk level assessment" loading="lazy"></figure>
+
+<h3 id="github-checks-integration">GitHub Checks</h3>
+<p>DryRun Security integrates with GitHub Checks to provide pass/fail status on PRs.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/06-checks.png" alt="DryRun Security GitHub Checks integration" loading="lazy"></figure>
+
+<p>Detailed check results include the specific vulnerability identified and remediation guidance.</p>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/07-checks-sql.png" alt="DryRun Security check detail showing SQL injection finding" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/walkthrough/08-checks-finding.png" alt="DryRun Security check finding with remediation details" loading="lazy"></figure>
+
+<h2 id="open-a-pull-request">Open a Pull Request</h2>
+
+<p>When code is updated and a Pull Request is opened, DryRun Security's Policy Enforcement Agent will immediately run any user-configured Custom Code Policies against the code. DryRun Security's many Code Security Agents will also run against the code and report back with any findings.</p>
+
+<p>You'll see the results of the analysis in both a summary comment and the Checks area of the Pull Request.</p>
+
+<h2 id="dryrun-security-summary">DryRun Security Summary</h2>
+
+<p>DryRun Security generates a summary describing the security implications of the change. If any Code Policies or Code Security Agents have findings, they will be described in this summary.</p>
+
+<h2 id="policy-enforcement">Policy Enforcement</h2>
+
+<p>The Policy Enforcement Agent runs any user-configured Custom Code Policies that are set up for the repository. If a policy has findings, they will be listed in the Pull Request comment. This enables your team to enforce custom, organization-specific security rules - like "no new API endpoints without authorization" - written in plain English.</p>
+
+<h2 id="code-security">Code Security</h2>
+
+<p>The summary also lists any findings from DryRun Security's Code Security Agents. Each agent is specialized for a specific class of vulnerability - SQL injection, secrets exposure, IDOR, insecure dependencies, and more. Click on a finding to see more details about the affected code path and recommended fix.</p>
+
+<h2 id="risk-level">Risk Level</h2>
+
+<p>DryRun Security calculates and assigns a risk level to each change: <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This risk level can be used to trigger notifications or block the merging of a Pull Request via GitHub Branch Protection Rules.</p>
+
+<h2 id="vulnerability-severity">Vulnerability Severity Workflow</h2>
+
+<p>DryRun Security evaluates each finding based on both <strong>impact</strong> and <strong>exploitability</strong>, assigning a severity rating of <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>. This model goes beyond simple pattern matching to assess how likely a finding is to be exploitable in your specific codebase context.</p>
+
+<p>A configuration toggle is available to block PRs based on this severity model. See <a href="../docs/pr-scanning-configuration.html">PR Scanning Configuration</a> for setup.</p>
+
+<h2 id="false-positive-reduction">False Positive Reduction</h2>
+
+<p>DryRun Security continuously improves its false positive detection rate and matching across your organization. When findings are triaged as false positives, the system fingerprints those patterns and applies suppression across all repositories in your org. Recent improvements have expanded the matching logic to reduce repeat false positives more effectively.</p>
+
+<h2 id="context-handling">Context Handling</h2>
+
+<p>Package handling context has been expanded to inject better context where and when it matters during analysis. This means DryRun Security&rsquo;s agents have richer understanding of dependency relationships, framework conventions, and package-level security patterns when evaluating code changes.</p>
+
+<h2 id="github-checks">GitHub Checks</h2>
+
+<p>DryRun Security also posts agent results to the <strong>Checks</strong> area on the Pull Request. This can be seen on the Pull Request default page or by clicking the <strong>Checks</strong> tab at the top of the Pull Request page.</p>
+
+<p>Each check corresponds to a specific agent or policy. Click on a check to see its details. Expand a finding's dropdown to view the finding type, description, file name, and a direct link to the code where the finding was detected.</p>
+
+<h2 id="gitlab-merge-requests">GitLab Merge Requests</h2>
+
+<p>DryRun Security works identically on GitLab, posting findings as Merge Request comments and in the GitLab pipeline status checks area. See <a href="../quick-start.html">Install DryRun Security for GitLab</a> for setup instructions.</p>
+
+
+<h2 id="how-sast-works">How DryRun Security SAST Works</h2>
+
+<h2 id="not-pattern-matching">This Is Not Pattern Matching</h2>
+
+<p>Traditional static application security testing (SAST) tools work by comparing your code against a database of known-bad patterns. If a function call or code fragment matches a signature, it gets flagged. This approach is fast to implement and easy to explain - but it misses the vast majority of real vulnerabilities while generating enormous volumes of noise on code that happens to look like a pattern but is actually safe.</p>
+
+<p>DryRun Security takes a fundamentally different approach. Our <strong>Contextual Security Analysis (CSA)</strong> evaluates code within its full context: the data flowing into a function, the authorization logic surrounding it, the framework being used, the developer's apparent intent, and the broader architecture of the application. A SQL query constructed from user input is only a problem if input sanitization is absent - and CSA can determine that, while a pattern matcher cannot.</p>
+
+<h2 id="how-csa-works">How Contextual Security Analysis Works</h2>
+
+<p>When a Pull Request is opened, DryRun Security's Code Review Agent retrieves the diff along with the relevant surrounding code context. It does not analyze the diff in isolation - it considers the complete code path, imported libraries, authentication middleware, and any applicable security policies configured for the repository.</p>
+
+<p>The analysis is performed by a multi-agent system where each specialized agent focuses on a specific class of vulnerability or security concern. The SQL Injection Analyzer, for example, traces the full data flow from input to query execution. The Secrets Analyzer looks for credential patterns in context - distinguishing between a real API key and a test fixture. Each agent reports findings with precise file locations and a plain-language explanation of the risk.</p>
+
+<h2 id="ai-native-architecture">AI-Native Architecture</h2>
+
+<p>DryRun Security is built AI-first. Every layer of the platform - from ingestion to analysis to reporting - is designed around large language model capabilities rather than bolted on top of a legacy rules engine. This means findings reflect the same kind of reasoning a senior security engineer would apply: considering intent, context, and consequence rather than matching syntax.</p>
+
+<p>Importantly, DryRun uses <strong>model-independent verification</strong>. Findings are validated across multiple AI models before being surfaced, reducing hallucinations and ensuring that every result has been cross-checked. This multi-model approach means DryRun Security is not dependent on the behavior of any single model provider, and findings remain consistent even as underlying models evolve.</p>
+
+<h2 id="what-this-means-for-developers">What This Means for Developers</h2>
+
+<p>The practical impact of contextual analysis is dramatically lower false-positive rates. Developers spend less time triaging irrelevant alerts and more time addressing findings that represent genuine risk. Because findings include full context - the affected code path, the reason the vulnerability exists, and suggested remediation - they are immediately actionable without requiring a security expert to interpret them.</p>
+
+<p>DryRun Security integrates directly into the Pull Request workflow on GitHub and GitLab, so developers receive security feedback in the same place they already work. No separate dashboard to check, no end-of-sprint security reviews - security analysis happens in real time as code is being written.</p>
+
+<h2 id="coverage">Coverage</h2>
+
+<p>DryRun Security's agents cover over 47 vulnerability categories, from SQL injection and cross-site scripting to business logic flaws, IDOR, and AI-specific risks like prompt injection. See the <a href="./vulnerability-trends.html">Coverage Matrix</a> for the full list with CWE mappings.</p>
+</div>

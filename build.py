@@ -5,7 +5,9 @@ Usage: python3 build.py
 
 Site structure: 5 sections, 27 pages
 """
+import csv
 import html
+import io
 import json
 import re
 from pathlib import Path
@@ -3866,6 +3868,233 @@ def generate_search_index() -> str:
 
 
 # ---------------------------------------------------------------------------
+# Webflow export
+# ---------------------------------------------------------------------------
+
+_INLINE_STYLE_RE = re.compile(r'\s+style="[^"]*"', re.IGNORECASE)
+_SCRIPT_TAG_RE = re.compile(
+    r'<script[\s>].*?</script>', re.IGNORECASE | re.DOTALL
+)
+_CLASS_ATTR_RE = re.compile(r'class="([^"]*)"')
+_ASSET_PREFIX_RE = re.compile(r'\{asset_prefix\}')
+
+# CSS class names used in page content that need the drs- prefix
+_DRS_CLASS_MAP = {
+    'landing-hero': 'drs-landing-hero',
+    'landing-section': 'drs-landing-section',
+    'landing-section-header': 'drs-landing-section-header',
+    'landing-grid': 'drs-landing-grid',
+    'landing-card': 'drs-landing-card',
+    'landing-card-title': 'drs-landing-card-title',
+    'landing-card-desc': 'drs-landing-card-desc',
+    'landing-resources': 'drs-landing-resources',
+    'res-desc': 'drs-res-desc',
+    'cols-2': 'drs-cols-2',
+    'cols-3': 'drs-cols-3',
+    'persona': 'drs-persona',
+    'doc-content': 'drs-doc-content',
+    'info-box': 'drs-info-box',
+    'warning-box': 'drs-warning-box',
+    'feature-grid': 'drs-feature-grid',
+    'feature-item': 'drs-feature-item',
+    'feature-icon': 'drs-feature-icon',
+    'code-block': 'drs-code-block',
+    'copy-btn': 'drs-copy-btn',
+}
+
+
+def _clean_content_for_webflow(raw_content: str) -> str:
+    """Clean page content HTML for Webflow compatibility.
+
+    - Removes inline styles
+    - Removes <script> tags
+    - Remaps CSS class names to drs- prefixed versions
+    - Removes {asset_prefix} placeholders (replaces with relative paths)
+    """
+    content = raw_content.strip()
+
+    # Remove {asset_prefix} references - use relative paths for Webflow
+    content = _ASSET_PREFIX_RE.sub('', content)
+
+    # Remove inline styles
+    content = _INLINE_STYLE_RE.sub('', content)
+
+    # Remove script tags
+    content = _SCRIPT_TAG_RE.sub('', content)
+
+    # Remap class names to drs- prefix
+    def _remap_classes(m):
+        original = m.group(1)
+        classes = original.split()
+        remapped = []
+        for cls in classes:
+            remapped.append(_DRS_CLASS_MAP.get(cls, cls))
+        return f'class="{" ".join(remapped)}"'
+
+    content = _CLASS_ATTR_RE.sub(_remap_classes, content)
+
+    # Inject heading IDs for proper anchor linking
+    content = inject_heading_ids(content)
+
+    return content
+
+
+def _extract_meta_description(content: str) -> str:
+    """Extract a meta description from the first <p> tag in the content."""
+    match = re.search(r'<p[^>]*>(.*?)</p>', content, re.DOTALL)
+    if not match:
+        return ''
+    text = _strip_html(match.group(1)).strip()
+    if len(text) > 160:
+        text = text[:157] + '...'
+    return text
+
+
+def generate_webflow_csv(output_dir: Path) -> None:
+    """Generate a CSV file for Webflow CMS import with all documentation pages."""
+    webflow_dir = output_dir / 'webflow-export'
+    webflow_dir.mkdir(parents=True, exist_ok=True)
+
+    csv_path = webflow_dir / 'pages.csv'
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow(['Name', 'Slug', 'Content', 'Meta Description', 'Category'])
+
+    for slug in ORDERED_PAGES:
+        page = PAGES.get(slug)
+        if page is None:
+            continue
+        title = page['title']
+        description = page.get('description', '')
+        section = page.get('section', get_section_for_slug(slug))
+        raw_content = page['content']
+        clean = _clean_content_for_webflow(raw_content)
+
+        meta_desc = description if description else _extract_meta_description(clean)
+
+        writer.writerow([title, slug, clean, meta_desc, section])
+
+    csv_path.write_text(buf.getvalue(), encoding='utf-8')
+    print(f'  Generated: webflow-export/pages.csv')
+
+
+def generate_webflow_pages(output_dir: Path) -> None:
+    """Generate individual clean HTML content files for Webflow code embeds."""
+    pages_dir = output_dir / 'webflow-export' / 'pages'
+    pages_dir.mkdir(parents=True, exist_ok=True)
+
+    for slug in ORDERED_PAGES:
+        page = PAGES.get(slug)
+        if page is None:
+            continue
+        raw_content = page['content']
+        clean = _clean_content_for_webflow(raw_content)
+
+        page_html = f'<div class="drs-doc-content">\n{clean}\n</div>\n'
+        out_path = pages_dir / f'{slug}.html'
+        out_path.write_text(page_html, encoding='utf-8')
+
+    print(f'  Generated: webflow-export/pages/ ({len(ORDERED_PAGES)} files)')
+
+
+def generate_webflow_readme(output_dir: Path) -> None:
+    """Generate a README explaining how to use the Webflow export files."""
+    webflow_dir = output_dir / 'webflow-export'
+    webflow_dir.mkdir(parents=True, exist_ok=True)
+
+    # Collect all drs- classes actually used across content
+    all_classes = set()
+    for slug in ORDERED_PAGES:
+        page = PAGES.get(slug)
+        if page is None:
+            continue
+        clean = _clean_content_for_webflow(page['content'])
+        for m in _CLASS_ATTR_RE.finditer(clean):
+            for cls in m.group(1).split():
+                if cls.startswith('drs-'):
+                    all_classes.add(cls)
+
+    class_table = '\n'.join(
+        f'| `{cls}` | {cls.replace("drs-", "").replace("-", " ").title()} container/element |'
+        for cls in sorted(all_classes)
+    )
+
+    readme = f'''# Webflow Export - DryRun Security Documentation
+
+This directory contains DryRun Security documentation content formatted for
+import into Webflow.
+
+## Files
+
+- **pages.csv** - All documentation pages in CSV format for Webflow CMS import
+- **pages/*.html** - Individual HTML content files for use as Webflow Code Embeds
+- **README.md** - This file
+
+## Using the CSV for CMS Import
+
+1. In Webflow, go to **CMS** > **Import/Export** (or use the API).
+2. Upload `pages.csv`.
+3. Map the columns to your CMS Collection fields:
+   - `Name` -> Page title (plain text field)
+   - `Slug` -> URL slug (slug field)
+   - `Content` -> Page body (Rich Text or plain HTML field for Code Embed)
+   - `Meta Description` -> SEO description (plain text field)
+   - `Category` -> Section grouping (option/reference field)
+4. Content is clean HTML suitable for Webflow Rich Text fields. If your Rich
+   Text field strips custom classes, use a Code Embed element instead.
+
+## Using Individual HTML Files as Code Embeds
+
+Each file in `pages/` contains only the page body content wrapped in a single
+`<div class="drs-doc-content">` element. To use in Webflow:
+
+1. Add a **Code Embed** element to your page template.
+2. Paste the contents of the corresponding `.html` file.
+3. The HTML uses semantic tags (`h2`, `h3`, `h4`, `p`, `ul`, `ol`, `li`,
+   `table`, `thead`, `tbody`, `tr`, `th`, `td`, `pre`, `code`, `strong`, `em`,
+   `a`) that Webflow styles natively.
+4. Custom layout classes use the `drs-` prefix to avoid conflicts with
+   Webflow\'s own class namespace.
+
+## CSS Classes
+
+All custom CSS classes use the `drs-` prefix. Add these styles to your
+Webflow project\'s custom CSS (Site Settings > Custom Code > Head):
+
+| Class | Purpose |
+|-------|---------|
+{class_table}
+
+Copy the relevant styles from the original `style.css` file, renaming each
+class to its `drs-` prefixed version. Semantic HTML elements (`h2`, `p`,
+`table`, etc.) inherit Webflow\'s typography styles by default.
+
+## Images and Assets
+
+Images referenced in the content use relative paths. Before importing:
+
+1. Upload all images from the `assets/` directory to Webflow\'s Asset Manager.
+2. Update image `src` attributes in the HTML to point to Webflow-hosted URLs,
+   or use Webflow\'s built-in image elements and reference CMS image fields.
+3. SVG logos are inlined in the original site\'s header/footer and are **not**
+   included in these content files. Use Webflow\'s native header/footer
+   components instead.
+
+## Notes
+
+- Content HTML has been cleaned: no inline styles, no `<script>` tags, and
+  no site wrapper elements (header, footer, sidebar, navigation).
+- Internal links between pages use relative paths (e.g., `deepscan.html`).
+  Update these to match your Webflow URL structure if slugs differ.
+- Tables use standard HTML table markup (`<table>`, `<thead>`, `<tbody>`,
+  `<tr>`, `<th>`, `<td>`) compatible with Webflow\'s table styling.
+'''
+
+    (webflow_dir / 'README.md').write_text(readme, encoding='utf-8')
+    print(f'  Generated: webflow-export/README.md')
+
+
+# ---------------------------------------------------------------------------
 # Build entry point
 # ---------------------------------------------------------------------------
 
@@ -3906,8 +4135,14 @@ def build(output_dir: str = None) -> None:
     (output_dir / 'robots.txt').write_text(render_robots(), encoding='utf-8')
     print('  Generated: robots.txt')
 
+    # Webflow export
+    generate_webflow_csv(output_dir)
+    generate_webflow_pages(output_dir)
+    generate_webflow_readme(output_dir)
+
     total = len(ORDERED_PAGES) + 3  # pages + index + sitemap + robots
-    print(f'\nBuild complete: {total} files generated in {output_dir}')
+    webflow_total = len(ORDERED_PAGES) + 2  # pages + CSV + README
+    print(f'\nBuild complete: {total} site files + {webflow_total} webflow-export files generated in {output_dir}')
 
 
 if __name__ == '__main__':
