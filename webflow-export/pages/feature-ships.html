@@ -36,4 +36,27 @@
   <li><strong>Release readiness</strong> - Verify that all features in a release have been security-reviewed.</li>
   <li><strong>Audit evidence</strong> - Provide auditors with a record of features shipped alongside their security assessments. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
 </ul>
+
+<h2 id="how-to-access-insights">How to Access Insights</h2>
+
+<p>You can interact with feature ship intelligence in two ways:</p>
+
+<ol>
+  <li><strong>Insights AI Assistant</strong> - In the DryRun Security dashboard, navigate to the Insights tab to view findings. Click &ldquo;Investigate&rdquo; on any finding to load its context into the AI assistant for interactive conversation and deeper analysis.</li>
+  <li><strong>MCP Integration</strong> - Connect your AI coding tools (such as Claude Code) to DryRun Security via MCP for programmatic access to the same intelligence directly from your development environment. See <a href="../docs/mcp.html">MCP Integration</a> for setup instructions.</li>
+</ol>
+
+<h2 id="ai-powered-summaries">AI-Powered Summaries</h2>
+
+<p>Ask the AI assistant to generate summaries tailored to your workflow. For example: <em>&ldquo;Summarize the security posture of features shipped this sprint&rdquo;</em> - useful for sprint reviews, release readiness assessments, and security sign-off before deployments.</p>
+
+<p>Because DryRun Security continuously scans every pull request, these summaries are grounded in real findings from your codebase - not generic checklists. They pull from live data, so the answers reflect your current state rather than a stale snapshot.</p>
+
+<h3 id="why-dryrun">Why DryRun Security</h3>
+
+<ul>
+  <li><strong>Continuous context</strong> - Every PR review feeds the intelligence index, so feature tracking is always up to date without manual tagging or spreadsheets.</li>
+  <li><strong>Security-annotated features</strong> - Each feature is linked to its security findings and risk assessments, giving reviewers a complete picture in one query.</li>
+  <li><strong>On-demand reporting</strong> - Generate sprint-level or release-level security summaries instantly instead of compiling data from multiple tools.</li>
+</ul>
 </div>
