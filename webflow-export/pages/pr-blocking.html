@@ -1,0 +1,74 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security can be configured to block pull requests from being merged when security findings exceed your defined thresholds. PR Blocking integrates with your source code management platform's native branch protection features to enforce security gates in your development workflow.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>When PR Blocking is enabled, DryRun Security reports its scan results as a required status check on each pull request. If findings meet or exceed the configured severity threshold, the check is marked as failed, preventing the PR from being merged until the issues are resolved.</p>
+
+<ul>
+  <li><strong>GitHub:</strong> DryRun Security integrates with GitHub's required status checks. Configure the DryRun Security check as required in your branch protection rules.</li>
+  <li><strong>GitLab:</strong> DryRun Security integrates with GitLab's merge request approval rules to block merges when findings are present.</li>
+</ul>
+
+<h2 id="configuring-blocking">Configuring PR Blocking</h2>
+
+<ol>
+  <li>Navigate to the <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">DryRun Security dashboard</a>.</li>
+  <li>Go to <strong>Settings</strong> for the repository you want to configure.</li>
+  <li>Under <strong>PR Blocking</strong>, enable the blocking toggle.</li>
+  <li>Set the <strong>severity threshold</strong> - findings at or above this level will block the PR. Options include:
+    <ul>
+      <li><strong>Critical</strong> - Only block on critical severity findings.</li>
+      <li><strong>High</strong> - Block on high and critical findings.</li>
+      <li><strong>Medium</strong> - Block on medium, high, and critical findings.</li>
+      <li><strong>Low</strong> - Block on all findings.</li>
+    </ul>
+  </li>
+  <li>Configure your SCM's branch protection to require the DryRun Security status check.</li>
+</ol>
+
+<h2 id="override-workflow">Override Workflow</h2>
+
+<p>In cases where a blocked PR needs to be merged despite findings (for example, an accepted risk or false positive), authorized users can override the block:</p>
+
+<ul>
+  <li>Use <a href="./finding-tuning.html">Finding Tuning with Feedback</a> to mark findings as accepted risk or false positive.</li>
+  <li>Repository administrators can bypass branch protection rules when necessary.</li>
+  <li>All overrides are logged in the <a href="./risk-register.html">Risk Register</a> for audit purposes.</li>
+</ul>
+
+<h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
+
+<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+
+<h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
+
+<ol>
+  <li>On GitHub, navigate to the main page of the repository.</li>
+  <li>Under your repository name, click <strong>Settings</strong>.</li>
+  <li>In the <strong>Code and automation</strong> section of the sidebar, click <strong>Branches</strong>.</li>
+  <li>Choose <strong>Add classic branch protection rule</strong>.</li>
+  <li>Under <strong>Branch name pattern</strong>, type the name of the branch to protect (e.g., <code>main</code>).</li>
+  <li>Select <strong>Require status checks to pass before merging</strong>.</li>
+  <li>In the search field, search for DryRun Security status checks to require. Choose <strong>Code Policies</strong> for Custom Code Policies, or the agent name (e.g., <strong>Secrets Analyzer</strong>) for Code Security Agents.</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
+
+<p>When a Custom Code Policy has <strong>Blocking</strong> enabled, it appears as a single Check in GitHub under the name <strong>Code Policies</strong>. When a Code Security Agent has blocking enabled, it appears as a Check with the agent's name (e.g., <strong>Secrets Analyzer</strong>).</p>
+
+<h2 id="github-branch-protection-rules">GitHub Branch Protection Rules</h2>
+
+<p>Use GitHub Branch Protection Rules to enforce DryRun Security checks before merging.</p>
+<figure class="docs-screenshot"><img src="assets/images/configurations/10-github-settings.png" alt="GitHub repository Settings page" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/11-github-branches.png" alt="GitHub Branches settings" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/12-branch-protection.png" alt="GitHub Branch Protection rule" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/13-branch-name.png" alt="Branch name pattern for protection" loading="lazy"></figure>
+
+<p>Require DryRun Security status checks to pass before merging.</p>
+<figure class="docs-screenshot"><img src="assets/images/configurations/14-require-checks.png" alt="Requiring status checks for DryRun Security" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/15-checks-policies.png" alt="DryRun Security policy checks in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/16-checks-secrets.png" alt="DryRun Security secrets check in branch protection" loading="lazy"></figure>
+<figure class="docs-screenshot"><img src="assets/images/configurations/17-checks-details.png" alt="DryRun Security check details in branch protection" loading="lazy"></figure>
+</div>

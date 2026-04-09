@@ -1,0 +1,52 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security supports generic webhook integration, allowing you to send security events to any HTTP endpoint. Use webhooks to integrate DryRun Security with custom dashboards, ticketing systems, SIEMs, or any other tool in your security workflow.</p>
+
+<h2 id="configuring-webhooks">Configuring Webhooks</h2>
+
+<ol>
+  <li>Navigate to the <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">DryRun Security dashboard</a>.</li>
+  <li>Go to <strong>Settings &gt; Integrations &gt; Webhooks</strong>.</li>
+  <li>Click <strong>Add Webhook</strong>.</li>
+  <li>Enter the <strong>URL</strong> of your webhook endpoint.</li>
+  <li>Select which <strong>events</strong> should trigger the webhook:
+    <ul>
+      <li><strong>New Finding</strong> - Triggered when a new vulnerability is discovered.</li>
+      <li><strong>Finding Resolved</strong> - Triggered when a finding is fixed or dismissed.</li>
+      <li><strong>Scan Complete</strong> - Triggered when a PR scan or DeepScan finishes.</li>
+      <li><strong>Policy Violation</strong> - Triggered when a custom code policy is violated.</li>
+    </ul>
+  </li>
+  <li>Optionally configure a <strong>secret token</strong> for request signature verification.</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="payload-format">Payload Format</h2>
+
+<p>Webhook payloads are sent as HTTP POST requests with a JSON body. Each payload includes:</p>
+
+<pre><code>{
+  "event": "new_finding",
+  "timestamp": "2026-01-15T10:30:00Z",
+  "repository": "org/repo-name",
+  "pull_request": 42,
+  "finding": {
+    "id": "finding-uuid",
+    "severity": "high",
+    "category": "xss",
+    "title": "Cross-Site Scripting in user input handler",
+    "file": "src/handlers/input.py",
+    "line": 127,
+    "description": "User input is rendered without escaping..."
+  }
+}</code></pre>
+
+<h2 id="signature-verification">Signature Verification</h2>
+
+<p>If a secret token is configured, DryRun Security includes an <code>X-DryRun-Signature</code> header with each request. The signature is computed as an HMAC-SHA256 of the request body using your secret token. Verify this signature on your server to ensure the request is authentic.</p>
+
+<h2 id="retry-policy">Retry Policy</h2>
+
+<p>If your endpoint returns a non-2xx status code, DryRun Security retries the webhook delivery up to 3 times with exponential backoff (1 minute, 5 minutes, 30 minutes). Failed deliveries are logged in the webhook configuration page.</p>
+</div>

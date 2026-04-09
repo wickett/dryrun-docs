@@ -1,0 +1,53 @@
+<div class="drs-doc-content">
+<p><a href="https://agents.md/" target="_blank" rel="noopener noreferrer">AGENTS.md</a> is a format supported by the <a href="https://aaif.io/" target="_blank" rel="noopener noreferrer">Agentic AI Foundation</a>, a Linux Foundation Project. The file is intended to be "a predictable place to provide the context and instructions to help AI coding agents work on your project."</p>
+
+<p>DryRun Security supports <code>AGENTS.md</code> for both core analyzer products: the Code Review Agent and the DeepScan Agent. DryRun Security's agents will look for and review this file to apply the additional context it provides during analysis.</p>
+
+<p><strong>Note:</strong> The Code Review Agent checks for AGENTS.md in the root. The DeepScan Agent can discover both root and nested AGENTS.md files.</p>
+
+<h2 id="what-to-include">What to Include</h2>
+
+<p>You can use <code>AGENTS.md</code> to describe your application structure, test and build instructions for coding agents, integration definitions, and more. That same information can also provide valuable context to DryRun Security's agents.</p>
+
+<p>To best leverage this feature, add a <strong>Security Review Guidelines</strong> section to your <code>AGENTS.md</code> with any additional context related to design assumptions, areas of particular security interest, or other relevant points helpful for an agentic security reviewer.</p>
+
+<p>Context ideas for Security Agents:</p>
+<ul>
+  <li>Structure of a monolith, and how authorization works between components</li>
+  <li>Collections of routes or controllers that do not follow typical authorization patterns by design</li>
+  <li>Specific security requirements coding assistants need to validate against during code generation</li>
+  <li>Assumptions about security-impacting configurations not clear in code (e.g., TLS offloading, WAF rules)</li>
+  <li>Specific security patterns that must be followed, with examples of allowed and disallowed code snippets</li>
+</ul>
+
+<h2 id="example">Example Security Review Guidelines Section</h2>
+
+<pre><code>## Security Review Guidelines
+
+### Device Trust for internal routes
+All routes that are prefixed with /abc123 are to be recognized
+as internal-only routes, and require the use of trusted devices
+issued by the enterprise. Device trust is recognized by an Okta
+device token, and these routes are verified within Okta for
+proper authorization scopes from the IdP and authorization
+server, which will not be checked by the application layer
+specifically. Row or object-level authorization issues related to
+this pattern only for these internal routes can be ignored as
+accepted.
+
+### Intentionally Public Routes
+Some controllers have embedded routes with authentication and
+authorization decorators disabled or skipped on purpose for
+public facing content. The routes are intended to allow anonymous
+access to these features ONLY IF the specific controller action
+does not perform edits or require write access. Validate the read-
+only nature of these endpoints and flag any actions that enable
+write behavior when the authentication decorations are skipped.
+
+### Ignore HTTPS related issues on cookies and configuration files
+This application is always deployed to a kubernetes cluster as a
+mesh service. TLS offloading is provided in front of the application.
+Ignore any issues related to Cookies missing Secure flags, requiring
+HTTPS in build configurations, or certificate requirements in
+this application.</code></pre>
+</div>

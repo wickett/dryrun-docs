@@ -1,0 +1,78 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security uses a role-based access control model that maps to your existing source code management platform permissions. This ensures that your security workflow respects the same access boundaries as your development workflow.</p>
+
+<h2 id="role-mapping">Role Mapping</h2>
+
+<p>DryRun Security automatically inherits permissions from your SCM platform:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>SCM Role</th>
+      <th>DryRun Security Access</th>
+      <th>Capabilities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Organization Owner</strong></td>
+      <td>Admin</td>
+      <td>Full access to all settings, configurations, policies, and billing.</td>
+    </tr>
+    <tr>
+      <td><strong>Repository Admin</strong></td>
+      <td>Manager</td>
+      <td>Configure scanning settings, manage policies, view findings, tune results for managed repositories.</td>
+    </tr>
+    <tr>
+      <td><strong>Developer / Maintainer</strong></td>
+      <td>Contributor</td>
+      <td>View findings on their PRs, provide feedback on findings, access remediation guidance.</td>
+    </tr>
+    <tr>
+      <td><strong>Read-only</strong></td>
+      <td>Viewer</td>
+      <td>View scan results and dashboards. No configuration or feedback access.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="github-permissions">GitHub Permissions</h2>
+
+<p>The DryRun Security GitHub App requests the following permissions during installation:</p>
+
+<ul>
+  <li><strong>Repository contents</strong> (read) - Required to analyze code in pull requests and repositories.</li>
+  <li><strong>Pull requests</strong> (read/write) - Required to post review comments and status checks.</li>
+  <li><strong>Checks</strong> (read/write) - Required to report scan results as check runs.</li>
+  <li><strong>Metadata</strong> (read) - Required to list repositories and basic organization information.</li>
+</ul>
+
+<h2 id="gitlab-permissions">GitLab Permissions</h2>
+
+<p>For GitLab integration, the Group Access Token used during setup requires:</p>
+
+<ul>
+  <li><strong>api</strong> scope - Required for merge request comments and status updates.</li>
+  <li><strong>read_repository</strong> scope - Required to analyze code.</li>
+  <li>The token must have at least the <strong>Maintainer</strong> role.</li>
+</ul>
+
+<h2 id="configuration-access">Configuration Access</h2>
+
+<p>Developer edit rights have been removed for configurations. Only <strong>Admins</strong> (Organization Owners and Repository Admins mapped to Manager or above) can modify configurations in the DryRun Security dashboard. Developers retain view access to findings and can provide feedback on their PRs, but cannot change scanning configurations, policies, or blocking settings.</p>
+
+<p>If you have a developer who is not a GitHub or GitLab admin but needs to modify configurations, contact DryRun Security support at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a> to request an override.</p>
+
+<h2 id="managing-access">Managing Access</h2>
+
+<p>To manage who has access to DryRun Security:</p>
+
+<ol>
+  <li>Manage team members through your SCM platform - DryRun Security automatically syncs permissions.</li>
+  <li>Use the DryRun Security dashboard to view current team members and their access levels.</li>
+  <li>Repository-level configurations are only accessible to users with Manager or Admin access.</li>
+</ol>
+</div>

@@ -1,0 +1,50 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>When a security incident occurs, speed of investigation is critical. DryRun Security&rsquo;s intelligence index provides a queryable record of every code change, security finding, and policy evaluation across your repositories - enabling rapid, targeted investigation through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone incident response tool. It is a query pattern - a way to ask DryRun Security&rsquo;s LLM to trace code changes, findings, and triage decisions using the structured insights generated from every PR review and <a href="../docs/deepscan.html">DeepScan</a>.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>Every PR review and repository scan feeds the intelligence index with structured data: what changed, what was found, which policies were evaluated, and what the security assessment was. During incident response, this index becomes an investigation tool. Instead of piecing together information from Git logs, CI systems, and security dashboards, responders can query the LLM directly - and it has access to the full history of findings and insights across your organization.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;Which PR introduced the risky dependency?&rdquo;</strong> - Traces a vulnerable component back to its introduction.</li>
+  <li><strong>&ldquo;Show me all changes to authentication code in the last 30 days&rdquo;</strong> - Scopes investigation to security-critical areas.</li>
+  <li><strong>&ldquo;What secrets-related findings were suppressed in repo X?&rdquo;</strong> - Reviews triage decisions that may be relevant to the incident.</li>
+  <li><strong>&ldquo;List all PRs that modified payment processing logic this quarter&rdquo;</strong> - Narrows investigation to a specific functional area.</li>
+</ul>
+
+<h2 id="investigation-capabilities">Investigation Capabilities</h2>
+
+<p>The intelligence index supports incident response workflows including:</p>
+
+<ul>
+  <li><strong>Change tracing</strong> - Identify exactly which PR introduced a specific change, dependency, or configuration.</li>
+  <li><strong>Blast radius assessment</strong> - Determine what other components or repositories may be affected by the same issue.</li>
+  <li><strong>Timeline reconstruction</strong> - Build a chronological view of security-relevant changes leading up to an incident.</li>
+  <li><strong>Finding review</strong> - Surface any prior findings related to the affected code that may have been triaged or deferred.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Incident response queries integrate with DryRun Security&rsquo;s broader analysis. Each investigation query draws on:</p>
+
+<ul>
+  <li>Security findings from the PR reviews across your repositories</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Vulnerability triage</strong> - When a CVE is disclosed, quickly determine if and where the affected component exists in your codebase.</li>
+  <li><strong>Breach investigation</strong> - Trace the code path involved in a security breach back through its development history.</li>
+  <li><strong>Post-incident review</strong> - Generate a comprehensive timeline of changes for post-mortem analysis. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a> for audit trail documentation.</li>
+</ul>
+</div>

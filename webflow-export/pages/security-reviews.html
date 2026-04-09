@@ -1,0 +1,79 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security&rsquo;s intelligence index captures deep security analysis from every PR review and <a href="../docs/deepscan.html">DeepScan</a> - including contextual security analysis, business logic detection, and model-independent verification results. These insights are queryable as use cases through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone product page. It describes the analytical capabilities that power the intelligence index and how to query for their results. Every query to the LLM draws on the full depth of these analytical methods.</p>
+
+<h2 id="contextual-analysis">Contextual Security Analysis</h2>
+
+<h3 id="the-limits-of-pattern-matching">The Limits of Pattern Matching</h3>
+
+<p>Pattern-matching SAST tools work by detecting syntactic patterns associated with known vulnerability classes. If you call <code>execute_query</code> with a string that contains user input, you get flagged. If you use an outdated encryption algorithm, you get flagged. The pattern is present; the finding is generated.</p>
+
+<p>The fundamental problem is that security in real code is almost never a matter of syntactic patterns. Whether a SQL query is vulnerable depends on how the input was validated before it arrived. Whether a redirect is dangerous depends on whether the target URL can be influenced by an attacker. Whether an API endpoint is a risk depends on whether authorization is enforced - which might happen in middleware the pattern matcher never examined.</p>
+
+<p>This is why traditional SAST produces so many false positives (flagging safe code) and so many false negatives (missing real vulnerabilities that don't match a pattern). It isn't a tuning problem. It's a fundamental limitation of the approach.</p>
+
+<h3 id="what-full-context-means">What "Full Context" Means</h3>
+
+<p>DryRun Security's Contextual Security Analysis evaluates code through several dimensions of context simultaneously:</p>
+
+<ul>
+  <li><strong>Code patterns and data flow</strong> - Traces the flow of data from its origin through transformations and into sensitive operations. A function that receives a validated, sanitized parameter is treated differently from one that receives a raw request field.</li>
+  <li><strong>Runtime behaviors</strong> - Considers the runtime context: which framework is in use, how middleware is configured, what the deployment topology implies about trust boundaries.</li>
+  <li><strong>Developer intent</strong> - Evaluates what a code change is trying to accomplish. A change that adds a new authenticated API endpoint has very different security implications from a change that modifies how authentication is enforced.</li>
+  <li><strong>Cross-file analysis</strong> - Follows vulnerability chains across file boundaries, providing the comprehensive view that single-file analysis fundamentally cannot.</li>
+</ul>
+
+<h3 id="example-queries-csa">Example Queries</h3>
+
+<ul>
+  <li><strong>&ldquo;Which PRs had findings that required cross-file analysis to detect?&rdquo;</strong> - Surfaces complex vulnerabilities that pattern matchers would miss.</li>
+  <li><strong>&ldquo;Show me findings where context changed the severity assessment&rdquo;</strong> - Highlights where contextual analysis made a material difference.</li>
+  <li><strong>&ldquo;What percentage of our findings this month were business logic flaws?&rdquo;</strong> - Measures coverage beyond pattern-matching categories.</li>
+</ul>
+
+<h2 id="business-logic">Business Logic Detection</h2>
+
+<h3 id="what-are-business-logic-flaws">What Are Business Logic Flaws?</h3>
+
+<p>Business logic flaws are vulnerabilities that arise from errors in how an application implements its intended behavior - not from missing input validation or insecure library calls, but from flawed assumptions in the logic itself. No pattern matcher can find these. They require understanding what the code is supposed to do - and then evaluating whether it actually does it securely.</p>
+
+<h3 id="examples-of-what-it-catches">Examples of What It Catches</h3>
+
+<ul>
+  <li><strong>IDOR (Insecure Direct Object Reference)</strong> - An API endpoint that looks up a resource by user-controlled ID without verifying the requesting user owns that resource.</li>
+  <li><strong>Race conditions in transactions</strong> - Logic that allows a resource to be consumed multiple times if requests arrive simultaneously.</li>
+  <li><strong>Authorization on the wrong layer</strong> - UI-level access controls that aren't enforced at the API layer.</li>
+  <li><strong>State machine violations</strong> - Workflows that can be driven into invalid states by skipping or repeating steps.</li>
+  <li><strong>Privilege abuse paths</strong> - Sequences of otherwise-legitimate operations that achieve an outcome an attacker shouldn't be able to reach.</li>
+</ul>
+
+<h3 id="example-queries-logic">Example Queries</h3>
+
+<ul>
+  <li><strong>&ldquo;Show me all business logic findings across our repos this quarter&rdquo;</strong> - Surfaces the category of findings traditional tools miss entirely.</li>
+  <li><strong>&ldquo;Which repos have the most IDOR findings?&rdquo;</strong> - Identifies authorization pattern weaknesses by codebase.</li>
+  <li><strong>&ldquo;What race condition risks have been flagged in our payment services?&rdquo;</strong> - Focuses on a specific risk class in a critical domain.</li>
+</ul>
+
+<h2 id="model-verification">Model-Independent Verification</h2>
+
+<p>DryRun Security's <a href="../docs/pr-variant-analysis.html">multi-agent architecture</a> provides a natural verification layer. When multiple specialized agents analyze the same code from different perspectives - one focused on injection, another on authorization, another on data flow - their findings serve as cross-checks on each other. The combination of AI-powered contextual analysis and deterministic validation (CVE lookups, secrets format checks, IaC specification matching) produces findings that are both contextually relevant and factually grounded.</p>
+
+<h3 id="example-queries-verification">Example Queries</h3>
+
+<ul>
+  <li><strong>&ldquo;How consistent are our findings across repeated scans?&rdquo;</strong> - Evaluates reliability of the multi-agent verification process.</li>
+  <li><strong>&ldquo;Which findings were confirmed by multiple agents?&rdquo;</strong> - Surfaces high-confidence results validated through cross-checking.</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Deep finding investigation</strong> - Query the index to understand the full context behind any finding - what analysis methods detected it and why.</li>
+  <li><strong>Coverage assessment</strong> - Evaluate what categories of vulnerabilities your scans are catching beyond what pattern matchers detect.</li>
+  <li><strong>Audit evidence</strong> - Demonstrate the depth and rigor of your security analysis methodology. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+</div>

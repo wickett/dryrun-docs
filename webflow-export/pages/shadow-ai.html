@@ -1,0 +1,53 @@
+<div class="drs-doc-content">
+<h2 id="overview">Overview</h2>
+
+<p>Shadow AI refers to the use of AI coding tools, models, or AI-generated code that is not sanctioned or tracked by the organization. DryRun Security&rsquo;s intelligence index captures signals of AI involvement during every PR review and <a href="../docs/deepscan.html">DeepScan</a>, making them queryable as a use case through the <strong>DryRun AI Assistant</strong> on the Insights page or programmatically through the <a href="../docs/mcp.html">MCP Integration</a>.</p>
+
+<p>This is not a standalone detection dashboard. It is a query pattern - a way to ask DryRun Security&rsquo;s LLM about AI usage patterns using the structured findings and insights generated across your repositories.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>DryRun Security&rsquo;s models analyze code changes for indicators of AI-generated or AI-assisted code. These signals - including coding patterns, commit metadata, and structural characteristics - are indexed alongside all other findings. When you query for shadow AI patterns, the LLM has access to the full history of these observations and can investigate where AI tools are being used, whether that usage aligns with organizational policy, and what security implications it carries.</p>
+
+<p>This capability builds on DryRun Security&rsquo;s <a href="../docs/ai-coding-integration.html">AI Coding Integration</a> analysis, extending it into the intelligence index for historical querying and trend analysis.</p>
+
+<h2 id="example-queries">Example Queries</h2>
+
+<ul>
+  <li><strong>&ldquo;Show me PRs with AI-generated code indicators this month&rdquo;</strong> - Surfaces pull requests where AI involvement was detected.</li>
+  <li><strong>&ldquo;Which repositories have the highest percentage of AI-assisted contributions?&rdquo;</strong> - Identifies where AI tools are most actively used.</li>
+  <li><strong>&ldquo;Are there AI-generated code patterns in security-critical paths?&rdquo;</strong> - Focuses investigation on high-risk areas.</li>
+  <li><strong>&ldquo;What AI coding tools are being used across our organization?&rdquo;</strong> - Maps the AI tool landscape in your development workflow.</li>
+</ul>
+
+<h2 id="detection-signals">Detection Signals</h2>
+
+<p>The intelligence index tracks multiple dimensions of AI involvement:</p>
+
+<ul>
+  <li><strong>Code pattern analysis</strong> - Structural and stylistic indicators that suggest AI generation.</li>
+  <li><strong>Commit metadata</strong> - Signals from commit messages, authorship patterns, and contribution timing.</li>
+  <li><strong>Tool fingerprints</strong> - Identifiable patterns associated with specific AI coding assistants.</li>
+  <li><strong>Volume anomalies</strong> - Unusual spikes in code contribution volume that may indicate AI-assisted development.</li>
+</ul>
+
+<h2 id="security-review-integration">Security Review Integration</h2>
+
+<p>Shadow AI queries integrate with DryRun Security&rsquo;s broader analysis. Each AI-related observation in the index is annotated with:</p>
+
+<ul>
+  <li>Security findings from the PR reviews that flagged AI indicators</li>
+  <li>Risk severity assessment from the <a href="../docs/risk-register.html">Risk Register</a></li>
+  <li>Policy evaluation results from <a href="../docs/custom-code-policies.html">Custom Code Policies</a></li>
+  <li>Links to the originating PRs for full context</li>
+</ul>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<ul>
+  <li><strong>Policy enforcement</strong> - Verify that AI tool usage complies with organizational policies. Use <a href="../docs/custom-code-policies.html">Custom Code Policies</a> to enforce AI-specific rules.</li>
+  <li><strong>Risk assessment</strong> - Evaluate the security implications of AI-generated code in your codebase.</li>
+  <li><strong>Governance reporting</strong> - Provide leadership with visibility into AI adoption patterns across engineering teams.</li>
+  <li><strong>Compliance</strong> - Document AI usage for regulatory requirements. See <a href="../docs/compliance-grc.html">Compliance and Audit Readiness</a>.</li>
+</ul>
+</div>
