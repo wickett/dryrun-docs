@@ -855,30 +855,31 @@ PAGES['auto-fix'] = {
 
 <h2 id="how-dryrun-enables-auto-fix">How DryRun Enables Auto Fix with AI Coding</h2>
 
-<p>DryRun Security enables auto fix by integrating with AI coding tools like Claude Code. Auto fix is enabled by:</p>
+<p>DryRun Security enables auto fix by integrating with AI coding tools. Supported tools include:</p>
+
+<ul>
+  <li><strong>Claude Code</strong></li>
+  <li><strong>Codex</strong></li>
+  <li><strong>Cursor</strong></li>
+  <li><strong>Windsurf</strong></li>
+  <li><strong>VS Code</strong></li>
+</ul>
+
+<p>Auto fix is enabled by:</p>
 
 <ol>
+  <li>Creating an API key from the DryRun Security dashboard (see <a href="./dryrun-api.html">API Access Keys</a>)</li>
   <li>Connecting your AI coding tool to the DryRun Security <a href="./mcp.html">MCP (Model Context Protocol) server</a></li>
   <li>Installing the DryRun Security remediation skill</li>
 </ol>
 
-<p>The skill can be downloaded from the Integrations page in the DryRun Security dashboard.</p>
-
 <p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
 
-<h2 id="skill-download-and-install">DryRun Skill Download and Install</h2>
+<h2 id="tool-setup-instructions">Setup Instructions for Your AI Coding Tool</h2>
 
-<p>To add the DryRun Security remediation skill to Claude Code, run the following commands in Claude Code:</p>
+<p>Each supported tool &mdash; Claude Code, Codex, Cursor, Windsurf, and VS Code &mdash; has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
 
-<p><strong>1. Add the marketplace:</strong></p>
-
-<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace</code></pre>
-
-<p><strong>2. Install the DryRun Security remediation skill:</strong></p>
-
-<pre><code>/plugin install dryrun-remediation@dryrunsecurity</code></pre>
-
-<p>These commands are also available from the Integrations page in the DryRun Security dashboard under &ldquo;Add Skill to Claude Code.&rdquo;</p>
+<p>To get started, navigate to <strong>Integrations</strong> in the DryRun Security dashboard and select your AI coding tool for tool-specific instructions.</p>
 ''',
 }
 
