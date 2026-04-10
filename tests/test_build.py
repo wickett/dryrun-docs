@@ -22,10 +22,10 @@ class TestDataIntegrity:
     """Verify all page data is complete and consistent."""
 
     def test_pages_not_empty(self):
-        assert len(build.PAGES) >= 25, f"Should have at least 25 pages, got {len(build.PAGES)}"
+        assert len(build.PAGES) >= 18, f"Should have at least 18 pages, got {len(build.PAGES)}"
 
     def test_sections_not_empty(self):
-        assert len(build.SECTIONS) >= 5, f"Should have at least 5 sections, got {len(build.SECTIONS)}"
+        assert len(build.SECTIONS) >= 4, f"Should have at least 4 sections, got {len(build.SECTIONS)}"
 
     def test_all_pages_have_required_fields(self):
         required = {"title", "description", "section", "content"}

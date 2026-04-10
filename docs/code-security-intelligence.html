@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>API Access Keys - DryRun Security Docs</title>
-  <meta name="description" content="Create and manage API access keys for programmatic access to DryRun Security.">
+  <title>Code Security Intelligence - DryRun Security Docs</title>
+  <meta name="description" content="DryRun Security builds an intelligence layer on top of vulnerability findings and scan data, enabling actionable security workflows across your codebase and development organization.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -89,7 +89,7 @@
 <li><a href="../docs/permissions.html">Permissions</a></li>
 <li><a href="../docs/mcp.html">MCP</a></li>
 <li><a href="../docs/dryrun-api.html">DryRun API</a></li>
-<li><a href="../docs/code-security-intelligence.html">Code Security Intelligence</a></li>
+<li><a href="../docs/code-security-intelligence.html" class="active">Code Security Intelligence</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -97,7 +97,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/slack-integration.html">Slack Integration</a></li>
 <li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
-<li><a href="../docs/api-access-keys.html" class="active">API Access Keys</a></li>
+<li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
 <li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
 </div>
@@ -106,57 +106,128 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Integrations</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">API Access Keys</span></div>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Platform</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Code Security Intelligence</span></div>
         <div class="page-heading-row">
-          <h1 class="page-heading">API Access Keys</h1>
+          <h1 class="page-heading">Code Security Intelligence</h1>
           <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
         </div>
-        <p class="page-description">Create and manage API access keys for programmatic access to DryRun Security.</p>
+        <p class="page-description">DryRun Security builds an intelligence layer on top of vulnerability findings and scan data, enabling actionable security workflows across your codebase and development organization.</p>
         <div class="doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>API access keys allow you to authenticate with the <a href="./dryrun-api.html">DryRun API</a> for programmatic access to DryRun Security. Use API keys to integrate DryRun Security into your CI/CD pipelines, custom tooling, or automation workflows.</p>
+<p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings &mdash; surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
 
-<h2 id="creating-keys">Creating an API Key</h2>
+<p>Every pull request DryRun Security reviews and every DeepScan contributes to a structured, queryable intelligence index. This index powers a range of security workflows that would otherwise require manual data collection, spreadsheet tracking, and cross-referencing multiple tools.</p>
 
-<ol>
-  <li>Navigate to the <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">DryRun Security dashboard</a>.</li>
-  <li>Go to <strong>Settings &gt; API Keys</strong>.</li>
-  <li>Click <strong>Generate New Key</strong>.</li>
-  <li>Enter a <strong>name</strong> for the key (e.g., "CI Pipeline", "Security Dashboard").</li>
-  <li>Select the <strong>scope</strong> for the key:
-    <ul>
-      <li><strong>Read-only</strong> - Query findings, scan results, and reports.</li>
-      <li><strong>Read/Write</strong> - Trigger scans, update finding statuses, and manage configurations.</li>
-    </ul>
-  </li>
-  <li>Click <strong>Create</strong>. The key is displayed once - copy it immediately and store it securely.</li>
-</ol>
+<h2 id="intelligence-workflows">Intelligence Workflows</h2>
 
-<h2 id="using-keys">Using API Keys</h2>
+<p>The intelligence layer enables a range of security workflows. Each workflow draws on the findings and scan data DryRun Security continuously collects across your repositories.</p>
 
-<p>Include your API key in the <code>Authorization</code> header of each request:</p>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Workflow</th>
+      <th>What It Shows</th>
+      <th>Example Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feature Ships</td>
+      <td>Security posture of features shipped in a sprint or release, with risk annotations and PR links</td>
+      <td>Summarize the security status of features shipped this sprint for a release review</td>
+    </tr>
+    <tr>
+      <td>Vulnerability Trends</td>
+      <td>Trending vulnerability patterns and coverage data across repos over time, including OWASP Top 10 mapping</td>
+      <td>Compare critical finding counts quarter over quarter to measure security program effectiveness</td>
+    </tr>
+    <tr>
+      <td>Architecture Risks</td>
+      <td>Structural risk patterns in the codebase &mdash; trust boundary changes, auth drift, data flow modifications</td>
+      <td>Identify new unauthenticated endpoints or service-to-service communication paths added this month</td>
+    </tr>
+    <tr>
+      <td>Developer Trends</td>
+      <td>Which teams or repos have recurring finding patterns, remediation velocity, and code change activity</td>
+      <td>Determine which teams would benefit most from targeted security training based on finding patterns</td>
+    </tr>
+    <tr>
+      <td>Shadow AI</td>
+      <td>AI and LLM usage detected across the codebase &mdash; tool fingerprints, code pattern analysis, volume anomalies</td>
+      <td>Audit all AI-generated code contributions in security-critical paths for governance reporting</td>
+    </tr>
+    <tr>
+      <td>Incident Response</td>
+      <td>Queryable record of code changes, findings, and triage decisions for rapid incident investigation</td>
+      <td>Trace which PR introduced a vulnerable dependency and assess blast radius during an active incident</td>
+    </tr>
+    <tr>
+      <td>Application Summary</td>
+      <td>Security profile of a specific service or application &mdash; open findings, scan coverage, risk trends</td>
+      <td>Generate an application security profile for a new team member onboarding onto a service</td>
+    </tr>
+    <tr>
+      <td>Security Reviews</td>
+      <td>Contextual security analysis results, business logic detection, and multi-model verification insights</td>
+      <td>Investigate which findings required cross-file analysis to detect and would be missed by pattern matchers</td>
+    </tr>
+    <tr>
+      <td>New Feature/Repo Review</td>
+      <td>Precedent-based risk assessment for new features or repositories using historical findings</td>
+      <td>Before building a new payment integration, review security findings from similar past implementations</td>
+    </tr>
+    <tr>
+      <td>PR Variant Analysis</td>
+      <td>Deep investigation of individual PR findings using the Insights AI assistant</td>
+      <td>Click &ldquo;Investigate&rdquo; on a finding to explore its security implications interactively</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-<p><strong>MCP Connection (recommended):</strong> API Access Keys are the recommended best practice for connecting to the <a href="../docs/mcp.html">DryRun Security Insights MCP</a>. Use the key as a Bearer token in the Authorization header when configuring your MCP client.</p>
+<h2 id="how-to-access-insights">How to Access Insights</h2>
 
-<pre><code>curl -H "Authorization: Bearer YOUR_API_KEY"   https://api.dryrun.security/v1/findings</code></pre>
+<p>Users interact with these intelligence capabilities through the <strong>Insights</strong> page in the DryRun Security dashboard in two ways:</p>
 
-<h2 id="key-management">Key Management</h2>
+<h3 id="ai-assistant">AI Assistant</h3>
+
+<p>The Insights page has an AI assistant chat interface. Users can interact with it to generate security reports, feature ship summaries, risk assessments, and more &mdash; all grounded in real DryRun Security findings data. Simply describe what you want (e.g., &ldquo;Create a security summary for the features shipped this week&rdquo;) and the assistant generates it from your actual scan data.</p>
+
+<p>Example prompts:</p>
 
 <ul>
-  <li><strong>Rotate keys regularly</strong> - Generate a new key and revoke the old one periodically.</li>
-  <li><strong>Use descriptive names</strong> - Name keys after their use case for easy identification.</li>
-  <li><strong>Revoke unused keys</strong> - Delete keys that are no longer in use from the API Keys settings page.</li>
-  <li><strong>Never commit keys to source control</strong> - Use environment variables or secret management tools.</li>
+  <li>&ldquo;What features shipped this sprint and what are their security implications?&rdquo;</li>
+  <li>&ldquo;Show me the top vulnerability trends across my repos for the past quarter&rdquo;</li>
+  <li>&ldquo;Which repos need the most attention right now?&rdquo;</li>
+  <li>&ldquo;Generate an incident response summary for this vulnerability&rdquo;</li>
+  <li>&ldquo;What AI coding tools are being used across our organization?&rdquo;</li>
+  <li>&ldquo;Summarize the security posture of repo X&rdquo;</li>
 </ul>
 
-<h2 id="rate-limits">Rate Limits</h2>
+<p>Because DryRun Security continuously scans every pull request and repository, these responses are grounded in real findings from your codebase &mdash; not generic checklists. They pull from live data, so the answers reflect your current state.</p>
 
-<p>API keys are subject to rate limits to ensure platform stability. Current limits are displayed in the API Keys settings page. If you need higher limits, contact <a href="https://dryrun.security" target="_blank" rel="noopener noreferrer">DryRun Security support</a>.</p>
+<h3 id="recurring-queries">Recurring Queries</h3>
+
+<p>Users can create recurring queries &mdash; scheduled questions that DryRun Security runs against findings data on a regular cadence. For example:</p>
+
+<ul>
+  <li>A daily report on new critical findings across all repositories</li>
+  <li>A weekly developer trend summary highlighting teams with the most new findings</li>
+  <li>A monthly risk overview comparing finding rates period over period</li>
+  <li>A sprint-aligned feature ship summary for release reviews</li>
+</ul>
+
+<p>DryRun Security generates the reports automatically and delivers them on the configured schedule, keeping your team informed without manual effort.</p>
+
+<h2 id="mcp-integration">MCP Integration</h2>
+
+<p>AppSec engineers and AI coding tools can also access the intelligence layer programmatically via DryRun Security&#x27;s MCP integration. This enables AI coding assistants and agents to query findings, trends, and risk data directly from the development environment. See <a href="./mcp.html">MCP Integration</a> for setup instructions.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/webhook-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Generic Webhook Integration</span></a>
-<a href="../docs/ai-coding-integration.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">AI Coding Integration</span></a>
+<a href="../docs/dryrun-api.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">DryRun API</span></a>
+<a href="../docs/slack-integration.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Slack Integration</span></a>
 </nav>
       </div>
     </main>
@@ -164,10 +235,11 @@
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
 <li class="toc-h2"><a href="#overview">Overview</a></li>
-<li class="toc-h2"><a href="#creating-keys">Creating an API Key</a></li>
-<li class="toc-h2"><a href="#using-keys">Using API Keys</a></li>
-<li class="toc-h2"><a href="#key-management">Key Management</a></li>
-<li class="toc-h2"><a href="#rate-limits">Rate Limits</a></li>
+<li class="toc-h2"><a href="#intelligence-workflows">Intelligence Workflows</a></li>
+<li class="toc-h2"><a href="#how-to-access-insights">How to Access Insights</a></li>
+<li class="toc-h3"><a href="#ai-assistant">AI Assistant</a></li>
+<li class="toc-h3"><a href="#recurring-queries">Recurring Queries</a></li>
+<li class="toc-h2"><a href="#mcp-integration">MCP Integration</a></li>
 </ul>
 </aside>
   </div>

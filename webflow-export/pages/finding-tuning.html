@@ -9,7 +9,7 @@
 <ul>
   <li><strong>False positive fingerprinting</strong> - When you mark a finding as a false positive, DryRun Security fingerprints the vulnerability pattern and automatically suppresses it in future PR scans and DeepScans.</li>
   <li><strong>Context-based learning</strong> - When you add context explaining why a finding is safe, that context is stored and used to calibrate future analysis in similar situations across your codebase.</li>
-  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../docs/architecture-risks.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
+  <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href="../docs/code-security-intelligence.html">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
 </ul>
 <p>The result: false positive rates decrease over time as DryRun Security accumulates organizational knowledge from your team's triage decisions.</p>
 
@@ -108,7 +108,7 @@ Yes. Developers can triage findings directly from GitHub and GitLab comments. Th
 
 <h2 id="contextual-analysis-approach">The Contextual Analysis Approach</h2>
 
-<p>DryRun Security's <a href="../docs/security-reviews.html">Contextual Security Analysis</a> engine evaluates each potential finding against the surrounding code context before reporting it. This means the engine considers:</p>
+<p>DryRun Security's <a href="../docs/code-security-intelligence.html">Contextual Security Analysis</a> engine evaluates each potential finding against the surrounding code context before reporting it. This means the engine considers:</p>
 
 <ul>
   <li><strong>Data flow</strong> - tracing where input originates and whether it passes through sanitization before reaching a sensitive sink</li>
@@ -130,7 +130,7 @@ Yes. Developers can triage findings directly from GitHub and GitLab comments. Th
 
 <p>It is important to distinguish between false positive <strong>reduction</strong> and false positive <strong>suppression</strong>. Many tools achieve lower noise by letting users suppress finding categories, raise severity thresholds, or ignore entire file paths. This hides findings but does not prevent them from being generated.</p>
 
-<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/pr-variant-analysis.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-tuning.html">Finding Triage</a>), but they are the exception rather than the primary noise management strategy. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
+<p>DryRun Security reduces false positives at the analysis stage. The <a href="../docs/code-security-intelligence.html">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur (see <a href="../docs/finding-tuning.html">Finding Triage</a>), but they are the exception rather than the primary noise management strategy. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
 
 <h2 id="developer-trust">Impact on Developer Trust</h2>
 
