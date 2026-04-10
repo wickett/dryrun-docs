@@ -50,6 +50,22 @@
 
 <p>Developers can also triage findings directly from GitHub and GitLab comments - marking findings as false positives and adding context without leaving the PR workflow. Those triage decisions flow into the Risk Register and feed the same learning loop, keeping the feedback close to where developers work.</p>
 
+<h2 id="triage-in-risk-register">Triage in the Risk Register</h2>
+
+<p>The <a href="./risk-register.html">Risk Register</a> supports Finding Triage so teams can categorize findings and feed decisions back into DryRun Security. Every triage decision - the reason, the context you provide - is a learning signal that improves future scan accuracy.</p>
+<figure class="docs-screenshot"><img src="assets/images/risk-register/03-finding-triage.png" alt="Finding triage in the Risk Register" loading="lazy"></figure>
+
+<p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
+<figure class="docs-screenshot"><img src="assets/images/risk-register/04-triage-pr.png" alt="Finding triage from the PR workflow" loading="lazy"></figure>
+
+<h2 id="dismissed-findings">Dismissed Findings</h2>
+
+<p>You can view and manage dismissed findings in the Risk Register using the <strong>Dismissed</strong> filter option. This shows all previously dismissed findings with full context: the dismissal category, reason, who dismissed it, when, and any notes provided at the time of dismissal.</p>
+
+<p>Each dismissed finding has a <strong>Restore</strong> button to bring it back to your active queue if circumstances change or the dismissal needs to be revisited.</p>
+
+<p>The dismissal flow includes <strong>Resolved</strong> and <strong>Won&rsquo;t Fix / Nitpick</strong> values in addition to the standard options, giving teams more precise categorization when triaging findings.</p>
+
 <h2 id="faqs">FAQs</h2>
 
 <p><strong>What is Finding Triage?</strong><br>
