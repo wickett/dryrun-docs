@@ -387,13 +387,13 @@ test.describe('Accessibility', () => {
       if (!el) return null;
       return getComputedStyle(el).color;
     });
-    // Text should be light (high luminance) on dark background
+    // Text should be dark on light background
     expect(bodyColor).not.toBeNull();
-    // Parse rgb values - text should be bright (> 150 for at least one channel)
+    // Parse rgb values - text should be dark (max channel < 150 for dark text)
     const match = bodyColor.match(/\d+/g);
     if (match) {
       const maxChannel = Math.max(...match.map(Number));
-      expect(maxChannel).toBeGreaterThan(150);
+      expect(maxChannel).toBeLessThan(150);
     }
   });
 });

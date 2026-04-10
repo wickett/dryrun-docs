@@ -25,8 +25,8 @@ test.describe('Typography & Readability', () => {
       return { r, g, b, luminance };
     });
     expect(contrast).not.toBeNull();
-    // Body text luminance should be at least 170 (readable on dark bg)
-    expect(contrast.luminance).toBeGreaterThanOrEqual(170);
+    // Body text luminance should be under 120 (dark text on light bg)
+    expect(contrast.luminance).toBeLessThanOrEqual(120);
   });
 
   test('page heading is larger than h2, h2 is larger than h3', async ({ page }) => {
@@ -91,17 +91,17 @@ test.describe('Typography & Readability', () => {
 // Color & Theming
 // ============================================================
 test.describe('Color & Theming', () => {
-  test('background color is dark (not white/light)', async ({ page }) => {
+  test('background color is light', async ({ page }) => {
     await page.goto('/docs/pr-scanning-configuration.html');
     const bgColor = await page.evaluate(() => {
       const style = getComputedStyle(document.body);
       const match = style.backgroundColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-      if (!match) return 255;
+      if (!match) return 0;
       const [, r, g, b] = match.map(Number);
       return (r + g + b) / 3;
     });
-    // Average RGB should be under 60 for a dark theme
-    expect(bgColor).toBeLessThan(60);
+    // Average RGB should be over 200 for a light theme
+    expect(bgColor).toBeGreaterThan(200);
   });
 
   test('accent links are visually distinct from body text', async ({ page }) => {
