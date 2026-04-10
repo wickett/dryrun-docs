@@ -1670,30 +1670,29 @@ PR Scanning Configuration,pr-scanning-configuration,"<p>Configurations let you c
 <p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>","Customize DryRun Security behavior per repository - enable agents, attach policies, configure blocking, and set up notifications.",Platform
 Custom Code Policies,custom-code-policies,"<h2 id=""custom-code-policies"">Custom Code Policies</h2>
 
-<p>DryRun Security's Custom Code Policies are a way to define and enforce security policies in a codebase using natural language instead of complex scripting or specialized rule languages.</p>
+<p>DryRun Security's Custom Code Policies let you define and enforce security policies in your codebase using natural language instead of complex scripting or specialized rule languages. Rather than writing regex patterns or static analysis rules, you describe what you care about in plain English and the LLM reasons through the code to evaluate it.</p>
 
-<p>In this section we demonstrate how to build and save a Custom Code Policy in the DryRun Security Dashboard.</p>
+<p>The key advantage of Custom Code Policies is that they are <strong>agentic</strong>. The LLM does not simply pattern-match against your code — it reasons about the code in context. It can follow function calls, trace data flow, understand business logic, and make judgments that traditional static analysis tools cannot. This means your policies can go far beyond what is possible with grep-style rules or AST matchers.</p>
+
+<p>Custom Code Policies can be laser-focused on a unique function or structure specific to your application. Because you control the context — through the Question, Background, and Guidance fields — you can guide the analysis to look exactly where it matters and reason about the patterns that are unique to your codebase.</p>
+
+<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Custom Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
 
 
-<h2 id=""creating-a-policy-walkthrough"">Creating a Policy - Visual Walkthrough</h2>
+<h2 id=""use-cases"">Use Cases</h2>
 
-<p>Navigate to the Code Policies section of the DryRun Security dashboard.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/01-code-policies.png"" alt=""Code Policies list in DryRun Security dashboard"" loading=""lazy""></figure>
+<h3 id=""identifying-vulnerabilities"">1. Identifying specific vulnerabilities unique to your codebase</h3>
 
-<p>Click <strong>Add New Policy</strong> to start creating a new Custom Code Policy.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/02-add-new.png"" alt=""Add New Code Policy button"" loading=""lazy""></figure>
+<p>Custom Code Policies can find security issues that generic scanners miss — vulnerabilities tied to your application's specific architecture, patterns, or business logic. Because the LLM reasons through your code agenetically, it can identify risks that only make sense in the context of how your application actually works.</p>
 
-<p>Enter a descriptive name for your policy and fill in the Question, Background, and Guidance fields.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/03-policy-name.png"" alt=""Naming a new code policy"" loading=""lazy""></figure>
+<p>For example, a Custom Code Policy could detect an authentication bypass that only exists because of how your specific auth model chains middleware, or flag an injection risk in a custom query builder that is unique to your application. These are the kinds of vulnerabilities that generic scanners overlook because they lack the context of your particular codebase.</p>
 
-<p>Select the repository to test the policy against.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/04-policy-repo.png"" alt=""Selecting a repository for policy testing"" loading=""lazy""></figure>
+<h3 id=""monitoring-non-vulnerability-changes"">2. Monitoring for non-vulnerability changes</h3>
 
-<p>Click <strong>Run</strong> to evaluate the policy against a sample PR and review the results.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/05-policy-run.png"" alt=""Running a code policy for evaluation"" loading=""lazy""></figure>
+<p>Custom Code Policies are not limited to security vulnerabilities. They can detect any type of change you want to monitor — including compliance checks, procedural guardrails, and architectural standards.</p>
 
-<p>Once satisfied with the results, click <strong>Save</strong> to add the policy to your organization.</p>
-<figure class=""docs-screenshot""><img src=""assets/images/nlcp-create/06-policy-save.png"" alt=""Saving a validated code policy"" loading=""lazy""></figure>
+<p>For example, you can create policies that detect when a regulated data model is modified, flag the use of deprecated internal APIs, or monitor for changes to configuration files that require a review process. This makes Custom Code Policies a flexible tool for enforcing organizational standards beyond traditional security scanning.</p>
+
 
 <h2 id=""creating-a-policy"">Creating a Policy</h2>
 
@@ -1714,288 +1713,7 @@ Custom Code Policies,custom-code-policies,"<h2 id=""custom-code-policies"">Custo
   <li>Once the policy is returning expected results, click <strong>Save</strong> to save it for use in a Repository configuration.</li>
 </ol>
 
-<p>To apply the Code Policy to one or more repositories, click <strong>Configure</strong> and follow the steps in <a href=""./pr-scanning-configuration.html"">Configure Repositories</a>.</p>
-
-<h2 id=""policy-enforcement-agent"">Policy Enforcement Agent</h2>
-
-<p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Custom Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
-
-<h2 id=""next-steps"">Next Steps</h2>
-
-<ul>
-  <li>See the <a href=""./custom-code-policies.html"">Custom Code Policy Starter Pack</a> for ready-to-use policy examples.</li>
-  <li>See <a href=""./custom-code-policies.html"">Custom Code Policy Best Practices</a> for guidance on writing effective policy backgrounds.</li>
-  <li>See <a href=""./pr-scanning-configuration.html"">Configurations</a> to attach policies to repositories.</li>
-</ul>
-
-
-<h2 id=""starter-pack"">Starter Pack</h2>
-
-<p>The following Custom Code Policies can be used to help you get started. They are generic enough to be customized by your organization but can also be used as-is.</p>
-
-<h2 id=""starter-policies"">Starter Policies</h2>
-
-<div class=""table-wrap"">
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Question</th>
-      <th>Background</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>GitHub Action Policy</strong></td>
-      <td>Carefully examine any GitHub Actions related changes or inline commands for security risks. Provide results in the form of a list with line numbers and with the title: Identified GitHub Actions Risks.</td>
-      <td>Concerned about: use of untrusted or mutable third-party actions; secrets exposure; unsafe use of <code>run:</code> commands; privilege escalation; insecure usage of <code>pull_request_target</code> trigger; workflow that can be triggered by forks with write access to secrets.</td>
-    </tr>
-    <tr>
-      <td><strong>New API Endpoint w/o authz</strong></td>
-      <td>Does this code introduce a new API endpoint without authorization enforcement?</td>
-      <td>Concerned about new API routes or endpoints being added without any type of enforcement. Check default framework annotations or a specified access definitions file to determine if the endpoint has been added without authz.</td>
-    </tr>
-    <tr>
-      <td><strong>Third Party Scripts</strong></td>
-      <td>Does any file in the codebase include references (e.g., via <code>&lt;script&gt;</code> tags, import/require statements, or dynamic loading functions) to third-party scripts?</td>
-      <td>Introducing third-party scripts means trusting an external source to provide code that will run in user browsers. If a CDN or third-party host is compromised, users could be exposed to malicious behavior (e.g., credential theft, data exfiltration, crypto mining).</td>
-    </tr>
-    <tr>
-      <td><strong>Logging Sensitive Data</strong></td>
-      <td>Does any logging function in the codebase output sensitive data (such as passwords, API keys, or session tokens)?</td>
-      <td>Logging sensitive data can inadvertently expose secrets if logs are accessed by unauthorized parties.</td>
-    </tr>
-    <tr>
-      <td><strong>Username Enumeration</strong></td>
-      <td>Does this change introduce username enumeration flaws?</td>
-      <td>Username enumeration flaws typically happen when system error messages indicate the presence of a user in a system and can be used by malicious actors to find valid usernames.</td>
-    </tr>
-    <tr>
-      <td><strong>Token Validation Check</strong></td>
-      <td>Are there any logical flaws in our token validation or generation logic?</td>
-      <td>Tokens need to be generated using a secure algorithm that has high entropy, and they must be validated before use.</td>
-    </tr>
-    <tr>
-      <td><strong>Insecure File Upload Handling</strong></td>
-      <td>Does this change introduce or modify file upload functionality in a way that might allow dangerous file types or bypass security controls?</td>
-      <td>File uploads, if not strictly validated, pose a risk of allowing attackers to send files that could be executed server-side (e.g., web shells) or cause other harm.</td>
-    </tr>
-    <tr>
-      <td><strong>Improper Error Handling</strong></td>
-      <td>Does this change expose detailed internal error messages or stack traces to end users that might reveal sensitive application internals?</td>
-      <td>Detailed error messages or stack traces can provide attackers with insights into the application structure, technology stack, or logic.</td>
-    </tr>
-    <tr>
-      <td><strong>Insufficient CORS Configuration</strong></td>
-      <td>Does this change modify Cross-Origin Resource Sharing (CORS) settings in a way that might allow unauthorized cross-origin access?</td>
-      <td>Overly permissive CORS settings can open the door to cross-origin attacks or unintended data leakage.</td>
-    </tr>
-    <tr>
-      <td><strong>Insecure Inter-Service Communication</strong></td>
-      <td>Does this change affect how microservices communicate, potentially bypassing secure channels, authentication, or authorization between services?</td>
-      <td>In a microservices architecture, inter-service communication often transmits sensitive data. If communication is not secured, attackers may intercept or manipulate data.</td>
-    </tr>
-    <tr>
-      <td><strong>Insecure Deserialization Handling</strong></td>
-      <td>Does this change deserialize data from untrusted sources without proper validation or secure safeguards?</td>
-      <td>Unvalidated deserialization of data can lead to severe vulnerabilities, including remote code execution (RCE) or privilege escalation.</td>
-    </tr>
-    <tr>
-      <td><strong>PHI/PII Exposure</strong></td>
-      <td>Does this change result in the exposure of sensitive PII or PHI through code, logs, network transmissions, or repository artifacts?</td>
-      <td>Exposing PII/PHI can lead to severe privacy breaches, legal ramifications, and reputational damage. Must comply with HIPAA, GDPR, or other applicable standards.</td>
-    </tr>
-    <tr>
-      <td><strong>Hard-Coded Credentials Detection</strong></td>
-      <td>Does this change introduce hard-coded credentials such as passwords, API keys, tokens, or secret access keys?</td>
-      <td>Hard-coding credentials directly into source code poses a serious security risk. Include file path and line number in results. Do not repeat the credentials in the results.</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-<h2 id=""best-practices"">Best Practices</h2>
-
-<p>When you provide more clarity in your Custom Code Policy's background, your policy becomes more reliable and accurate. The tips below help your policies accurately scope which files are considered, reason about your code, and decide when deeper analysis is necessary.</p>
-
-<h2 id=""what-is-a-background"">What Is a Background?</h2>
-
-<p>When writing your Custom Code Policy, you provide:</p>
-<ul>
-  <li><strong>Question:</strong> The question to ask against a pull request. This should be a yes or no question.</li>
-  <li><strong>Background:</strong> Optional background information about the question. This provides context for your question.</li>
-  <li><strong>Guidance:</strong> Optional guidance your policy will provide to a viewer when a finding is identified. This should be a clear set of instructions.</li>
-</ul>
-
-<h2 id=""scope-file-paths"">1. Scope File Paths When Possible</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Only apply this check to files in <code>/src/controllers/**</code>""</li>
-  <li>""Limit this check to files under <code>services/auth/</code> and <code>middleware/</code>""</li>
-</ul>
-
-<p><strong>Avoid this:</strong></p>
-<ul>
-  <li>""Check the whole codebase for this"" - too vague, slow, and may introduce noise</li>
-  <li>""Anywhere this might happen"" - ambiguous and not helpful for targeting</li>
-</ul>
-
-<h2 id=""target-specific-layers"">2. Target Specific Layers or Components</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Authorization is enforced at the controller layer - be sure to check it""</li>
-  <li>""Verify any additions to the service layer that might bypass our middleware""</li>
-</ul>
-
-<p><strong>Avoid this:</strong></p>
-<ul>
-  <li>""Just make sure this is secure"" - doesn't guide where your policy should look or what to expect</li>
-  <li>""Check backend stuff"" - too generic</li>
-</ul>
-
-<h2 id=""use-naming-cues"">3. Use File or Function Naming Cues</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Look for function names starting with <code>validate</code> or containing <code>auth</code>""</li>
-  <li>""Check for uses of <code>unsafeEval()</code> or similar patterns in JavaScript""</li>
-</ul>
-
-<h2 id=""indicate-pr-diffs"">4. Indicate When Only PR Diffs Should Be Analyzed</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Only analyze changes introduced in this PR""</li>
-  <li>""Ignore unchanged files - only evaluate lines added or modified""</li>
-</ul>
-
-<h2 id=""mention-full-file-analysis"">5. Mention When Full-File or Tool-Based Analysis Is Needed</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""If a helper is called, trace its definition from the imports""</li>
-  <li>""Use search tools if the current file doesn't define the authorization logic""</li>
-</ul>
-
-<h2 id=""explain-indirection"">6. Explain Known Indirection Patterns</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Database access may happen via helper functions in <code>db/helpers.ts</code>""</li>
-  <li>""Authorization is often wrapped in <code>ensureAuthorizedUser()</code> - follow that chain""</li>
-</ul>
-
-<h2 id=""define-secure"">7. Define What ""Secure"" Means</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Tokens must be validated using <code>secureCompare()</code>""</li>
-  <li>""CORS must not allow <code>*</code> unless <code>isTrustedOrigin(origin)</code> returns <code>true</code>""</li>
-</ul>
-
-<p><strong>Avoid this:</strong></p>
-<ul>
-  <li>""Just make sure it is secure"" - every organization defines ""secure"" differently</li>
-  <li>""CORS should be safe"" - what does ""safe"" mean?</li>
-</ul>
-
-<h2 id=""call-out-enforcement-mechanisms"">8. Call Out Recognized Enforcement Mechanisms</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Authorization is enforced via the <code>require_role</code> decorator""</li>
-  <li>""Secure file uploads must go through <code>validateFileType()</code>""</li>
-</ul>
-
-<h2 id=""avoid-vague-language"">9. Avoid Vague or Abstract Language</h2>
-
-<p><strong>Do this:</strong></p>
-<ul>
-  <li>""Check that logging statements do not include variables like <code>password</code>, <code>token</code>, or <code>apiKey</code>""</li>
-</ul>
-
-<p><strong>Avoid this:</strong></p>
-<ul>
-  <li>""Make sure secrets are not logged"" - what is a ""secret""? What logging system?</li>
-  <li>""Scan for unsafe logging"" - what qualifies as unsafe?</li>
-</ul>
-
-
-<h2 id=""policy-library"">Policy Library</h2>
-
-<h2 id=""overview"">Overview</h2>
-
-<p>The Policy Library provides curated, pre-built <a href=""../docs/custom-code-policies.html"">Custom Code Policy</a> templates that you can deploy immediately or customize for your organization. Instead of writing policies from scratch, start from a tested template and adapt it to your specific architecture and requirements.</p>
-
-<h2 id=""policy-categories"">Policy Categories</h2>
-
-<h3 id=""owasp-top-10"">OWASP Top 10</h3>
-<p>Policies targeting the most common web application vulnerability classes:</p>
-<ul>
-  <li>""Does this change introduce SQL injection by constructing queries from user input?""</li>
-  <li>""Does this code render user input in HTML without proper escaping?""</li>
-  <li>""Does this change introduce an API endpoint that accesses resources without verifying the requesting user owns them?""</li>
-</ul>
-
-<h3 id=""auth-patterns"">Authentication and Authorization</h3>
-<p>Policies for access control enforcement:</p>
-<ul>
-  <li>""Does this change introduce a new API endpoint without authorization enforcement?""</li>
-  <li>""Does this change introduce username enumeration through different error messages for valid and invalid usernames?""</li>
-  <li>""Does this code store or transmit passwords in plaintext?""</li>
-</ul>
-
-<h3 id=""secrets-handling"">Secrets Handling</h3>
-<p>Policies for credential management:</p>
-<ul>
-  <li>""Does this change commit API keys, tokens, or passwords that should be stored in environment variables?""</li>
-  <li>""Does this code log sensitive data like passwords, tokens, or personal information?""</li>
-</ul>
-
-<h3 id=""ai-code-guidelines"">AI-Generated Code Guidelines</h3>
-<p>Policies for teams using AI coding assistants:</p>
-<ul>
-  <li>""Does this AI-generated code include hardcoded credentials that should be environment variables?""</li>
-  <li>""Does this change introduce a dependency not in our approved list?""</li>
-</ul>
-
-<h3 id=""compliance-policies"">Compliance</h3>
-<p>Policies for regulatory requirements:</p>
-<ul>
-  <li>""Do any libraries introduced in this PR violate our internal licensing requirements?""</li>
-  <li>""Does this change handle personal data without proper consent or encryption?""</li>
-</ul>
-
-<h2 id=""using-library-policies"">Using Library Policies</h2>
-
-<ol>
-  <li><strong>Browse the library</strong> in the DryRun Security platform to find policies that match your needs</li>
-  <li><strong>Preview and customize</strong> - adjust the policy language to match your specific architecture, frameworks, and terminology</li>
-  <li><strong>Test before deploying</strong> - use the AI Policy Assistant to run the policy against recent PRs and verify it produces the expected results</li>
-  <li><strong>Deploy</strong> - enable the policy for selected repositories or your entire organization</li>
-</ol>
-
-<h2 id=""ai-policy-assistant"">AI Policy Assistant</h2>
-
-<p>The AI Policy Assistant helps you draft, refine, and test policies through a guided workflow:</p>
-
-<ul>
-  <li><strong>Describe your goal</strong> in natural language - ""I want to prevent debug endpoints from reaching production""</li>
-  <li><strong>Refine the policy</strong> - the assistant suggests specific language that accounts for your frameworks and patterns</li>
-  <li><strong>Test against recent PRs</strong> - see what the policy would have flagged on real code changes before enabling it</li>
-  <li><strong>Iterate</strong> - adjust the wording and re-test until the policy catches what you want without false positives</li>
-</ul>
-
-<h2 id=""related-pages"">Related Pages</h2>
-
-<ul>
-  <li><a href=""../docs/custom-code-policies.html"">Custom Code Policies</a> - how Custom Code Policy works</li>
-  <li><a href=""../docs/custom-code-policies.html"">Custom Code Policy Starter Pack</a> - getting started with your first policies</li>
-  <li><a href=""../docs/custom-code-policies.html"">Custom Code Policy Best Practices</a> - writing effective policies</li>
-</ul>",Create custom security rules in plain English using Custom Code Policies.,Platform
+<p>To apply the Code Policy to one or more repositories, click <strong>Configure</strong> and follow the steps in <a href=""./pr-scanning-configuration.html"">Configure Repositories</a>.</p>",Create custom security rules in plain English using Custom Code Policies.,Platform
 Repository Context,repository-context,"<p><a href=""https://agents.md/"" target=""_blank"" rel=""noopener noreferrer"">AGENTS.md</a> is a format supported by the <a href=""https://aaif.io/"" target=""_blank"" rel=""noopener noreferrer"">Agentic AI Foundation</a>, a Linux Foundation Project. The file is intended to be ""a predictable place to provide the context and instructions to help AI coding agents work on your project.""</p>
 
 <p>DryRun Security supports <code>AGENTS.md</code> for both core analyzer products: the Code Review Agent and the DeepScan Agent. DryRun Security's agents will look for and review this file to apply the additional context it provides during analysis.</p>
