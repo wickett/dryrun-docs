@@ -8,7 +8,7 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:3000',
     screenshot: 'only-on-failure',
-    colorScheme: 'dark',
+    colorScheme: 'light',
   },
   webServer: {
     command: 'npx serve . -l 3000 --no-clipboard --no-request-logging',
@@ -18,7 +18,7 @@ module.exports = defineConfig({
   projects: [
     {
       name: 'desktop',
-      use: { viewport: { width: 1440, height: 900 }, colorScheme: 'dark' },
+      use: { viewport: { width: 1440, height: 900 }, colorScheme: 'light' },
     },
     {
       name: 'mobile',
@@ -26,7 +26,7 @@ module.exports = defineConfig({
         viewport: { width: 390, height: 844 },
         isMobile: true,
         hasTouch: true,
-        colorScheme: 'dark',
+        colorScheme: 'light',
       },
     },
   ],
