@@ -1993,6 +1993,21 @@ PAGES['custom-code-policies'] = {
 </ol>
 
 <p>To apply the Code Policy to one or more repositories, click <strong>Configure</strong> and follow the steps in <a href="./pr-scanning-configuration.html">Configure Repositories</a>.</p>
+
+
+<h2 id="field-usage">Field Usage</h2>
+
+<h3 id="question">Question</h3>
+
+<p>The question field is the prompt given to the LLM that triggers it to begin investigating for the vulnerability. This field should contain a series of things you want the model to check for or validate against. Think of it as the investigation directive &mdash; it should be specific enough to focus the analysis but broad enough to cover the relevant variations of the issue you want to catch.</p>
+
+<h3 id="background">Background</h3>
+
+<p>The background field provides context that loads alongside the question, giving the LLM the background information it needs to properly assess the code it is reviewing for this vulnerability type. Use this field to provide factual details about your app&rsquo;s function, architecture, authentication handling, data flow, or other dynamics. Do not tell the LLM what you want it to do here &mdash; just provide factual details about your application so the model has the context it needs to make accurate assessments.</p>
+
+<h3 id="guidance">Guidance</h3>
+
+<p>The guidance field contains the instructions that the LLM will deliver to your development team when a vulnerability is identified by the code policy. This text appears as a comment in your SCM (GitHub, GitLab, etc.) on the relevant PR, so it should be written as actionable remediation instructions &mdash; telling developers exactly what to fix and how.</p>
 ''',
 }
 
