@@ -1055,7 +1055,7 @@ Finding Tuning with Feedback,finding-tuning,"<p>DryRun Security knows that LLMs 
 
 <p>No tickets, no context switching, no waiting. The feedback loop stays where developers already work. <a href=""https://www.dryrun.security/blog/security-that-listens-introducing-pr-feedback-in-dryrun-security"" target=""_blank"" rel=""noopener noreferrer"">Learn more about PR feedback in DryRun Security</a>.</p>
 
-<figure class=""docs-screenshot""><img src=""assets/images/risk-register/04-triage-pr.png"" alt=""Finding triage from the PR workflow"" loading=""lazy""></figure>
+<figure class=""docs-screenshot""><img src=""assets/images/risk-register/05-scm-feedback.jpg"" alt=""SCM feedback workflow"" loading=""lazy""></figure>
 
 <h2 id=""feedback-from-risk-register"">Feedback from the Risk Register (AppSec)</h2>
 
@@ -1070,6 +1070,8 @@ Finding Tuning with Feedback,finding-tuning,"<p>DryRun Security knows that LLMs 
 <p>Select one or more findings using the checkboxes, then click <strong>Triage</strong> to choose a reason and optionally add context. When you mark a finding as <strong>False Positive</strong>, DryRun Security fingerprints the vulnerability pattern and suppresses it in future scans automatically. The context you provide feeds into the Knowledge Graph to improve detection accuracy over time.</p>
 
 <figure class=""docs-screenshot""><img src=""assets/images/risk-register/03-finding-triage.png"" alt=""Finding triage in the Risk Register"" loading=""lazy""></figure>
+
+<figure class=""docs-screenshot""><img src=""assets/images/risk-register/04-triage-pr.png"" alt=""Finding triage from the PR workflow"" loading=""lazy""></figure>
 
 <h2 id=""use-cases"">Use Cases</h2>
 
@@ -1094,39 +1096,6 @@ Finding Tuning with Feedback,finding-tuning,"<p>DryRun Security knows that LLMs 
   <li><strong>Pattern recognition</strong> - Over time, triage decisions feed into the <a href=""./code-security-intelligence.html"">Code Security Knowledge Graph</a>, improving accuracy for your specific frameworks, deployment patterns, and risk profile.</li>
 </ul>
 <p>The result: false positive rates decrease over time as DryRun Security accumulates organizational knowledge from your team's feedback.</p>
-
-<h2 id=""triaging-a-finding"">Triaging a Finding</h2>
-
-<p>In the Risk Register, click <strong>Triage</strong> on a finding to:</p>
-<ul>
-  <li>Select a triage reason (for example: False Positive, Accepted Risk, Won't Fix)</li>
-  <li>Add supporting context in a text box explaining your reasoning</li>
-</ul>
-<p>The more context you provide, the more DryRun Security can learn from the decision. Even a short explanation helps improve future scan accuracy.</p>
-
-<h3 id=""false-positive-fingerprinting"">False Positive Fingerprinting</h3>
-
-<p>When you mark a finding as <strong>False Positive</strong>:</p>
-<ul>
-  <li>DryRun Security creates a fingerprint of that vulnerability pattern.</li>
-  <li>Future PR scans and DeepScans automatically suppress the finding when the same fingerprint is detected, so it does not come back.</li>
-  <li>The fingerprint and your context are stored in the Knowledge Graph and used to improve detection accuracy for similar patterns.</li>
-</ul>
-
-<h3 id=""context-based-learning"">Context-Based Learning</h3>
-
-<p>When you include context in the triage text box, DryRun Security uses it in two ways:</p>
-<ul>
-  <li><strong>Immediate suppression</strong> - Similar false positives matching the context are suppressed in future scans.</li>
-  <li><strong>Long-term learning</strong> - The context feeds into the Knowledge Graph to improve analysis for similar code patterns, framework behaviors, and deployment topologies.</li>
-</ul>
-
-<p>Examples of useful context:</p>
-<ul>
-  <li>&ldquo;This endpoint is only accessible from internal services - no user input reaches this code path.&rdquo;</li>
-  <li>&ldquo;TLS offloading is handled upstream; the application does not need to enforce HTTPS internally.&rdquo;</li>
-  <li>&ldquo;This query is constructed only from validated constants, never from user input.&rdquo;</li>
-</ul>
 
 <h2 id=""dismissed-findings"">Dismissed Findings</h2>
 
@@ -1154,61 +1123,7 @@ Context is stored with the triage decision and used in two ways: immediately to 
 Yes. Developers can reply directly in the PR thread with <code>@dryrunsecurity FP [issue ID]</code> to mark a finding as a false positive. DryRun Security removes the finding, regenerates the PR summary, and feeds the signal back into the system. Those decisions also sync to the Risk Register for AppSec review.</p>
 
 <p><strong>What is the difference between a false positive and a nitpick?</strong><br>
-A false positive means the finding is not real or does not apply to the codebase. A nitpick means the finding is technically valid but below the bar the team cares about. Both are removed from the active list, but they are tracked separately so AppSec can monitor patterns.</p>
-
-<h2 id=""false-positive-reduction"">False Positive Reduction</h2>
-
-<h3 id=""the-false-positive-problem"">The False Positive Problem</h3>
-
-<p>False positives are the defining problem of traditional static analysis. When a tool flags code that is not actually vulnerable, developers lose time investigating, lose trust in the tool, and eventually start ignoring findings entirely. Studies consistently show that legacy SAST tools produce false positive rates of 40-60% or higher, meaning more than half of all alerts are noise.</p>
-
-<p>The consequence is predictable: development teams either disable the tool, suppress entire categories of findings, or assign a dedicated person to triage alerts - none of which improve security.</p>
-
-<h3 id=""why-pattern-matching-fails"">Why Pattern Matching Produces Noise</h3>
-
-<p>Pattern-matching tools flag code based on syntactic similarity to known vulnerability patterns. A function call that looks like a SQL query with string concatenation gets flagged, regardless of whether:</p>
-
-<ul>
-  <li>The input is actually user-controlled</li>
-  <li>The input has already been sanitized upstream</li>
-  <li>The code is behind an authorization check that limits access</li>
-  <li>The string being concatenated is a constant, not a variable</li>
-  <li>The framework being used has built-in protections</li>
-</ul>
-
-<p>Every one of these cases produces a false positive in a pattern-matching tool. The tool sees the pattern but cannot evaluate whether the pattern represents real risk in context.</p>
-
-<h3 id=""contextual-analysis-approach"">The Contextual Analysis Approach</h3>
-
-<p>DryRun Security's <a href=""./code-security-intelligence.html"">Contextual Security Analysis</a> engine evaluates each potential finding against the surrounding code context before reporting it. This means the engine considers:</p>
-
-<ul>
-  <li><strong>Data flow</strong> - tracing where input originates and whether it passes through sanitization before reaching a sensitive sink</li>
-  <li><strong>Authorization context</strong> - whether the code path is protected by authentication and authorization middleware</li>
-  <li><strong>Framework behavior</strong> - understanding that Django's ORM parameterizes queries by default, that React escapes JSX output, that Spring Security's CSRF protection is enabled by default</li>
-  <li><strong>Developer intent</strong> - recognizing test fixtures, example configurations, and development-only code paths</li>
-  <li><strong>Exploitability</strong> - assessing whether a theoretical vulnerability is actually reachable and exploitable in the deployed application</li>
-</ul>
-
-<p>The result is findings that represent genuine risk, not syntactic matches.</p>
-
-<h3 id=""90-lower-noise"">90% Lower Noise in Practice</h3>
-
-<p>DryRun Security's contextual approach produces approximately 90% fewer false positives compared to traditional pattern-matching SAST tools. This is not achieved through suppression or threshold tuning - it is the natural result of analyzing code in context rather than in isolation.</p>
-
-<p>In practical terms, a traditional tool that generates 100 findings on a codebase might have 50-60 false positives that require manual review. DryRun Security analyzing the same codebase would produce fewer total findings, with the overwhelming majority representing actionable, real vulnerabilities.</p>
-
-<h3 id=""not-suppression"">Reduction, Not Suppression</h3>
-
-<p>It is important to distinguish between false positive <strong>reduction</strong> and false positive <strong>suppression</strong>. Many tools achieve lower noise by letting users suppress finding categories, raise severity thresholds, or ignore entire file paths. This hides findings but does not prevent them from being generated.</p>
-
-<p>DryRun Security reduces false positives at the analysis stage. The <a href=""./code-security-intelligence.html"">specialized analyzers</a> evaluate context before generating a finding, so noise is eliminated before it reaches the developer. Suppression workflows exist for the rare false positive that does occur, but they are the exception rather than the primary noise management strategy. Every triage decision feeds back into DryRun Security to improve future accuracy.</p>
-
-<h3 id=""developer-trust"">Impact on Developer Trust</h3>
-
-<p>When developers trust that findings represent real issues, they act on them. Low false positive rates create a positive feedback loop: developers investigate findings promptly, fix real vulnerabilities, and continue to engage with the tool rather than working around it.</p>
-
-<p>This is why DryRun Security's approach to false positive reduction is not just a technical feature - it is the foundation of a security workflow that developers actually adopt.</p>",Tune security findings and reduce false positives with feedback from developers and AppSec engineers.,Platform
+A false positive means the finding is not real or does not apply to the codebase. A nitpick means the finding is technically valid but below the bar the team cares about. Both are removed from the active list, but they are tracked separately so AppSec can monitor patterns.</p>",Tune security findings and reduce false positives with feedback from developers and AppSec engineers.,Platform
 PR Blocking,pr-blocking,"<h2 id=""overview"">Overview</h2>
 
 <p>DryRun Security can be configured to block pull requests from being merged when security findings exceed your defined thresholds. PR Blocking integrates with your source code management platform's native branch protection features to enforce security gates in your development workflow.</p>
