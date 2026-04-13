@@ -204,7 +204,7 @@ Quick Start,quick-start,"<h2 id=""getting-started"">Getting Started</h2>
   <li>Navigate to the Group where DryRun Security will be installed.</li>
   <li>Go to <strong>Settings &gt; Access Tokens</strong>.</li>
   <li>Click <strong>Add new token</strong>.</li>
-  <li>Add a token name, set the role to at least <strong>Maintainer</strong>, and select the <code>api</code> and <code>read_user</code> scopes.</li>
+  <li>Add a token name, set the role to at least <strong>Maintainer</strong>, and select the <code>api</code> and <code>read_repository</code> scopes.</li>
   <li>Click <strong>Create group access token</strong>.</li>
   <li>Copy the token and save it for later use.</li>
 </ol>
