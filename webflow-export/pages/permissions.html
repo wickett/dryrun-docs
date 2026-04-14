@@ -1,7 +1,9 @@
 <div class="drs-doc-content">
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security uses a two-role model, <strong>Admin</strong> and <strong>Developer</strong>, that maps to your existing SCM platform roles. An account administrator can also manually promote any developer to Admin within the DryRun Security UI, regardless of their role in GitHub or GitLab.</p>
+<p>DryRun Security uses your SCM platform (GitHub or GitLab) for authentication. Because DryRun already knows your SCM role at login, it maps that role directly to a DryRun permission level with no additional setup required.</p>
+
+<p>DryRun uses a two-role model: <strong>Admin</strong> and <strong>Developer</strong>. To give a user more access, you can either elevate their permissions in the SCM, or request an <a href="#admin-override">Admin Override</a>.</p>
 
 <h2 id="scm-role-mapping">SCM Role Mapping</h2>
 
