@@ -604,6 +604,20 @@ body {
   font-weight: 700;
 }
 
+.method-get, .method-post, .method-put, .method-delete {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: monospace;
+    letter-spacing: 0.03em;
+}
+.method-get    { background: #dcfce7; color: #15803d; }
+.method-post   { background: #dbeafe; color: #1d4ed8; }
+.method-put    { background: #fef9c3; color: #a16207; }
+.method-delete { background: #fee2e2; color: #b91c1c; }
+
 /* Blockquotes / callouts */
 .doc-content blockquote {
   border-left: 3px solid var(--accent);
