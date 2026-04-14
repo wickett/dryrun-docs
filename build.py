@@ -2054,18 +2054,6 @@ PAGES['slack-integration'] = {
 
 <p>Changes in the repository that match the integration's risk level will now trigger a notification.</p>
 
-
-<h2 id="slack-setup">Setting Up Slack Notifications</h2>
-
-<p>DryRun Security can send real-time security finding notifications to your Slack workspace. This keeps your team informed about new vulnerabilities as they are discovered during PR scanning and DeepScan analysis.</p>
-
-<h3 id="slack-channels">Recommended Channel Setup</h3>
-
-<ul>
-  <li><strong>#security-alerts</strong> - High and critical findings for immediate attention.</li>
-  <li><strong>#security-digest</strong> - Daily or weekly summary of all findings.</li>
-  <li><strong>#dev-security</strong> - All findings for developer visibility.</li>
-</ul>
 ''',
 }
 
