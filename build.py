@@ -1224,9 +1224,9 @@ PAGES['custom-code-policies'] = {
 
 <p>DryRun Security's Custom Code Policies let you define and enforce security policies in your codebase using natural language instead of complex scripting or specialized rule languages. Rather than writing regex patterns or static analysis rules, you describe what you care about in plain English and the LLM reasons through the code to evaluate it.</p>
 
-<p>The key advantage of Custom Code Policies is that they are <strong>agentic</strong>. The LLM does not simply pattern-match against your code — it reasons about the code in context. It can follow function calls, trace data flow, understand business logic, and make judgments that traditional static analysis tools cannot. This means your policies can go far beyond what is possible with grep-style rules or AST matchers.</p>
+<p>The key advantage of Custom Code Policies is that they are <strong>agentic</strong>. The LLM does not simply pattern-match against your code. Instead, it reasons about the code in context. It can follow function calls, trace data flow, understand business logic, and make judgments that traditional static analysis tools cannot. This means your policies can go far beyond what is possible with grep-style rules or AST matchers.</p>
 
-<p>Custom Code Policies can be laser-focused on a unique function or structure specific to your application. Because you control the context — through the Question, Background, and Guidance fields — you can guide the analysis to look exactly where it matters and reason about the patterns that are unique to your codebase.</p>
+<p>Custom Code Policies can be laser-focused on a unique function or structure specific to your application. Because you control the context (through the Question, Background, and Guidance fields), you can guide the analysis to look exactly where it matters and reason about the patterns that are unique to your codebase.</p>
 
 <p>When a pull request is opened, DryRun Security's Policy Enforcement Agent runs all configured Custom Code Policies for the repository. The Policy Enforcement Agent can run up to 7 code policies per repository. Results appear in the PR comment and in the GitHub Checks area, with the option to block merges when a policy has findings.</p>
 
@@ -1235,13 +1235,13 @@ PAGES['custom-code-policies'] = {
 
 <h3 id="identifying-vulnerabilities">1. Identifying specific vulnerabilities unique to your codebase</h3>
 
-<p>Custom Code Policies can find security issues that generic scanners miss — vulnerabilities tied to your application's specific architecture, patterns, or business logic. Because the LLM reasons through your code agenetically, it can identify risks that only make sense in the context of how your application actually works.</p>
+<p>Custom Code Policies can find security issues that generic scanners miss, including vulnerabilities tied to your application's specific architecture, patterns, or business logic. Because the LLM reasons through your code agenetically, it can identify risks that only make sense in the context of how your application actually works.</p>
 
 <p>For example, a Custom Code Policy could detect an authentication bypass that only exists because of how your specific auth model chains middleware, or flag an injection risk in a custom query builder that is unique to your application. These are the kinds of vulnerabilities that generic scanners overlook because they lack the context of your particular codebase.</p>
 
 <h3 id="monitoring-non-vulnerability-changes">2. Monitoring for non-vulnerability changes</h3>
 
-<p>Custom Code Policies are not limited to security vulnerabilities. They can detect any type of change you want to monitor — including compliance checks, procedural guardrails, and architectural standards.</p>
+<p>Custom Code Policies are not limited to security vulnerabilities. They can detect any type of change you want to monitor, including compliance checks, procedural guardrails, and architectural standards.</p>
 
 <p>For example, you can create policies that detect when a regulated data model is modified, flag the use of deprecated internal APIs, or monitor for changes to configuration files that require a review process. This makes Custom Code Policies a flexible tool for enforcing organizational standards beyond traditional security scanning.</p>
 
