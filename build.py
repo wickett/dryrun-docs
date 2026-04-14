@@ -188,7 +188,7 @@ PAGES['documentation'] = {
       <span class="landing-card-desc">Route finding alerts and scan summaries to the Slack channels your team already monitors.</span>
     </a>
     <a class="landing-card" href="./webhook-integration.html">
-      <span class="landing-card-title">Generic Webhook Integration</span>
+      <span class="landing-card-title">Webhook Integration</span>
       <span class="landing-card-desc">Stream scan events and finding data to any HTTP endpoint for custom automation and reporting pipelines.</span>
     </a>
     <a class="landing-card" href="./mcp.html">
@@ -2058,13 +2058,13 @@ PAGES['slack-integration'] = {
 }
 
 PAGES['webhook-integration'] = {
-    'title': 'Generic Webhook Integration',
+    'title': 'Webhook Integration',
     'description': 'Send DryRun Security events to any webhook endpoint for custom integrations.',
     'section': 'Integrations',
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security supports generic webhook integration, allowing you to send security events to any HTTP endpoint. Use webhooks to integrate DryRun Security with custom dashboards, ticketing systems, SIEMs, or any other tool in your security workflow.</p>
+<p>DryRun Security supports webhook integration, allowing you to send security events to any HTTP endpoint. Use webhooks to integrate DryRun Security with custom dashboards, ticketing systems, SIEMs, or any other tool in your security workflow.</p>
 
 <h2 id="configuring-webhooks">Configuring Webhooks</h2>
 
@@ -2105,13 +2105,6 @@ PAGES['webhook-integration'] = {
   }
 }</code></pre>
 
-<h2 id="signature-verification">Signature Verification</h2>
-
-<p>If a secret token is configured, DryRun Security includes an <code>X-DryRun-Signature</code> header with each request. The signature is computed as an HMAC-SHA256 of the request body using your secret token. Verify this signature on your server to ensure the request is authentic.</p>
-
-<h2 id="retry-policy">Retry Policy</h2>
-
-<p>If your endpoint returns a non-2xx status code, DryRun Security retries the webhook delivery up to 3 times with exponential backoff (1 minute, 5 minutes, 30 minutes). Failed deliveries are logged in the webhook configuration page.</p>
 ''',
 }
 
@@ -2124,12 +2117,12 @@ PAGES['jira-integration'] = {
 
 <p>DryRun Security does not have a native Jira integration today, but admins can connect DryRun Security to Jira using an automation middleware tool &mdash; either <strong>Tines</strong> or <strong>Zapier</strong>. DryRun Security sends a webhook when a finding is detected on a PR scan. The middleware receives the webhook, unpacks the finding details, checks Jira for an existing ticket for that finding, and either creates a new ticket or updates the existing one.</p>
 
-<p>When a PR is scanned and a finding is returned, DryRun Security sends a POST request with a JSON payload containing the event type, timestamp, repository, pull request number, and a finding object with <code>id</code>, <code>severity</code>, <code>category</code>, <code>title</code>, <code>file</code>, <code>line</code>, and <code>description</code>. See the <a href="./webhook-integration.html">Generic Webhook Integration</a> page for the full payload structure and configuration details.</p>
+<p>When a PR is scanned and a finding is returned, DryRun Security sends a POST request with a JSON payload containing the event type, timestamp, repository, pull request number, and a finding object with <code>id</code>, <code>severity</code>, <code>category</code>, <code>title</code>, <code>file</code>, <code>line</code>, and <code>description</code>. See the <a href="./webhook-integration.html">Webhook Integration</a> page for the full payload structure and configuration details.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-  <li>DryRun Security webhook configured &mdash; see <a href="./webhook-integration.html">Generic Webhook Integration</a></li>
+  <li>DryRun Security webhook configured &mdash; see <a href="./webhook-integration.html">Webhook Integration</a></li>
   <li>A Jira project with API access (Jira API token and project key)</li>
   <li>A <a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> or <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> account</li>
 </ul>
