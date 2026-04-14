@@ -618,6 +618,71 @@ body {
 .method-put    { background: #fef9c3; color: #a16207; }
 .method-delete { background: #fee2e2; color: #b91c1c; }
 
+/* API endpoint accordions */
+.api-endpoint {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.api-endpoint-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: var(--bg-secondary, #f9fafb);
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.api-endpoint-summary::-webkit-details-marker { display: none; }
+
+.api-endpoint-summary::before {
+    content: "\25B6";
+    font-size: 0.72rem;
+    color: var(--text-muted, #6b7280);
+    transition: transform 0.15s;
+    flex-shrink: 0;
+}
+
+details[open] .api-endpoint-summary::before {
+    transform: rotate(90deg);
+}
+
+.api-endpoint-summary:hover {
+    background: #eef2ff;
+}
+
+.api-endpoint-desc {
+    color: var(--text-muted, #6b7280);
+    font-size: 0.85rem;
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+    max-width: 50%;
+}
+
+.api-endpoint-body {
+    padding: 16px 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.api-endpoint-body h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted, #6b7280);
+    margin: 14px 0 6px;
+    font-weight: 600;
+}
+
+.api-endpoint-body h4:first-child {
+    margin-top: 0;
+}
+
 /* Blockquotes / callouts */
 .doc-content blockquote {
   border-left: 3px solid var(--accent);
