@@ -41,6 +41,10 @@ npx playwright test
 - Brand name is "DryRun Security" (no space between Dry and Run). "DryRun" shorthand only after full name appears twice.
 - CSS custom properties match the capability matrix site exactly (`--bg-primary`, `--accent`, `--green`, etc.).
 
+## Writing Style
+
+- Never use em dashes (—) in any content. Replace with a colon, comma, or reword the sentence. This applies to all pages, descriptions, table cells, headings, and any other content.
+
 ## Security
 
 This repo is monitored by [DryRun Security](https://dryrun.security). Every PR is reviewed by DryRun Security's analyzers including:
