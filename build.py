@@ -230,7 +230,7 @@ PAGES['quick-start'] = {
     </tr>
     <tr>
       <td>2</td>
-      <td><strong><a href="./deepscan.html">Do your first DeepScan</a></strong></td>
+      <td><strong><a href="./deepscan.html">DeepScan</a></strong></td>
       <td>Run a full-repository scan to establish your baseline security posture.</td>
     </tr>
     <tr>
@@ -250,7 +250,7 @@ PAGES['quick-start'] = {
     </tr>
     <tr>
       <td>6</td>
-      <td><strong><a href="./custom-code-policies.html">Create custom code policies</a></strong></td>
+      <td><strong><a href="./custom-code-policies.html">Create Custom Code Policies</a></strong></td>
       <td>Define organization-specific security rules written in plain English.</td>
     </tr>
     <tr>
@@ -260,6 +260,11 @@ PAGES['quick-start'] = {
     </tr>
     <tr>
       <td>8</td>
+      <td><strong><a href="./pr-blocking.html">Enforcement</a></strong></td>
+      <td>Configure blocking rules to prevent PRs from merging when findings exceed your defined severity or policy thresholds.</td>
+    </tr>
+    <tr>
+      <td>9</td>
       <td><strong><a href="./code-security-intelligence.html">Unlock the power of Code Security Intelligence</a></strong></td>
       <td>Query the intelligence index to track features, trends, and risks across your organization.</td>
     </tr>
