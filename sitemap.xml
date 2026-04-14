@@ -22,6 +22,7 @@
   <url><loc>https://docs.dryrun.security/docs/dryrun-api.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/slack-integration.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/webhook-integration.html</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.dryrun.security/docs/jira-integration.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/api-access-keys.html</loc><priority>0.8</priority></url>
   <url><loc>https://docs.dryrun.security/docs/ai-coding-integration.html</loc><priority>0.8</priority></url>
 </urlset>

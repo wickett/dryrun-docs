@@ -81,7 +81,7 @@ SECTIONS = [
     {
         'name': 'Integrations',
         'slug': 'integrations',
-        'pages': ['slack-integration', 'webhook-integration', 'api-access-keys', 'ai-coding-integration'],
+        'pages': ['slack-integration', 'webhook-integration', 'jira-integration', 'api-access-keys', 'ai-coding-integration'],
     },
 ]
 
@@ -2112,6 +2112,151 @@ PAGES['webhook-integration'] = {
 <h2 id="retry-policy">Retry Policy</h2>
 
 <p>If your endpoint returns a non-2xx status code, DryRun Security retries the webhook delivery up to 3 times with exponential backoff (1 minute, 5 minutes, 30 minutes). Failed deliveries are logged in the webhook configuration page.</p>
+''',
+}
+
+PAGES['jira-integration'] = {
+    'title': 'Jira Integration',
+    'description': 'Connect DryRun Security to Jira using automation middleware for automated ticket creation and deduplication.',
+    'section': 'Integrations',
+    'content': '''
+<h2 id="overview">Overview</h2>
+
+<p>DryRun Security does not have a native Jira integration today, but admins can connect DryRun Security to Jira using an automation middleware tool &mdash; either <strong>Tines</strong> or <strong>Zapier</strong>. DryRun Security sends a webhook when a finding is detected on a PR scan. The middleware receives the webhook, unpacks the finding details, checks Jira for an existing ticket for that finding, and either creates a new ticket or updates the existing one.</p>
+
+<p>When a PR is scanned and a finding is returned, DryRun Security sends a POST request with a JSON payload containing the event type, timestamp, repository, pull request number, and a finding object with <code>id</code>, <code>severity</code>, <code>category</code>, <code>title</code>, <code>file</code>, <code>line</code>, and <code>description</code>. See the <a href="./webhook-integration.html">Generic Webhook Integration</a> page for the full payload structure and configuration details.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ul>
+  <li>DryRun Security webhook configured &mdash; see <a href="./webhook-integration.html">Generic Webhook Integration</a></li>
+  <li>A Jira project with API access (Jira API token and project key)</li>
+  <li>A <a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> or <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> account</li>
+</ul>
+
+<h2 id="jira-field-mapping">Jira Field Mapping</h2>
+
+<p>Map DryRun Security finding fields to Jira ticket fields as follows:</p>
+
+<table>
+  <thead>
+    <tr><th>Jira Field</th><th>Value from DryRun</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Summary</td><td><code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></td></tr>
+    <tr><td>Description</td><td>Full finding description, repository, PR number, severity, file path, finding ID</td></tr>
+    <tr><td>Labels</td><td><code>dryrun-security</code>, <code>{finding.severity}</code>, <code>{finding.category}</code>, <code>{finding.id}</code> (used for deduplication)</td></tr>
+    <tr><td>Priority</td><td>Critical &rarr; Highest, High &rarr; High, Medium &rarr; Medium, Low &rarr; Low</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Note:</strong> The <code>finding.id</code> label is used as the deduplication key to check whether a ticket already exists.</p>
+
+<h2 id="tines-workflow">Tines Workflow</h2>
+
+<p><a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> is a security automation platform. Use it to receive DryRun Security webhooks and automate Jira ticket creation with deduplication logic.</p>
+
+<ol>
+  <li>
+    <strong>Create a Webhook action in Tines</strong> &mdash; Add a &ldquo;Webhook&rdquo; action as the trigger. Tines will generate a unique URL. Copy this URL and use it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+  </li>
+  <li>
+    <strong>Add a Filter action</strong> &mdash; Filter on <code>event == &quot;new_finding&quot;</code> to ensure the workflow only runs for new findings (not scan completions or resolved findings).
+  </li>
+  <li>
+    <strong>Search Jira for an existing ticket</strong> &mdash; Add an HTTP Request action to call the Jira REST API:
+<pre><code>GET {JIRA_BASE_URL}/rest/api/3/search
+  ?jql=project={PROJECT_KEY} AND labels=&quot;{finding.id}&quot; AND statusCategory != Done
+Authorization: Basic {base64(email:api_token)}</code></pre>
+    <p>This checks whether a ticket already exists for this specific finding by searching for its unique ID in labels.</p>
+  </li>
+  <li>
+    <strong>Add a Branch (condition) action</strong> &mdash; Check the <code>issues</code> array in the Jira search response:
+    <ul>
+      <li>If <code>issues.length &gt; 0</code> &rarr; ticket exists &rarr; go to Step 5</li>
+      <li>If <code>issues.length == 0</code> &rarr; no ticket &rarr; go to Step 6</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Add a comment to the existing Jira ticket</strong> &mdash; HTTP Request action:
+<pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue/{issues[0].id}/comment
+Body:
+{
+  &quot;body&quot;: &quot;DryRun Security flagged this finding again on PR #{pull_request} in {repository} at {timestamp}.&quot;
+}</code></pre>
+  </li>
+  <li>
+    <strong>Create a new Jira ticket</strong> &mdash; HTTP Request action:
+<pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue
+Body:
+{
+  &quot;fields&quot;: {
+    &quot;project&quot;: { &quot;key&quot;: &quot;{PROJECT_KEY}&quot; },
+    &quot;summary&quot;: &quot;[DryRun] {finding.title} in {finding.file}:{finding.line}&quot;,
+    &quot;description&quot;: { &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1, &quot;content&quot;: [ ... ] },
+    &quot;issuetype&quot;: { &quot;name&quot;: &quot;Bug&quot; },
+    &quot;labels&quot;: [&quot;dryrun-security&quot;, &quot;{finding.severity}&quot;, &quot;{finding.id}&quot;],
+    &quot;priority&quot;: { &quot;name&quot;: &quot;{mapped priority}&quot; }
+  }
+}</code></pre>
+  </li>
+</ol>
+
+<p><strong>Workflow diagram:</strong> Webhook &rarr; Filter (<code>new_finding</code>) &rarr; Search Jira &rarr; Branch &rarr; [Comment on existing ticket | Create new ticket]</p>
+
+<h2 id="zapier-workflow">Zapier Workflow</h2>
+
+<p><a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> is a no-code automation platform. Use it to build the same DryRun Security &rarr; Jira workflow without writing code.</p>
+
+<ol>
+  <li>
+    <strong>Create a new Zap and choose &ldquo;Webhooks by Zapier&rdquo; as the trigger</strong> &mdash; Select &ldquo;Catch Hook&rdquo; as the trigger event. Zapier generates a webhook URL. Copy it and configure it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+  </li>
+  <li>
+    <strong>Test the trigger</strong> &mdash; Use DryRun Security&rsquo;s <strong>Test</strong> button in the webhook configuration to send a sample payload. This lets Zapier detect the field structure from the finding payload.
+  </li>
+  <li>
+    <strong>Add a Filter step</strong> &mdash; Insert a &ldquo;Filter&rdquo; action and set the condition: <code>event</code> (exactly) <code>new_finding</code>. This ensures the Zap only continues for new findings.
+  </li>
+  <li>
+    <strong>Add a &ldquo;Find Issue&rdquo; Jira action</strong> &mdash; Choose the Jira Cloud app and select &ldquo;Find Issue.&rdquo; Configure the search using JQL:
+<pre><code>project = {PROJECT_KEY} AND labels = &quot;{finding.id}&quot; AND statusCategory != Done</code></pre>
+    <p>Map <code>finding.id</code> from the DryRun Security payload as the label value.</p>
+  </li>
+  <li>
+    <strong>Add a &ldquo;Paths&rdquo; step (two branches)</strong>:
+    <ul>
+      <li>
+        <strong>Path A &mdash; Ticket exists</strong> (Find Issue returned a result):
+        <ul>
+          <li>Add a Jira &ldquo;Add Comment to Issue&rdquo; action.</li>
+          <li>Set the Issue ID from the Find Issue result.</li>
+          <li>Comment body: <code>DryRun Security flagged this finding again on PR #{pull_request} in {repository}.</code></li>
+        </ul>
+      </li>
+      <li>
+        <strong>Path B &mdash; No ticket</strong> (Find Issue returned no result):
+        <ul>
+          <li>Add a Jira &ldquo;Create Issue&rdquo; action.</li>
+          <li>Map fields from the DryRun Security payload:
+            <ul>
+              <li>Summary: <code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></li>
+              <li>Description: include finding description, repo, PR number, severity, file, line, finding ID</li>
+              <li>Labels: <code>dryrun-security</code>, severity value, finding ID</li>
+              <li>Priority: map from severity</li>
+              <li>Issue Type: Bug</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>Turn on the Zap</strong> &mdash; Once all steps are configured and tested, enable the Zap.
+  </li>
+</ol>
+
+<p><strong>Note:</strong> Zapier&rsquo;s free plan limits the number of Zap steps and runs per month. For high-volume repositories, consider Zapier&rsquo;s paid plans or using Tines which offers more flexible security-focused automation.</p>
 ''',
 }
 

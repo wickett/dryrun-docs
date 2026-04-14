@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto Fix - DryRun Security Docs</title>
-  <meta name="description" content="Automated remediation guidance and fix verification for security findings.">
+  <title>Jira Integration - DryRun Security Docs</title>
+  <meta name="description" content="Connect DryRun Security to Jira using automation middleware for automated ticket creation and deduplication.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,7 @@
 <li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
 <li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
 <li><a href="../docs/sca.html">SCA</a></li>
-<li><a href="../docs/auto-fix.html" class="active">Auto Fix</a></li>
+<li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
 </div>
 <div class="sidebar-section">
@@ -97,7 +97,7 @@
 <ul class="sidebar-links">
 <li><a href="../docs/slack-integration.html">Slack Integration</a></li>
 <li><a href="../docs/webhook-integration.html">Generic Webhook Integration</a></li>
-<li><a href="../docs/jira-integration.html">Jira Integration</a></li>
+<li><a href="../docs/jira-integration.html" class="active">Jira Integration</a></li>
 <li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
 <li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
 </ul>
@@ -107,65 +107,165 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Scanning</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Auto Fix</span></div>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Integrations</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Jira Integration</span></div>
         <div class="page-heading-row">
-          <h1 class="page-heading">Auto Fix</h1>
+          <h1 class="page-heading">Jira Integration</h1>
           <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
         </div>
-        <p class="page-description">Automated remediation guidance and fix verification for security findings.</p>
+        <p class="page-description">Connect DryRun Security to Jira using automation middleware for automated ticket creation and deduplication.</p>
         <div class="doc-content">
-<h2 id="why-implement-auto-fix">Why Implement Auto Fix</h2>
+<h2 id="overview">Overview</h2>
 
-<p>Automating security fixes delivers measurable value across your development organization:</p>
+<p>DryRun Security does not have a native Jira integration today, but admins can connect DryRun Security to Jira using an automation middleware tool &mdash; either <strong>Tines</strong> or <strong>Zapier</strong>. DryRun Security sends a webhook when a finding is detected on a PR scan. The middleware receives the webhook, unpacks the finding details, checks Jira for an existing ticket for that finding, and either creates a new ticket or updates the existing one.</p>
 
-<ul>
-  <li><strong>Speed of deployment</strong> - Fixing vulnerabilities faster means shipping faster</li>
-  <li><strong>Reduced time-to-remediation</strong> - Vulnerabilities are resolved quickly rather than sitting in backlogs</li>
-  <li><strong>Developer productivity</strong> - Developers spend less time on manual security fixes and more time building features</li>
-  <li><strong>Consistent remediation</strong> - AI-powered fixes follow security best practices every time</li>
-  <li><strong>Shift-left at scale</strong> - Security fixes happen as part of the development workflow, not as a separate process</li>
-</ul>
+<p>When a PR is scanned and a finding is returned, DryRun Security sends a POST request with a JSON payload containing the event type, timestamp, repository, pull request number, and a finding object with <code>id</code>, <code>severity</code>, <code>category</code>, <code>title</code>, <code>file</code>, <code>line</code>, and <code>description</code>. See the <a href="./webhook-integration.html">Generic Webhook Integration</a> page for the full payload structure and configuration details.</p>
 
-<h2 id="how-dryrun-enables-auto-fix">How DryRun Enables Auto Fix with AI Coding</h2>
-
-<p>DryRun Security enables auto fix by integrating with AI coding tools. Supported tools include:</p>
+<h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-  <li><strong>Claude Code</strong></li>
-  <li><strong>Codex</strong></li>
-  <li><strong>Cursor</strong></li>
-  <li><strong>Windsurf</strong></li>
-  <li><strong>VS Code</strong></li>
+  <li>DryRun Security webhook configured &mdash; see <a href="./webhook-integration.html">Generic Webhook Integration</a></li>
+  <li>A Jira project with API access (Jira API token and project key)</li>
+  <li>A <a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> or <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> account</li>
 </ul>
 
-<p>Auto fix is enabled by:</p>
+<h2 id="jira-field-mapping">Jira Field Mapping</h2>
+
+<p>Map DryRun Security finding fields to Jira ticket fields as follows:</p>
+
+<table>
+  <thead>
+    <tr><th>Jira Field</th><th>Value from DryRun</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Summary</td><td><code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></td></tr>
+    <tr><td>Description</td><td>Full finding description, repository, PR number, severity, file path, finding ID</td></tr>
+    <tr><td>Labels</td><td><code>dryrun-security</code>, <code>{finding.severity}</code>, <code>{finding.category}</code>, <code>{finding.id}</code> (used for deduplication)</td></tr>
+    <tr><td>Priority</td><td>Critical &rarr; Highest, High &rarr; High, Medium &rarr; Medium, Low &rarr; Low</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Note:</strong> The <code>finding.id</code> label is used as the deduplication key to check whether a ticket already exists.</p>
+
+<h2 id="tines-workflow">Tines Workflow</h2>
+
+<p><a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> is a security automation platform. Use it to receive DryRun Security webhooks and automate Jira ticket creation with deduplication logic.</p>
 
 <ol>
-  <li>Creating an API key from the DryRun Security dashboard (see <a href="./dryrun-api.html">API Access Keys</a>)</li>
-  <li>Connecting your AI coding tool to the DryRun Security <a href="./mcp.html">MCP (Model Context Protocol) server</a></li>
-  <li>Installing the DryRun Security remediation skill</li>
+  <li>
+    <strong>Create a Webhook action in Tines</strong> &mdash; Add a &ldquo;Webhook&rdquo; action as the trigger. Tines will generate a unique URL. Copy this URL and use it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+  </li>
+  <li>
+    <strong>Add a Filter action</strong> &mdash; Filter on <code>event == &quot;new_finding&quot;</code> to ensure the workflow only runs for new findings (not scan completions or resolved findings).
+  </li>
+  <li>
+    <strong>Search Jira for an existing ticket</strong> &mdash; Add an HTTP Request action to call the Jira REST API:
+<pre><code>GET {JIRA_BASE_URL}/rest/api/3/search
+  ?jql=project={PROJECT_KEY} AND labels=&quot;{finding.id}&quot; AND statusCategory != Done
+Authorization: Basic {base64(email:api_token)}</code></pre>
+    <p>This checks whether a ticket already exists for this specific finding by searching for its unique ID in labels.</p>
+  </li>
+  <li>
+    <strong>Add a Branch (condition) action</strong> &mdash; Check the <code>issues</code> array in the Jira search response:
+    <ul>
+      <li>If <code>issues.length &gt; 0</code> &rarr; ticket exists &rarr; go to Step 5</li>
+      <li>If <code>issues.length == 0</code> &rarr; no ticket &rarr; go to Step 6</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Add a comment to the existing Jira ticket</strong> &mdash; HTTP Request action:
+<pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue/{issues[0].id}/comment
+Body:
+{
+  &quot;body&quot;: &quot;DryRun Security flagged this finding again on PR #{pull_request} in {repository} at {timestamp}.&quot;
+}</code></pre>
+  </li>
+  <li>
+    <strong>Create a new Jira ticket</strong> &mdash; HTTP Request action:
+<pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue
+Body:
+{
+  &quot;fields&quot;: {
+    &quot;project&quot;: { &quot;key&quot;: &quot;{PROJECT_KEY}&quot; },
+    &quot;summary&quot;: &quot;[DryRun] {finding.title} in {finding.file}:{finding.line}&quot;,
+    &quot;description&quot;: { &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1, &quot;content&quot;: [ ... ] },
+    &quot;issuetype&quot;: { &quot;name&quot;: &quot;Bug&quot; },
+    &quot;labels&quot;: [&quot;dryrun-security&quot;, &quot;{finding.severity}&quot;, &quot;{finding.id}&quot;],
+    &quot;priority&quot;: { &quot;name&quot;: &quot;{mapped priority}&quot; }
+  }
+}</code></pre>
+  </li>
 </ol>
 
-<p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
+<p><strong>Workflow diagram:</strong> Webhook &rarr; Filter (<code>new_finding</code>) &rarr; Search Jira &rarr; Branch &rarr; [Comment on existing ticket | Create new ticket]</p>
 
-<h2 id="tool-setup-instructions">Setup Instructions for Your AI Coding Tool</h2>
+<h2 id="zapier-workflow">Zapier Workflow</h2>
 
-<p>Each supported tool &mdash; Claude Code, Codex, Cursor, Windsurf, and VS Code &mdash; has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
+<p><a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> is a no-code automation platform. Use it to build the same DryRun Security &rarr; Jira workflow without writing code.</p>
 
-<p>To get started, navigate to <strong>Integrations</strong> in the DryRun Security dashboard and select your AI coding tool for tool-specific instructions.</p>
+<ol>
+  <li>
+    <strong>Create a new Zap and choose &ldquo;Webhooks by Zapier&rdquo; as the trigger</strong> &mdash; Select &ldquo;Catch Hook&rdquo; as the trigger event. Zapier generates a webhook URL. Copy it and configure it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+  </li>
+  <li>
+    <strong>Test the trigger</strong> &mdash; Use DryRun Security&rsquo;s <strong>Test</strong> button in the webhook configuration to send a sample payload. This lets Zapier detect the field structure from the finding payload.
+  </li>
+  <li>
+    <strong>Add a Filter step</strong> &mdash; Insert a &ldquo;Filter&rdquo; action and set the condition: <code>event</code> (exactly) <code>new_finding</code>. This ensures the Zap only continues for new findings.
+  </li>
+  <li>
+    <strong>Add a &ldquo;Find Issue&rdquo; Jira action</strong> &mdash; Choose the Jira Cloud app and select &ldquo;Find Issue.&rdquo; Configure the search using JQL:
+<pre><code>project = {PROJECT_KEY} AND labels = &quot;{finding.id}&quot; AND statusCategory != Done</code></pre>
+    <p>Map <code>finding.id</code> from the DryRun Security payload as the label value.</p>
+  </li>
+  <li>
+    <strong>Add a &ldquo;Paths&rdquo; step (two branches)</strong>:
+    <ul>
+      <li>
+        <strong>Path A &mdash; Ticket exists</strong> (Find Issue returned a result):
+        <ul>
+          <li>Add a Jira &ldquo;Add Comment to Issue&rdquo; action.</li>
+          <li>Set the Issue ID from the Find Issue result.</li>
+          <li>Comment body: <code>DryRun Security flagged this finding again on PR #{pull_request} in {repository}.</code></li>
+        </ul>
+      </li>
+      <li>
+        <strong>Path B &mdash; No ticket</strong> (Find Issue returned no result):
+        <ul>
+          <li>Add a Jira &ldquo;Create Issue&rdquo; action.</li>
+          <li>Map fields from the DryRun Security payload:
+            <ul>
+              <li>Summary: <code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></li>
+              <li>Description: include finding description, repo, PR number, severity, file, line, finding ID</li>
+              <li>Labels: <code>dryrun-security</code>, severity value, finding ID</li>
+              <li>Priority: map from severity</li>
+              <li>Issue Type: Bug</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>Turn on the Zap</strong> &mdash; Once all steps are configured and tested, enable the Zap.
+  </li>
+</ol>
+
+<p><strong>Note:</strong> Zapier&rsquo;s free plan limits the number of Zap steps and runs per month. For high-volume repositories, consider Zapier&rsquo;s paid plans or using Tines which offers more flexible security-focused automation.</p>
         </div>
 <nav class="prev-next">
-<a href="../docs/sca.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">SCA</span></a>
-<a href="../docs/code-security-intelligence.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">Code Security Intelligence</span></a>
+<a href="../docs/webhook-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Generic Webhook Integration</span></a>
+<a href="../docs/api-access-keys.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">API Access Keys</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#why-implement-auto-fix">Why Implement Auto Fix</a></li>
-<li class="toc-h2"><a href="#how-dryrun-enables-auto-fix">How DryRun Enables Auto Fix with AI Coding</a></li>
-<li class="toc-h2"><a href="#tool-setup-instructions">Setup Instructions for Your AI Coding Tool</a></li>
+<li class="toc-h2"><a href="#overview">Overview</a></li>
+<li class="toc-h2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2"><a href="#jira-field-mapping">Jira Field Mapping</a></li>
+<li class="toc-h2"><a href="#tines-workflow">Tines Workflow</a></li>
+<li class="toc-h2"><a href="#zapier-workflow">Zapier Workflow</a></li>
 </ul>
 </aside>
   </div>
