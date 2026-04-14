@@ -1649,43 +1649,6 @@ PAGES['permissions'] = {
 
 <p>DryRun Security uses a two-role model, <strong>Admin</strong> and <strong>Developer</strong>, that maps to your existing SCM platform roles. An account administrator can also manually promote any developer to Admin within the DryRun Security UI, regardless of their role in GitHub or GitLab.</p>
 
-<h2 id="dryrun-roles">DryRun Roles</h2>
-
-<p>Two roles exist in DryRun Security: <strong>Admin</strong> and <strong>Developer</strong>. Each role controls what a user can see and configure across the platform.</p>
-
-<h3 id="admin-role">Admin</h3>
-
-<p>Full access to the platform across all repositories the customer has installed:</p>
-
-<ul>
-  <li><strong>Risk Register</strong> (all repos)</li>
-  <li><strong>Repositories page</strong> (all repos)</li>
-  <li><strong>Pull Requests page</strong> (all PRs across all repos)</li>
-  <li><strong>DeepScan page</strong> - view all DeepScan runs and reports, trigger new DeepScans</li>
-  <li><strong>Code Policies</strong> - view and configure custom code policies</li>
-  <li><strong>Insights page</strong> (including AI chat assistant and Daily Digest)</li>
-  <li><strong>Configurations</strong> - edit all PR scanner configurations</li>
-  <li><strong>Integrations</strong> - set up Slack, webhook integrations, and AI coding integrations (MCP/IDE)</li>
-  <li><strong>Access Keys</strong> - generate API access keys</li>
-  <li><strong>Dismiss Findings</strong> - dismiss findings from the DryRun Security dashboard and from the SCM comment (GitHub/GitLab PR comment)</li>
-  <li>Install/uninstall repositories</li>
-</ul>
-
-<h3 id="developer-role">Developer</h3>
-
-<p>Scoped access based on their repository membership in the SCM platform:</p>
-
-<ul>
-  <li><strong>Risk Register</strong> - findings only for repos they have membership permission over</li>
-  <li><strong>Repositories page</strong> - only repos they have membership permission over</li>
-  <li><strong>Pull Requests</strong> - only PRs and findings for repos they have membership permission over</li>
-  <li><strong>DeepScan</strong> - view only (cannot trigger new DeepScans)</li>
-  <li><strong>Code Policies</strong> - view only</li>
-  <li><strong>Dismiss Findings</strong> - dismiss findings from the DryRun Security dashboard and from the SCM comment (GitHub/GitLab PR comment)</li>
-</ul>
-
-<p><strong>Cannot access:</strong> Insights page, Configurations, Access Keys, Integrations, or install/uninstall repos.</p>
-
 <h2 id="scm-role-mapping">SCM Role Mapping</h2>
 
 <p>DryRun Security automatically maps SCM roles to DryRun roles at login. No manual configuration is required.</p>
@@ -1726,20 +1689,18 @@ PAGES['permissions'] = {
     <tr><th>Feature</th><th>Admin</th><th>Developer</th></tr>
   </thead>
   <tbody>
-    <tr><td>Risk Register</td><td>&#10003; (all repos)</td><td>Scoped to repos with membership</td></tr>
-    <tr><td>Repositories</td><td>&#10003; (all repos)</td><td>Scoped to repos with membership</td></tr>
-    <tr><td>Pull Requests</td><td>&#10003; (all repos)</td><td>Scoped to repos with membership</td></tr>
-    <tr><td>Dismiss Findings (dashboard &amp; SCM comment)</td><td>&#10003;</td><td>&#10003;</td></tr>
-    <tr><td>DeepScan (view)</td><td>&#10003;</td><td>&#10003;</td></tr>
-    <tr><td>DeepScan (trigger)</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Code Policies (view)</td><td>&#10003;</td><td>&#10003;</td></tr>
-    <tr><td>Code Policies (configure)</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Insights &amp; AI Assistant</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Daily Digest</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Configurations</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Integrations</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Access Keys</td><td>&#10003;</td><td>&#10007;</td></tr>
-    <tr><td>Install / Uninstall Repos</td><td>&#10003;</td><td>&#10007;</td></tr>
+    <tr><td>Risk Register</td><td>All repositories</td><td>Scoped to repos with membership</td></tr>
+    <tr><td>Repositories</td><td>All repositories</td><td>Scoped to repos with membership</td></tr>
+    <tr><td>Pull Requests</td><td>All PRs across all repositories</td><td>Scoped to repos with membership</td></tr>
+    <tr><td>Dismiss Findings</td><td>Dashboard and SCM comment (PR comment)</td><td>Dashboard and SCM comment (PR comment)</td></tr>
+    <tr><td>DeepScan</td><td>View all runs and reports; trigger new DeepScans</td><td>View only — cannot trigger new DeepScans</td></tr>
+    <tr><td>Code Policies</td><td>View and configure custom code policies</td><td>View only — cannot configure</td></tr>
+    <tr><td>Insights &amp; AI Assistant</td><td>Full access including AI chat assistant</td><td class="no-access">No access</td></tr>
+    <tr><td>Daily Digest</td><td>Full access</td><td class="no-access">No access</td></tr>
+    <tr><td>Configurations</td><td>Edit all PR scanner configurations</td><td class="no-access">No access</td></tr>
+    <tr><td>Integrations</td><td>Slack, webhook, and AI coding integrations (MCP/IDE)</td><td class="no-access">No access</td></tr>
+    <tr><td>Access Keys</td><td>Generate API access keys</td><td class="no-access">No access</td></tr>
+    <tr><td>Install / Uninstall Repos</td><td>Full access</td><td class="no-access">No access</td></tr>
   </tbody>
 </table>
 ''',
