@@ -3,7 +3,7 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings &mdash; surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
+<p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings, surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
 
 <p>Every pull request DryRun Security reviews and every DeepScan contributes to a structured, queryable intelligence index. This index powers a range of security workflows that would otherwise require manual data collection, spreadsheet tracking, and cross-referencing multiple tools.</p>
 
@@ -33,7 +33,7 @@
     </tr>
     <tr>
       <td>Architecture Risks</td>
-      <td>Structural risk patterns in the codebase &mdash; trust boundary changes, auth drift, data flow modifications</td>
+      <td>Structural risk patterns in the codebase, including trust boundary changes, auth drift, and data flow modifications</td>
       <td>Identify new unauthenticated endpoints or service-to-service communication paths added this month</td>
     </tr>
     <tr>
@@ -43,7 +43,7 @@
     </tr>
     <tr>
       <td>Shadow AI</td>
-      <td>AI and LLM usage detected across the codebase &mdash; tool fingerprints, code pattern analysis, volume anomalies</td>
+      <td>AI and LLM usage detected across the codebase: tool fingerprints, code pattern analysis, and volume anomalies</td>
       <td>Audit all AI-generated code contributions in security-critical paths for governance reporting</td>
     </tr>
     <tr>
@@ -53,7 +53,7 @@
     </tr>
     <tr>
       <td>Application Summary</td>
-      <td>Security profile of a specific service or application &mdash; open findings, scan coverage, risk trends</td>
+      <td>Security profile of a specific service or application: open findings, scan coverage, and risk trends</td>
       <td>Generate an application security profile for a new team member onboarding onto a service</td>
     </tr>
     <tr>
@@ -81,7 +81,7 @@
 
 <h3 id="ai-assistant">AI Assistant</h3>
 
-<p>The Insights page has an AI assistant chat interface. Users can interact with it to generate security reports, feature ship summaries, risk assessments, and more &mdash; all grounded in real DryRun Security findings data. Simply describe what you want (e.g., &ldquo;Create a security summary for the features shipped this week&rdquo;) and the assistant generates it from your actual scan data.</p>
+<p>The Insights page has an AI assistant chat interface. Users can interact with it to generate security reports, feature ship summaries, risk assessments, and more, all grounded in real DryRun Security findings data. Simply describe what you want (e.g., &ldquo;Create a security summary for the features shipped this week&rdquo;) and the assistant generates it from your actual scan data.</p>
 
 <p>Example prompts:</p>
 
@@ -94,11 +94,11 @@
   <li>&ldquo;Summarize the security posture of repo X&rdquo;</li>
 </ul>
 
-<p>Because DryRun Security continuously scans every pull request and repository, these responses are grounded in real findings from your codebase &mdash; not generic checklists. They pull from live data, so the answers reflect your current state.</p>
+<p>Because DryRun Security continuously scans every pull request and repository, these responses are grounded in real findings from your codebase, not generic checklists. They pull from live data, so the answers reflect your current state.</p>
 
 <h3 id="recurring-queries">Recurring Queries</h3>
 
-<p>Users can create recurring queries &mdash; scheduled questions that DryRun Security runs against findings data on a regular cadence. For example:</p>
+<p>Users can create recurring queries, which are scheduled questions that DryRun Security runs against findings data on a regular cadence. For example:</p>
 
 <ul>
   <li>A daily report on new critical findings across all repositories</li>
