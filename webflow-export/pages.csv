@@ -1597,31 +1597,7 @@ DryRun API,dryrun-api,"<h2 id=""dryrun-simple-api"">DryRun Simple API</h2>
 
 <h2 id=""authentication"">Authentication</h2>
 
-<p>All API requests require an API key generated from the DryRun Security dashboard.</p>
-
-<figure class=""docs-screenshot""><img src=""assets/images/api-guide/02-swagger.png"" alt=""DryRun Security API Swagger documentation"" loading=""lazy""></figure>
-<figure class=""docs-screenshot""><img src=""assets/images/api-guide/01-api-key.png"" alt=""API key generation in DryRun Security Settings"" loading=""lazy""></figure>
-
-<h3 id=""getting-an-api-key"">Getting an API Key</h3>
-
-<p>Navigate to <strong>Settings &gt; Access Keys</strong> in the sidebar at <a href=""https://app.dryrun.security/settings/access-keys"" target=""_blank"" rel=""noopener noreferrer"">app.dryrun.security</a>. The Access Keys page provides two sections:</p>
-
-<ul>
-  <li><strong>API Keys</strong> - Create and manage API keys for your applications. Click <strong>+ Generate New API Key</strong> to create a new key.</li>
-  <li><strong>Your API Keys</strong> - View and manage your existing API keys. You can revoke any key at any time.</li>
-</ul>
-
-<div class=""callout callout-warning"">
-  <strong>Keep your API keys secure.</strong> Treat API keys like passwords. Never share them in public repositories, client-side code, or unsecured locations. If a key is compromised, revoke it immediately from the Access Keys page.
-</div>
-
-<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
-
-<h3 id=""using-your-api-key"">Using Your API Key</h3>
-
-<p>Send your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme:</p>
-
-<pre><code>Authorization: Bearer dryrunsec_**********************</code></pre>
+<p>For information on creating and managing API keys, see the <a href=""./api-access-keys.html"">API Access Keys</a> page. All API requests require a valid API key sent in the <code>Authorization</code> header using the <code>Bearer</code> scheme.</p>
 
 <h2 id=""quick-start"">Quick Start</h2>
 
@@ -1659,6 +1635,27 @@ DryRun API,dryrun-api,"<h2 id=""dryrun-simple-api"">DryRun Simple API</h2>
 <h3 id=""findings"">Findings</h3>
 
 <p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/findings</code> - List all PR findings for a repository. Each finding includes a <code>dashboard_url</code> to view it in the DryRun Security dashboard.</p>
+
+<p><code>GET /v1/accounts/{account_id}/all_findings</code> - List all findings (both PR and DeepScan) for an account.</p>
+<ul>
+  <li><code>days</code> (query, required) &mdash; Number of days to look back</li>
+  <li><code>finding_type</code> (query, optional) &mdash; Filter by type (e.g., <code>pr</code>, <code>deepscan</code>)</li>
+  <li><code>severity</code> (query, optional) &mdash; Filter by severity</li>
+  <li><code>repository_id</code> (query, optional) &mdash; Filter by repository</li>
+  <li><code>page</code> (query, optional) &mdash; Page number for pagination</li>
+  <li><code>per_page</code> (query, optional) &mdash; Results per page</li>
+</ul>
+
+<h3 id=""finding-triage"">Finding Triage</h3>
+
+<p><code>POST /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Set a triage category for a finding.</p>
+<ul>
+  <li>Request body: <code>triage_category</code> &mdash; one of: <code>false_positive</code>, <code>wont_fix</code>, <code>accepted_risk</code>, <code>in_progress</code></li>
+</ul>
+
+<p><code>GET /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Get the triage status for a finding.</p>
+
+<p><code>DELETE /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Remove the triage category from a finding (resets triage status).</p>
 
 <h3 id=""deepscans"">Deepscans</h3>
 
