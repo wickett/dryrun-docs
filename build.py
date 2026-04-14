@@ -98,7 +98,7 @@ PAGES = {}
 
 PAGES['documentation'] = {
     'title': 'Documentation',
-    'description': 'Welcome to DryRun Security documentation. Learn how DryRun Security uses AI-native analysis to find vulnerabilities in your code.',
+    'description': 'Welcome to DryRun Security documentation. DryRun Security uses AI-native analysis to find vulnerabilities in your code across every pull request and repository scan. Beyond individual findings, DryRun builds an intelligence layer on top of all scan data, surfacing trends, patterns, and risks across your entire codebase and development organization.',
     'section': 'Getting Started',
     'content': '''
 <div class="landing-hero">
