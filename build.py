@@ -76,7 +76,7 @@ SECTIONS = [
     {
         'name': 'Platform',
         'slug': 'platform',
-        'pages': ['pr-scanning-configuration', 'custom-code-policies', 'repository-context', 'risk-register', 'finding-tuning', 'pr-blocking', 'compliance-grc', 'permissions', 'mcp', 'dryrun-api', 'code-security-intelligence'],
+        'pages': ['code-security-intelligence', 'pr-scanning-configuration', 'custom-code-policies', 'repository-context', 'risk-register', 'finding-tuning', 'pr-blocking', 'compliance-grc', 'permissions', 'mcp', 'dryrun-api'],
     },
     {
         'name': 'Integrations',
@@ -949,6 +949,8 @@ PAGES['code-security-intelligence'] = {
     'description': 'DryRun Security builds an intelligence layer on top of vulnerability findings and scan data, enabling actionable security workflows across your codebase and development organization.',
     'section': 'Platform',
     'content': '''
+<figure class="docs-screenshot"><img src="{asset_prefix}assets/images/code-security-intelligence/01-csi-architecture.jpg" alt="Code Security Intelligence architecture diagram showing sources, the DryRun intelligence layer, access methods, and intelligence workflows" loading="lazy"></figure>
+
 <h2 id="overview">Overview</h2>
 
 <p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings &mdash; surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
