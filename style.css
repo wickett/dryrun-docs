@@ -913,6 +913,12 @@ body {
   border-color: var(--accent);
   box-shadow: var(--shadow-sm);
   transform: translateY(-2px);
+  text-decoration: none;
+}
+
+a.landing-card:hover,
+a.landing-card:hover * {
+  text-decoration: none;
 }
 
 .landing-card-title {
