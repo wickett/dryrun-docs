@@ -32,71 +32,32 @@
 
 <h2 id="endpoint-reference">Endpoint Reference</h2>
 
-<h3 id="accounts">Accounts</h3>
-
-<p><code>GET /v1/accounts</code> - List all accounts accessible by the API key.</p>
-
-<h3 id="repositories">Repositories</h3>
-
-<p><code>GET /v1/accounts/{account_id}/repositories</code> - List all repositories for an account.</p>
-
-<h3 id="scans">Scans</h3>
-
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans</code> - List PR scans for a repository (supports filtering by status, date, and pagination).</p>
-
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code> - Get detailed PR scan results including findings.</p>
-
-<h3 id="findings">Findings</h3>
-
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/findings</code> - List all PR findings for a repository. Each finding includes a <code>dashboard_url</code> to view it in the DryRun Security dashboard.</p>
-
-<p><code>GET /v1/accounts/{account_id}/all_findings</code> - List all findings (both PR and DeepScan) for an account.</p>
-<ul>
-  <li><code>days</code> (query, required) &mdash; Number of days to look back</li>
-  <li><code>finding_type</code> (query, optional) &mdash; Filter by type (e.g., <code>pr</code>, <code>deepscan</code>)</li>
-  <li><code>severity</code> (query, optional) &mdash; Filter by severity</li>
-  <li><code>repository_id</code> (query, optional) &mdash; Filter by repository</li>
-  <li><code>page</code> (query, optional) &mdash; Page number for pagination</li>
-  <li><code>per_page</code> (query, optional) &mdash; Results per page</li>
-</ul>
-
-<h3 id="finding-triage">Finding Triage</h3>
-
-<p><code>POST /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Set a triage category for a finding.</p>
-<ul>
-  <li>Request body: <code>triage_category</code> &mdash; one of: <code>false_positive</code>, <code>wont_fix</code>, <code>accepted_risk</code>, <code>in_progress</code></li>
-</ul>
-
-<p><code>GET /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Get the triage status for a finding.</p>
-
-<p><code>DELETE /v1/accounts/{account_id}/findings/{finding_id}/triage</code> - Remove the triage category from a finding (resets triage status).</p>
-
-<h3 id="deepscans">Deepscans</h3>
-
-<p><code>GET /v1/accounts/{account_id}/deepscans</code> - List all deepscans for an account.</p>
-
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans</code> - List deepscans for a repository.</p>
-
-<p><code>GET /v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results</code> - List findings for a specific deepscan.</p>
-
-<h3 id="configurations-api">Configurations</h3>
-
-<p><code>GET /v1/accounts/{account_id}/configurations</code> - List configurations for an account.</p>
-<p><code>POST /v1/accounts/{account_id}/configurations</code> - Create a new configuration.</p>
-<p><code>PUT /v1/accounts/{account_id}/configurations/{id}</code> - Update a configuration.</p>
-<p><code>DELETE /v1/accounts/{account_id}/configurations/{id}</code> - Delete a configuration.</p>
-
-<h3 id="analyzers-api">Analyzers</h3>
-
-<p><code>GET /v1/accounts/{account_id}/analyzers</code> - List available analyzers. Use the <code>slug</code> field as the key in configuration analyzer settings.</p>
-
-<h3 id="custom-policies-api">Custom Policies</h3>
-
-<p><code>GET /v1/accounts/{account_id}/custom_policies</code> - List all Custom Code Policies for an account.</p>
-
-<h3 id="insights-api">Insights</h3>
-
-<p><code>GET /v1/accounts/{account_id}/insights</code> - Retrieve the daily insights digest. Insights are generated daily and highlight important security changes. Supports a <code>date</code> query parameter (YYYY-MM-DD).</p>
+<table>
+  <thead>
+    <tr><th>Method</th><th>Endpoint</th><th>Category</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts</code></td><td>Accounts</td><td>List all accounts accessible by the API key.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories</code></td><td>Repositories</td><td>List all repositories for an account.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/scans</code></td><td>Scans</td><td>List PR scans for a repository. Supports filtering by status, date, and pagination.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code></td><td>Scans</td><td>Get detailed PR scan results including findings.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/findings</code></td><td>Findings</td><td>List all PR findings for a repository. Each finding includes a dashboard_url.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/all_findings</code></td><td>Findings</td><td>List all findings (PR and DeepScan) for an account. Supports filtering by days (required), finding_type, severity, repository_id, page, per_page.</td></tr>
+    <tr><td><span class="method-post">POST</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Set a triage category for a finding. Request body: triage_category &mdash; one of: false_positive, wont_fix, accepted_risk, in_progress.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Get the triage status for a finding.</td></tr>
+    <tr><td><span class="method-delete">DELETE</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Remove the triage category from a finding (resets triage status).</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/deepscans</code></td><td>Deepscans</td><td>List all deepscans for an account.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/deepscans</code></td><td>Deepscans</td><td>List deepscans for a repository.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results</code></td><td>Deepscans</td><td>List findings for a specific deepscan.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/configurations</code></td><td>Configurations</td><td>List configurations for an account.</td></tr>
+    <tr><td><span class="method-post">POST</span></td><td><code>/v1/accounts/{account_id}/configurations</code></td><td>Configurations</td><td>Create a new configuration.</td></tr>
+    <tr><td><span class="method-put">PUT</span></td><td><code>/v1/accounts/{account_id}/configurations/{id}</code></td><td>Configurations</td><td>Update a configuration.</td></tr>
+    <tr><td><span class="method-delete">DELETE</span></td><td><code>/v1/accounts/{account_id}/configurations/{id}</code></td><td>Configurations</td><td>Delete a configuration.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/analyzers</code></td><td>Analyzers</td><td>List available analyzers. Use the slug field as the key in configuration analyzer settings.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/custom_policies</code></td><td>Custom Policies</td><td>List all Custom Code Policies for an account.</td></tr>
+    <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/insights</code></td><td>Insights</td><td>Retrieve the daily insights digest. Supports a date query parameter (YYYY-MM-DD).</td></tr>
+  </tbody>
+</table>
 
 <h2 id="conventions">Conventions</h2>
 
