@@ -557,13 +557,13 @@ body {
 .doc-content th {
   text-align: left;
   padding: 10px 16px;
-  background: var(--bg-primary);
+  background: #6366f1;
   border-bottom: 1px solid var(--border);
   font-weight: 600;
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-secondary);
+  color: #ffffff;
 }
 
 .doc-content td {
@@ -582,8 +582,26 @@ body {
   font-style: italic;
 }
 
+.doc-content tbody tr:nth-child(odd) td {
+  background: #ffffff;
+}
+
+.doc-content tbody tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
 .doc-content tr:hover td {
-  background: var(--bg-primary);
+  background: #eef2ff;
+}
+
+.doc-content td .check {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.doc-content td .cross {
+  color: #dc2626;
+  font-weight: 700;
 }
 
 /* Blockquotes / callouts */
