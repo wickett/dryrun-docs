@@ -159,9 +159,9 @@ PAGES['documentation'] = {
     <h2 id="code-security-intelligence">Code Security Intelligence</h2>
   </div>
   <div class="landing-grid cols-3">
-    <a class="landing-card" href="./code-security-intelligence.html">
+    <a class="landing-card" href="./code-security-intelligence.html" style="grid-column: 1 / -1">
       <span class="landing-card-title">Code Security Intelligence</span>
-      <span class="landing-card-desc">An intelligence layer built on top of all finding data and trends &mdash; surfacing feature ships, vulnerability trends, architecture risks, developer patterns, shadow AI usage, incident investigation, and more.</span>
+      <span class="landing-card-desc">An intelligence layer built on top of all finding data and trends, surfacing feature ships, vulnerability trends, architecture risks, developer patterns, shadow AI usage, incident investigation, and more.</span>
     </a>
   </div>
 </div>
@@ -348,7 +348,7 @@ PAGES['quick-start'] = {
   <li>Installing DryRun Security via the DryRun Security Dashboard.</li>
 </ul>
 
-<p>Once installed and activated, you&#x27;ll get immediate visibility into security risks across your GitLab projects &mdash; without slowing development down.</p>
+<p>Once installed and activated, you&#x27;ll get immediate visibility into security risks across your GitLab projects, without slowing development down.</p>
 
 <h3 id="create-a-group-access-token">Create a Group Access Token</h3>
 
@@ -462,7 +462,7 @@ PAGES['deepscan'] = {
 
 <h3 id="option-2-deepscan-page">Option 2 - DeepScan Page</h3>
 
-<p>From the DeepScan page, click on a previously scanned repository to see findings from the latest DeepScan. To review past scans, use the date picker at the top of the page and select the date of a previous scan. The &ldquo;View Details&rdquo; button shows app-specific summaries created by DeepScan &mdash; including auth methods, APIs, configurations, and other context discovered during the scan.</p>
+<p>From the DeepScan page, click on a previously scanned repository to see findings from the latest DeepScan. To review past scans, use the date picker at the top of the page and select the date of a previous scan. The &ldquo;View Details&rdquo; button shows app-specific summaries created by DeepScan, including auth methods, APIs, configurations, and other context discovered during the scan.</p>
 
 <h2 id="vulnerability-categories">Vulnerability Categories</h2>
 
@@ -981,7 +981,7 @@ PAGES['auto-fix'] = {
 
 <h2 id="tool-setup-instructions">Setup Instructions for Your AI Coding Tool</h2>
 
-<p>Each supported tool &mdash; Claude Code, Codex, Cursor, Windsurf, and VS Code &mdash; has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
+<p>Each supported tool (Claude Code, Codex, Cursor, Windsurf, and VS Code) has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
 
 <p>To get started, navigate to <strong>Integrations</strong> in the DryRun Security dashboard and select your AI coding tool for tool-specific instructions.</p>
 ''',
@@ -999,7 +999,7 @@ PAGES['code-security-intelligence'] = {
 
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings &mdash; surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
+<p>DryRun Security takes vulnerability scanning to the next level by building an intelligence layer on top of all the finding data and trends from <a href="./pr-scanning.html">PR scanning</a> and <a href="./deepscan.html">DeepScan</a>. This intelligence layer is actionable and enables AppSec teams to do meaningful security work beyond just reviewing individual findings, surfacing trends, patterns, risks, and insights across the entire codebase and development organization.</p>
 
 <p>Every pull request DryRun Security reviews and every DeepScan contributes to a structured, queryable intelligence index. This index powers a range of security workflows that would otherwise require manual data collection, spreadsheet tracking, and cross-referencing multiple tools.</p>
 
@@ -1029,7 +1029,7 @@ PAGES['code-security-intelligence'] = {
     </tr>
     <tr>
       <td>Architecture Risks</td>
-      <td>Structural risk patterns in the codebase &mdash; trust boundary changes, auth drift, data flow modifications</td>
+      <td>Structural risk patterns in the codebase, including trust boundary changes, auth drift, and data flow modifications</td>
       <td>Identify new unauthenticated endpoints or service-to-service communication paths added this month</td>
     </tr>
     <tr>
@@ -1039,7 +1039,7 @@ PAGES['code-security-intelligence'] = {
     </tr>
     <tr>
       <td>Shadow AI</td>
-      <td>AI and LLM usage detected across the codebase &mdash; tool fingerprints, code pattern analysis, volume anomalies</td>
+      <td>AI and LLM usage detected across the codebase: tool fingerprints, code pattern analysis, and volume anomalies</td>
       <td>Audit all AI-generated code contributions in security-critical paths for governance reporting</td>
     </tr>
     <tr>
@@ -1049,7 +1049,7 @@ PAGES['code-security-intelligence'] = {
     </tr>
     <tr>
       <td>Application Summary</td>
-      <td>Security profile of a specific service or application &mdash; open findings, scan coverage, risk trends</td>
+      <td>Security profile of a specific service or application: open findings, scan coverage, and risk trends</td>
       <td>Generate an application security profile for a new team member onboarding onto a service</td>
     </tr>
     <tr>
@@ -1077,7 +1077,7 @@ PAGES['code-security-intelligence'] = {
 
 <h3 id="ai-assistant">AI Assistant</h3>
 
-<p>The Insights page has an AI assistant chat interface. Users can interact with it to generate security reports, feature ship summaries, risk assessments, and more &mdash; all grounded in real DryRun Security findings data. Simply describe what you want (e.g., &ldquo;Create a security summary for the features shipped this week&rdquo;) and the assistant generates it from your actual scan data.</p>
+<p>The Insights page has an AI assistant chat interface. Users can interact with it to generate security reports, feature ship summaries, risk assessments, and more, all grounded in real DryRun Security findings data. Simply describe what you want (e.g., &ldquo;Create a security summary for the features shipped this week&rdquo;) and the assistant generates it from your actual scan data.</p>
 
 <p>Example prompts:</p>
 
@@ -1090,11 +1090,11 @@ PAGES['code-security-intelligence'] = {
   <li>&ldquo;Summarize the security posture of repo X&rdquo;</li>
 </ul>
 
-<p>Because DryRun Security continuously scans every pull request and repository, these responses are grounded in real findings from your codebase &mdash; not generic checklists. They pull from live data, so the answers reflect your current state.</p>
+<p>Because DryRun Security continuously scans every pull request and repository, these responses are grounded in real findings from your codebase, not generic checklists. They pull from live data, so the answers reflect your current state.</p>
 
 <h3 id="recurring-queries">Recurring Queries</h3>
 
-<p>Users can create recurring queries &mdash; scheduled questions that DryRun Security runs against findings data on a regular cadence. For example:</p>
+<p>Users can create recurring queries, which are scheduled questions that DryRun Security runs against findings data on a regular cadence. For example:</p>
 
 <ul>
   <li>A daily report on new critical findings across all repositories</li>
@@ -1280,15 +1280,15 @@ PAGES['custom-code-policies'] = {
 
 <h3 id="question">Question</h3>
 
-<p>The question field is the prompt given to the LLM that triggers it to begin investigating for the vulnerability. This field should contain a series of things you want the model to check for or validate against. Think of it as the investigation directive &mdash; it should be specific enough to focus the analysis but broad enough to cover the relevant variations of the issue you want to catch.</p>
+<p>The question field is the prompt given to the LLM that triggers it to begin investigating for the vulnerability. This field should contain a series of things you want the model to check for or validate against. Think of it as the investigation directive: it should be specific enough to focus the analysis but broad enough to cover the relevant variations of the issue you want to catch.</p>
 
 <h3 id="background">Background</h3>
 
-<p>The background field provides context that loads alongside the question, giving the LLM the background information it needs to properly assess the code it is reviewing for this vulnerability type. Use this field to provide factual details about your app&rsquo;s function, architecture, authentication handling, data flow, or other dynamics. Do not tell the LLM what you want it to do here &mdash; just provide factual details about your application so the model has the context it needs to make accurate assessments.</p>
+<p>The background field provides context that loads alongside the question, giving the LLM the background information it needs to properly assess the code it is reviewing for this vulnerability type. Use this field to provide factual details about your app&rsquo;s function, architecture, authentication handling, data flow, or other dynamics. Do not tell the LLM what you want it to do here. Just provide factual details about your application so the model has the context it needs to make accurate assessments.</p>
 
 <h3 id="guidance">Guidance</h3>
 
-<p>The guidance field contains the instructions that the LLM will deliver to your development team when a vulnerability is identified by the code policy. This text appears as a comment in your SCM (GitHub, GitLab, etc.) on the relevant PR, so it should be written as actionable remediation instructions &mdash; telling developers exactly what to fix and how.</p>
+<p>The guidance field contains the instructions that the LLM will deliver to your development team when a vulnerability is identified by the code policy. This text appears as a comment in your SCM (GitHub, GitLab, etc.) on the relevant PR, so it should be written as actionable remediation instructions, telling developers exactly what to fix and how.</p>
 ''',
 }
 
@@ -1364,10 +1364,10 @@ PAGES['risk-register'] = {
 <h2 id="common-workflows">Common Workflows</h2>
 
 <h3 id="reviewing-merged-risk">Reviewing Merged Risk</h3>
-<p>Filter by &ldquo;merged&rdquo; PR status. This shows findings DryRun Security identified as containing a vulnerability but that were merged anyway &mdash; the vulnerability lives in the codebase. These represent accepted or overlooked risk and should be reviewed to determine if remediation is needed.</p>
+<p>Filter by &ldquo;merged&rdquo; PR status. This shows findings DryRun Security identified as containing a vulnerability but that were merged anyway, meaning the vulnerability lives in the codebase. These represent accepted or overlooked risk and should be reviewed to determine if remediation is needed.</p>
 
 <h3 id="triaging-open-prs">Triaging Open PRs</h3>
-<p>Filter by &ldquo;open&rdquo; PR status. This surfaces findings on pull requests that are still open and have not been merged to main yet. Because the PR is still open, there is still time to fix the issue before it reaches production &mdash; these findings should be prioritized and actioned first.</p>
+<p>Filter by &ldquo;open&rdquo; PR status. This surfaces findings on pull requests that are still open and have not been merged to main yet. Because the PR is still open, there is still time to fix the issue before it reaches production. These findings should be prioritized and actioned first.</p>
 
 <h3 id="reviewing-dismissed-findings">Reviewing Dismissed Findings</h3>
 <p>Filter to show dismissed findings. AppSec engineers can see who dismissed each finding and take appropriate follow-up action: override the dismissal if the finding represents real risk, reach out to the developer to help educate them, or stay informed about what is being marked as &ldquo;won&rsquo;t fix&rdquo;, &ldquo;nit pick&rdquo;, or &ldquo;false positive&rdquo;. This workflow supports both risk oversight and developer security education.</p>
@@ -1914,7 +1914,7 @@ PAGES['dryrun-api'] = {
     <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/scans/{id}</code></td><td>Scans</td><td>Get detailed PR scan results including findings.</td></tr>
     <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/repositories/{repository_id}/findings</code></td><td>Findings</td><td>List all PR findings for a repository. Each finding includes a dashboard_url.</td></tr>
     <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/all_findings</code></td><td>Findings</td><td>List all findings (PR and DeepScan) for an account. Supports filtering by days (required), finding_type, severity, repository_id, page, per_page.</td></tr>
-    <tr><td><span class="method-post">POST</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Set a triage category for a finding. Request body: triage_category &mdash; one of: false_positive, wont_fix, accepted_risk, in_progress.</td></tr>
+    <tr><td><span class="method-post">POST</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Set a triage category for a finding. Request body: triage_category, one of: false_positive, wont_fix, accepted_risk, in_progress.</td></tr>
     <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Get the triage status for a finding.</td></tr>
     <tr><td><span class="method-delete">DELETE</span></td><td><code>/v1/accounts/{account_id}/findings/{finding_id}/triage</code></td><td>Finding Triage</td><td>Remove the triage category from a finding (resets triage status).</td></tr>
     <tr><td><span class="method-get">GET</span></td><td><code>/v1/accounts/{account_id}/deepscans</code></td><td>Deepscans</td><td>List all deepscans for an account.</td></tr>
@@ -2097,14 +2097,14 @@ PAGES['jira-integration'] = {
     'content': '''
 <h2 id="overview">Overview</h2>
 
-<p>DryRun Security does not have a native Jira integration today, but admins can connect DryRun Security to Jira using an automation middleware tool &mdash; either <strong>Tines</strong> or <strong>Zapier</strong>. DryRun Security sends a webhook when a finding is detected on a PR scan. The middleware receives the webhook, unpacks the finding details, checks Jira for an existing ticket for that finding, and either creates a new ticket or updates the existing one.</p>
+<p>DryRun Security does not have a native Jira integration today, but admins can connect DryRun Security to Jira using an automation middleware tool, either <strong>Tines</strong> or <strong>Zapier</strong>. DryRun Security sends a webhook when a finding is detected on a PR scan. The middleware receives the webhook, unpacks the finding details, checks Jira for an existing ticket for that finding, and either creates a new ticket or updates the existing one.</p>
 
 <p>When a PR is scanned and a finding is returned, DryRun Security sends a POST request with a JSON payload containing the event type, timestamp, repository, pull request number, and a finding object with <code>id</code>, <code>severity</code>, <code>category</code>, <code>title</code>, <code>file</code>, <code>line</code>, and <code>description</code>. See the <a href="./webhook-integration.html">Webhook Integration</a> page for the full payload structure and configuration details.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 
 <ul>
-  <li>DryRun Security webhook configured &mdash; see <a href="./webhook-integration.html">Webhook Integration</a></li>
+  <li>DryRun Security webhook configured (see <a href="./webhook-integration.html">Webhook Integration</a>)</li>
   <li>A Jira project with API access (Jira API token and project key)</li>
   <li>A <a href="https://www.tines.com/" target="_blank" rel="noopener noreferrer">Tines</a> or <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier</a> account</li>
 </ul>
@@ -2133,27 +2133,27 @@ PAGES['jira-integration'] = {
 
 <ol>
   <li>
-    <strong>Create a Webhook action in Tines</strong> &mdash; Add a &ldquo;Webhook&rdquo; action as the trigger. Tines will generate a unique URL. Copy this URL and use it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+    <strong>Create a Webhook action in Tines:</strong> Add a &ldquo;Webhook&rdquo; action as the trigger. Tines will generate a unique URL. Copy this URL and use it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
   </li>
   <li>
-    <strong>Add a Filter action</strong> &mdash; Filter on <code>event == &quot;new_finding&quot;</code> to ensure the workflow only runs for new findings (not scan completions or resolved findings).
+    <strong>Add a Filter action:</strong> Filter on <code>event == &quot;new_finding&quot;</code> to ensure the workflow only runs for new findings (not scan completions or resolved findings).
   </li>
   <li>
-    <strong>Search Jira for an existing ticket</strong> &mdash; Add an HTTP Request action to call the Jira REST API:
+    <strong>Search Jira for an existing ticket:</strong> Add an HTTP Request action to call the Jira REST API:
 <pre><code>GET {JIRA_BASE_URL}/rest/api/3/search
   ?jql=project={PROJECT_KEY} AND labels=&quot;{finding.id}&quot; AND statusCategory != Done
 Authorization: Basic {base64(email:api_token)}</code></pre>
     <p>This checks whether a ticket already exists for this specific finding by searching for its unique ID in labels.</p>
   </li>
   <li>
-    <strong>Add a Branch (condition) action</strong> &mdash; Check the <code>issues</code> array in the Jira search response:
+    <strong>Add a Branch (condition) action:</strong> Check the <code>issues</code> array in the Jira search response:
     <ul>
       <li>If <code>issues.length &gt; 0</code> &rarr; ticket exists &rarr; go to Step 5</li>
       <li>If <code>issues.length == 0</code> &rarr; no ticket &rarr; go to Step 6</li>
     </ul>
   </li>
   <li>
-    <strong>Add a comment to the existing Jira ticket</strong> &mdash; HTTP Request action:
+    <strong>Add a comment to the existing Jira ticket.</strong> HTTP Request action:
 <pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue/{issues[0].id}/comment
 Body:
 {
@@ -2161,7 +2161,7 @@ Body:
 }</code></pre>
   </li>
   <li>
-    <strong>Create a new Jira ticket</strong> &mdash; HTTP Request action:
+    <strong>Create a new Jira ticket.</strong> HTTP Request action:
 <pre><code>POST {JIRA_BASE_URL}/rest/api/3/issue
 Body:
 {
@@ -2194,16 +2194,16 @@ Body:
 
 <ol>
   <li>
-    <strong>Create a new Zap and choose &ldquo;Webhooks by Zapier&rdquo; as the trigger</strong> &mdash; Select &ldquo;Catch Hook&rdquo; as the trigger event. Zapier generates a webhook URL. Copy it and configure it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
+    <strong>Create a new Zap and choose &ldquo;Webhooks by Zapier&rdquo; as the trigger:</strong> Select &ldquo;Catch Hook&rdquo; as the trigger event. Zapier generates a webhook URL. Copy it and configure it as the DryRun Security webhook destination in <strong>Settings &gt; Integrations</strong>.
   </li>
   <li>
-    <strong>Test the trigger</strong> &mdash; Use DryRun Security&rsquo;s <strong>Test</strong> button in the webhook configuration to send a sample payload. This lets Zapier detect the field structure from the finding payload.
+    <strong>Test the trigger:</strong> Use DryRun Security&rsquo;s <strong>Test</strong> button in the webhook configuration to send a sample payload. This lets Zapier detect the field structure from the finding payload.
   </li>
   <li>
-    <strong>Add a Filter step</strong> &mdash; Insert a &ldquo;Filter&rdquo; action and set the condition: <code>event</code> (exactly) <code>new_finding</code>. This ensures the Zap only continues for new findings.
+    <strong>Add a Filter step:</strong> Insert a &ldquo;Filter&rdquo; action and set the condition: <code>event</code> (exactly) <code>new_finding</code>. This ensures the Zap only continues for new findings.
   </li>
   <li>
-    <strong>Add a &ldquo;Find Issue&rdquo; Jira action</strong> &mdash; Choose the Jira Cloud app and select &ldquo;Find Issue.&rdquo; Configure the search using JQL:
+    <strong>Add a &ldquo;Find Issue&rdquo; Jira action:</strong> Choose the Jira Cloud app and select &ldquo;Find Issue.&rdquo; Configure the search using JQL:
 <pre><code>project = {PROJECT_KEY} AND labels = &quot;{finding.id}&quot; AND statusCategory != Done</code></pre>
     <p>Map <code>finding.id</code> from the DryRun Security payload as the label value.</p>
   </li>
@@ -2211,7 +2211,7 @@ Body:
     <strong>Add a &ldquo;Paths&rdquo; step (two branches)</strong>:
     <ul>
       <li>
-        <strong>Path A &mdash; Ticket exists</strong> (Find Issue returned a result):
+        <strong>Path A: Ticket exists</strong> (Find Issue returned a result):
         <ul>
           <li>Add a Jira &ldquo;Add Comment to Issue&rdquo; action.</li>
           <li>Set the Issue ID from the Find Issue result.</li>
@@ -2219,7 +2219,7 @@ Body:
         </ul>
       </li>
       <li>
-        <strong>Path B &mdash; No ticket</strong> (Find Issue returned no result):
+        <strong>Path B: No ticket</strong> (Find Issue returned no result):
         <ul>
           <li>Add a Jira &ldquo;Create Issue&rdquo; action.</li>
           <li>Map fields from the DryRun Security payload:
@@ -2236,7 +2236,7 @@ Body:
     </ul>
   </li>
   <li>
-    <strong>Turn on the Zap</strong> &mdash; Once all steps are configured and tested, enable the Zap.
+    <strong>Turn on the Zap:</strong> Once all steps are configured and tested, enable the Zap.
   </li>
 </ol>
 
@@ -2900,9 +2900,9 @@ def render_index_page() -> str:
             <h2>Code Security Intelligence</h2>
           </div>
           <div class="landing-grid cols-3">
-            <a class="landing-card" href="{esc(dp)}code-security-intelligence.html">
+            <a class="landing-card" href="{esc(dp)}code-security-intelligence.html" style="grid-column: 1 / -1">
               <span class="landing-card-title">Code Security Intelligence</span>
-              <span class="landing-card-desc">An intelligence layer built on top of all finding data and trends &mdash; surfacing feature ships, vulnerability trends, architecture risks, developer patterns, shadow AI usage, incident investigation, and more.</span>
+              <span class="landing-card-desc">An intelligence layer built on top of all finding data and trends, surfacing feature ships, vulnerability trends, architecture risks, developer patterns, shadow AI usage, incident investigation, and more.</span>
             </a>
           </div>
         </div>
