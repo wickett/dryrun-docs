@@ -72,7 +72,16 @@ Body:
   &quot;fields&quot;: {
     &quot;project&quot;: { &quot;key&quot;: &quot;{PROJECT_KEY}&quot; },
     &quot;summary&quot;: &quot;[DryRun] {finding.title} in {finding.file}:{finding.line}&quot;,
-    &quot;description&quot;: { &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1, &quot;content&quot;: [ ... ] },
+    &quot;description&quot;: {
+      &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1,
+      &quot;content&quot;: [
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;PR: #{pull_request} | Repository: {repository}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Severity: {finding.severity} | Category: {finding.category}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;File: {finding.file}:{finding.line}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Finding ID: {finding.id}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{finding.description}&quot; }] }
+      ]
+    },
     &quot;issuetype&quot;: { &quot;name&quot;: &quot;Bug&quot; },
     &quot;labels&quot;: [&quot;dryrun-security&quot;, &quot;{finding.severity}&quot;, &quot;{finding.id}&quot;],
     &quot;priority&quot;: { &quot;name&quot;: &quot;{mapped priority}&quot; }
@@ -120,7 +129,7 @@ Body:
           <li>Map fields from the DryRun Security payload:
             <ul>
               <li>Summary: <code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></li>
-              <li>Description: include finding description, repo, PR number, severity, file, line, finding ID</li>
+              <li>Description: <code>PR: #{pull_request} | Repository: {repository} | Severity: {finding.severity} | File: {finding.file}:{finding.line} | Finding ID: {finding.id} | {finding.description}</code></li>
               <li>Labels: <code>dryrun-security</code>, severity value, finding ID</li>
               <li>Priority: map from severity</li>
               <li>Issue Type: Bug</li>
@@ -134,6 +143,4 @@ Body:
     <strong>Turn on the Zap</strong> &mdash; Once all steps are configured and tested, enable the Zap.
   </li>
 </ol>
-
-<p><strong>Note:</strong> Zapier&rsquo;s free plan limits the number of Zap steps and runs per month. For high-volume repositories, consider Zapier&rsquo;s paid plans or using Tines which offers more flexible security-focused automation.</p>
 </div>
