@@ -2272,28 +2272,24 @@ PAGES['api-access-keys'] = {
 
 <h2 id="creating-keys">Creating an API Key</h2>
 
-<ol>
-  <li>Navigate to the <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">DryRun Security dashboard</a>.</li>
-  <li>Go to <strong>Settings &gt; API Keys</strong>.</li>
-  <li>Click <strong>Generate New Key</strong>.</li>
-  <li>Enter a <strong>name</strong> for the key (e.g., "CI Pipeline", "Security Dashboard").</li>
-  <li>Select the <strong>scope</strong> for the key:
-    <ul>
-      <li><strong>Read-only</strong> - Query findings, scan results, and reports.</li>
-      <li><strong>Read/Write</strong> - Trigger scans, update finding statuses, and manage configurations.</li>
-    </ul>
-  </li>
-  <li>Click <strong>Create</strong>. The key is displayed once - copy it immediately and store it securely.</li>
-</ol>
+<p>Navigate to <strong>Settings &gt; Access Keys</strong> in the sidebar at <a href="https://app.dryrun.security/settings/access-keys" target="_blank" rel="noopener noreferrer">app.dryrun.security</a>. The Access Keys page provides two sections:</p>
+
+<ul>
+  <li><strong>API Keys</strong> - Create and manage API keys for your applications. Click <strong>+ Generate New API Key</strong> to create a new key.</li>
+  <li><strong>Your API Keys</strong> - View and manage your existing API keys. You can revoke any key at any time.</li>
+</ul>
+
+<div class="callout callout-warning">
+  <strong>Keep your API keys secure.</strong> Treat API keys like passwords. Never share them in public repositories, client-side code, or unsecured locations. If a key is compromised, revoke it immediately from the Access Keys page.
+</div>
+
+<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
 
 <h2 id="using-keys">Using API Keys</h2>
 
-<p>Include your API key in the <code>Authorization</code> header of each request:</p>
+<p>Send your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme:</p>
 
-<p><strong>MCP Connection (recommended):</strong> API Access Keys are the recommended best practice for connecting to the <a href="../docs/mcp.html">DryRun Security Insights MCP</a>. Use the key as a Bearer token in the Authorization header when configuring your MCP client.</p>
-
-<pre><code>curl -H "Authorization: Bearer YOUR_API_KEY" \
-  https://api.dryrun.security/v1/findings</code></pre>
+<pre><code>Authorization: Bearer dryrunsec_**********************</code></pre>
 
 <h2 id="key-management">Key Management</h2>
 

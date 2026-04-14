@@ -1896,7 +1896,16 @@ Body:
   &quot;fields&quot;: {
     &quot;project&quot;: { &quot;key&quot;: &quot;{PROJECT_KEY}&quot; },
     &quot;summary&quot;: &quot;[DryRun] {finding.title} in {finding.file}:{finding.line}&quot;,
-    &quot;description&quot;: { &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1, &quot;content&quot;: [ ... ] },
+    &quot;description&quot;: {
+      &quot;type&quot;: &quot;doc&quot;, &quot;version&quot;: 1,
+      &quot;content&quot;: [
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;PR: #{pull_request} | Repository: {repository}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Severity: {finding.severity} | Category: {finding.category}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;File: {finding.file}:{finding.line}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;Finding ID: {finding.id}&quot; }] },
+        { &quot;type&quot;: &quot;paragraph&quot;, &quot;content&quot;: [{ &quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;{finding.description}&quot; }] }
+      ]
+    },
     &quot;issuetype&quot;: { &quot;name&quot;: &quot;Bug&quot; },
     &quot;labels&quot;: [&quot;dryrun-security&quot;, &quot;{finding.severity}&quot;, &quot;{finding.id}&quot;],
     &quot;priority&quot;: { &quot;name&quot;: &quot;{mapped priority}&quot; }
@@ -1944,7 +1953,7 @@ Body:
           <li>Map fields from the DryRun Security payload:
             <ul>
               <li>Summary: <code>[DryRun] {finding.title} in {finding.file}:{finding.line}</code></li>
-              <li>Description: include finding description, repo, PR number, severity, file, line, finding ID</li>
+              <li>Description: <code>PR: #{pull_request} | Repository: {repository} | Severity: {finding.severity} | File: {finding.file}:{finding.line} | Finding ID: {finding.id} | {finding.description}</code></li>
               <li>Labels: <code>dryrun-security</code>, severity value, finding ID</li>
               <li>Priority: map from severity</li>
               <li>Issue Type: Bug</li>
@@ -1957,36 +1966,31 @@ Body:
   <li>
     <strong>Turn on the Zap</strong> &mdash; Once all steps are configured and tested, enable the Zap.
   </li>
-</ol>
-
-<p><strong>Note:</strong> Zapier&rsquo;s free plan limits the number of Zap steps and runs per month. For high-volume repositories, consider Zapier&rsquo;s paid plans or using Tines which offers more flexible security-focused automation.</p>",Connect DryRun Security to Jira using automation middleware for automated ticket creation and deduplication.,Integrations
+</ol>",Connect DryRun Security to Jira using automation middleware for automated ticket creation and deduplication.,Integrations
 API Access Keys,api-access-keys,"<h2 id=""overview"">Overview</h2>
 
 <p>API access keys allow you to authenticate with the <a href=""./dryrun-api.html"">DryRun API</a> for programmatic access to DryRun Security. Use API keys to integrate DryRun Security into your CI/CD pipelines, custom tooling, or automation workflows.</p>
 
 <h2 id=""creating-keys"">Creating an API Key</h2>
 
-<ol>
-  <li>Navigate to the <a href=""https://app.dryrun.security"" target=""_blank"" rel=""noopener noreferrer"">DryRun Security dashboard</a>.</li>
-  <li>Go to <strong>Settings &gt; API Keys</strong>.</li>
-  <li>Click <strong>Generate New Key</strong>.</li>
-  <li>Enter a <strong>name</strong> for the key (e.g., ""CI Pipeline"", ""Security Dashboard"").</li>
-  <li>Select the <strong>scope</strong> for the key:
-    <ul>
-      <li><strong>Read-only</strong> - Query findings, scan results, and reports.</li>
-      <li><strong>Read/Write</strong> - Trigger scans, update finding statuses, and manage configurations.</li>
-    </ul>
-  </li>
-  <li>Click <strong>Create</strong>. The key is displayed once - copy it immediately and store it securely.</li>
-</ol>
+<p>Navigate to <strong>Settings &gt; Access Keys</strong> in the sidebar at <a href=""https://app.dryrun.security/settings/access-keys"" target=""_blank"" rel=""noopener noreferrer"">app.dryrun.security</a>. The Access Keys page provides two sections:</p>
+
+<ul>
+  <li><strong>API Keys</strong> - Create and manage API keys for your applications. Click <strong>+ Generate New API Key</strong> to create a new key.</li>
+  <li><strong>Your API Keys</strong> - View and manage your existing API keys. You can revoke any key at any time.</li>
+</ul>
+
+<div class=""callout callout-warning"">
+  <strong>Keep your API keys secure.</strong> Treat API keys like passwords. Never share them in public repositories, client-side code, or unsecured locations. If a key is compromised, revoke it immediately from the Access Keys page.
+</div>
+
+<p>The API key must be scoped to at least one account. One API key can be used to access more than one account. After creating the key, copy it to a safe place - it will not be shown again.</p>
 
 <h2 id=""using-keys"">Using API Keys</h2>
 
-<p>Include your API key in the <code>Authorization</code> header of each request:</p>
+<p>Send your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme:</p>
 
-<p><strong>MCP Connection (recommended):</strong> API Access Keys are the recommended best practice for connecting to the <a href=""../docs/mcp.html"">DryRun Security Insights MCP</a>. Use the key as a Bearer token in the Authorization header when configuring your MCP client.</p>
-
-<pre><code>curl -H ""Authorization: Bearer YOUR_API_KEY""   https://api.dryrun.security/v1/findings</code></pre>
+<pre><code>Authorization: Bearer dryrunsec_**********************</code></pre>
 
 <h2 id=""key-management"">Key Management</h2>
 
