@@ -7,45 +7,35 @@
 
 <p>DryRun Security automatically maps SCM roles to DryRun roles at login. No manual configuration is required.</p>
 
-<h3 id="github-role-mapping">GitHub</h3>
-
 <table>
   <thead>
-    <tr><th>GitHub Role</th><th>DryRun Role</th></tr>
+    <tr><th>SCM Platform</th><th>SCM Role</th><th>DryRun Role</th></tr>
   </thead>
   <tbody>
-    <tr><td>Admin</td><td>Admin</td></tr>
-    <tr><td>Member</td><td>Developer</td></tr>
-  </tbody>
-</table>
-
-<h3 id="gitlab-role-mapping">GitLab</h3>
-
-<table>
-  <thead>
-    <tr><th>GitLab Role</th><th>DryRun Role</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Owner</td><td>Admin</td></tr>
-    <tr><td>Maintainer</td><td>Admin</td></tr>
-    <tr><td>Developer</td><td>Developer</td></tr>
+    <tr><td>GitHub</td><td>Admin</td><td>Admin</td></tr>
+    <tr><td>GitHub</td><td>Member</td><td>Developer</td></tr>
+    <tr><td>GitLab</td><td>Owner</td><td>Admin</td></tr>
+    <tr><td>GitLab</td><td>Maintainer</td><td>Admin</td></tr>
+    <tr><td>GitLab</td><td>Developer</td><td>Developer</td></tr>
   </tbody>
 </table>
 
 <h2 id="admin-override">Admin Override</h2>
 
-<p>An account administrator can promote any developer to Admin within the DryRun Security UI. This override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact your account administrator or reach out to <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
+<p>An account administrator can request that DryRun Security promote a developer to Admin within the DryRun UI. This setting is managed by DryRun and is not self-serve. The override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact DryRun Security at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
 
 <h2 id="permissions-matrix">Permissions Matrix</h2>
+
+<p><em>Note: Developers can only view findings, repositories, and pull requests for repositories they have membership access to in GitHub or GitLab. All other access listed below applies to the full platform.</em></p>
 
 <table>
   <thead>
     <tr><th>Feature</th><th>Admin</th><th>Developer</th></tr>
   </thead>
   <tbody>
-    <tr><td>Risk Register</td><td>All repositories</td><td>Scoped to repos with membership</td></tr>
-    <tr><td>Repositories</td><td>All repositories</td><td>Scoped to repos with membership</td></tr>
-    <tr><td>Pull Requests</td><td>All PRs across all repositories</td><td>Scoped to repos with membership</td></tr>
+    <tr><td>Risk Register</td><td>All repositories</td><td>&#x2713;</td></tr>
+    <tr><td>Repositories</td><td>All repositories</td><td>&#x2713;</td></tr>
+    <tr><td>Pull Requests</td><td>All PRs across all repositories</td><td>&#x2713;</td></tr>
     <tr><td>Dismiss Findings</td><td>Dashboard and SCM comment (PR comment)</td><td>Dashboard and SCM comment (PR comment)</td></tr>
     <tr><td>DeepScan</td><td>View all runs and reports; trigger new DeepScans</td><td>View only — cannot trigger new DeepScans</td></tr>
     <tr><td>Code Policies</td><td>View and configure custom code policies</td><td>View only — cannot configure</td></tr>
