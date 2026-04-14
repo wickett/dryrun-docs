@@ -577,6 +577,11 @@ body {
   border-bottom: none;
 }
 
+.doc-content td.no-access {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .doc-content tr:hover td {
   background: var(--bg-primary);
 }
