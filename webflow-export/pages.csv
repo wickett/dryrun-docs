@@ -1,6 +1,6 @@
 Name,Slug,Content,Meta Description,Category
 Documentation,documentation,"<div class=""drs-landing-hero"">
-<p>DryRun Security is an AI-native application security platform that reviews every pull request for vulnerabilities in real time. These docs cover setup, scanning configuration, code security intelligence, platform administration, and integrations.</p>
+<p>DryRun Security is an AI-native application security platform that reviews every pull request and repository scan for vulnerabilities in real time. It builds an intelligence layer on top of all scan data, surfacing trends, patterns, and risks across your entire codebase and development organization. These docs cover setup, scanning, code security intelligence, platform administration, and integrations.</p>
 </div>
 
 <div class=""drs-landing-section"">
@@ -94,7 +94,7 @@ Documentation,documentation,"<div class=""drs-landing-hero"">
       <span class=""drs-landing-card-desc"">Expose DryRun Security data to AI coding assistants and agents through the Model Context Protocol.</span>
     </a>
   </div>
-</div>","Welcome to DryRun Security documentation. DryRun Security uses AI-native analysis to find vulnerabilities in your code across every pull request and repository scan. Beyond individual findings, DryRun builds an intelligence layer on top of all scan data, surfacing trends, patterns, and risks across your entire codebase and development organization.",Getting Started
+</div>","DryRun Security is an AI-native application security platform that reviews every pull request and repository scan for vulnerabilities in real time. It builds an intelligence layer on top of all scan data, surfacing trends, patterns, and risks across your entire codebase and development organization. These docs cover setup, scanning, code security intelligence, platform administration, and integrations.",Getting Started
 Quick Start,quick-start,"<h2 id=""getting-started"">Getting Started</h2>
 
 <p>DryRun Security is an AI-native application security platform that reviews every pull request for vulnerabilities in real time. This guide helps you install DryRun Security on GitHub or GitLab, run your first scan, and configure the platform to match your workflow.</p>
