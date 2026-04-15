@@ -808,7 +808,7 @@ Auto Fix,auto-fix,"<h2 id=""why-implement-auto-fix"">Why Implement Auto Fix</h2>
 <p>Auto fix is enabled by:</p>
 
 <ol>
-  <li>Creating an API key from the DryRun Security dashboard (see <a href=""./dryrun-api.html"">API Access Keys</a>)</li>
+  <li>Creating an API key from the DryRun Security dashboard (see <a href=""./api-access-keys.html"">API Access Keys</a>)</li>
   <li>Connecting your AI coding tool to the DryRun Security <a href=""./mcp.html"">MCP (Model Context Protocol) server</a></li>
   <li><a href=""./dryrun-skill.html"">Installing the DryRun Security remediation skill</a></li>
 </ol>
@@ -1502,55 +1502,58 @@ Permissions,permissions,"<h2 id=""overview"">Overview</h2>
     <tr><td>Install / Uninstall Repos</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>Add or remove repositories from DryRun Security scanning.</td></tr>
   </tbody>
 </table>",Understand the two-role permission model in DryRun Security and how SCM platform roles map to Admin and Developer access.,Platform
-MCP,mcp,"<p>The DryRun Security Insights MCP enables AI assistants to securely connect to your organization's security data for powerful, context-aware code analysis. Think of it as ""USB-C for AI"" - a standard way for agents to interact with security insights, trends, and context across your codebase.</p>
+MCP,mcp,"<p>The DryRun Security Insights MCP (Model Context Protocol) server gives AI assistants direct access to your organization's security data. Once connected, your AI coding tool can query findings, trends, pull request context, and Code Security Intelligence results in natural language, without leaving your development environment.</p>
 
+<h2 id=""what-you-can-do"">What You Can Do</h2>
 
-<figure class=""docs-screenshot""><img src=""assets/images/mcp/01-mcp-setup.png"" alt=""DryRun Security MCP Integration setup"" loading=""lazy""></figure>
-
-<h2 id=""what-is-the-insights-mcp"">What Is the Insights MCP?</h2>
-
-<p>The <strong>Insights MCP</strong> is a <a href=""https://modelcontextprotocol.io/"" target=""_blank"" rel=""noopener noreferrer"">Model Context Protocol</a> server that exposes DryRun Security's rich security analysis to AI applications. Once connected, tools like Claude Desktop or other MCP-compatible clients can answer natural language questions about security posture, pull request vulnerabilities, Code Security Agent trends, and more.</p>
-
-<h2 id=""capabilities"">Capabilities</h2>
-
-<p>With the Insights MCP connected, AI assistants can:</p>
+<p>With the Insights MCP connected, your AI assistant can:</p>
 <ul>
-  <li><strong>Daily Security Summaries</strong> - Generate summaries of recent security activity over any 30-day window.</li>
-  <li><strong>Pull Request Analysis</strong> - Deep-dive into the security implications of a specific pull request.</li>
-  <li><strong>File Security History</strong> - View the historical security context and findings for a specific file.</li>
-  <li><strong>Natural Language Search</strong> - Ask questions like: ""Have any new payment integrations been introduced in the last week?""</li>
-  <li><strong>Code Security Agent Stats</strong> - View counts and types of security issues across your org.</li>
-  <li><strong>Trend Monitoring</strong> - Track security posture over time.</li>
+  <li>Generate summaries of recent security activity across your repositories</li>
+  <li>Query findings for a specific pull request or file</li>
+  <li>Ask natural language questions about your security posture (for example: ""Have any new payment integrations been introduced in the last week?"")</li>
+  <li>Access Code Security Intelligence trends and agent stats</li>
+  <li>Track security posture changes over time</li>
 </ul>
+
+<p>For the full list of Code Security Intelligence capabilities, see <a href=""./code-security-intelligence.html"">Code Security Intelligence</a>.</p>
+
+<h2 id=""supported-clients"">Supported Clients</h2>
+
+<p>The following AI coding tools support the DryRun Security Insights MCP:</p>
+
+<table>
+  <thead>
+    <tr><th>Tool</th><th>Connection method</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Cursor</td><td>HTTP MCP config</td></tr>
+    <tr><td>Codex</td><td>HTTP MCP config</td></tr>
+    <tr><td>Claude Code</td><td>CLI (<code>claude mcp add</code>)</td></tr>
+    <tr><td>Claude Desktop</td><td>Settings &gt; Connectors</td></tr>
+    <tr><td>Windsurf</td><td>HTTP MCP config</td></tr>
+    <tr><td>VS Code</td><td>HTTP MCP config</td></tr>
+  </tbody>
+</table>
+
+<p>For step-by-step setup instructions for each tool, go to <strong>Settings &gt; Integrations</strong> in the DryRun Security dashboard, or see <a href=""./ai-coding-integration.html"">AI Coding Integration</a>.</p>
+
+<h2 id=""authentication"">Authentication</h2>
+
+<p>The MCP server uses API key authentication. Pass your API key as a Bearer token in the <code>Authorization</code> header.</p>
+
+<p>Before connecting, generate an API key from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard. See <a href=""./api-access-keys.html"">API Access Keys</a> for instructions.</p>
+
+<p>The MCP server URL is:</p>
+
+<pre><code>https://insights-mcp.dryrun.security/api/insights/mcp</code></pre>
 
 <h2 id=""configuration"">Configuration</h2>
 
-<p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
-
-<h3 id=""quick-setup"">Quick Setup from the Dashboard</h3>
-
-<p>The fastest way to connect is through <strong>Settings &gt; Integrations</strong> in the DryRun Security dashboard. Each supported tool has a card with a <strong>Connect</strong> button that provides the exact command or configuration for that tool. See <a href=""./ai-coding-integration.html"">AI Coding Tool Integrations</a> for the full list of supported tools.</p>
-
 <h3 id=""claude-code"">Claude Code (CLI)</h3>
 
-<pre><code>claude mcp add --transport http dryrun-security   https://insights-mcp.dryrun.security/api/insights/mcp   --header ""Authorization: Bearer &lt;dryrunsec_token&gt;""</code></pre>
+<pre><code>claude mcp add --transport http dryrun-security https://insights-mcp.dryrun.security/api/insights/mcp --header ""Authorization: Bearer &lt;your-api-key&gt;""</code></pre>
 
-<p>Replace <code>&lt;dryrunsec_token&gt;</code> with your token from <strong>Settings &gt; Access Keys</strong>.</p>
-
-<h3 id=""claude-desktop"">Claude Desktop or Claude Web</h3>
-
-<ol>
-  <li>Navigate to <a href=""https://claude.ai"" target=""_blank"" rel=""noopener noreferrer"">https://claude.ai</a>.</li>
-  <li>Select <strong>Settings</strong>.</li>
-  <li>Select <strong>Connectors</strong>.</li>
-  <li>Click <strong>Add custom connector</strong>.</li>
-  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/api/insights/mcp</code></li>
-  <li>Select <strong>Add</strong>.</li>
-</ol>
-
-<h3 id=""direct-http"">Direct HTTP Configuration</h3>
-
-<p>For clients that support HTTP-based MCP servers, use this JSON configuration:</p>
+<h3 id=""http-json-config"">HTTP JSON Config (Cursor, Windsurf, VS Code, Codex)</h3>
 
 <pre><code>{
   ""mcpServers"": {
@@ -1558,55 +1561,32 @@ MCP,mcp,"<p>The DryRun Security Insights MCP enables AI assistants to securely c
       ""type"": ""http"",
       ""url"": ""https://insights-mcp.dryrun.security/api/insights/mcp"",
       ""headers"": {
-        ""Authorization"": ""Bearer &lt;dryrunsec_token&gt;""
+        ""Authorization"": ""Bearer &lt;your-api-key&gt;""
       }
     }
   }
 }</code></pre>
 
-<h3 id=""cursor-notice"">Cursor Compatibility Notice</h3>
+<h3 id=""claude-desktop"">Claude Desktop</h3>
 
-<p><strong>Known issue:</strong> Cursor currently has a known bug in its MCP implementation that may cause authentication failures. Contact <a href=""mailto:hi@dryrun.security"">hi@dryrun.security</a> if you need the workaround enabled for your environment.</p>
+<ol>
+  <li>Navigate to <a href=""https://claude.ai"" target=""_blank"" rel=""noopener noreferrer"">https://claude.ai</a></li>
+  <li>Select <strong>Settings</strong></li>
+  <li>Select <strong>Connectors</strong></li>
+  <li>Click <strong>Add custom connector</strong></li>
+  <li>Enter the URL: <code>https://insights-mcp.dryrun.security/api/insights/mcp</code></li>
+  <li>Select <strong>Add</strong></li>
+</ol>
 
-<h3 id=""mcp-remote"">Using mcp-remote (Fallback)</h3>
-
-<p>For clients that don't support HTTP-based MCP servers or if you experience authentication issues, use <a href=""https://github.com/geelen/mcp-remote"" target=""_blank"" rel=""noopener noreferrer"">mcp-remote</a>. Requires Node.js.</p>
-
-<pre><code>{
-  ""mcpServers"": {
-    ""dryrun-security"": {
-      ""command"": ""npx"",
-      ""args"": [
-        ""mcp-remote"",
-        ""https://insights-mcp.dryrun.security/api/insights/mcp"",
-        ""--transport"", ""http-first"",
-        ""--allow-http""
-      ],
-      ""env"": {
-        ""NODE_TLS_REJECT_UNAUTHORIZED"": ""0""
-      }
-    }
-  }
-}</code></pre>
-
-<h2 id=""authorization"">Authorization</h2>
-
-<p>The recommended method for connecting to the Insights MCP is using an <strong><a href=""../docs/api-access-keys.html"">API Access Key</a></strong>. Generate an API Access Key from <strong>Settings &gt; Access Keys</strong> in the DryRun Security dashboard and pass it as a Bearer token in the <code>Authorization</code> header. This is the best practice method for all MCP connections. See <a href=""./dryrun-api.html"">API Usage Guide</a> for details on key management.</p>
-
-<p><strong>Note:</strong> At this time, only GitHub users are supported. GitLab support is actively being implemented.</p>
+<p>Replace <code>&lt;your-api-key&gt;</code> with the key from <strong>Settings &gt; Access Keys</strong>. See <a href=""./api-access-keys.html"">API Access Keys</a>.</p>
 
 <h2 id=""remediation-skill"">DryRun Remediation Skill</h2>
 
-<p>In addition to connecting the Insights MCP, you can install the <strong>DryRun remediation skill</strong> into supported AI coding tools. The skill enables the tool to discover security findings and generate fixes directly. For Claude Code:</p>
+<p>In addition to the MCP connection, you can install the DryRun Security remediation skill into your AI coding tool. The skill enables the tool to automatically detect findings and generate fixes. See <a href=""./dryrun-skill.html"">DryRun Skill</a> for installation instructions.</p>
 
-<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace
-/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+<h2 id=""verifying-the-connection"">Verifying the Connection</h2>
 
-<p>Use the <strong>Add Skill</strong> button on the Integrations page for tool-specific instructions.</p>
-
-<h2 id=""verifying"">Verifying the Connection</h2>
-
-<p>Once configured, confirm the DryRun Security Insights tool is available in your AI assistant's toolset. Try asking: <em>""What is my insights summary for the past week?""</em></p>
+<p>Once configured, confirm the DryRun Security Insights tool is available in your AI assistant's toolset. Try asking: ""What is my insights summary for the past week?""</p>
 
 <p>If you encounter any issues, reach out at <a href=""mailto:hi@dryrun.security"">hi@dryrun.security</a>.</p>",Connect AI assistants to DryRun Security insights using the Model Context Protocol for natural language queries about your security data.,Platform
 DryRun API,dryrun-api,"<h2 id=""dryrun-simple-api"">DryRun Simple API</h2>
