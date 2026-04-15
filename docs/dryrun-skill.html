@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IaC Scanning - DryRun Security Docs</title>
-  <meta name="description" content="DryRun Security scans Terraform configurations for security misconfigurations and insecure defaults in pull requests.">
+  <title>DryRun Skill - DryRun Security Docs</title>
+  <meta name="description" content="Automate security vulnerability remediation using AI coding tools with the DryRun Security skill.">
   <link rel="icon" href="../assets/favicon.ico" type="image/png">
   <link rel="apple-touch-icon" href="../assets/logo192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,7 @@
 <li><a href="../docs/deepscan.html">Repository Scanning with DeepScan</a></li>
 <li><a href="../docs/pr-scanning.html">PR Scanning</a></li>
 <li><a href="../docs/secrets-scanning.html">Secrets Scanning</a></li>
-<li><a href="../docs/iac-scanning.html" class="active">IaC Scanning</a></li>
+<li><a href="../docs/iac-scanning.html">IaC Scanning</a></li>
 <li><a href="../docs/sca.html">SCA</a></li>
 <li><a href="../docs/auto-fix.html">Auto Fix</a></li>
 </ul>
@@ -100,7 +100,7 @@
 <li><a href="../docs/jira-integration.html">Jira Integration</a></li>
 <li><a href="../docs/api-access-keys.html">API Access Keys</a></li>
 <li><a href="../docs/ai-coding-integration.html">AI Coding Integration</a></li>
-<li><a href="../docs/dryrun-skill.html">DryRun Skill</a></li>
+<li><a href="../docs/dryrun-skill.html" class="active">DryRun Skill</a></li>
 </ul>
 </div>
 </div>
@@ -108,46 +108,94 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="document.querySelector('.sidebar').classList.remove('open');document.getElementById('sidebarOverlay').style.display='none'"></div>
     <main class="content-area">
       <div class="content-inner">
-        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Scanning</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">IaC Scanning</span></div>
+        <div class="breadcrumb"><a href="../index.html">Docs</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-section">Integrations</span><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">DryRun Skill</span></div>
         <div class="page-heading-row">
-          <h1 class="page-heading">IaC Scanning</h1>
+          <h1 class="page-heading">DryRun Skill</h1>
           <button class="btn-download-pdf" onclick="window.print()" title="Download as PDF"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 10l3.5-2.5"/><path d="M2.5 11v2a1 1 0 001 1h9a1 1 0 001-1v-2"/></svg><span>PDF</span></button>
         </div>
-        <p class="page-description">DryRun Security scans Terraform configurations for security misconfigurations and insecure defaults in pull requests.</p>
+        <p class="page-description">Automate security vulnerability remediation using AI coding tools with the DryRun Security skill.</p>
         <div class="doc-content">
-<h2 id="overview">Overview</h2>
+<h2 id="what-is-the-dryrun-skill">What Is the DryRun Skill</h2>
 
-<p>DryRun Security provides Infrastructure as Code scanning focused on Terraform configurations. When a pull request modifies <code>.tf</code> files, DryRun Security analyzes the changes for security misconfigurations and flags findings as part of its <a href="pr-scanning.html">PR scanning</a> workflow.</p>
+<p>An AI skill is a set of instructions that tells your AI coding tool how to behave in a specific context. The DryRun Security skill instructs your AI coding tool to check PR comments after each push or commit, pull in finding details from DryRun Security, and fix the identified vulnerabilities in your codebase.</p>
 
-<h2 id="what-it-detects">What It Detects</h2>
+<p>The skill works with all supported AI coding tools: Claude Code, Codex, Cursor, Windsurf, and VS Code.</p>
 
-<p>IaC scanning identifies common Terraform security issues including:</p>
+<h2 id="what-the-skill-does">What the Skill Does</h2>
+
+<p>When the skill is active, your AI coding tool:</p>
+
+<ol>
+  <li>Monitors PR comments for DryRun Security finding notifications</li>
+  <li>Pulls the full finding details from DryRun Security, including the vulnerability type, location, and context</li>
+  <li>Analyzes the finding in the context of your codebase</li>
+  <li>Generates and applies a fix</li>
+</ol>
+
+<h3 id="operating-modes">Operating Modes</h3>
 
 <ul>
-  <li><strong>Overly permissive IAM policies</strong> - Roles granting broader access than required, violating least privilege</li>
-  <li><strong>Exposed resources</strong> - Security groups, firewall rules, or storage buckets with unintended public access</li>
-  <li><strong>Insecure defaults</strong> - Unencrypted data stores, disabled logging, or missing audit trails</li>
-  <li><strong>Subdomain takeover risks</strong> - Dangling DNS records or CDN configurations that could be claimed by an attacker</li>
+  <li><strong>Automatic mode</strong>: The skill instructs the AI coding tool to find DryRun Security finding details and apply fixes automatically, without waiting for developer input. Best for teams that want zero-friction remediation.</li>
+  <li><strong>Human-in-the-loop mode</strong>: The skill can be configured to pause before applying a fix and require developer approval. Best for teams that want visibility and control over every change before it is committed.</li>
 </ul>
 
-<p>Beyond the built-in IaC checks, teams can use <a href="./custom-code-policies.html">Custom Code Policies</a> to monitor additional infrastructure concerns. Custom policies let you enforce specific configuration requirements, flag unapproved resource types, or define any other infrastructure rules that matter to your organization. This extends IaC coverage to match your team's specific infrastructure security requirements.</p>
+<p>The operating mode is controlled by how the skill is configured in your project. Both modes use the same installation process.</p>
 
-<h2 id="how-findings-appear">How Findings Appear</h2>
+<h2 id="installation">Installation</h2>
 
-<p>IaC findings are reported the same way as other DryRun Security results: as comments on pull requests and as entries in the <a href="risk-register.html">Risk Register</a> dashboard. Each finding includes the affected resource, a description of the risk, and guidance on remediation.</p>
+<p>First, make sure you have completed the MCP setup for your AI coding tool (see the <a href="https://app.dryrun.security" target="_blank" rel="noopener noreferrer">Integrations</a> page in the DryRun Security dashboard). The skill requires the MCP connection to be active so the AI coding tool can retrieve finding details.</p>
+
+<p>Then install the skill for your tool using the command below. Run the command from your project root.</p>
+
+<h3 id="cursor">Cursor</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o .cursorrules https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/.cursorrules</code></pre>
+
+<h3 id="codex">Codex</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o AGENTS.md https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/RULES.md</code></pre>
+
+<h3 id="claude-code">Claude Code</h3>
+
+<p>Run these two commands inside Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace</code></pre>
+
+<pre><code>/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<h3 id="windsurf">Windsurf</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o .windsurfrules https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/.windsurfrules</code></pre>
+
+<h3 id="vs-code">VS Code</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>mkdir -p .github &amp;&amp; curl -o .github/copilot-instructions.md https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/copilot-instructions.md</code></pre>
         </div>
 <nav class="prev-next">
-<a href="../docs/secrets-scanning.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">Secrets Scanning</span></a>
-<a href="../docs/sca.html" class="prev-next-link next-link"><span class="prev-next-label">Next →</span><span class="prev-next-title">SCA</span></a>
+<a href="../docs/ai-coding-integration.html" class="prev-next-link prev-link"><span class="prev-next-label">← Previous</span><span class="prev-next-title">AI Coding Integration</span></a>
 </nav>
       </div>
     </main>
 <aside class="toc-sidebar">
 <p class="toc-title">On this page</p>
 <ul class="toc-list">
-<li class="toc-h2"><a href="#overview">Overview</a></li>
-<li class="toc-h2"><a href="#what-it-detects">What It Detects</a></li>
-<li class="toc-h2"><a href="#how-findings-appear">How Findings Appear</a></li>
+<li class="toc-h2"><a href="#what-is-the-dryrun-skill">What Is the DryRun Skill</a></li>
+<li class="toc-h2"><a href="#what-the-skill-does">What the Skill Does</a></li>
+<li class="toc-h3"><a href="#operating-modes">Operating Modes</a></li>
+<li class="toc-h2"><a href="#installation">Installation</a></li>
+<li class="toc-h3"><a href="#cursor">Cursor</a></li>
+<li class="toc-h3"><a href="#codex">Codex</a></li>
+<li class="toc-h3"><a href="#claude-code">Claude Code</a></li>
+<li class="toc-h3"><a href="#windsurf">Windsurf</a></li>
+<li class="toc-h3"><a href="#vs-code">VS Code</a></li>
 </ul>
 </aside>
   </div>
