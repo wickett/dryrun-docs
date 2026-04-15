@@ -288,16 +288,24 @@ body {
 }
 
 .sidebar-section {
-  margin-bottom: 2px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.sidebar-section:first-child .sidebar-section-title {
+    border-top: none;
+    margin-top: 8px;
 }
 
 .sidebar-section-title {
-  padding: 14px 20px 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
+    padding: 16px 20px 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #4338ca;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
 }
 
 .sidebar-links {
