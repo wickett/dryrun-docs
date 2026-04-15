@@ -1687,27 +1687,6 @@ PAGES['permissions'] = {
 
 <p>DryRun uses a two-role model: <strong>Admin</strong> and <strong>Developer</strong>. To give a user more access, you can either elevate their permissions in the SCM, or request an <a href="#admin-override">Admin Override</a> (see the Admin Override section below).</p>
 
-<h2 id="scm-role-mapping">SCM Role Mapping</h2>
-
-<p>DryRun Security automatically maps SCM roles to DryRun roles at login. No manual configuration is required.</p>
-
-<table>
-  <thead>
-    <tr><th>SCM Platform</th><th>SCM Role</th><th>DryRun Role</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>GitHub</td><td>Admin</td><td>Admin</td></tr>
-    <tr><td>GitHub</td><td>Member</td><td>Developer</td></tr>
-    <tr><td>GitLab</td><td>Owner</td><td>Admin</td></tr>
-    <tr><td>GitLab</td><td>Maintainer</td><td>Admin</td></tr>
-    <tr><td>GitLab</td><td>Developer</td><td>Developer</td></tr>
-  </tbody>
-</table>
-
-<h2 id="admin-override">Admin Override</h2>
-
-<p>An account administrator can request that a developer be promoted to Admin within the platform. This setting is not self-serve and is managed by our team. The override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact us at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
-
 <h2 id="permissions-matrix">Permissions Matrix</h2>
 
 <p><em>Note: Developers can only view findings, repositories, and pull requests for repositories they have membership access to in GitHub or GitLab. All other access listed below applies to the full platform.</em></p>
@@ -1736,6 +1715,27 @@ PAGES['permissions'] = {
     <tr><td>Install / Uninstall Repos</td><td><span class="check">&#x2713;</span></td><td class="no-access"><span class="cross">&#x2717;</span></td><td>Add or remove repositories from DryRun Security scanning.</td></tr>
   </tbody>
 </table>
+
+<h2 id="scm-role-mapping">SCM Role Mapping</h2>
+
+<p>DryRun Security automatically maps SCM roles to DryRun roles at login. No manual configuration is required.</p>
+
+<table>
+  <thead>
+    <tr><th>SCM Platform</th><th>SCM Role</th><th>DryRun Role</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>GitHub</td><td>Admin</td><td>Admin</td></tr>
+    <tr><td>GitHub</td><td>Member</td><td>Developer</td></tr>
+    <tr><td>GitLab</td><td>Owner</td><td>Admin</td></tr>
+    <tr><td>GitLab</td><td>Maintainer</td><td>Admin</td></tr>
+    <tr><td>GitLab</td><td>Developer</td><td>Developer</td></tr>
+  </tbody>
+</table>
+
+<h2 id="admin-override">Admin Override</h2>
+
+<p>An account administrator can request that a developer be promoted to Admin within the platform. This setting is not self-serve and is managed by our team. The override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact us at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
 ''',
 }
 
