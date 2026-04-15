@@ -1706,7 +1706,7 @@ PAGES['permissions'] = {
 
 <h2 id="admin-override">Admin Override</h2>
 
-<p>An account administrator can request that DryRun Security promote a developer to Admin within the DryRun UI. This setting is managed by DryRun and is not self-serve. The override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact DryRun Security at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
+<p>An account administrator can request that a developer be promoted to Admin within the platform. This setting is not self-serve and is managed by our team. The override applies only within DryRun Security and does not change the user's role in GitHub or GitLab. To request an override, contact us at <a href="mailto:hi@dryrun.security">hi@dryrun.security</a>.</p>
 
 <h2 id="permissions-matrix">Permissions Matrix</h2>
 
