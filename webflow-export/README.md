@@ -47,7 +47,6 @@ Webflow project's custom CSS (Site Settings > Custom Code > Head):
 | `drs-landing-card-desc` | Landing Card Desc container/element |
 | `drs-landing-card-title` | Landing Card Title container/element |
 | `drs-landing-grid` | Landing Grid container/element |
-| `drs-landing-hero` | Landing Hero container/element |
 | `drs-landing-section` | Landing Section container/element |
 | `drs-landing-section-header` | Landing Section Header container/element |
 | `drs-persona` | Persona container/element |
