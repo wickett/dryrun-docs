@@ -810,7 +810,7 @@ Auto Fix,auto-fix,"<h2 id=""why-implement-auto-fix"">Why Implement Auto Fix</h2>
 <ol>
   <li>Creating an API key from the DryRun Security dashboard (see <a href=""./dryrun-api.html"">API Access Keys</a>)</li>
   <li>Connecting your AI coding tool to the DryRun Security <a href=""./mcp.html"">MCP (Model Context Protocol) server</a></li>
-  <li>Installing the DryRun Security remediation skill</li>
+  <li><a href=""./dryrun-skill.html"">Installing the DryRun Security remediation skill</a></li>
 </ol>
 
 <p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
@@ -2995,3 +2995,66 @@ AI Coding Integration,ai-coding-integration,"<h2 id=""ai-coding-tools"">AI Codin
   <li><a href=""../docs/ai-coding-integration.html"">AI Coding Visibility</a> - observability into AI-generated changes</li>
   <li><a href=""../docs/ai-coding-integration.html"">Securing AI-Generated Code</a> - security analysis for AI-written code</li>
 </ul>","Integrate DryRun Security with AI coding tools, IDEs, and AI agents.",Integrations
+DryRun Skill,dryrun-skill,"<h2 id=""what-is-the-dryrun-skill"">What Is the DryRun Skill</h2>
+
+<p>An AI skill is a set of instructions that tells your AI coding tool how to behave in a specific context. The DryRun Security skill instructs your AI coding tool to check PR comments after each push or commit, pull in finding details from DryRun Security, and fix the identified vulnerabilities in your codebase.</p>
+
+<p>The skill works with all supported AI coding tools: Claude Code, Codex, Cursor, Windsurf, and VS Code.</p>
+
+<h2 id=""what-the-skill-does"">What the Skill Does</h2>
+
+<p>When the skill is active, your AI coding tool:</p>
+
+<ol>
+  <li>Monitors PR comments for DryRun Security finding notifications</li>
+  <li>Pulls the full finding details from DryRun Security, including the vulnerability type, location, and context</li>
+  <li>Analyzes the finding in the context of your codebase</li>
+  <li>Generates and applies a fix</li>
+</ol>
+
+<h3 id=""operating-modes"">Operating Modes</h3>
+
+<ul>
+  <li><strong>Automatic mode</strong>: The skill instructs the AI coding tool to find DryRun Security finding details and apply fixes automatically, without waiting for developer input. Best for teams that want zero-friction remediation.</li>
+  <li><strong>Human-in-the-loop mode</strong>: The skill can be configured to pause before applying a fix and require developer approval. Best for teams that want visibility and control over every change before it is committed.</li>
+</ul>
+
+<p>The operating mode is controlled by how the skill is configured in your project. Both modes use the same installation process.</p>
+
+<h2 id=""installation"">Installation</h2>
+
+<p>First, make sure you have completed the MCP setup for your AI coding tool (see the <a href=""https://app.dryrun.security"" target=""_blank"" rel=""noopener noreferrer"">Integrations</a> page in the DryRun Security dashboard). The skill requires the MCP connection to be active so the AI coding tool can retrieve finding details.</p>
+
+<p>Then install the skill for your tool using the command below. Run the command from your project root.</p>
+
+<h3 id=""cursor"">Cursor</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o .cursorrules https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/.cursorrules</code></pre>
+
+<h3 id=""codex"">Codex</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o AGENTS.md https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/RULES.md</code></pre>
+
+<h3 id=""claude-code"">Claude Code</h3>
+
+<p>Run these two commands inside Claude Code:</p>
+
+<pre><code>/plugin marketplace add DryRunSecurity/external-plugin-marketplace</code></pre>
+
+<pre><code>/plugin install dryrun-remediation@dryrunsecurity</code></pre>
+
+<h3 id=""windsurf"">Windsurf</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>curl -o .windsurfrules https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/.windsurfrules</code></pre>
+
+<h3 id=""vs-code"">VS Code</h3>
+
+<p>Run in your project root:</p>
+
+<pre><code>mkdir -p .github &amp;&amp; curl -o .github/copilot-instructions.md https://raw.githubusercontent.com/DryRunSecurity/external-plugin-marketplace/main/standalone/copilot-instructions.md</code></pre>",Automate security vulnerability remediation using AI coding tools with the DryRun Security skill.,Integrations
