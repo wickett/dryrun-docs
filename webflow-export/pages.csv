@@ -1,9 +1,5 @@
 Name,Slug,Content,Meta Description,Category
-Documentation,documentation,"<div class=""drs-landing-hero"">
-<p>DryRun Security is an AI-native application security platform that reviews every pull request and repository scan for vulnerabilities in real time. It builds an intelligence layer on top of all scan data, surfacing trends, patterns, and risks across your entire codebase and development organization. These docs cover setup, scanning, code security intelligence, platform administration, and integrations.</p>
-</div>
-
-<div class=""drs-landing-section"">
+Documentation,documentation,"<div class=""drs-landing-section"">
   <div class=""drs-landing-grid drs-cols-3"">
     <a class=""drs-landing-card drs-persona"" href=""./risk-register.html"">
       <span class=""drs-landing-card-title"">AppSec Engineers</span>
@@ -813,13 +809,7 @@ Auto Fix,auto-fix,"<h2 id=""why-implement-auto-fix"">Why Implement Auto Fix</h2>
   <li><a href=""./dryrun-skill.html"">Installing the DryRun Security remediation skill</a></li>
 </ol>
 
-<p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
-
-<h2 id=""tool-setup-instructions"">Setup Instructions for Your AI Coding Tool</h2>
-
-<p>Each supported tool (Claude Code, Codex, Cursor, Windsurf, and VS Code) has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
-
-<p>To get started, navigate to <strong>Integrations</strong> in the DryRun Security dashboard and select your AI coding tool for tool-specific instructions.</p>",Automated remediation guidance and fix verification for security findings.,Scanning
+<p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>",Automated remediation guidance and fix verification for security findings.,Scanning
 Code Security Intelligence,code-security-intelligence,"<figure class=""docs-screenshot""><img src=""assets/images/code-security-intelligence/01-csi-architecture.jpg"" alt=""Code Security Intelligence architecture diagram showing sources, the DryRun intelligence layer, access methods, and intelligence workflows"" loading=""lazy""></figure>
 
 <h2 id=""overview"">Overview</h2>
