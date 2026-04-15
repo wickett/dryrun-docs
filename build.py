@@ -1717,6 +1717,7 @@ PAGES['permissions'] = {
     <tr><th>Feature</th><th>Admin</th><th>Developer</th><th>Details</th></tr>
   </thead>
   <tbody>
+    <tr><td>Install</td><td><span class="check">&#x2713;</span></td><td class="no-access"><span class="cross">&#x2717;</span></td><td>Install DryRun Security on GitHub or GitLab organizations and repositories.</td></tr>
     <tr><td>Risk Register</td><td><span class="check">&#x2713;</span></td><td><span class="check">&#x2713;</span></td><td>Central view of security findings across repositories, organized by severity and status. Developers see findings only for repos they have membership access to.</td></tr>
     <tr><td>Repositories</td><td><span class="check">&#x2713;</span></td><td><span class="check">&#x2713;</span></td><td>View repositories connected to DryRun Security and their scan status. Developers see only repos they have membership access to.</td></tr>
     <tr><td>Pull Requests</td><td><span class="check">&#x2713;</span></td><td><span class="check">&#x2713;</span></td><td>View pull requests and their associated security findings. Developers see only PRs for repos they have membership access to.</td></tr>
