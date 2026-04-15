@@ -978,12 +978,6 @@ PAGES['auto-fix'] = {
 </ol>
 
 <p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
-
-<h2 id="tool-setup-instructions">Setup Instructions for Your AI Coding Tool</h2>
-
-<p>Each supported tool (Claude Code, Codex, Cursor, Windsurf, and VS Code) has its own MCP connection steps and skill download/install process. The <strong>Integrations</strong> page in the DryRun Security dashboard provides step-by-step setup instructions for each tool, including how to connect to the MCP server and install the remediation skill.</p>
-
-<p>To get started, navigate to <strong>Integrations</strong> in the DryRun Security dashboard and select your AI coding tool for tool-specific instructions.</p>
 ''',
 }
 
