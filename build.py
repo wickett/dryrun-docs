@@ -972,7 +972,7 @@ PAGES['auto-fix'] = {
 <p>Auto fix is enabled by:</p>
 
 <ol>
-  <li>Creating an API key from the DryRun Security dashboard (see <a href="./dryrun-api.html">API Access Keys</a>)</li>
+  <li>Creating an API key from the DryRun Security dashboard (see <a href="./api-access-keys.html">API Access Keys</a>)</li>
   <li>Connecting your AI coding tool to the DryRun Security <a href="./mcp.html">MCP (Model Context Protocol) server</a></li>
   <li><a href="./dryrun-skill.html">Installing the DryRun Security remediation skill</a></li>
 </ol>
