@@ -41,7 +41,9 @@
 
 <h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
 
-<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+<p>The recommended approach is to configure a severity threshold at the configuration level. Any finding at or above that threshold will trigger the blocking flow across all agents. See <a href="#configuring-pr-blocking">Configuring PR Blocking</a> above.</p>
+
+<p>For teams that prefer per-policy or per-analyzer blocking, that is still supported. After enabling <strong>Blocking</strong> on a specific policy or analyzer, follow these steps:</p>
 
 <h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
 

@@ -575,7 +575,7 @@ PAGES['pr-scanning'] = {
     'content': '''
 <h2 id="how-it-works">How It Works</h2>
 
-<p>DryRun Security analyzes code changes every time a pull request is opened or updated. Its security agents inspect the diff, evaluate the surrounding context, and report findings directly on the PR - before the code is merged. Scanning runs automatically with no manual steps required: open a PR and DryRun Security handles the rest.</p>
+<p>DryRun Security analyzes code changes every time a pull request is opened or updated. Its security agents inspect the diff, evaluate the surrounding context, and report findings directly on the PR - before the code is merged. Each finding is evaluated for impact and exploitability and tagged with a severity: Critical, High, Medium, or Low. Scanning runs automatically with no manual steps required: open a PR and DryRun Security handles the rest.</p>
 
 <p>Results appear as a summary comment on the pull request, inline comments on specific lines, and a pass/fail check status that integrates with your branch protection rules. This keeps security feedback inside the developer workflow where it can be acted on immediately.</p>
 
@@ -1180,9 +1180,9 @@ PAGES['pr-scanning-configuration'] = {
   <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
   <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
   <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
-  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
+  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on severity. When enabled, set a minimum severity threshold; any finding at or above that level will block the PR from being merged. See <a href="../docs/pr-blocking.html">PR Blocking</a> for threshold options.</li>
   <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Toggle off for the familiar behavior where DryRun posts a comment only when scans produce findings. Toggle on to have DryRun post a comment on every PR scanned, useful for visibility and audit trails.</li>
-  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the risk level has not changed. When enabled, repeated notifications for the same risk level are suppressed, reducing noise.</li>
+  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the severity has not changed. When enabled, repeated notifications for the same severity are suppressed, reducing noise.</li>
 </ul>
 
 <h3 id="policy-enforcement">Policy Enforcement Agent</h3>
@@ -1199,7 +1199,7 @@ PAGES['pr-scanning-configuration'] = {
 <ul>
   <li><strong>Blocking</strong> - Toggle to make this policy a required status check. When enabled, a policy violation prevents the PR from being merged.</li>
   <li><strong>Silent Mode</strong> - Toggle to run the policy without posting findings in the PR comment. Useful for testing new policies before enforcing them.</li>
-  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>.</li>
+  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>.</li>
 </ul>
 
 <p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>
@@ -1453,7 +1453,7 @@ PAGES['finding-tuning'] = {
 <p>When a team knowingly accepts a risk and will not remediate it, the finding can be dismissed as won't fix. AppSec engineers can review these in the Risk Register to ensure accepted risk is intentional and documented. The audit trail provides visibility into which risks have been accepted, by whom, and with what justification.</p>
 
 <h3 id="unblocking-pr">Unblocking a PR Incorrectly Blocked by a Finding</h3>
-<p>If a finding is incorrectly blocking a merge via <a href="./pr-blocking.html">branch protection rules</a>, developers can mark it as a false positive directly in the PR thread to unblock the merge without waiting for AppSec intervention. The feedback is logged so AppSec can review it afterward, and the signal improves future scans to prevent the same incorrect block from recurring.</p>
+<p>If a finding is incorrectly blocking a merge via <a href="./pr-blocking.html">branch protection rules</a>, developers can mark it as a false positive directly in the PR thread. DryRun Security will automatically remove the block, allowing the PR to be merged without waiting for AppSec intervention. The feedback is logged so AppSec can review it afterward, and the signal improves future scans to prevent the same incorrect block from recurring.</p>
 
 <h2 id="how-dryrun-learns">How DryRun Security Learns from Feedback</h2>
 
@@ -1543,7 +1543,9 @@ PAGES['pr-blocking'] = {
 
 <h2 id="configure-blocking">Configure Blocking with Branch Protection</h2>
 
-<p>Both Custom Code Policies and Code Security Agents can be used with GitHub Branch Protection Rules to block PRs from being merged. After enabling <strong>Blocking</strong> on a policy or analyzer, follow these steps:</p>
+<p>The recommended approach is to configure a severity threshold at the configuration level. Any finding at or above that threshold will trigger the blocking flow across all agents. See <a href="#configuring-pr-blocking">Configuring PR Blocking</a> above.</p>
+
+<p>For teams that prefer per-policy or per-analyzer blocking, that is still supported. After enabling <strong>Blocking</strong> on a specific policy or analyzer, follow these steps:</p>
 
 <h3 id="set-up-branch-protection">Set Up a Classic Branch Protection Rule</h3>
 

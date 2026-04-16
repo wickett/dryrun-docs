@@ -70,9 +70,9 @@
   <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
   <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
   <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
-  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
+  <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on severity. When enabled, set a minimum severity threshold; any finding at or above that level will block the PR from being merged. See <a href="../docs/pr-blocking.html">PR Blocking</a> for threshold options.</li>
   <li><strong>Show Comment for No Findings</strong> - Toggle to control whether DryRun posts a comment even when no security findings are detected. Toggle off for the familiar behavior where DryRun posts a comment only when scans produce findings. Toggle on to have DryRun post a comment on every PR scanned, useful for visibility and audit trails.</li>
-  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the risk level has not changed. When enabled, repeated notifications for the same risk level are suppressed, reducing noise.</li>
+  <li><strong>Deduplicate Notifications</strong> - Toggle to reduce duplicate notifications on PRs where the severity has not changed. When enabled, repeated notifications for the same severity are suppressed, reducing noise.</li>
 </ul>
 
 <h3 id="policy-enforcement">Policy Enforcement Agent</h3>
@@ -89,7 +89,7 @@
 <ul>
   <li><strong>Blocking</strong> - Toggle to make this policy a required status check. When enabled, a policy violation prevents the PR from being merged.</li>
   <li><strong>Silent Mode</strong> - Toggle to run the policy without posting findings in the PR comment. Useful for testing new policies before enforcing them.</li>
-  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Risky</strong>, <strong>Fail</strong>, or <strong>Info</strong>.</li>
+  <li><strong>Risk Level</strong> - Dropdown to set the severity label returned when the policy has findings. Options are <strong>Critical</strong>, <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong>.</li>
 </ul>
 
 <p>The Policy Enforcement Agent can run up to 7 code policies per repository.</p>
