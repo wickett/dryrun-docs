@@ -126,6 +126,7 @@
 
 <h3 id="triaging-open-prs">Triaging Open PRs</h3>
 <p>Filter by &ldquo;open&rdquo; PR status. This surfaces findings on pull requests that are still open and have not been merged to main yet. Because the PR is still open, there is still time to fix the issue before it reaches production. These findings should be prioritized and actioned first.</p>
+<p>Draft PRs are also surfaced here. DryRun Security scans draft PRs and surfaces findings in the Risk Register, but does not post comments to the SCM until the PR is marked ready for review.</p>
 
 <h3 id="reviewing-dismissed-findings">Reviewing Dismissed Findings</h3>
 <p>Filter to show dismissed findings. AppSec engineers can see who dismissed each finding and take appropriate follow-up action: override the dismissal if the finding represents real risk, reach out to the developer to help educate them, or stay informed about what is being marked as &ldquo;won&rsquo;t fix&rdquo;, &ldquo;nit pick&rdquo;, or &ldquo;false positive&rdquo;. This workflow supports both risk oversight and developer security education.</p>
