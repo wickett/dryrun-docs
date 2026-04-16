@@ -973,6 +973,7 @@ PAGES['auto-fix'] = {
 <ol>
   <li>Creating an API key from the DryRun Security dashboard (see <a href="./api-access-keys.html">API Access Keys</a>)</li>
   <li>Connecting your AI coding tool to the DryRun Security <a href="./mcp.html">MCP (Model Context Protocol) server</a></li>
+  <li>Installing the DryRun Security remediation skill: visit the <strong>Integrations</strong> page in the DryRun Security UI for instructions</li>
 </ol>
 
 <p>Once connected, the AI coding tool can read DryRun Security findings and automatically generate fixes in the context of your codebase.</p>
