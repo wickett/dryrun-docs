@@ -78,6 +78,7 @@ SECTIONS = [
         'name': 'Platform',
         'slug': 'platform',
         'pages': ['code-security-intelligence', 'pr-scanning-configuration', 'custom-code-policies', 'repository-context', 'risk-register', 'finding-tuning', 'pr-blocking', 'compliance-grc', 'permissions', 'mcp', 'dryrun-api'],
+        'nav_hidden': ['compliance-grc'],
     },
     {
         'name': 'Integrations',
