@@ -1140,6 +1140,7 @@ PAGES['pr-scanning-configuration'] = {
 
 <p>Enable notifications to get alerts when security findings are detected.</p>
 <figure class="docs-screenshot"><img src="{asset_prefix}assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
+<p><strong>Draft PRs:</strong> Comments are not sent to draft PRs. Findings from draft PR scans still appear in the Risk Register dashboard, but no comment is posted to the SCM until the PR is marked ready for review.</p>
 
 <h3 id="attach-policies">Attach Code Policies</h3>
 <p>Add up to 7 Custom Code Policies to a configuration.</p>
@@ -1178,7 +1179,7 @@ PAGES['pr-scanning-configuration'] = {
 
 <ul>
   <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
-  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
+  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings. Comments are not sent to draft PRs; findings from draft PR scans are still visible in the Risk Register.</li>
   <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
   <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
   <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on severity. When enabled, set a minimum severity threshold; any finding at or above that level will block the PR from being merged. See <a href="../docs/pr-blocking.html">PR Blocking</a> for threshold options.</li>
@@ -1360,6 +1361,7 @@ PAGES['risk-register'] = {
 
 <h3 id="triaging-open-prs">Triaging Open PRs</h3>
 <p>Filter by &ldquo;open&rdquo; PR status. This surfaces findings on pull requests that are still open and have not been merged to main yet. Because the PR is still open, there is still time to fix the issue before it reaches production. These findings should be prioritized and actioned first.</p>
+<p>Draft PRs are also surfaced here. DryRun Security scans draft PRs and surfaces findings in the Risk Register, but does not post comments to the SCM until the PR is marked ready for review.</p>
 
 <h3 id="reviewing-dismissed-findings">Reviewing Dismissed Findings</h3>
 <p>Filter to show dismissed findings. AppSec engineers can see who dismissed each finding and take appropriate follow-up action: override the dismissal if the finding represents real risk, reach out to the developer to help educate them, or stay informed about what is being marked as &ldquo;won&rsquo;t fix&rdquo;, &ldquo;nit pick&rdquo;, or &ldquo;false positive&rdquo;. This workflow supports both risk oversight and developer security education.</p>
