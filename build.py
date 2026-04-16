@@ -83,6 +83,7 @@ SECTIONS = [
         'name': 'Integrations',
         'slug': 'integrations',
         'pages': ['slack-integration', 'webhook-integration', 'jira-integration', 'api-access-keys', 'ai-coding-integration', 'dryrun-skill'],
+        'nav_hidden': ['ai-coding-integration', 'dryrun-skill'],
     },
 ]
 
@@ -3412,10 +3413,14 @@ def render_sidebar(current_slug: str, asset_prefix: str) -> str:
     parts.append('</div>')
     parts.append('<div class="sidebar-nav">')
     for section in SECTIONS:
+        hidden = section.get('nav_hidden', [])
+        visible_pages = [s for s in section['pages'] if s not in hidden]
+        if not visible_pages:
+            continue
         parts.append('<div class="sidebar-section">')
         parts.append(f'<p class="sidebar-section-title">{esc(section["name"])}</p>')
         parts.append('<ul class="sidebar-links">')
-        for slug in section['pages']:
+        for slug in visible_pages:
             page = PAGES.get(slug, {})
             title = page.get('title', slug)
             active_class = ' class="active"' if slug == current_slug else ''

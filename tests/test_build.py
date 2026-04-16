@@ -358,7 +358,12 @@ class TestSidebarNavigation:
     """Verify sidebar navigation is consistent across pages."""
 
     def test_every_page_has_active_link_in_sidebar(self):
+        nav_hidden = set()
+        for section in build.SECTIONS:
+            nav_hidden.update(section.get('nav_hidden', []))
         for slug in build.PAGES:
+            if slug in nav_hidden:
+                continue  # hidden pages don't have an active sidebar link
             page_file = DOCS_DIR / f"{slug}.html"
             content = page_file.read_text()
             assert 'class="active"' in content, (
