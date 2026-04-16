@@ -146,8 +146,6 @@
 <p>Enable notifications to get alerts when security findings are detected.</p>
 <figure class="docs-screenshot"><img src="../assets/images/configurations/05-notifications.png" alt="Notifications toggle" loading="lazy"></figure>
 
-<p><strong>Draft PRs:</strong> Comments are not sent to draft PRs. Findings from draft PR scans still appear in the Risk Register dashboard, but no comment is posted to the SCM until the PR is marked ready for review.</p>
-
 <h3 id="attach-policies">Attach Code Policies</h3>
 <p>Add up to 7 Custom Code Policies to a configuration.</p>
 <figure class="docs-screenshot"><img src="../assets/images/configurations/06-add-policies.png" alt="Adding code policies to a configuration" loading="lazy"></figure>
@@ -185,7 +183,7 @@
 
 <ul>
   <li><strong>Select Repositories</strong> - A dropdown selector to choose which repositories use this configuration. Repositories can only belong to one configuration at a time; repositories already assigned to another configuration will be greyed out.</li>
-  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings. Comments are not sent to draft PRs; findings from draft PR scans are still visible in the Risk Register.</li>
+  <li><strong>Issue Comment Enabled</strong> - Toggle to enable or disable DryRun Security's PR/MR comment. When enabled, DryRun posts a summary comment on each pull request with findings.</li>
   <li><strong>PR Blocking Enabled</strong> - Toggle to enable PR blocking globally for this configuration. When enabled, findings from configured agents and policies will create GitHub status checks that must pass before merging.</li>
   <li><strong>Notifications Enabled</strong> - Toggle to enable notification delivery. When enabled, choose which integrations receive alerts (see <a href="../docs/slack-integration.html">Notifications</a> for setup details).</li>
   <li><strong>Severity-Based PR Blocking</strong> - Toggle to block PRs based on the vulnerability severity model. When enabled, findings rated Critical or High will prevent the PR from being merged.</li>
