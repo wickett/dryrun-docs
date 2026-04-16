@@ -62,7 +62,7 @@ Documentation,documentation,"<div class=""drs-landing-section"">
 
 <div class=""drs-landing-section"">
   <div class=""drs-landing-section-header"">
-    <h2 id=""platform-integrations"">Platform &amp; Integrations</h2>
+    <h2 id=""platform-integrations"">Platform & Integrations</h2>
   </div>
   <div class=""drs-landing-grid drs-cols-3"">
     <a class=""drs-landing-card"" href=""./pr-blocking.html"">
@@ -74,7 +74,7 @@ Documentation,documentation,"<div class=""drs-landing-section"">
       <span class=""drs-landing-card-desc"">Write organization-specific security rules in plain language and enforce them on every scan.</span>
     </a>
     <a class=""drs-landing-card"" href=""./compliance-grc.html"">
-      <span class=""drs-landing-card-title"">Compliance &amp; GRC</span>
+      <span class=""drs-landing-card-title"">Compliance & GRC</span>
       <span class=""drs-landing-card-desc"">Generate compliance reports, maintain audit trails, and demonstrate regulatory readiness from a single dashboard.</span>
     </a>
     <a class=""drs-landing-card"" href=""./slack-integration.html"">
@@ -498,7 +498,7 @@ PR Scanning,pr-scanning,"<h2 id=""how-it-works"">How It Works</h2>
 
 <p>All findings are filtered to the changed regions of the pull request. Pre-existing issues in unchanged code are excluded from the results so developers can focus on what they introduced.</p>
 
-<h2 id=""check-status-and-feedback"">Check Status &amp; Feedback</h2>
+<h2 id=""check-status-and-feedback"">Check Status & Feedback</h2>
 
 <p>DryRun Security reports results through two channels: a <strong>summary comment</strong> on the pull request with an overview of all findings, and individual <strong>check statuses</strong> that integrate with your branch protection rules.</p>
 
@@ -1462,7 +1462,7 @@ Permissions,permissions,"<h2 id=""overview"">Overview</h2>
     <tr><td>DeepScan: Trigger</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>Initiate a new DeepScan run on a repository on demand.</td></tr>
     <tr><td>Code Policies: View</td><td><span class=""check"">&#x2713;</span></td><td><span class=""check"">&#x2713;</span></td><td>View existing custom code policies configured for the account.</td></tr>
     <tr><td>Code Policies: Configure</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>Create, edit, and manage custom code policies used during scanning.</td></tr>
-    <tr><td>Insights &amp; AI Assistant</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>AI-powered security insights and a chat assistant for querying findings and trends.</td></tr>
+    <tr><td>Insights & AI Assistant</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>AI-powered security insights and a chat assistant for querying findings and trends.</td></tr>
     <tr><td>Daily Digest</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>Automated daily summary of new findings, trends, and security posture changes.</td></tr>
     <tr><td>Configurations: View</td><td><span class=""check"">&#x2713;</span></td><td><span class=""check"">&#x2713;</span></td><td>View PR scanner behavior, blocking rules, and policy enforcement settings.</td></tr>
     <tr><td>Configurations: Edit</td><td><span class=""check"">&#x2713;</span></td><td class=""no-access""><span class=""cross"">&#x2717;</span></td><td>Edit PR scanner behavior, blocking rules, and policy enforcement settings.</td></tr>
