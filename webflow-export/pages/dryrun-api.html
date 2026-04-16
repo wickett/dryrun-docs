@@ -234,21 +234,23 @@
   <summary class="api-endpoint-summary">
     <span class="method-get">GET</span>
     <code>/v1/accounts/{account_id}/all_findings</code>
-    <span class="api-endpoint-desc">List all findings (PR and DeepScan) for an account.</span>
+    <span class="api-endpoint-desc">List all findings across PR scans, DeepScans, SCA, and code policies for an account.</span>
   </summary>
   <div class="api-endpoint-body">
-    <p>List all findings across the account, including both PR scan and DeepScan findings. Supports filtering and pagination.</p>
+    <p>List all findings across PR scans, DeepScans, SCA, and code policies for an account. By default, returns only findings from the latest scan. Results are sorted by newest first.</p>
     <h4>Parameters</h4>
     <table>
       <thead><tr><th>Name</th><th>In</th><th>Required</th><th>Type</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td>account_id</td><td>path</td><td>yes</td><td>string</td><td>Account ID</td></tr>
-        <tr><td>days</td><td>query</td><td>yes</td><td>integer</td><td>Number of days to look back</td></tr>
-        <tr><td>finding_type</td><td>query</td><td>no</td><td>string</td><td>Filter by finding type</td></tr>
-        <tr><td>severity</td><td>query</td><td>no</td><td>string</td><td>Filter by severity level</td></tr>
+        <tr><td>days</td><td>query</td><td>yes</td><td>integer</td><td>Filter to findings from the last N days (1-365)</td></tr>
+        <tr><td>finding_type</td><td>query</td><td>no</td><td>string</td><td>Filter by finding type. One of: deepscan, pullrequest, sca, code_policy, all. Defaults to 'all'</td></tr>
+        <tr><td>severity</td><td>query</td><td>no</td><td>string</td><td>Filter by severity (comma-separated: critical, high, medium, low)</td></tr>
         <tr><td>repository_id</td><td>query</td><td>no</td><td>string</td><td>Filter by repository ID</td></tr>
-        <tr><td>page</td><td>query</td><td>no</td><td>integer</td><td>Page number for pagination</td></tr>
-        <tr><td>per_page</td><td>query</td><td>no</td><td>integer</td><td>Results per page</td></tr>
+        <tr><td>branch</td><td>query</td><td>no</td><td>string</td><td>Filter SCA and DeepScan findings by branch name. When omitted, returns findings from the default branch. Does not affect PR or code policy findings.</td></tr>
+        <tr><td>all_results</td><td>query</td><td>no</td><td>boolean</td><td>When true, returns all findings including historical scans. Defaults to false (latest scan only).</td></tr>
+        <tr><td>page</td><td>query</td><td>no</td><td>integer</td><td>Page number (default: 1)</td></tr>
+        <tr><td>per_page</td><td>query</td><td>no</td><td>integer</td><td>Results per page (default: 50, max: 100)</td></tr>
       </tbody>
     </table>
     <h4>Responses</h4>
@@ -434,6 +436,37 @@
     <pre><code>curl \
   -H "Authorization: Bearer $DRYRUN_API_KEY" \
   "https://simple-api.dryrun.security/v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/results"</code></pre>
+  </div>
+</details>
+
+<details class="api-endpoint">
+  <summary class="api-endpoint-summary">
+    <span class="method-get">GET</span>
+    <code>/v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/sca_results</code>
+    <span class="api-endpoint-desc">List SCA findings for a specific DeepScan run.</span>
+  </summary>
+  <div class="api-endpoint-body">
+    <p>List SCA findings for a specific DeepScan run.</p>
+    <h4>Parameters</h4>
+    <table>
+      <thead><tr><th>Name</th><th>In</th><th>Required</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>account_id</td><td>path</td><td>yes</td><td>string</td><td>Account ID</td></tr>
+        <tr><td>repository_id</td><td>path</td><td>yes</td><td>string</td><td>Repository ID</td></tr>
+        <tr><td>deepscan_id</td><td>path</td><td>yes</td><td>string</td><td>DeepScan ID</td></tr>
+        <tr><td>severity</td><td>query</td><td>no</td><td>string</td><td>Filter by severity (comma-separated). Valid values: critical, high, medium, low</td></tr>
+      </tbody>
+    </table>
+    <h4>Response Fields</h4>
+    <p><code>id</code>, <code>dashboard_url</code>, <code>title</code>, <code>description</code>, <code>severity</code>, <code>package_name</code>, <code>package_version</code>, <code>package_ecosystem</code>, <code>cve_id</code>, <code>cvss_score</code>, <code>fixed_version</code>, <code>remediation</code>, <code>locations</code>, <code>references</code>, <code>created_at</code></p>
+    <h4>Responses</h4>
+    <ul>
+      <li><code>200</code> - SCA results listed</li>
+    </ul>
+    <h4>Example (curl)</h4>
+    <pre><code>curl \
+  -H "Authorization: Bearer &lt;your-api-key&gt;" \
+  "https://simple-api.dryrun.security/v1/accounts/{account_id}/repositories/{repository_id}/deepscans/{deepscan_id}/sca_results"</code></pre>
   </div>
 </details>
 
