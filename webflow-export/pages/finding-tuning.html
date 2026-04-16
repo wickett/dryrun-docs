@@ -49,7 +49,7 @@
 <p>When a team knowingly accepts a risk and will not remediate it, the finding can be dismissed as won't fix. AppSec engineers can review these in the Risk Register to ensure accepted risk is intentional and documented. The audit trail provides visibility into which risks have been accepted, by whom, and with what justification.</p>
 
 <h3 id="unblocking-pr">Unblocking a PR Incorrectly Blocked by a Finding</h3>
-<p>If a finding is incorrectly blocking a merge via <a href="./pr-blocking.html">branch protection rules</a>, developers can mark it as a false positive directly in the PR thread to unblock the merge without waiting for AppSec intervention. The feedback is logged so AppSec can review it afterward, and the signal improves future scans to prevent the same incorrect block from recurring.</p>
+<p>If a finding is incorrectly blocking a merge via <a href="./pr-blocking.html">branch protection rules</a>, developers can mark it as a false positive directly in the PR thread. DryRun Security will automatically remove the block, allowing the PR to be merged without waiting for AppSec intervention. The feedback is logged so AppSec can review it afterward, and the signal improves future scans to prevent the same incorrect block from recurring.</p>
 
 <h2 id="how-dryrun-learns">How DryRun Security Learns from Feedback</h2>
 
